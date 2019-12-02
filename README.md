@@ -1,7 +1,7 @@
 # SIGICOP
 Sistema de Gerenciamento de Impressões e Copias
 
-## Descricao:
+## Descrição:
 **A SIGICOP é um projeto de conclusão do curso subsequente em informática,
  realizado por Manacio Pereira de Souza e por Magdiel Pereira de Souza.
  A SIGICOP é um sistema de gerenciamento de cópias e impressões,
