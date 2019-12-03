@@ -50,29 +50,23 @@ System.ou.ptintl("Hello World!");
 }
 ```
 
-# TABELAS
-
-| Primeiro cabeçalho  |  Segundo cabeçalho  |
-| ------------------- | ------------------- |
-|  Célula de conteúdo |  Célula de conteúdo |
-|  Célula de conteúdo |  Célula de conteúdo |
-|  Célula de conteúdo |  Célula de conteúdo |
-|  Célula de conteúdo |  Célula de conteúdo |
-
-
 <img src="https://img.elo7.com.br/product/zoom/1F2E1D9/big-poster-anime-tokyo-ghoul-tamanho-90x-0-cm-lo11-tokyo-ghoul.jpg" height="100px"></img>
 <img src="http://leitorcabuloso.com.br/wp-content/uploads/2014/02/destaque1.jpg" height="100px"></img>
 <table>
  <tr>
-  <th>teste</th>
+  <th>Primeiro cabeçalho </th>
+   <th> Segundo cabeçalho  </th>
  </tr>
   <tr>
-  <td>1</td>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
  </tr>
  <tr>
-  <td>2</td>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
  </tr>
  <tr>
-  <td>3</td>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
  </tr>
  </table>
