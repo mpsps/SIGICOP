@@ -21,6 +21,24 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
  também poderá ver e editar seus dados;
 * Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;.
 
+<table>
+ <tr>
+  <th>Primeiro cabeçalho </th>
+   <th> Segundo cabeçalho  </th>
+ </tr>
+  <tr>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
+ </tr>
+ <tr>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
+ </tr>
+ <tr>
+  <td> Célula de conteúdo</td>
+   <td> Célula de conteúdo</td>
+ </tr>
+ </table>
 **BOLD**
 
 `Insira o código`
@@ -52,21 +70,4 @@ System.ou.ptintl("Hello World!");
 
 <img src="https://img.elo7.com.br/product/zoom/1F2E1D9/big-poster-anime-tokyo-ghoul-tamanho-90x-0-cm-lo11-tokyo-ghoul.jpg" height="100px"></img>
 <img src="http://leitorcabuloso.com.br/wp-content/uploads/2014/02/destaque1.jpg" height="100px"></img>
-<table>
- <tr>
-  <th>Primeiro cabeçalho </th>
-   <th> Segundo cabeçalho  </th>
- </tr>
-  <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
- </tr>
- <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
- </tr>
- <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
- </tr>
- </table>
+
