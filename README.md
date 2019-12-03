@@ -20,7 +20,7 @@ solicitações, se não for zero perderá realizar mais;
 solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado à dar uma justificativa,
  também poderá ver e editar seus dados;
 * Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;.
-
+## Tabela
 <table>
  <tr>
   <th>Primeiro cabeçalho </th>
@@ -39,6 +39,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
    <td> Célula de conteúdo</td>
  </tr>
  </table>
+ 
 **BOLD**
 
 `Insira o código`
