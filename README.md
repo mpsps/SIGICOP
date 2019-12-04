@@ -6,7 +6,7 @@ Sistema de Gerenciamento de Impressões e Copias
  realizado por Manacio Pereira de Souza e por Magdiel Pereira de Souza.
  A SIGICOP é um sistema de gerenciamento de cópias e impressões,
  que facilite e agilize a demanda de impressões e cópias do IFRN-*CAMPUS*-JC,
- onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis**
+ onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrdor possar gerenciar as solicitacões**
 
 ## PASSO A PASSO
 
@@ -21,22 +21,29 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
  também poderá ver e editar seus dados;
 * Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;.
 ## Tabela
+Referências    | Links
+-------------- | ---------------
+Play Framework | [1.4.5](https://pages.github.com/) 
+Bootstrap      | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+Semantic       |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
+W3school       | [Semantic](https://www.w3schools.com/)
+
 <table>
  <tr>
-  <th>Primeiro cabeçalho </th>
-   <th> Segundo cabeçalho  </th>
+  <th></th>
+   <th></th>
  </tr>
   <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
+  <td></td>
+   <td></td>
  </tr>
  <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
+  <td></td>
+   <td> link:  </td>
  </tr>
  <tr>
-  <td> Célula de conteúdo</td>
-   <td> Célula de conteúdo</td>
+  <td>Semantic</td>
+   <td> link:</td>
  </tr>
  </table>
  
@@ -45,7 +52,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 `Insira o código`
 
 link: [GitHub Pages](https://pages.github.com/)
-
+[1.4.5](https://pages.github.com/) 
 ~TESTE~
 
 ```
