@@ -60,3 +60,4 @@ System.ou.ptintl("Hello World!");
 <img src="https://img.elo7.com.br/product/zoom/1F2E1D9/big-poster-anime-tokyo-ghoul-tamanho-90x-0-cm-lo11-tokyo-ghoul.jpg" height="100px"></img>
 <img src="http://leitorcabuloso.com.br/wp-content/uploads/2014/02/destaque1.jpg" height="100px"></img>
 
+@Manacio
