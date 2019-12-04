@@ -23,29 +23,10 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 ## Tabela
 Referências    | Links
 -------------- | ---------------
-Play Framework | [1.4.5](https://pages.github.com/) 
+Play Framework | [1.4.5](https://www.playframework.com/documentation/1.4.x/home) 
 Bootstrap      | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
-Semantic       |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
-W3school       | [Semantic](https://www.w3schools.com/)
-
-<table>
- <tr>
-  <th></th>
-   <th></th>
- </tr>
-  <tr>
-  <td></td>
-   <td></td>
- </tr>
- <tr>
-  <td></td>
-   <td> link:  </td>
- </tr>
- <tr>
-  <td>Semantic</td>
-   <td> link:</td>
- </tr>
- </table>
+Semantic UI      |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
+W3school       | [W3school](https://www.w3schools.com/)
  
 **BOLD**
 
