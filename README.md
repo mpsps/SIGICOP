@@ -49,7 +49,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}"><!-- rodape utilizar-->
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 ```
-### Javascript Imcorporado no Templates laySeg.html
+### Javascript Incorporado no Templates laySeg.html
 ```javascript
 <!-- JS DA PAGINA -->
 <!-- MESSAGEM DE ALERTA -->
@@ -123,7 +123,7 @@ $().ready(function() {
 		})
 </script>
 ```
-### Javascript Imcorporado no Templates layPri.html
+### Javascript Incorporado no Templates layPri.html
 ```javascript
 <!-- JS DA PAGINA -->
 <!-- VOLTAR AO TOPO -->
