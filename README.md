@@ -33,6 +33,7 @@ W3school       | [W3school](https://www.w3schools.com/)
 `Insira o código`
 
 link: [GitHub Pages](https://pages.github.com/)
+([@Manacio](https://github.com/limonte/))
 [1.4.5](https://pages.github.com/) 
 ~TESTE~
 
