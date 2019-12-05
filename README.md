@@ -49,8 +49,101 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}"><!-- rodape utilizar-->
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 ```
+### Javascript Imcorporado no Templates laySeg.html
+```javascript
+<!-- JS DA PAGINA -->
+<!-- MESSAGEM DE ALERTA -->
+	<script type="text/javascript">
+$().ready(function() {
+		setTimeout(function () {
+			$('#messagemAlerta').hide(); // "messagemAlerta" é o id do elemento que seja manipular.
+		}, 2000); // O valor é representado em milisegundos.
+});
+$().ready(function() {
+	setTimeout(function () {
+		$('#messagemArquivo').hide(); // "messagemAlerta" é o id do elemento que seja manipular.
+	}, 2000); // O valor é representado em milisegundos.
+});
+	</script>
+	<script type="text/javascript">
 
+    $("#telefone, #celular").mask("(00) 0000-0000");
+    $('#matricula').mask('00000000000000');
+    $('#qtdCopiasFiltro').mask('00');
+    $('#dataEnvio').mask('00/00/0000');
+    $('#dataEnvtrega').mask('00/00/0000');
+   
+    var valorMaximo = 0;//document.getElementById('qtdCopiasFiltro').val();
+    var meuValor = parseInt(valorMaximo);
+    
+    if(meuValor > 10){
+    	document.getElementById('maxDez').innerHTML = "O valor maximo é 10";
+    }
+    $("#dadosAdmin").click(function () {
+		Swal.fire({
+			  position: 'top-end',
+			  icon: '',
+			  title: 'Meus Dados <br> <a href="@{Administradores.editar}" class="btn primary ml-5" style="background-color: #529fed;">Editar</a>',
+			  footer: 'Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email} <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if} ' ,
+			  showCloseButton: true,
+			  showConfirmButton: false,
+			})
+	});
+    $("#dadosUser").click(function () {
+		Swal.fire({
+			  position: 'top-end',
+			  icon: '',
+			  title: 'Meus Dados',
+			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br> #{if usuarioBanco?.ultimoAcessoUsu} Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")} #{/if} <br> Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel}' ,
+			  showCloseButton: true,
+			  showConfirmButton: false,
+			})
+	});
+    </script>
+    <script type="text/javascript">
+	$("#restaurar").click(function() {
+		Swal.fire({
+			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
+			  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
+			  icon: 'question',
+			  showCancelButton: true,
+			  confirmButtonColor: '#21ac0d',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Ok',
+			  showCloseButton: true,
+			}).then((result) => {
+			  if (result.value) {
+			$('#formRestaurar').submit(); 
+			  }
+			})
+	});
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		  $('#example').tooltip({ boundary: 'window' })
+		})
+</script>
+```
+### Javascript Imcorporado no Templates layPri.html
+```javascript
+<!-- JS DA PAGINA -->
+<!-- VOLTAR AO TOPO -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 500) {
+            $('a[href="#top"]').fadeIn();
+        } else {
+            $('a[href="#top"]').fadeOut();
+        }
+    });
 
+    $('a[href="#top"]').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+});
+</script>    
+```
 
 ## Tabela de Referências
 Referências    | Links
@@ -63,10 +156,7 @@ W3school       | [W3school](https://www.w3schools.com/)
 **BOLD**
 
 `Insira o código`
-
-link: [GitHub Pages](https://pages.github.com/)
-
-[1.4.5](https://pages.github.com/) 
+ 
 ~TESTE~
 
 ```
@@ -89,8 +179,3 @@ if(num == 1){
 System.ou.ptintl("Hello World!");
 }
 ```
-
-<img src="https://img.elo7.com.br/product/zoom/1F2E1D9/big-poster-anime-tokyo-ghoul-tamanho-90x-0-cm-lo11-tokyo-ghoul.jpg" height="100px"></img>
-<img src="http://leitorcabuloso.com.br/wp-content/uploads/2014/02/destaque1.jpg" height="100px"></img>
-
-@Manacio
