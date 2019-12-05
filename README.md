@@ -21,8 +21,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
  também poderá ver e editar seus dados;
 * Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;.
 ## As importações mais importantes utlizado nos templates layPri.html e laySeg.html:
-
-´´´html
+```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}">
@@ -38,11 +37,14 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
   <script src="@{'/public/Semantic/js/semantic.js'}"/></script>
+```
+'''html
+
   
   
    
    
-´´´
+'''
 
 ## Tabela de Referências
 Referências    | Links
