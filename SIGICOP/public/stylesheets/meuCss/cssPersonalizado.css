@@ -1,0 +1,227 @@
+body {
+	background-color: #fafaff;
+}
+/*body>.grid {
+	height: 100%;
+}
+*/
+
+.listaPped {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e1f5ff;
+  border-radius: 0.3rem;
+  padding-right: 0;
+  padding-left: 0;
+  border-radius: 0;
+}
+.listaConcluido{
+	color: black;
+	background: #5eed4e;
+}
+.listaRecusado{
+	background:#ff3535;
+}
+.image {
+	margin-top: -100px;
+}
+.column {
+	max-width: 450px;
+}
+#corMenu{
+	background: #1b1c1d;
+}
+/**************************/
+/***tela de computador*****/
+/**************************/
+
+@media (min-width: 750px) {
+	#messagemAlerta{
+	display: block;
+	position: fixed;
+	top: 3.6%;
+	left: 1%;
+	right: 1%;
+	width: 98%;
+	z-index: 9999;
+	margin: auto;
+	margin-top: 50px;
+	box-shadow: 1px 1px 5px black;
+  } 
+  #container {
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  height: 100%;
+  padding: 10% 20% 10% 20%;
+  }
+ .column {
+	max-width: 450px;
+	float: none;
+}
+.heightMin{
+	min-height: 460px;
+}
+.itemMenu{
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #000000;
+	padding: 4px;
+	margin: 4px 4px 4px 4px;
+}
+.itemMenu:hover{
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #529fed;
+	margin: 4px 4px 4px 4px;
+	padding-bottom: -10;
+}
+#concluidos:hover{
+	border-bottom:  3px solid #92f88f;
+	color: #92f88f;
+}
+#recusados:hover{
+	border-bottom:  3px solid #ff5555;
+	color: #ff5555;
+}
+.icon:hover  {
+	color: rgba(10, 10, 10, 1);
+}
+.corFiltro{
+	background: #f2f8ff;
+	padding: 5%;
+	margin-left: 10%;
+	margin-right: 10%;" 
+}
+}
+
+/**************************/
+/****tela de celular*******/
+/**************************/
+@media (max-width: 500px){ 
+  #messagemAlerta{
+	display: block;
+	position: fixed;
+	top: 10%;
+	left: 10%;
+	right: 10%;
+	width: 80%;
+	z-index: 9999;
+	margin: auto;
+	box-shadow: 1px 1px 5px black;
+}
+ #container {
+  width: 100%;
+  padding-right: auto;
+  padding-left: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+ }
+.sairUsu{
+ 	position: relative;
+ 	top: 0;
+	float: right;
+	text-align: right;
+	padding-top: 0;
+ }
+#corpoCelular{	
+ 	margin-bottom: 250px;
+ 	margin-top: 100px;
+ 	margin-right: 3px;
+ 	margin-left: 3px;
+}
+#rodapeCelular{
+	margin-top: 15%;	
+	min-height:100%;
+}
+#menuCorpo{
+	max-width: 100%;
+	display: none;
+}
+.info{
+	font-size: 18px;
+	font-family: sans-serif;
+}
+.itemMenu{
+	text-align: center;
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #000000;
+	padding: 4px;
+	margin: 1px 1px 1px 1px;
+}
+.itemMenu:hover{
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #529fed;
+	margin: 1px 1px 1px 1px;
+	padding-bottom: -10;
+}
+#concluidos:hover{
+	border-bottom:  3px solid #92f88f;
+	color: #92f88f;
+}
+#recusados:hover{
+	border-bottom:  3px solid #ff5555;
+	color: #ff5555;
+}
+.icon:hover  {
+	color: rgba(10, 10, 10, 1);
+}
+.corFiltro{
+	background: #f2f2ff;
+	padding: 5%;
+	margin-left: 5%;
+	margin-right: 5%;" 
+}
+}
+
+/*tela de tablet */
+@media (max-width: 749px) { 
+	@media (min-width: 501px){
+#messagemAlerta{
+	display: block;
+	position: fixed;
+	top: 10;
+	left: 15%;
+	right: 15%;
+	width: 70%;
+	padding-top: 10px;
+	z-index: 9999;
+	margin: 0 auto;
+	box-shadow: 1px 1px 5px black;
+}
+#container {
+	width: 100%;
+	padding-right: 20px;
+	padding-left: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 70px;
+	height: 100%;
+	padding: 10% 20% 20% 20%;
+  }
+#corpoCelular{	
+ 	margin-bottom: 5px;
+ 	margin-top: -50px;
+ 	margin-right: 0;
+ 	margin-left: 0;
+}
+.rodapeEmBaixo{	
+	min-height:100%;
+	position:relative;
+	width:800px;
+}
+.heightMin{
+	min-height: 460px;
+}
+}
+}
+
+

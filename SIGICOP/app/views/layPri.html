@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>#{get 'title' /}</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!-- ICONE  -->
+		<link rel="shortcut icon" type="image/png" href="@{'/public/images/icones/S.png'}">  
+<!-- CSS PADRÃO -->
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+#{get 'moreStyles' /}
+<!-- JAVASCRIPT PADRAO -->
+        <script src="@{'/public/javascripts/popper.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<!-- JAVASCRIPT PERSONALIZADA -->
+        <!--<script src="@{'/public/javascripts/mascaras.js'}" type="text/javascript" charset="${_response_encoding}"></script>-->
+#{get 'moreScripts' /}
+<!-- BOOTSTRAP - CSS -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}">
+<!-- BOOTSTRAP JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
+<!--SEAMNTIC CSS -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/reset.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/site.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/container.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/image.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/menu.css'}">		
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/divider.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/dropdown.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/list.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/sidebar.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/transition.css'}">
+	  	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}">
+<!-- SEMANTIC JS -->
+		<script src="@{'/public/Semantic/js/jquery.min.js'}"></script>
+		<script src="@{'/public/Semantic/js/visibility.js'}"></script>
+		<script src="@{'/public/Semantic/js/sidebar.js'}"></script>
+		<script src="@{'/public/Semantic/js/transition.js'}"></script>
+		<script src="@{'/public/Semantic/js/meuJs.js'}"></script>
+		<!-- UIKIT CSS -->
+		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.min.css'}" />	  
+		<!-- UIKIT JS -->
+		<script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
+		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>    
+		<style type="text/css">
+	.papelDeParede {
+	 background-image: url("/public/images/sigicop/papel.jpg");
+	 background-repeat: no-repeat;
+	}
+
+		</style>
+		<style type="text/css">
+	a[href="#top"]{
+    padding:10px;
+    position:fixed;
+    top: 90%;
+    right:40px;
+    display:none;
+    font-size: 5px;
+	}
+	a[href="#top"]:hover{
+    text-decoration:none;
+	}
+		</style>
+    </head>
+<body>   
+<!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
+<div class="ui large top fixed hidden menu" id="menuCorpo">
+  <div class="ui container">
+		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
+    	<!-- <a class="item">Item 1</a>-->
+    	<a class="item">Sobre Nos</a>
+    	<div class="right menu">
+		<div class="item">
+        <a class="ui primary button" href="@{Gerenciador.login}" >Logar</a>
+		</div>
+		<div class="item">
+		</div>
+		</div>
+		</div>
+		</div>
+<!-- MENU ICONE A ESQUERDA-->
+		<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
+  		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
+  		<!-- <a class="item">Item 1</a>-->
+  		<a class="item">Sobre Nos</a>
+  		<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Logar</a>
+		</div>
+<!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
+<div class="pusher">
+  	<div class="ui inverted vertical masthead center aligned segment">
+   		<div class="ui container sticky-top" >
+		<div class="ui large secondary inverted pointing menu ">
+        <a class="toc item">
+        <img src="@{'/public/images/icones/menuIcone.png'}">
+		<!-- <i class="sidebar icon"></i> -->
+        </a>
+        <a class="active item" href="@{Gerenciador.principal}">Principal</a>
+        <!--  <a class="item">Item 1</a>-->
+        <a class="item">Sobre Nos</a>
+        <div class="right item">
+        <a class="ui inverted button" href="@{Gerenciador.login}">logar</a>
+		</div>
+		</div>
+		</div>
+		<div class="ui text container">
+		<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" height="25%" style="float: left; margin: 7% 25% 3% 25%; max-width: 100%;"/><br>
+		<span>
+		<h1 class="ui inverted header">
+        IFRN <i>campus </i> João Câmara
+		</h1>
+		</span>
+		<br/>
+		<a href="@{Gerenciador.login}" class="ui huge primary button">Logar Agora <i class="right arrow icon"></i></a>
+	</div>
+</div>
+
+<!-- CORPO DA PAGINA -->
+
+<div class="ui vertical stripe segment">
+	<div class="ui text container text-break" style="max-height: 100%;">
+#{doLayout /}
+		<a href="#top" class="glyphicon glyphicon-chevron-up">
+		<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
+		</a>
+	</div>
+</div>
+
+<!-- RODAPÉ DA PAGINA -->
+<div class="ui inverted vertical footer segment" class="dark">
+	<div class="ui container">
+		<div class="ui stackable inverted divided equal height stackable grid">
+		<div class="three wide column">
+		<h4 class="ui inverted header">Sobre:</h4>
+		<div class="ui inverted link list">
+		<a href="https://pt-br.facebook.com/login/" target="_blank">
+		<img alt="" src="@{'/public/images/icones/facebook.png'}" title="Facebook">
+		</a>
+		<a href="https://br.pinterest.com/" target="_blank">
+		<img alt="" src="@{'/public/images/icones/pinterest.png'}" title="Pinterest">
+		</a>
+		<a href="https://web.whatsapp.com/" target="_blank">
+		<img alt="" src="@{'/public/images/icones/whatsapp.png'}" title="Whatsapp">
+		</a>
+		</div>
+		</div>
+		<div class="three wide column">
+		<h4 class="ui inverted header">Contatos:</h4>
+		<div class="ui inverted link list">
+		<a href="#" class="item">+55 (84) 988122176</a> 
+		<a href="#" class="item">+55 (84) 994333803</a> 
+		</div>
+		</div>
+		<div class="three wide column">
+		<h4 class="ui inverted header">E-mails:</h4>
+		<a href="#" class="item">magdiel.pereira@escolar.ifrn.edu.br</a> 
+		<a href="#" class="item">manacio.p@escolar.ifrn.edu.br</a> 
+		</div>
+		</div>
+	</div>
+</div>
+<!-- JS DA PAGINA -->
+<!-- VOLTAR AO TOPO -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 500) {
+            $('a[href="#top"]').fadeIn();
+        } else {
+            $('a[href="#top"]').fadeOut();
+        }
+    });
+
+    $('a[href="#top"]').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
+});
+</script>    
+</body>
+</html>

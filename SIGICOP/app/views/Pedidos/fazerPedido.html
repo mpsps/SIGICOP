@@ -1,0 +1,142 @@
+#{extends 'laySeg.html' /}
+#{set title:'Solicitacao de Pedido(s)' /}
+
+<div id="corpoCelular">	
+				<!-- FORMULARIO DE PEDIDOS -->
+<form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
+	<div class="ui stacked segment">
+		<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
+		<br><br>
+#{if obrigatorio}
+		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}
+		<div class="float-left" style="margin-right: 1%;">
+		<label>Arquivo:</label><sup style="color: red;">*</sup></div>
+		<div class="float-left"><label for="item-arquivo" class="btn btn-primary icon" required>Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
+		<div class="float-left ml-2">
+		<div id="nomeArquivo" class="text-primary h4 center text-break">
+		</div>
+		</div><!-- accept=".pdf" -->
+		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" autofocus ><br /> 
+ <br /><br />
+		<br>
+#{if obrigatorio}
+		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}
+		<div class="row">
+		 <div class="col">
+		<label>Qtd Copias:<sup style="color: red;">*</sup></label>
+		<select name="item.qtdCopias" required="" class="form-control" autofocus="" required>
+		<option></option>
+#{list items:1..usuarioBanco.qtdDisponivel	, as:'i'}
+		<option value="${i}">${i}</option>
+#{/list}
+		</select>
+		</div>
+		<div class="col">		<!--  <input type="number" min="0" max="10" name="item.qtdCopias" required="" class="form-control" autofocus=""><br /> -->
+#{if obrigatorio}
+		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}
+		<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
+		<div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" value="frente" checked="checked">
+ 		 <label class="custom-control-label" for="frente">Frente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+ 		 <input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" value="frenteEverso">
+  		<label class="custom-control-label" for="frenteEverso">Frente e Verso</label>
+		</div>
+		<br />
+		</div>
+		</div>
+		<label>Descricao</label>
+		<textarea rows="3" cols="7" name="item.descricao" class="form-control" autofocus="" placeholder="descrição" style="text-indent: none:">
+		</textarea>
+		<div class="text-center">
+		<button class="btn btn-success mt-3 icon">Adicionar <i class="paper plane outline icon"></i></button>
+		</div>
+	</div>
+</form>
+
+		<div class="listaPped text-center">
+#{if listaDePedidos == null}
+		<div class="h1 text-primary">Nenhum pedido realizado</div>
+#{/if}
+#{else}
+		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos <i class="save outline icon"></i> #{/if} #{else} Salvar <i class="save outline icon"></i> #{/else}</a>
+		<br><br><br>
+		<div class="container">
+ 		<div class="row">
+#{list items: listaDePedidos, as: 'p'}
+		<div class="col-lg-4">
+		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+		<div class="card-header">#{if listaDePedidos.size() > 1}Meus Pedidos #{/if} #{else} Meu pedido #{/else}</div>
+		<div class="card-body">
+		<h5 class="card-title">
+		<b></b>
+		</h5>
+		<div class="card-text">
+		<b>Arquivo: </b> ${p.nomeArquivo}
+		</div>
+		<div class="card-text">
+		<b>Quantidade de copias: </b> ${p.qtdCopias}
+		</div>
+		<div class="card-text">
+		<b>Frente ou verso : </b> ${p.frenteVerso}
+		</div>
+		<div class="card-text">
+#{if p.descricao} <b>Descricao: </b> ${p.descricao}<br /> #{/if}
+		</div>
+		<div class="card-text">
+		<b>Status: </b> ${p.status}
+		</div>
+		<div class="card-text">
+		<br>
+		<a href="@{Pedidos.cancelarPedidos(p.id)}" class="btn btn-danger icon">Cancelar <i class="trash alternate outline icon"></i></a>
+		</div>
+		</div>
+		</div>
+		</div>
+#{/list}
+		</div>
+		</div>
+#{/else}
+
+		</div>
+</div>
+<!-- JS DA PAGINA -->
+<script type="text/javascript">
+
+	$(document).ready(function(e) {
+		$("#form-pedido").submit(function(e) {
+			var arq = $("#item-arquivo").val();
+			if (arq == "") {
+				/*alert("Você deve anexar um arquivo!");*/
+			e.preventDefault();
+			if (arq == ""){
+				Swal.fire({
+					  icon: 'error',
+					  title: 'ERROR...',
+					  text: 'é obrigatório o anexo do arquivo!',
+					  footer: '<a href>Limpar e tentar novamente</a>',
+						  showCloseButton: true
+					})
+			}
+			}			
+		});
+		
+	});
+	$(".example--1").click(function () {
+	    
+	  });
+/*pega o nome do arquivo e jogar para o campo hiddem nomeArquivo*/
+    var inputNome = document.getElementById('nomeArquivo');
+	var inputFicheiro = document.getElementById('item-arquivo');
+
+inputFicheiro.addEventListener('change', function() {
+  var nome = this.files[0].name;
+  inputNome.innerHTML = nome;
+  document.getElementById('arquivo').value = nome;
+});
+/***************************************************************/
+</script>

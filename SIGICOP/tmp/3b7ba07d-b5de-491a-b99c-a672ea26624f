@@ -1,0 +1,480 @@
+------WebKitFormBoundaryApBdpyovBptPqyJX
+Content-Disposition: form-data; name="user"
+
+2
+------WebKitFormBoundaryApBdpyovBptPqyJX
+Content-Disposition: form-data; name="item.arquivo"; filename="loginn.txt"
+Content-Type: text/plain
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Standard Meta -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="shortcut icon" type="image/png"
+	href="@{'/public/images/favicon.png'}">
+ <title>#{get 'title' /}</title>
+ <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <!-- ICONE  -->
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        
+        #{get 'moreStyles' /}
+        <!-- CSS -->
+        <!-- UIKIT - CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/css/uikit.min.css" />
+		
+		<!-- BOOTSTRAP - CSS -->
+		<link rel="stylesheet" type="text/css" href="/public/bootstrap/dist/css/bootstrap.css">
+		
+		<!-- SEMANTIC - CSS -->
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/site.css">
+		
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/container.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/grid.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/header.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/image.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/menu.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/divider.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/dropdown.css">
+ 		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/segment.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/button.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/list.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/icon.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/sidebar.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/transition.css">
+		<link rel="stylesheet" type="text/css" href="/public/Semantic/css/message.css">
+	
+	<!-- 
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
+
+  <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/form.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/input.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/button.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/message.css">
+  <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
+
+  <script src="assets/library/jquery.min.js"></script>
+  <script src="../dist/components/form.js"></script>
+  <script src="../dist/components/transition.js"></script>
+
+  <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+  </script>
+   -->
+
+   
+        <!-- CSS NO CABEÇALHO  -->
+        
+<style type="text/css">
+.hidden.menu {
+	display: none;
+}
+
+.masthead.segment {
+	min-height: 700px;
+	padding: 1em 0em;
+}
+
+.masthead .logo.item img {
+	margin-right: 1em;
+}
+
+.masthead .ui.menu .ui.button {
+	margin-left: 0.5em;
+}
+
+.masthead h1.ui.header {
+	margin-top: 3em;
+	margin-bottom: 0em;
+	font-size: 4em;
+	font-weight: normal;
+}
+
+.masthead h2 {
+	font-size: 1.7em;
+	font-weight: normal;
+}
+
+.ui.vertical.stripe {
+	padding: 8em 0em;
+}
+
+.ui.vertical.stripe h3 {
+	font-size: 2em;
+}
+
+.ui.vertical.stripe .button+h3, .ui.vertical.stripe p+h3 {
+	margin-top: 3em;
+}
+
+.ui.vertical.stripe .floated.image {
+	clear: both;
+}
+
+.ui.vertical.stripe p {
+	font-size: 1.33em;
+}
+
+.ui.vertical.stripe .horizontal.divider {
+	margin: 3em 0em;
+}
+
+.quote.stripe.segment {
+	padding: 0em;
+}
+
+.quote.stripe.segment .grid .column {
+	padding-top: 5em;
+	padding-bottom: 5em;
+}
+
+.footer.segment {
+	padding: 5em 0em;
+}
+
+.secondary.pointing.menu .toc.item {
+	display: none;
+}
+
+@media only screen and (max-width: 700px) {
+	.ui.fixed.menu {
+		display: none !important;
+	}
+	.secondary.pointing.menu .item, .secondary.pointing.menu .menu {
+		display: none;
+	}
+	.secondary.pointing.menu .toc.item {
+		display: block;
+	}
+	.masthead.segment {
+		min-height: 350px;
+	}
+	.masthead h1.ui.header {
+		font-size: 2em;
+		margin-top: 1.5em;
+	}
+	.masthead h2 {
+		margin-top: 0.5em;
+		font-size: 1.5em;
+	}
+}
+</style>
+											<!--  JAVASCRIPT  --> 
+	<script src="/public/javascripts/mascaras.js"></script>
+		<!-- BOOTSTRAP JS -->
+		<script src="@{'/public/bootstrap/dist/js/popper.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+		
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<!-- SEMANTIC JS -->
+	<script src="@{'/public/Semantic/js/jquery.min.js'}"></script>
+	<script src="/public/Semantic/js/form.js"></script>
+	<script src="/public/Semantic/js/transition.js"></script>
+	<script src="/public/Semantic/js/jquery.min.js"></script>
+	<script src="/public/Semantic/js/visibility.js"></script>
+	<script src="/public/Semantic/js/sidebar.js"></script>
+	<script src="/public/Semantic/js/transition.js"></script>
+
+        											
+        <!-- JAVASCRIPT PADRAO -->
+        
+        <script src="@{'/public/javascripts/jquery-3.4.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+         #{get 'moreScripts' /}
+        <!-- MASCARAS -->
+ 		<script src="@{'/public/javascripts/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+       
+        <!-- UIKIT JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.7/js/uikit-icons.min.js"></script>
+	
+ 	<!-- JS NO CABEÇALHO -->
+ 	<script src="/public/Semantic/js/aparecerMenu.js"></script>
+ 	
+ 	<script>
+ 	$(document).ready(function() {
+
+		// fix menu when passed
+		$('.masthead').visibility({
+			once : false,
+			onBottomPassed : function() {
+				$('.fixed.menu').transition('fade in');
+			},
+			onBottomPassedReverse : function() {
+				$('.fixed.menu').transition('fade out');
+			}
+		});
+
+		// create sidebar and attach to menu open
+		$('.ui.sidebar').sidebar('attach events', '.toc.item');
+
+	});</script>
+	
+<style type="text/css">
+body {
+	background-color: #DADADA;
+}
+
+body>.grid {
+	height: 100%;
+}
+
+.image {
+	margin-top: -100px;
+}
+
+.column {
+	max-width: 450px;
+}
+</style>
+<script>
+	$(document).ready(function() {
+		$('.ui.form').form({
+			fields : {
+				email : {
+					identifier : 'email',
+					rules : [ {
+						type : 'empty',
+						prompt : 'Please enter your e-mail'
+					}, {
+						type : 'email',
+						prompt : 'Please enter a valid e-mail'
+					} ]
+				},
+				password : {
+					identifier : 'password',
+					rules : [ {
+						type : 'empty',
+						prompt : 'Please enter your password'
+					}, {
+						type : 'length[6]',
+						prompt : 'Your password must be at least 6 characters'
+					} ]
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<!-- 
+<div class="ui large top fixed menu">
+  <div class="ui container">
+    <a class="active item" href="@{Gerenciador.principal}">Principal</a>
+    <a class="item">Work</a>
+    <a class="item">Company</a>
+    <a class="item">Careers</a>
+    <div class="right menu">
+      <div class="item">
+        <a class="ui button" href="${voltar}" >Voltar</a>
+      </div>
+ 
+     
+ 
+    </div>
+  </div>
+</div>
+-->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08" style="">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link"  href="@{Gerenciador.principal}" >Principal <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown08">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+	<!-- <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">We Help Companies and Companions</h3>
+          <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
+          <h3 class="ui header">We Make Bananas That Can Dance</h3>
+          <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
+        </div>
+        <div class="six wide right floated column">
+          <img src="public/Semantic/assets/images/wireframe/white-image.png" class="ui large bordered rounded image">
+        </div>
+      </div>
+      <div class="row">
+        <div class="center aligned column">
+          <a class="ui huge button">Check Them Out</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+	<!-- <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>"What a Company"</h3>
+          <p>That is what they all say about us</p>
+        </div>
+        <div class="column">
+          <h3>"I shouldn't have gone with their competitor."</h3>
+          <p>
+            <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+   -->
+<div class="ui vertical stripe segment">
+    <div class="ui text container text-break" style="max-height: 100%;">
+       
+ #{doLayout /}
+ 
+    </div>
+  </div>
+	<!-- <div class="ui vertical stripe segment">
+    <div class="ui text container text-break" style="max-height: 100%;">
+      
+    </div>
+  </div> -->
+
+<div class="position-bottom" >
+	<div class="ui inverted vertical footer segment">
+		<div class="ui container">
+			<div
+				class="ui stackable inverted divided equal height stackable grid">
+				<div class="three wide column">
+					<h4 class="ui inverted header">Sobre</h4>
+					<div class="ui inverted link list">
+						<a href="#" class="item">Sitemap</a> <a href="#" class="item">Contact
+							Us</a> <a href="#" class="item">Religious Ceremonies</a> <a href="#"
+							class="item">Gazebo Plans</a>
+					</div>
+				</div>
+				<div class="three wide column">
+					<h4 class="ui inverted header">Contatos</h4>
+					<div class="ui inverted link list">
+					<a href="#"class="item">+55 (84) 988122176</a> 
+					<a href="#" class="item">+55 (84) 994333803</a> 
+					</div>
+				</div>
+				<div class="three wide column">
+					<h4 class="ui inverted header">E-mails</h4>
+					<a href="#" class="item">magdiel.pereira@escolar.ifrn.edu.br</a> 
+					<a href="#" class="item">manacio.p@escolar.ifrn.edu.br</a> 
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
+
+</html>
+
+------WebKitFormBoundaryApBdpyovBptPqyJX
+Content-Disposition: form-data; name="item.qtdCopias"
+
+8
+------WebKitFormBoundaryApBdpyovBptPqyJX
+Content-Disposition: form-data; name="item.frenteVerso"
+
+frenteEverso
+------WebKitFormBoundaryApBdpyovBptPqyJX
+Content-Disposition: form-data; name="item.descricao"
+
+apenas imprimaaaa
+------WebKitFormBoundaryApBdpyovBptPqyJX--

@@ -1,0 +1,76 @@
+Nome:	Ethernet
+Descrição:	Broadcom NetXtreme Gigabit Ethernet
+Endereço físico (MAC):	c8:d3:ff:00:ec:cf
+Status:	Operacional
+Unidade máxima de transmissão:	1500
+Velocidade da conexão (Recepção/Transmissão):	1000/1000 (Mbps)
+DHCP ativado:	Sim
+Servidores DHCP:	10.97.0.11
+Concessão DHCP obtida:	‎quinta-feira, ‎25‎ de ‎julho‎ de ‎2019 20:57:34
+A concessão DHCP expira em:	‎sexta-feira, ‎2‎ de ‎agosto‎ de ‎2019 20:57:34
+Endereço IPv4:	10.97.3.34/16
+Endereço IPv6:	fe80::68e4:30a9:178c:c365%8/64
+Gateway padrão:	10.97.0.1
+Servidores DNS:	10.102.0.2, 10.22.0.10
+Nome do domínio DNS:	ifrn.local
+Sufixo da conexão DNS:	ifrn.local
+Lista de sufixos de pesquisa DNS:	
+Nome da rede:	IFRN
+Categoria de rede:	Domínio
+Conectividade (IPv4/IPv6):	Conectado a Internet / Conectado a rede desconhecida
+	                                   
+	                                   
+Nome:	VirtualBox Host-Only Network
+Descrição:	VirtualBox Host-Only Ethernet Adapter
+Endereço físico (MAC):	0a:00:27:00:00:11
+Status:	Operacional
+Unidade máxima de transmissão:	1500
+Endereço IPv4:	192.168.56.1/24
+Endereço IPv6:	fe80::bc9a:a5e2:15e:4b17%17/64
+Servidores DNS:	fec0:0:0:ffff::1%1, fec0:0:0:ffff::2%1, fec0:0:0:ffff::3%1
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
+Nome:	Npcap Loopback Adapter
+Descrição:	Npcap Loopback Adapter
+Endereço físico (MAC):	02:00:4c:4f:4f:50
+Status:	Operacional
+Unidade máxima de transmissão:	1500
+Endereço IPv4:	169.254.172.204/16
+Endereço IPv6:	fe80::6d43:388b:d5de:accc%20/64
+Servidores DNS:	fec0:0:0:ffff::1%1, fec0:0:0:ffff::2%1, fec0:0:0:ffff::3%1
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
+Nome:	Conexão de Rede Bluetooth
+Descrição:	Bluetooth Device (Personal Area Network)
+Endereço físico (MAC):	98:54:1b:65:76:46
+Status:	Ausente
+Unidade máxima de transmissão:	0
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
+Nome:	Wi-Fi
+Descrição:	Intel(R) Dual Band Wireless-AC 3165
+Endereço físico (MAC):	98:54:1b:65:76:42
+Status:	Ausente
+Unidade máxima de transmissão:	0
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
+Nome:	Conexão Local* 10
+Descrição:	Microsoft Wi-Fi Direct Virtual Adapter
+Endereço físico (MAC):	98:54:1b:65:76:43
+Status:	Ausente
+Unidade máxima de transmissão:	0
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
+Nome:	Conexão Local* 11
+Descrição:	Microsoft Wi-Fi Direct Virtual Adapter #2
+Endereço físico (MAC):	9a:54:1b:65:76:42
+Status:	Ausente
+Unidade máxima de transmissão:	0
+Conectividade (IPv4/IPv6):	Desconectado
+	                                   
+	                                   
