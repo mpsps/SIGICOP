@@ -151,9 +151,9 @@ Referências    | Categoria   | Links
 Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home) 
 Bootstrap      | CSS | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 Semantic UI      | CSS |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
+Uikit          | CSS | [Uikit](https://getuikit.com/docs/introduction) 
 Sweeetalert2     | JS |  [Sweeetalert2](https://sweetalert2.github.io/)
 Jquery          | JS |  [Jquery](https://jquery.com/)
-Uikit          | CSS | [Uikit](https://getuikit.com/docs/introduction) 
 W3school       | Plataforma de Conhecimento |  [W3school](https://www.w3schools.com/)
 Icon8          | Plataforma de Icones | [Icons8](https://icons8.com.br/icons)
  
