@@ -79,6 +79,7 @@ $().ready(function() {
 </script>
    ```
 **Dialog do [SweetAlert2](https://sweetalert2.github.io/)**
+
 **Dados do usuário e do Admin**
    ```javascript
 <!-- DIALOGS DO SWEETALERT2 -->
