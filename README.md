@@ -52,7 +52,6 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 ### Javascript Incorporado no Templates laySeg.html
 **Mensagem de Alerta**
 ```javascript
-<!-- JS DA PAGINA -->
 <!-- MESSAGEM DE ALERTA -->
 	<script type="text/javascript">
 $().ready(function() {
@@ -69,7 +68,7 @@ $().ready(function() {
 ```
 **Mascara de Campos**
 ```javascript
-	<script type="text/javascript">
+<script type="text/javascript">
     $("#telefone, #celular").mask("(00) 0000-0000");
     $('#matricula').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
@@ -79,6 +78,7 @@ $().ready(function() {
    ```
 **Dialog do [SweetAlert2](https://sweetalert2.github.io/)**
    ```javascript
+<script type="text/javascript">
     $("#dadosAdmin").click(function () {
 		Swal.fire({
 			  position: 'top-end',
@@ -89,6 +89,7 @@ $().ready(function() {
 			  showConfirmButton: false,
 			})
 	});
+	
     $("#dadosUser").click(function () {
 		Swal.fire({
 			  position: 'top-end',
@@ -99,8 +100,9 @@ $().ready(function() {
 			  showConfirmButton: false,
 			})
 	});
-    </script>
-    <script type="text/javascript">
+</script>
+    
+<script type="text/javascript">
 	$("#restaurar").click(function() {
 		Swal.fire({
 			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
@@ -117,7 +119,14 @@ $().ready(function() {
 			  }
 			})
 	});
-	$(function () {
+	
+	
+</script>
+```
+**Mensagem ao passar o mouse no link**
+```javascript
+<script type="text/javascript">
+$(function () {
 		  $('[data-toggle="tooltip"]').tooltip()
 		  $('#example').tooltip({ boundary: 'window' })
 		})
@@ -137,12 +146,17 @@ $(document).ready(function(){
         }
     });
 
-    $('a[href="#top"]').click(function(){
+</script>    
+```
+**Voltar ao Topo**
+```javascript
+<script type="text/javascript">
+$('a[href="#top"]').click(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
 });
-</script>    
+</script>
 ```
 
 ## Tabela de Referências
