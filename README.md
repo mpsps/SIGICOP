@@ -233,6 +233,21 @@ $(document).ready(function(){
 });
 </script> 
 ```
+**Sobre Nós**
+```javascript
+<script type="text/javascript">
+$(document).ready(function(){ 
+		$(".sobreNos").click(function () {
+	Swal.fire({
+		  position: 'top-center',
+		  icon: 'information',
+		  title: '<div  class=sticky-top> <img src=/public/images/icones/gitInfo.png height=30 style=float: left; margin-right: 5px; alt=GitHub title=GitHub /> <spanclass=text-white h4>SIGICOP</h4> </span>',
+		  showCloseButton: true,
+		  showConfirmButton: false,
+		})
+}); 
+</script> 
+```
 
 ## Tabela de Referências
 Referências    | Categoria   | Links
