@@ -157,29 +157,3 @@ Jquery          | JS |  [Jquery](https://jquery.com/)
 W3school       | Plataforma de Conhecimento |  [W3school](https://www.w3schools.com/)
 Icon8          | Plataforma de Icones | [Icons8](https://icons8.com.br/icons)
  
-**BOLD**
-
-`Insira o código`
- 
-~TESTE~
-
-```
-git status
-git add
-git commit
-```
-
->TEXTO CITACAO
-
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
-
- :+1: :shipit: :running:
-
-```java
-int num = 1;
-if(num == 1){
-System.ou.ptintl("Hello World!");
-}
-```
