@@ -110,11 +110,12 @@ $().ready(function() {
 ```
 **Dialog Mensagem de Restaurar**
 ```javascript
-<script type="text/javascript">
+<!-- DIALOGS DO COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
+ <script type="text/javascript">
 	$("#restaurar").click(function() {
 		Swal.fire({
-			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
-			  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
+			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitaÃ§Ãµes de todos os usuÃ¡rios?',
+			  text: 'lembre-se que essa funÃ§Ã£o sÃ³ Ã© recomendada em inicio de cada mÃªs',
 			  icon: 'question',
 			  showCancelButton: true,
 			  confirmButtonColor: '#21ac0d',
@@ -126,7 +127,79 @@ $().ready(function() {
 			$('#formRestaurar').submit(); 
 			  }
 			})
-	});	
+	});
+	
+	
+</script>
+```
+**Dialogs com Preenchimento de Justificativa de Conclusão ou recusa**
+```javascript
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".recusar").click(function() {
+		var idPedido = $(this).data("item");
+		
+		Swal.fire({
+			  title: 'Motivo da recusa:',
+			  input: 'textarea',
+			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
+			  inputAttributes: {
+			    'aria-label': 'Type your message here'
+			  },
+			  showCloseButton: true,
+			  showCancelButton: true
+		}).then((result) => {
+			if(result.value == ""){
+				Swal.fire({
+					  icon: 'error',
+					  title: 'ERROR...',
+					  text: 'preencha o motivo!',
+					  footer: '<a href>Limpar e tentar novamente</a>',
+					  showCloseButton: true
+					})
+								}
+			if (result.value) {
+				$('#idPed').val(idPedido);
+				$('#motivo').val(result.value);
+				$('#recusa').submit();
+			}
+		})
+	});
+
+	$(".concluir").click(function() {
+		var idPedido = $(this).data("item");
+		
+		Swal.fire({
+			  title: 'Mensagem de conclusÃ£o:',
+			  input: 'textarea',
+			  inputPlaceholder: 'digite alguma mensagem complementar',
+			  inputAttributes: {
+			    'aria-label': 'Type your message here'
+			  },
+			  showCloseButton: true,
+			  showCancelButton: true
+		}).then((result) => {
+			if(result.value == ""){
+				result.value = ".";
+				}
+			if (result.value) {
+				$('#idPedCon').val(idPedido);
+				$('#resposta').val(result.value);
+				$('#con').submit();
+			}
+		})
+	});
+});
+</script>
+```
+**Reload Automatico de Página**
+```javascript
+<script type="text/javascript">
+	$(document).ready(function () {
+	    setTimeout(function () {
+	        window.location.reload(1);
+	    }, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
+	});
 </script>
 ```
 **Mensagem ao passar o mouse no link**
@@ -139,8 +212,9 @@ $(function () {
 </script>
 ```
 ### Javascript Incorporado no Templates layPri.html
+
+**Voltar ao Topo**
 ```javascript
-<!-- JS DA PAGINA -->
 <!-- VOLTAR AO TOPO -->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -151,18 +225,13 @@ $(document).ready(function(){
             $('a[href="#top"]').fadeOut();
         }
     });
-
-</script>    
-```
-**Voltar ao Topo**
-```javascript
-<script type="text/javascript">
-$('a[href="#top"]').click(function(){
+    $('a[href="#top"]').click(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
+
 });
-</script>
+</script> 
 ```
 
 ## Tabela de Referências
