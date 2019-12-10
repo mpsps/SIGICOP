@@ -53,31 +53,36 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 **Mensagem de Alerta**
 ```javascript
 <!-- MESSAGEM DE ALERTA -->
-	<script type="text/javascript">
+<script type="text/javascript">
 $().ready(function() {
 		setTimeout(function () {
-			$('#messagemAlerta').hide(); // "messagemAlerta" é o id do elemento que seja manipular.
-		}, 2000); // O valor é representado em milisegundos.
+			$('#messagemAlerta').hide(); // "messagemAlerta" ï¿½ o id do elemento que seja manipular.
+		}, 2000); // O valor ï¿½ representado em milisegundos.
 });
 $().ready(function() {
 	setTimeout(function () {
-		$('#messagemArquivo').hide(); // "messagemAlerta" é o id do elemento que seja manipular.
-	}, 2000); // O valor é representado em milisegundos.
+		$('#messagemArquivo').hide(); // "messagemAlerta" ï¿½ o id do elemento que seja manipular.
+	}, 2000); // O valor ï¿½ representado em milisegundos.
 });
-	</script>
+</script>
 ```
 **Mascara de Campos**
 ```javascript
+<!-- MASCARA DE CAMPOS -->
 <script type="text/javascript">
     $("#telefone, #celular").mask("(00) 0000-0000");
     $('#matricula').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
     $('#dataEnvtrega').mask('00/00/0000');
-    </script>
+   
+</script>
    ```
 **Dialog do [SweetAlert2](https://sweetalert2.github.io/)**
+**Dados do usuário e do Admin**
    ```javascript
+<!-- DIALOGS DO SWEETALERT2 -->
+<!-- DIALOGS COM DADOS DO USUARIO E ADMIN -->
 <script type="text/javascript">
     $("#dadosAdmin").click(function () {
 		Swal.fire({
@@ -89,19 +94,21 @@ $().ready(function() {
 			  showConfirmButton: false,
 			})
 	});
-	
+    
     $("#dadosUser").click(function () {
 		Swal.fire({
 			  position: 'top-end',
 			  icon: '',
 			  title: 'Meus Dados',
-			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br> #{if usuarioBanco?.ultimoAcessoUsu} Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")} #{/if} <br> Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel}' ,
+			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}   <br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			})
 	});
-</script>
-    
+ </script>
+```
+**Dialog Mensagem de Restaurar**
+```javascript
 <script type="text/javascript">
 	$("#restaurar").click(function() {
 		Swal.fire({
@@ -118,9 +125,7 @@ $().ready(function() {
 			$('#formRestaurar').submit(); 
 			  }
 			})
-	});
-	
-	
+	});	
 </script>
 ```
 **Mensagem ao passar o mouse no link**
