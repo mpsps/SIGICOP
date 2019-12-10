@@ -50,6 +50,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 ```
 ### Javascript Incorporado no Templates laySeg.html
+**Mensagem de Alerta**
 ```javascript
 <!-- JS DA PAGINA -->
 <!-- MESSAGEM DE ALERTA -->
@@ -65,20 +66,19 @@ $().ready(function() {
 	}, 2000); // O valor é representado em milisegundos.
 });
 	</script>
+```
+**Mascara de Campos**
+```javascript
 	<script type="text/javascript">
-
     $("#telefone, #celular").mask("(00) 0000-0000");
     $('#matricula').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
     $('#dataEnvtrega').mask('00/00/0000');
-   
-    var valorMaximo = 0;//document.getElementById('qtdCopiasFiltro').val();
-    var meuValor = parseInt(valorMaximo);
-    
-    if(meuValor > 10){
-    	document.getElementById('maxDez').innerHTML = "O valor maximo é 10";
-    }
+    </script>
+   ```
+**Dialog do [SweetAlert2](https://sweetalert2.github.io/)**
+   ```javascript
     $("#dadosAdmin").click(function () {
 		Swal.fire({
 			  position: 'top-end',
