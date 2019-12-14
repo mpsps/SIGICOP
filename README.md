@@ -248,7 +248,7 @@ $(document).ready(function(){
 }); 
 </script> 
 ```
-![Alt Text](https://github.com/MagdielPS/SIGICOP/raw/public/imagens/sigicop/SIGICOPs.jpeg)
+![Alt Text](https://github.com/MagdielPS/SIGICOP/raw/public/images/sigicop/SIGICOPs.jpg)
 
 ## Tabela de Referências
 Referências    | Categoria   | Links
