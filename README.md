@@ -248,6 +248,7 @@ $(document).ready(function(){
 }); 
 </script> 
 ```
+![Alt Text](https://github.com/MagdielPS/SIGICOP/raw/{branch}/path/to/image.gif)
 
 ## Tabela de Referências
 Referências    | Categoria   | Links
