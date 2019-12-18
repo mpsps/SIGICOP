@@ -13,61 +13,46 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import play.data.validation.Email;
+import play.data.validation.Max;
 import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
-import util.CriptografiaUtils;
+import seguranca.CriptografiaUtils;
 
 @Entity
 public class Usuario extends Model{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Long id;
-	
 	@Required
 	@MaxSize(45)
 	public String nomeUsu;
-	
 	@Required
-//	@Unique(value = "matricula")
 	public String matricula;
-	
 	@Required
 	@MinSize(6)
 	public String senha;
-	
 	@Transient
 	public String confirmarSenha;
-	
 	@Required
 	@Email
 	public String email;
-	
-	public int qtdDisponivel;
-	
+	@Max(20)
+	public int qtdDisponivel = 20;
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date ultimoAcessoUsu;
-	
-//	@Enumerated
-//	public Patente patente;
-	
-	public Usuario() {
-		qtdDisponivel = 20;
-	}
+//	public Usuario() {
+//		qtdDisponivel = 20;
+//	}
 	public boolean compararSenha(){
-		boolean cs = false;
+		
 		if(senha.equals(confirmarSenha)) {
-			return cs = true;
+			return true;
 		}else {
-			return cs;
+			return false;
 		}
 	}
-	public Usuario autenticar() {
-		String senhaCript = CriptografiaUtils.criptografarMD5(senha);
-		Usuario u = Usuario.find("matricula = ?1 and senha = ?2",
-				matricula, senhaCript).first();
-		return u;
-	}
+
 }

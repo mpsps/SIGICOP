@@ -1,0 +1,41 @@
+#{extends 'laySeg.html' /} 
+#{set title:'Realizar copia' /}
+<div id="corpoCelular" class="heightMin">
+	<div class="h1 text-dark text-center">Realizar Pedido de Cópia</div>
+		<br>
+		<div class="ui middle aligned center aligned grid">
+		<div class="column">
+		<div class="column" style="whith: 100%; margin-bottom: 0px;">
+		<form action="@{Pedidos.realizarBaixa} " class="ui large form" method="post">
+		<div class="ui stacked segment"><!-- cor branca do formulario -->
+		<br/>
+		<label for="confirmarSenha">Usuário:</label>
+		<select name="ped.usuario.id" class="form-control">
+#{list items:listaDeUsuario, as: 'u'}
+		<option value="${u.id}">${u.nomeUsu}</option>
+#{/list}
+		</select>
+		<br/>
+		<label for="confirmarSenha">Quantidade de cópias:</label>
+		<input type="number" name="ped.qtdCopias" class="form-control" max="" min="0" class="qtdCopias" value="${valor}" required>
+		<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
+		<div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" id="frente" name="ped.frenteVerso" class="custom-control-input" value="frente" checked="checked">
+ 		<label class="custom-control-label" for="frente">Frente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+ 		<input type="radio" id="frenteEverso" name="ped.frenteVerso" class="custom-control-input" value="frenteEverso">
+  		<label class="custom-control-label" for="frenteEverso">Frente e Verso</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
+		</div>
+		<br/>
+		<label>Descricao</label>
+		<textarea rows="3" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
+		<br/>
+		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Salvar" required/>
+		<br /> 
+		</div>
+		</form>
+		</div>
+		</div>
+	</div>
+</div>

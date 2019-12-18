@@ -56,7 +56,7 @@ public class Pedido extends Model {
 	public Date dataEntrega;
 
 	@Enumerated(EnumType.STRING)
-	public StatusPedido status = StatusPedido.AGUARDANDO;;
+	public StatusPedido status = StatusPedido.AGUARDANDO;
 
 	@ManyToOne
 	public Usuario usuario;

@@ -3,6 +3,15 @@
 
 <div id="corpoCelular">	
 				<!-- FORMULARIO DE PEDIDOS -->
+#{if usuarioBanco?.qtdDisponivel == 0}
+		<div class="jumbotron jumbotron-fluid danger" style="background:#ff4a4a;">
+  		<div class="container">
+    	<h1 class="display-4 ">Você atingiu seu limite máximo de solicitacões nesse mês, mas lembresse de salvar os pedidos</h1>
+    	<p class="lead">você não podera mais realizar solicitacões, durante esse mês!</p>
+  		</div>
+		</div>
+#{/if}
+#{else}
 <form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
 	<div class="ui stacked segment">
 		<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
@@ -17,7 +26,7 @@
 		<div id="nomeArquivo" class="text-primary h4 center text-break">
 		</div>
 		</div><!-- accept=".pdf" -->
-		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" autofocus ><br /> 
+		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" ><br /> 
  <br /><br />
 		<br>
 #{if obrigatorio}
@@ -25,13 +34,14 @@
 #{/if}
 		<div class="row">
 		 <div class="col">
-		<label>Qtd Copias:<sup style="color: red;">*</sup></label>
-		<select name="item.qtdCopias" required="" class="form-control" autofocus="" required>
+		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
+		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="0" class="qtdCopias" value="${valor}" required>
+<!-- 		<select name="item.qtdCopias" class="form-control" required>
 		<option></option>
 #{list items:1..usuarioBanco.qtdDisponivel	, as:'i'}
 		<option value="${i}">${i}</option>
 #{/list}
-		</select>
+		</select> -->
 		</div>
 		<div class="col">		<!--  <input type="number" min="0" max="10" name="item.qtdCopias" required="" class="form-control" autofocus=""><br /> -->
 #{if obrigatorio}
@@ -44,23 +54,30 @@
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
  		 <input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" value="frenteEverso">
-  		<label class="custom-control-label" for="frenteEverso">Frente e Verso</label>
+  		<label class="custom-control-label" for="frenteEverso">Frente e Verso</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
 		</div>
 		<br />
 		</div>
 		</div>
 		<label>Descricao</label>
-		<textarea rows="3" cols="7" name="item.descricao" class="form-control" autofocus="" placeholder="descrição" style="text-indent: none:">
-		</textarea>
+		<textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
 		<div class="text-center">
 		<button class="btn btn-success mt-3 icon">Adicionar <i class="paper plane outline icon"></i></button>
 		</div>
 	</div>
 </form>
-
+#{/else}
+#{ifErrors}
+		<h2 style="color:red">Ops...</h2>
+	
+#{errors}
+		<li>${error.key} - ${error} - ${error.message}</li>
+#{/errors}
+							  
+#{/ifErrors}
 		<div class="listaPped text-center">
 #{if listaDePedidos == null}
-		<div class="h1 text-primary">Nenhum pedido realizado</div>
+		<div class="h1 text-primary">Nenhum pedido adicionado</div>
 #{/if}
 #{else}
 		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos <i class="save outline icon"></i> #{/if} #{else} Salvar <i class="save outline icon"></i> #{/else}</a>
@@ -126,9 +143,6 @@
 		});
 		
 	});
-	$(".example--1").click(function () {
-	    
-	  });
 /*pega o nome do arquivo e jogar para o campo hiddem nomeArquivo*/
     var inputNome = document.getElementById('nomeArquivo');
 	var inputFicheiro = document.getElementById('item-arquivo');

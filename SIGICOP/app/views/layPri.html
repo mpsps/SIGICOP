@@ -28,13 +28,13 @@
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/container.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.css'}">
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/image.css'}">
+		<!--<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/image.css'}">-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/menu.css'}">		
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/divider.css'}">
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/dropdown.css'}">
+		<!--<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/dropdown.css'}">-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/list.css'}">
+		<!--<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/list.css'}">-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/sidebar.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/transition.css'}">
@@ -77,10 +77,10 @@
   <div class="ui container">
 		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
     	<!-- <a class="item">Item 1</a>-->
-    	<a class="item">Sobre Nos</a>
+    	<a class="item" class="sobreNos">Sobre Nos</a>
     	<div class="right menu">
 		<div class="item">
-        <a class="ui primary button" href="@{Gerenciador.login}" >Logar</a>
+        <a class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
 		</div>
 		<div class="item">
 		</div>
@@ -91,8 +91,8 @@
 		<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
   		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
   		<!-- <a class="item">Item 1</a>-->
-  		<a class="item">Sobre Nos</a>
-  		<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Logar</a>
+  		<a class="item" class="sobreNos">Sobre Nos</a>
+  		<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
 		</div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
 <div class="pusher">
@@ -103,11 +103,12 @@
         <img src="@{'/public/images/icones/menuIcone.png'}">
 		<!-- <i class="sidebar icon"></i> -->
         </a>
-        <a class="active item" href="@{Gerenciador.principal}">Principal</a>
+        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" href="@{Gerenciador.principal}">Principal</a>
         <!--  <a class="item">Item 1</a>-->
-        <a class="item">Sobre Nos</a>
+        <a class="item" href="#" onmouseover="this.style='border-bottom:  3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" class="sobreNos">Sobre Nos</a>
         <div class="right item">
-        <a class="ui inverted button" href="@{Gerenciador.login}">logar</a>
+        <a class="ui inverted button" href="@{Gerenciador.login}">Entrar</a>
 		</div>
 		</div>
 		</div>
@@ -119,11 +120,11 @@
 		</h1>
 		</span>
 		<br/>
-		<a href="@{Gerenciador.login}" class="ui huge primary button">Logar Agora <i class="right arrow icon"></i></a>
+		<a href="@{Gerenciador.login}" class="ui huge primary button">Entrar Agora <i class="right arrow icon"></i></a>
 	</div>
 </div>
 
-<!-- CORPO DA PAGINA -->
+<!-- CORPO DA PAGINA-->
 
 <div class="ui vertical stripe segment">
 	<div class="ui text container text-break" style="max-height: 100%;">
@@ -134,39 +135,42 @@
 	</div>
 </div>
 
-<!-- RODAPÉ DA PAGINA -->
-<div class="ui inverted vertical footer segment" class="dark">
-	<div class="ui container">
+<!-- RODAP� DA PAGINA -->
+		<div class="position-bottom" id="rodapeCelular" class="rodapeEmBaixo">
+ 		<div class="ui inverted vertical footer segment" class="dark">
+		<div class="ui container">
 		<div class="ui stackable inverted divided equal height stackable grid">
 		<div class="three wide column">
 		<h4 class="ui inverted header">Sobre:</h4>
 		<div class="ui inverted link list">
-		<a href="https://pt-br.facebook.com/login/" target="_blank">
-		<img alt="" src="@{'/public/images/icones/facebook.png'}" title="Facebook">
+		<span class="sticky-top">
+		<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
+		<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
+		onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" width="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
 		</a>
-		<a href="https://br.pinterest.com/" target="_blank">
-		<img alt="" src="@{'/public/images/icones/pinterest.png'}" title="Pinterest">
-		</a>
-		<a href="https://web.whatsapp.com/" target="_blank">
-		<img alt="" src="@{'/public/images/icones/whatsapp.png'}" title="Whatsapp">
-		</a>
+		<span class="text-white h4">SIGICOP</span>
+		</span>
 		</div>
 		</div>
 		<div class="three wide column">
-		<h4 class="ui inverted header">Contatos:</h4>
+		<div class="ui inverted header h4">Contatos:</div>
 		<div class="ui inverted link list">
-		<a href="#" class="item">+55 (84) 988122176</a> 
-		<a href="#" class="item">+55 (84) 994333803</a> 
+		<a href="#"  class="text-decoration-none">+55 (84) 988122176</a> 
+		<br>
+		<a href="#" class="text-decoration-none">+55 (84) 994333803</a> 
 		</div>
 		</div>
 		<div class="three wide column">
 		<h4 class="ui inverted header">E-mails:</h4>
-		<a href="#" class="item">magdiel.pereira@escolar.ifrn.edu.br</a> 
-		<a href="#" class="item">manacio.p@escolar.ifrn.edu.br</a> 
+		<a href="#" class="text-decoration-none" data-toggle="tooltip" data-html="true" title="">magdiel.pereira@escolar.ifrn.edu.br</a> 
+		<a href="#" class="text-decoration-none">manacio.p@escolar.ifrn.edu.br</a> 
 		</div>
 		</div>
-	</div>
+		</div>
+		</div>
+		</div>
 </div>
+		
 <!-- JS DA PAGINA -->
 <!-- VOLTAR AO TOPO -->
 <script type="text/javascript">
@@ -178,12 +182,25 @@ $(document).ready(function(){
             $('a[href="#top"]').fadeOut();
         }
     });
-
     $('a[href="#top"]').click(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
+
 });
-</script>    
+</script> 
+<script type="text/javascript">
+$(document).ready(function(){ 
+		$(".sobreNos").click(function () {
+	Swal.fire({
+		  position: 'top-center',
+		  icon: 'information',
+		  title: '<div  class=sticky-top> <img src=/public/images/icones/gitInfo.png height=30 style=float: left; margin-right: 5px; alt=GitHub title=GitHub /> <spanclass=text-white h4>SIGICOP</h4> </span>',
+		  showCloseButton: true,
+		  showConfirmButton: false,
+		})
+}); 
+</script> 
+
 </body>
 </html>

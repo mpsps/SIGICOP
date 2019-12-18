@@ -9,30 +9,92 @@ import java.util.List;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 
+import annotations.Admin;
+import annotations.User;
 import models.Administrador;
 import models.DadosSessao;
 import models.Pedido;
+import models.StatusPedido;
 import models.Usuario;
 import play.cache.Cache;
 import play.data.validation.Valid;
 import play.db.jpa.Blob;
 import play.mvc.Controller;
 import play.mvc.With;
-import segurancaDoSistema.Seguranca;
-import util.CriptografiaUtils;
+import seguranca.CriptografiaUtils;
+import seguranca.Seguranca;
 
 @With(Seguranca.class)
 public class Usuarios extends Controller {
 	
-	// TELA DE CADASTRO DE USUARIO
-	public static void cadastroDeUsuario() {
-		session.clear();
-		Cache.clear();
-		render();
-	}
+	// TELA DO USUARIO, MANDA USUARIO E LISTA DE PEDIDOS
+	@User
+		public static void paginaUsuario() {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.paginaUsuario() ... ["+ new Date()+"]");
+			
+				DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);				
+				Usuario usuarioBanco = dadosSessao.usuario;
+			
+				List<Pedido> listaPedidos = new ArrayList<Pedido>();
+					listaPedidos = Pedido.find("usuario_id = ?1 ", usuarioBanco.id).fetch();	
+				String solicitar = "solicitar";
+				render(usuarioBanco, listaPedidos, solicitar);
+		}
+		
+		// FILTRO DE PEDIDOS NA PAGINA DO USUARIO
+	@User
+		public static void filtro(String NomeDoArquivoFiltro, String descricaoFiltro) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.filtro() ... ["+ new Date()+"]");	
+			
+			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);				
+			Usuario usuarioBanco = dadosSessao.usuario;
+		
+			List<Pedido> listaPedidos = new ArrayList<Pedido>();
+			
+			if (NomeDoArquivoFiltro.isEmpty() && descricaoFiltro.isEmpty()) {
+				listaPedidos = Pedido.find("usuario_id = ?1", usuarioBanco).fetch();
+				System.out.println("Tentou filtrar sem nada!");
+				
+			}else if(!NomeDoArquivoFiltro.isEmpty() || !descricaoFiltro.isEmpty()){
+				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND usuario_id = ?3",
+						"%" + NomeDoArquivoFiltro.toLowerCase() + "%","%" + descricaoFiltro.toLowerCase() + "%",
+						usuarioBanco).fetch();
+				System.out.println("Tentou filtrar com conteudo!(só Nome do Arquivo e Descricao)"+ descricaoFiltro.trim().replaceAll("\\s+"," "));
 
+				}else if(!NomeDoArquivoFiltro.isEmpty() || descricaoFiltro.isEmpty()){
+			listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND usuario_id = ?2",
+					"%" + NomeDoArquivoFiltro.toLowerCase() + "%", usuarioBanco).fetch();
+			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");
+
+			}else if(!descricaoFiltro.isEmpty()|| NomeDoArquivoFiltro.isEmpty()){
+				listaPedidos = Pedido.find("lower(descricao) like ?1 AND usuario_id = ?2",
+						"%" + descricaoFiltro.toLowerCase() + "%", usuarioBanco).fetch();
+				System.out.println("Tentou filtrar com conteudo!(só descricao)");
+
+				}
+			
+					String solicitar = "solicitar";
+			renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos,solicitar, NomeDoArquivoFiltro, descricaoFiltro);
+		}
+		
+		// TELA DE CADASTRO DE USUARIO
+	@User
+		public static void cadastroDeUsuario() {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.cadastroDeUsuario() ...["+ new Date()+"]");
+		
+			session.clear();
+			Cache.clear();
+			render();
+		}
+		
+		
 	// SALVAR O USUARIO
 	public static void salvarUsuario(@Valid Usuario user) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.salvarUsuario() ... ["+ new Date()+"]");
 		
 		Usuario userBancoMat = Usuario.find("matricula = ?1 ", user.matricula).first();
 		Usuario userBancoEmail = Usuario.find("email = ?1", user.email).first();
@@ -64,34 +126,47 @@ public class Usuarios extends Controller {
 			renderTemplate("Usuarios/cadastroDeUsuario.html", user);
 		}
 		}
+	
 		Gerenciador.login();
 	}
 	
-	// TELA DO USUARIO, MANDA USUARIO E LISTA DE PEDIDOS
-	public static void paginaUsuario() {
-			String NomeAquirvo = params.get("NomeDoArquivoFiltro");
-			String descricao = params.get("descricaoFiltro");
-			
-			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);				
-			Usuario usuarioBanco = dadosSessao.usuario;
-		
-			List<Pedido> listaPedidos = new ArrayList<Pedido>();
-			if(NomeAquirvo == null || NomeAquirvo.isEmpty()) {
-				listaPedidos = Pedido.find("usuario_id = ?1 ", usuarioBanco.id).fetch();	
-			}else if(NomeAquirvo != null || !NomeAquirvo.isEmpty() || descricao != null || !descricao.isEmpty()) {
-				listaPedidos = Pedido.find("usuario_id = ?1 AND lower(nomeArquivo) like ?2  AND lower(descricao) like ?3",
-						usuarioBanco.id, "%"+NomeAquirvo.toLowerCase()+"%", "%"+descricao.toLowerCase()+"%").fetch();
-			}
-			String solicitar = "solicitar";
-			render(usuarioBanco, listaPedidos, NomeAquirvo,solicitar);
-	}
 	// FAZ DOWNLOAD DO ARQUIVO DO USUARIO
-		public static void download(Long id) {
+	@User
+	public static void download(Long id) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.download() ... ["+ new Date()+"]");
 			Pedido ip = Pedido.findById(id);
+			
+			if(!ip.arquivo.exists()) {
+				flash.error("Arquivo não encontrado");
+				paginaUsuario();
+			}
+			System.out.println("pedido download: "+ ip.nomeArquivo);
 			renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 		}
-	// LOGOFF
+	// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS
+	// ADMINISTRADOR PADRAO MANIPULA
+	@Admin
+	public static void restaurarQtd(String qtd) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.restaurarQtd() ... ["+ new Date()+"]");
+		
+		int restQtd = Integer.parseInt(qtd);
+		List<Pedido> listaResetarQtd = Pedido.findAll();
+	for (int i = 0; i < listaResetarQtd.size(); i++) {
+		Usuario user = listaResetarQtd.get(i).usuario;
+		user.qtdDisponivel = restQtd;
+		user.save();
+		}
+		flash.success("Quantidade de solicitações restaurados para "+ restQtd);
+		Administradores.paginaAdmin();
+	}
+	// SAIR
+	@User
 	public static void sair() {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.sair() ... ["+ new Date()+"]");
+		
 		DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
 		Usuario usu = Usuario.findById(dadosSessao.usuario.id);
 		usu.ultimoAcessoUsu = new Date();

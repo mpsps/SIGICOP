@@ -1,51 +1,50 @@
 #{extends 'laySeg.html' /} 
-#{set title:'Tela Do Administrador' /}
+#{set title:'Pagina Do Administrador' /}
 <div id="corpoCelular" class="heightMin">
 	<div class="text-center">
 	<div class="h1 text-dark text-center">Lista de Pedidos em Espera</div>
 	</div>
 		<br />
-#{if listaPedidos.size() == 0}
+#{if listaPedidosPa.size() == 0}
 		<div class="text-center">
 		<div class="h1 text-primary text-center">(Nenhum pedido em Espera)</div>
 		</div>
 #{/if} 
-#{if listaPedidos != null}
-#{if listaPedidos.size() > -1}
-		<div class="text-center">
-		<div class="h1 text-dark text-center">Filtrar Por:</div><br>
-		</div>
-<div class="corFiltro shadow-lg rounded">
-	<form action="@{Administradores.paginaAdmin}" method="post">
+#{if listaPedidosPa != null}
+		<div class="row">
+  		<div class="col">
+    	<div class="collapse multi-collapse" id="multiCollapseExample1">
+      	<div class="card card-body">
+#{if listaPedidosPa.size() > -1}
+<form action="@{Administradores.paginaAdmin}" method="post">
+	<fieldset class="corFiltro shadow-lg rounded">
+        <legend>Filtrar Por:</legend>
 		<div class="form-row">
     	<div class="form-group col-md-6">
-    	<label for="NomeUser">Nome do Usuário:</label>
-		<input type="text" name="NomeDoUsuarioFiltro" class="form-control" placeholder="Nome do usuario" id="NomeUser" maxlength="100" >
+    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
+		<input type="text" name="matriculaDoUsuarioFiltro" class="form-control" placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
     	</div>
     	<div class="form-group col-md-6">
-    	<label for="matricula">Matricula do Usuário:</label>
-		<input type="text" name="matriculaDoUserFiltro" class="form-control" placeholder="Matricula do usuario" id="matricula" maxlength="100" >
-    	</div>
-   		<div class="form-group col-md-6">
-    	<label for="NomeDoArquivoFiltro">Nome do Arquivo:</label>
-		<input type="text" name="NomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="NomeDoArquivoFiltro" maxlength="100">
-    	</div>
-      	<div class="form-group col-md-6">
-      	<label for="descricaoFiltro">Descricao:</label>
-      	<textarea  name="descricaoFiltro"  class="form-control" id="descricaoFiltro" rows="2" maxlength="100" placeholder="Descricao"></textarea>
+    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
+		<input type="text" name="nomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
     	</div>
   		</div>
  		<div class="text-center"">
   		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
+  		<button type="reset" class="btn btn-danger icon">Limpar <i class="eraser icon"></i></button>
 	 	</div>
+	 	</fieldset>
 	</form>
-</div><br><br>
+<br><br>
 #{/if}
-	
+		</div>
+    	</div>
+  		</div>
+  		</div>	
 		<div class="container">
  		<div class="row">
-#{list items:listaPedidos, as:'p'}
-   		<div class="col-lg-4">
+#{list items:listaPedidosPa, as:'p'}
+   		<div class="col-lg-6">
 		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 		<div class="card-header text-center">
 		<h6 class="text-primary">Usuario:</h6>
@@ -69,19 +68,23 @@ ${p.usuario.matricula}
 		</div>
 		<div class="card-text">
 		<b>Status: </b>
-		<div class="bg-warning text-dark text-center rounded"> ${p.status}</div>
+		<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
 		</div>
 		<div class="card-text">
 		<b>Data de Envio: </b> ${p.dataEnvio}
 		</div>
 		<div class="card-text text-center">
 		<a href="@{Administradores.download(p.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
-		<span class="sticky-top">
-		<a class="concluir" data-item="${p.id}" href="#" style="font-size: medium; text-decoration: none; color: white; margin: 0px;" ><span class="btn btn-success mt-1 mb-1 icon" >Concluir <i style="float: right; margin: 1px;" class="check icon"></i></span></a>
-		<a class="recusar" data-item="${p.id}" href="#" style="font-size: medium; text-decoration: none; color: white; margin: 0px;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
+		<div class="sticky-top">
+		<span class="btn btn-success mt-1 mb-1 ml-0 mr-0 icon" >
+		<a class="concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; font-size: 85%;; color: white; margin: 0px;" >Concluir <i style="float: right; margin: 0;" class="check icon"></i></a>
+		</span>
+		<span class="btn btn-danger mt-1 mb-1 ml-0 mr-0 icon" >
+		<a class="recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;font-size: 85%;; color: white; margin: 0px;">Recusar<i style="float: right; margin: 0;" class="x icon"></i> </a>
+		</span>
 		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
-		</span>
+		</div>
 		</div>
 		</div>
 		</div>
@@ -91,15 +94,16 @@ ${p.usuario.matricula}
 		</div>
 #{/if}
 </div>
-<form id="con" action="@{Administradores.concluido}">
+<form id="con" action="@{Pedidos.concluido}">
 	<input type="hidden" id="idPedCon" name="idPedCon" />
 	<input type="hidden" id="resposta" name="resposta" />
 </form>
-<form id="recusa" action="@{Administradores.recusar}">
+<form id="recusa" action="@{Pedidos.recusar}">
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
 </form>
-<form id="formRestaurar" action="@{Administradores.restaurarQtd}">
+<form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
+	<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
 </form>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -107,10 +111,9 @@ ${p.usuario.matricula}
 	        window.location.reload(1);
 	    }, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
 	});
-	
-	
 </script>
 <script type="text/javascript">
+$(document).ready(function(){
 	$(".recusar").click(function() {
 		var idPedido = $(this).data("item");
 		
@@ -140,13 +143,12 @@ ${p.usuario.matricula}
 			}
 		})
 	});
-</script>
-<script type="text/javascript">
+
 	$(".concluir").click(function() {
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
-			  title: 'Mensagem de conclus�o:',
+			  title: 'Mensagem de conclusão:',
 			  input: 'textarea',
 			  inputPlaceholder: 'digite alguma mensagem complementar',
 			  inputAttributes: {
@@ -165,4 +167,5 @@ ${p.usuario.matricula}
 			}
 		})
 	});
+});
 </script>

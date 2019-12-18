@@ -47,15 +47,16 @@
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 </head>
-<body>
+<body onload="time()">
 <!-- MENU E CABE�ALHO EM TELA DE COMPUTADOR E EM CELULAR-->
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="min-height: 8%;">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="min-height: 10%;">
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
 		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
 		</button>
 		<a class="ui inverted basic" href="@{Gerenciador.principal}">
+		
 		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" />
 		</a>
 		<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
@@ -69,21 +70,65 @@
 		onMouseOut="this.src='@{'/public/images/icones/adminAdd.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		</a>
 		</span>
-		<span> <a title="Restaurar qtd" href="#" class="addAdm" style="padding: 0px; float: left;" id="restaurar">
-		<img src="@{'/public/images/icones/reset20.png'}" onMouseOver="this.src='@{'/public/images/icones/reset20Hover.png'}'"
-		onMouseOut="this.src='@{'/public/images/icones/reset20.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
+#{if listarDeAdmins}
+  		<span>
+  		<a title="filtrar Admins" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+		<img src="@{'/public/images/icones/adminFiltro.png'}" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
+		onMouseOut="this.src='@{'/public/images/icones/adminFiltro.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		</a>
 		</span>
 #{/if}
-		</div>
-#{if telaAdmin}
-		<li class="nav-item"></li>
-		<a href="@{Administradores.paginaAdmin}" style="margin: 1px;" class="itemMenu">Tela Admin</a>
+#{else}
+		<span>
+		<a title="listar Admins" href="@{Administradores.listarTodosAdmins}" class="addAdm" style="padding: 0px; float: left;">
+		<img src="@{'/public/images/icones/adminListar.png'}" onMouseOver="this.src='@{'/public/images/icones/adminListarHover.png'}'"
+		onMouseOut="this.src='@{'/public/images/icones/adminListar.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
+		</a>
+		</span>
+#{/else}
+		<span>
+		<a title="Restaurar qtd" href="#" class="addAdm" style="padding: 0px; float: left;" id="restaurar">
+		<img src="@{'/public/images/icones/restaurar.png'}" onMouseOver="this.src='@{'/public/images/icones/restaurarHover.png'}'"
+		onMouseOut="this.src='@{'/public/images/icones/restaurar.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
+		</a>
+		</span>
 #{/if}
-		<a href="@{Administradores.listarConcluidos}" class="itemMenu" style="margin: 1px;" id="concluidos">Concluidos</a>
-		
+#{if listaPedidosPa != null | listaPedidosPa == null}
+  		<span>
+  		<a title="filtrar Pedidos" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+		<img src="@{'/public/images/icones/filtro.png'}" onMouseOver="this.src='@{'/public/images/icones/filtroHover.png'}'"
+		onMouseOut="this.src='@{'/public/images/icones/filtro.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
+		</a>
+		</span>
+#{/if}
+#{if !listaDeUsuario}
+		<span>
+  		<a title="realizar baixa" href="@{Administradores.realizarPedido}" class="addAdm" style="padding: 0px; float: left;">
+		<img src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
+		onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
+		</a>
+		</span>
+#{/if}
+
+		</div>
+
+#{if telaAdmin}
+		<a href="@{Administradores.paginaAdmin}" style="margin: 1px;" class="itemMenu">Página Admin</a>
+#{/if}
+#{if listaconcluidos}
+  		<a class="itemMenu" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+#{/if}
+#{else}
+		<a href="@{Pedidos.listarConcluidos}" class="itemMenu" style="margin: 1px;" id="concluidos">Concluidos</a>
+#{/else}
+#{if listaRecusados}
+  		<a class="itemMenu" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+#{/if}
+#{else}
+	<a href="@{Pedidos.listarRecusados}" class="itemMenu" id="recusados" style="margin: 1px;">Recusados</a>
+#{/else}
 		<li class="nav-item"></li>
-		<a href="@{Administradores.listarRecusados}" class="itemMenu" id="recusados" style="margin: 1px;">Recusados</a>
+		
 #{/if}
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 		<li class="nav-item"> </li>
@@ -100,9 +145,10 @@
 		<a href="#" class="addAdm" style="padding: 0px;" id="dadosAdmin"> <!--  class="rounded-pill"-->
 		<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 		onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
-		</a>
+		
 		<b class="text-white mr-1" style="position: relative; top: 8px;" >${session['adminLogado']}</b>
 		</span>
+		</a>
 		<span class="float-right">
 		<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
 		</span>
@@ -110,6 +156,8 @@
 #{if session.contains("usuarioLogado")}
 #{if solicitar}
  		<a href="@{Pedidos.fazerPedido}" style="margin: 1px; margin-right: 5px;" class="itemMenu">Solicitar</a>
+  		<a class="itemMenu" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+
 #{/if}
 #{if voltar}
  		<a href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu">Voltar</a>
@@ -120,15 +168,22 @@
 		<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
 		onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 5px;" alt="user" />
 	<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
-		</a>
+		
 		<b class="text-white mr-1 mt-1" style="position: relative; top: 8px;">${session['usuarioLogado']}</b>
 		</span>
+		</a>
 		<span class="float-right">
 		<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
 		</span>
 		</span>
+		
 #{/if}
+
 		</ul>
+		</div>
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+		<div name="time" id="time" class="text-white" id="hora" ></div>
+#{/if}
 		</nav>
 		<!-- <div class="uk-alert-primary" uk-alert>
    		<a class="uk-alert-close" uk-close></a>
@@ -178,7 +233,7 @@
 		<div class="three wide column">
 		<h4 class="ui inverted header">Sobre:</h4>
 		<div class="ui inverted link list">
-		<a href="https://github.com/github" target="_blank">
+		<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
 		<div  class="sticky-top">
 		<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
 		onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
@@ -204,9 +259,10 @@
 		</div>
 		</div>
 		</div>
+		
 <!-- JS DA PAGINA -->
 <!-- MESSAGEM DE ALERTA -->
-	<script type="text/javascript">
+<script type="text/javascript">
 $().ready(function() {
 		setTimeout(function () {
 			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
@@ -217,21 +273,22 @@ $().ready(function() {
 		$('#messagemArquivo').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
 	}, 2000); // O valor � representado em milisegundos.
 });
-	</script>
-	<script type="text/javascript">
+</script>
+
+<!-- MASCARA DE CAMPOS -->
+<script type="text/javascript">
 
     $("#telefone, #celular").mask("(00) 0000-0000");
-    $('#matricula').mask('00000000000000');
+    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
     $('#dataEnvtrega').mask('00/00/0000');
-   
-    var valorMaximo = 0;//document.getElementById('qtdCopiasFiltro').val();
-    var meuValor = parseInt(valorMaximo);
-    
-    if(meuValor > 10){
-    	document.getElementById('maxDez').innerHTML = "O valor maximo é 10";
-    }
+   	
+</script>
+
+<!-- DIALOGS DO SWEETALERT2 -->
+<!-- DIALOGS COM DADOS DO USUARIO E ADMIN -->
+<script type="text/javascript">
     $("#dadosAdmin").click(function () {
 		Swal.fire({
 			  position: 'top-end',
@@ -242,40 +299,73 @@ $().ready(function() {
 			  showConfirmButton: false,
 			})
 	});
+    
     $("#dadosUser").click(function () {
 		Swal.fire({
 			  position: 'top-end',
 			  icon: '',
 			  title: 'Meus Dados',
-			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br> #{if usuarioBanco?.ultimoAcessoUsu} Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")} #{/if} <br> Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel}' ,
+			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}   <br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			})
 	});
-    </script>
-    <script type="text/javascript">
+ </script>
+ 
+ <!-- DIALOGS DO COM AVISOS E PREENCHIMENTO DE MENSAGENS -->
+ <script type="text/javascript">
 	$("#restaurar").click(function() {
 		Swal.fire({
 			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
 			  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
 			  icon: 'question',
+			  input: 'number',
+			  inputAttributes: {
+				    min: '0',
+				    max: '50'
+				  },
 			  showCancelButton: true,
 			  confirmButtonColor: '#21ac0d',
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: 'Ok',
 			  showCloseButton: true,
 			}).then((result) => {
-			  if (result.value) {
+			  if (result.value) {	
+			$('#restQtd').val(result.value);
 			$('#formRestaurar').submit(); 
 			  }
 			})
 	});
-	$(function () {
-		  $('[data-toggle="tooltip"]').tooltip()
-		  $('#example').tooltip({ boundary: 'window' })
-		})
+	
+	
 </script>
-    
+
+<!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
+<script type="text/javascript">
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	  $('#example').tooltip({ boundary: 'window' })
+	})
+
+function time()
+{
+today=new Date();
+h=today.getHours();
+m=today.getMinutes();
+s=today.getSeconds();
+if(h <10){
+	h = "0"+h;
+}
+if(m<10){
+	m = "0"+m;
+}
+if(s<10){
+	s = "0"+s;
+}
+document.getElementById('time').innerHTML=h+":"+m+":"+s;
+setTimeout('time()',500);
+}
+</script>
 </body>
 </html>
 

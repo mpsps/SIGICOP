@@ -9,7 +9,7 @@ import models.StatusPedido;
 import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
-import util.CriptografiaUtils;
+import seguranca.CriptografiaUtils;
 
 @OnApplicationStart
 public class Inicializador extends Job {

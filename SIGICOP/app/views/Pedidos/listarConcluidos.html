@@ -1,0 +1,151 @@
+#{extends 'laySeg.html' /} 
+#{set title:'Pedidos Concluidos' /}
+
+<div id="corpoCelular" class="heightMin">	
+	<div class="h1 text-success text-center">Lista de Pedidos Concluidos</div><br>
+#{if listaconcluidos.size() == 0}
+		<div class="h1 text-primary text-center">(Nenhum Pedido Foi Encontrado!)</div><br>
+#{/if} 
+#{else}
+		<div class="row">
+  		<div class="col">
+    	<div class="collapse multi-collapse" id="multiCollapseExample1">
+      	<div class="card card-body">
+#{if listaconcluidos.size() > -1}
+<form action="@{Pedidos.listarConcluidos}" method="post">
+	<fieldset class="corFiltro shadow-lg rounded">
+        <legend>Filtrar Por:</legend>
+		<div class="form-row">
+    	
+    	<div class="form-group col-md-6">
+    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
+		<input type="text" name="matriculaDoUsuarioFiltro" class="form-control" placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
+    	</div>
+   		<div class="form-group col-md-6">
+    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
+		<input type="text" name="nomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
+    	</div>
+  		</div>
+ 		<div class="text-center"">
+  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
+  		<button type="reset" class="btn btn-danger icon">Limpar <i class="eraser icon"></i></button>
+	 	</div>
+	 	</fieldset>
+	</form>
+	<br><br>
+#{/if}
+		</div>
+    	</div>
+  		</div>
+  		</div>
+#{/else}
+		<div class="container">
+ 		<div class="row">
+#{list items:listaconcluidos, as:'pc'}
+   		<div class="col-lg-6">
+		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+		<div class="card-header text-center">
+		<h6 class="text-primary">Usuario:</h6>
+${pc.usuario.nomeUsu}<br />
+		<h6 class="text-primary">Matricula:</h6>
+${pc.usuario.matricula}
+		</div>
+		<div class="card-body">
+		<div class="card-text">
+		<b>Arquivo: </b> ${pc.nomeArquivo}
+		</div>
+		<div class="card-text">
+		<b>Status: </b>
+		<div class="statusConcluido text-white text-center rounded">${pc.status}</div> 
+		</div>
+		<div class="text-center mt-1">
+  		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${pc.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+    	+ Informacoes
+  		</button>
+		</div>
+		<div class="collapse text-left" id="collapseExample${pc.id}">
+  		<div class="card card-body bg-dark">
+		<div class="card-text">
+		<b>Quantidade de Copias: </b> ${pc.qtdCopias}
+		</div>
+		<div class="card-text">
+		<b>Frente ou verso : </b> ${pc.frenteVerso}
+		</div>
+		<div class="card-text"> 
+		<b>Descricao: </b> ${pc.descricao} #{if pc.descricao == null}(sem descricao) #{/if}<br />
+		</div>
+		
+		<div class="card-text">
+		<b>Data de Envio: </b><br> ${pc.dataEnvio}
+		</div>
+		<div class="card-text">
+		<b>Data de Atendimento: </b><br>${pc.dataAtendimento}
+		</div>
+		</div>
+		</div>
+		<div class="card-text text-center">
+		<div class="sticky-top">
+		<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
+		<a class="recusar" data-item="${pc.id}" href="#" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
+		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
+		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
+		</div>
+		</div>
+		</div>
+		</div>
+ 		</div>
+#{/list}
+		</div>
+		</div>		
+
+</div>
+
+<form id="recusa" action="@{Pedidos.recusar}">
+	<input type="hidden" id="idPed" name="idPed" />
+	<input type="hidden" id="motivo" name="motivo" />
+</form>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+	    setTimeout(function () {
+	        window.location.reload(1);
+	    }, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
+	});
+	
+	
+</script>
+<script type="text/javascript">
+	$(".recusar").click(function() {
+		var idPedido = $(this).data("item");
+		
+		Swal.fire({
+			  title: 'Motivo da recusa:',
+			  input: 'textarea',
+			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
+			  inputAttributes: {
+			    'aria-label': 'Type your message here'
+			  },
+			  showCloseButton: true,
+			  showCancelButton: true
+		}).then((result) => {
+			if(result.value == ""){
+				Swal.fire({
+					  icon: 'error',
+					  title: 'ERROR...',
+					  text: 'preencha o motivo!',
+					  footer: '<a href>Limpar e tentar novamente</a>',
+					  showCloseButton: true
+					})
+								}
+			if (result.value) {
+				$('#idPed').val(idPedido);
+				$('#motivo').val(result.value);
+				$('#recusa').submit();
+			}
+		})
+	});
+</script>
+
+
+
+	

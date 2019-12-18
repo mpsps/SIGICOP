@@ -19,12 +19,12 @@
 		<link>
 			<name>docviewer</name>
 			<type>2</type>
-			<location>C:/Users/20181064110021/Documents/PIABD/play-1.5.2/modules/docviewer/app</location>
+			<location>E:/play-1.5.2/modules/docviewer/app</location>
 		</link>
 		<link>
 			<name>public/docviewer</name>
 			<type>2</type>
-			<location>C:/Users/20181064110023.IFRN/Desktop/play-1.5.2/modules/docviewer/public</location>
+			<location>E:/play-1.5.2/modules/docviewer/public</location>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -26,49 +26,35 @@ import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import util.CriptografiaUtils;
+import seguranca.CriptografiaUtils;
 
 @Entity
 public class Administrador extends Model {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Long id;
 	public boolean admPadrao;
-	
 	@Required
 	@MaxSize(45)
 	public String nomeAdm;
-	
 	@Required
 	@Email
 	public String email;
-	
 	@Required
 	@MinSize(6)
 	public String senha;
-	
 	@Transient
 	public String confirmarSenha;
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date ultimoAcesso;
-	
-	
-	public boolean compararSenha(){
-		boolean s = false;
-		if(senha.equals(confirmarSenha)) {
-			System.out.println("confirmacao de senha: "+confirmarSenha);
-			 s = true;
+
+	public boolean compararSenha() {
+
+		if (senha.equals(confirmarSenha)) {
+			return true;
+		} else {
+			return false;
 		}
-		return s;
-	}
-	public Administrador autenticar() {
-		
-		String senhaCript = CriptografiaUtils.criptografarMD5(senha);
-		Administrador a = Administrador.find("email = ?1 and senha = ?2", email, senhaCript).first();
-	
-		return a;
 	}
 
 }

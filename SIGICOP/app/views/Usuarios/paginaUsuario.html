@@ -1,34 +1,37 @@
 #{extends 'laySeg.html' /} 
-#{set title:'Tela do Usuario' /}
+#{set title:'Pagina do Usuario' /}
 
 <div id="corpoCelular" class="heightMin">
-	<div class="text-center">
-		
-		</div>
+
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
 #{if listaPedidos.size() > -1}
-		<div class="text-center">
-		<div class="h1 text-dark text-center">Filtrar Por:</div><br>
-		</div>
-<div class="corFiltro shadow-lg rounded">
-	<form action="@{Usuarios.paginaUsuario}" method="post">
+<form action="@{Usuarios.filtro}" method="post">
+	<fieldset class="corFiltro shadow-lg rounded">
+        <legend>Filtrar Por:</legend>
 		<div class="form-row">
    		<div class="form-group col-md-6">
     	<label for="NomeDoArquivoFiltro">Nome do Arquivo:</label>
-		<input type="text" name="NomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="NomeDoArquivoFiltro" maxlength="100" value="${NomeAquirvo}">
+		<input type="text" name="NomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
     	</div>
       	<div class="form-group col-md-6">
       	<label for="descricaoFiltro">Descricao:</label>
-      	<textarea  name="descricaoFiltro"  class="form-control" id="descricaoFiltro" rows="2" maxlength="100" placeholder="Descricao"></textarea>
-    	</div>
+      	<input  name="descricaoFiltro"  class="form-control" id="descricaoFiltro"  placeholder="Descricao" value="${descricaoFiltro}" />
+      	</div>
   		</div>
- 		<div class="text-center"">
+ 		<div class="text-center">
   		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-  		<button type="reset" class="btn btn-danger icon">Limpar <i class="eraser icon"></i></button>
+  		<button type="reset" class="btn btn-danger icon" id="limparFiltro" onclick="apagar()">Limpar <i class="eraser icon"></i></button>
   		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 icon">Solicitar<i class="file alternate outline icon"></i></a>
 	 	</div>
+	 	</fieldset>
 	</form>
-</div><br/><br/>
-#{/if} 
+<br/><br/>
+#{/if}
+		</div>
+    	
+  		</div>
+
 #{if listaPedidos.size() == 0 }
 		<div class="text-center">
 		<div class="h1 text-primary">Nenhum pedido foi encontrado</div>
@@ -39,21 +42,43 @@
 		<div class="container">
  		<div class="row">
 #{list items:listaPedidos, as:'p'}
-   		<div class="col-lg-4">
+   		<div class="col-lg-6">
 		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 		<div class="card-header text-center">
-#{if listaPedidos.size() > 1}Meus Pedidos #{/if} 
-#{else} Meu pedido #{/else}
+
 		<h5 class="text-primary">Matricula:</h5>
 ${p.usuario.matricula}
 		</div>
 		<div class="card-body">
 		<div class="card-text">
-		<b>Arquivo: </b> ${p.nomeArquivo}
+		<b>Nome: </b> ${p.nomeArquivo}
 		</div>
 		<div class="card-text">
-		<b>Quantidade de Copias: </b> ${p.qtdCopias}
+		<b>Qtd de Copias: </b> ${p.qtdCopias}
 		</div>
+		<b>Status: </b>
+#{if p.status.name() == 'RECUSADO'}
+		<div class="text-center rounded statusRecusado" id="statusPedido">
+		${p.status}
+		</div>	
+#{/if}
+#{if p.status.name() == 'AGUARDANDO'}
+		<div class=" text-center rounded statusAguardando" id="statusPedido">
+		${p.status}
+		</div>	
+#{/if}
+#{if p.status.name() == 'CONCLUIDO'}
+		<div class=" text-center rounded statusConcluido" id="statusPedido">
+		${p.status}
+		</div>	
+#{/if}
+		<div class="text-center mt-1">
+  		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${p.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+    	+ Informacoes
+  		</button>
+		</div>
+		<div class="collapse text-left" id="collapseExample${p.id}">
+  		<div class="card card-body bg-dark m-0">
 		<div class="card-text">
 		<b>Frente ou verso : </b> ${p.frenteVerso}
 		</div>
@@ -63,19 +88,34 @@ ${p.usuario.matricula}
 #{/if}
 		</div>
 		<div class="card-text">
-		<b>Status: </b>
-		<div class="text-dark text-center rounded" style="background: #3399ff;">
-		${p.status}
-		</div>	
 		</div>
 		<div class="card-text">
 		<b>Data de Envio: </b> ${p.dataEnvio}
 		</div>
 		<div class="card-text">
-#{if p.dataEntrega} <b>Data de Entrega: </b> ${p.dataEntrega}<br /> #{/if}
+#{if p.dataEntrega} 
+		<b>Data de Entrega: </b> ${p.dataEntrega}<br /> 
+#{/if}
+  		</div>
+  		<div class="card-text">
+#{if p?.atendimento}
+		<b>Atendimento: </b> ${p.atendimento}<br /> 
+#{/if}
+		</div>
+		<div class="card-text">
+#{if p?.dataAtendimento}
+		<b>Data de atendimento: </b> ${p.dataAtendimento}<br /> 
+#{/if}
+		</div>
+		<div class="card-text">
+#{if p?.dataEntrega}
+		<b>Data de Entrega: </b> ${p.dataEntrega}<br /> 
+#{/if}
+		</div>
+		</div>
 		</div>
 		<div class="card-text text-center">
-		<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1 icon">Download do Arquivo <i style="float: right; margin: 1px;" class="download icon"></i></a>
+		<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1 icon" style="font-size: 85%;">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
 		</div>
 		</div>
 		</div>
@@ -87,6 +127,12 @@ ${p.usuario.matricula}
 #{/if}
 #{/else}
 </div>
+<script type="text/javascript"> 
+$("#limparfiltro").click(function () {
+	document.getElementById("NomeDoArquivoFiltro").value = "";
+	document.getElementById("descricaoFiltro").value = "";
+});
+</script>
 
 
 

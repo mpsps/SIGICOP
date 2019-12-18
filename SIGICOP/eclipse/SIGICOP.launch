@@ -15,6 +15,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="play.server.Server"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="SIGICOP"/>
-    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value=" -noverify -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dplay.debug=yes -Dplay.id= -Dapplication.path=&quot;${project_loc:SIGICOP}&quot; -Djava.endorsed.dirs=&quot;C:\Users\20181064110023.IFRN\Desktop\play-1.5.2/framework/endorsed&quot; -javaagent:&quot;C:\Users\20181064110023.IFRN\Desktop\play-1.5.2/framework/play-1.5.2.jar&quot;"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value=" -noverify -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dplay.debug=yes -Dplay.id= -Dapplication.path=&quot;${project_loc:SIGICOP}&quot; -Djava.endorsed.dirs=&quot;E:\play-1.5.2/framework/endorsed&quot; -javaagent:&quot;E:\play-1.5.2/framework/play-1.5.2.jar&quot;"/>
 </launchConfiguration>
 
