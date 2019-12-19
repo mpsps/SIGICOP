@@ -106,10 +106,6 @@ public class Pedidos extends Controller {
 		
 		item.nomeArquivo = nomeArq;
 		item.usuario = dadosDeSessao.usuario;
-		if (item.descricao.isEmpty()) {
-		
-			item.descricao = null;
-		}
 		
 		listaDePedidos.add(item);
 		
@@ -312,28 +308,30 @@ public class Pedidos extends Controller {
 			render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro);
 		}
 		
+		@SuppressWarnings("deprecation")
 		@Admin
 		public static void realizarBaixa(Pedido ped) {
 			System.out.println("_____________________________________________________________________________________");
 			System.out.println("Pedidos.realizarBaixa() ... ["+ new Date()+"]");
+			
 			 if(ped.qtdCopias == 0){
 					flash.error("A Quantidade de Copias é obrigatorio");
-					fazerPedido();
+					Administradores.realizarPedido();
 				}else if(ped.frenteVerso == null){
 					flash.error("Frente ou Verso é obrigatorio");
-					fazerPedido();
+					Administradores.realizarPedido();
 				}
 			 int valor;
 				if(ped.frenteVerso.equals("frenteEverso")) {
 					valor = ped.usuario.qtdDisponivel - (ped.qtdCopias * 2);
 					if(valor < 0) {
 						flash.error("quatidade de copia indisponivel");
-						fazerPedido();
+						Administradores.realizarPedido();
 					}
 					ped.usuario.qtdDisponivel = valor;
 					if(valor < 0) {
 						flash.error("quatidade de copia indisponivel");
-						fazerPedido();
+						Administradores.realizarPedido();
 					}
 				}else {
 					valor = ped.usuario.qtdDisponivel - ped.qtdCopias;
@@ -348,9 +346,19 @@ public class Pedidos extends Controller {
 						fazerPedido();
 					}
 				}
+				DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+				
+				ped.nomeArquivo = "Copia do Usuário: "+ped.usuario.matricula+" "+new Date().getDate()+" "+ new Date().getHours()+":"+new Date().getMinutes();
+				ped.dataEnvio = new Date();
+				ped.adm = dadosSessaoAdmin.admin;
+				ped.atendimento = "Copia realizada pelo Admin: "+ dadosSessaoAdmin.admin.nomeAdm;
+				ped.dataAtendimento = new Date();
+				ped.dataEntrega = new Date();
+				ped.status = StatusPedido.ENTREGUE;
 				ped.usuario.save();
 				ped.save();
-			Administradores.realizarPedido();
+				flash.success("Pedido de copia realizado com sucesso!");
+				Administradores.realizarPedido();
 		}
 
 	

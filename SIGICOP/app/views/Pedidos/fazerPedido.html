@@ -12,6 +12,7 @@
 		</div>
 #{/if}
 #{else}
+		<div class="ui middle aligned center aligned grid">
 <form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
 	<div class="ui stacked segment">
 		<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
@@ -19,12 +20,13 @@
 #{if obrigatorio}
 		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
 #{/if}
-		<div class="float-left" style="margin-right: 1%;">
-		<label>Arquivo:</label><sup style="color: red;">*</sup></div>
-		<div class="float-left"><label for="item-arquivo" class="btn btn-primary icon" required>Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
-		<div class="float-left ml-2">
-		<div id="nomeArquivo" class="text-primary h4 center text-break">
+	
+		<div class="float-left botaoArquivo">
+		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" required>Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
 		</div>
+		<div class="float-left ml-2">
+		<span id="nomeArquivo" class="text-primary h4 text-center text-break">
+		</span>
 		</div><!-- accept=".pdf" -->
 		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" ><br /> 
  <br /><br />
@@ -66,6 +68,7 @@
 		</div>
 	</div>
 </form>
+</div>
 #{/else}
 #{ifErrors}
 		<h2 style="color:red">Ops...</h2>

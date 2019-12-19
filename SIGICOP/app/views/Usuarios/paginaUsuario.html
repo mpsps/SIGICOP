@@ -46,8 +46,7 @@
 		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 		<div class="card-header text-center">
 
-		<h5 class="text-primary">Matricula:</h5>
-${p.usuario.matricula}
+		<h5 class="text-primary">Pedido:</h5>
 		</div>
 		<div class="card-body">
 		<div class="card-text">
@@ -71,6 +70,11 @@ ${p.usuario.matricula}
 		<div class=" text-center rounded statusConcluido" id="statusPedido">
 		${p.status}
 		</div>	
+#{/if}
+#{if p.status.name() == 'ENTREGUE'}
+		<div class=" text-center rounded statusEntregue" id="statusPedido">
+		${p.status}
+		</div>
 #{/if}
 		<div class="text-center mt-1">
   		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${p.id}" role="button" aria-expanded="false" aria-controls="collapseExample">

@@ -59,18 +59,18 @@ public class Usuarios extends Controller {
 				
 			}else if(!NomeDoArquivoFiltro.isEmpty() || !descricaoFiltro.isEmpty()){
 				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND usuario_id = ?3",
-						"%" + NomeDoArquivoFiltro.toLowerCase() + "%","%" + descricaoFiltro.toLowerCase() + "%",
+						"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%","%" + descricaoFiltro.trim().toLowerCase() + "%",
 						usuarioBanco).fetch();
 				System.out.println("Tentou filtrar com conteudo!(só Nome do Arquivo e Descricao)"+ descricaoFiltro.trim().replaceAll("\\s+"," "));
 
 				}else if(!NomeDoArquivoFiltro.isEmpty() || descricaoFiltro.isEmpty()){
 			listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND usuario_id = ?2",
-					"%" + NomeDoArquivoFiltro.toLowerCase() + "%", usuarioBanco).fetch();
+					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");
 
 			}else if(!descricaoFiltro.isEmpty()|| NomeDoArquivoFiltro.isEmpty()){
 				listaPedidos = Pedido.find("lower(descricao) like ?1 AND usuario_id = ?2",
-						"%" + descricaoFiltro.toLowerCase() + "%", usuarioBanco).fetch();
+						"%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
 				System.out.println("Tentou filtrar com conteudo!(só descricao)");
 
 				}
