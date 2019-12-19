@@ -21,6 +21,13 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
  também poderá ver e editar seus dados;
 * Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;
 
+# Diagrama de Caso de Uso
+
+![Caso_de_uso](https://user-images.githubusercontent.com/55263599/71190066-a21a6680-2262-11ea-8f1c-7cf2cf5c059a.jpg)
+
+# Diagrama de Classes
+
+
 ## As importações mais importantes utlizado nos templates layPri.html e laySeg.html:
 
 [**Jquery**](https://jquery.com/)
