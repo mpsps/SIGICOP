@@ -26,7 +26,7 @@ solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado 
 ![Caso_de_uso](https://user-images.githubusercontent.com/55263599/71190066-a21a6680-2262-11ea-8f1c-7cf2cf5c059a.jpg)
 
 # Diagrama de Classes
-
+![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263599/71190212-e6a60200-2262-11ea-9943-93c5a2809e5e.jpg)
 
 ## As importações mais importantes utlizado nos templates layPri.html e laySeg.html:
 
