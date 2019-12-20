@@ -37,7 +37,7 @@
 		<div class="row">
 		 <div class="col">
 		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="0" class="qtdCopias" value="${valor}" required>
+		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}" required>
 <!-- 		<select name="item.qtdCopias" class="form-control" required>
 		<option></option>
 #{list items:1..usuarioBanco.qtdDisponivel	, as:'i'}

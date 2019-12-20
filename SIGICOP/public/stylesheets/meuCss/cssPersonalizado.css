@@ -134,10 +134,10 @@ body {
   #messagemAlerta{
 	display: block;
 	position: fixed;
-	top: 10%;
-	left: 10%;
-	right: 10%;
-	width: 80%;
+	top: 12%;
+	left: 1%;
+	right: 1%;
+	width: 92%;
 	z-index: 9999;
 	margin: auto;
 	box-shadow: 1px 1px 5px black;
@@ -160,8 +160,8 @@ body {
 	padding-top: 0;
  }
 #corpoCelular{	
- 	margin-bottom: 250px;
- 	margin-top: 100px;
+ 	margin-bottom: 10%;
+ 	margin-top: 20%;
  	margin-right: 3px;
  	margin-left: 3px;
 }
@@ -213,6 +213,17 @@ body {
 	margin-left: 5%;
 	margin-right: 5%;
 	text-align: center;
+}
+.telaCellSigicop{
+	display: none;
+}
+.nomeUsuAdmin{
+	font-size: 80%;
+	letter-spacing: 0.5;
+}
+.tituloCelular {
+	font-size: 130%;
+	display: block;
 }
 }
 

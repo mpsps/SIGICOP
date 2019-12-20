@@ -2,9 +2,9 @@
 #{set title:'Pedidos Recusados' /}
 
 <div id="corpoCelular" class="heightMin">		
-	<div class="h1 text-danger text-center">Lista de Pedidos Recusados</div><br>
+	<div class="h1 text-danger text-center tituloCelular">Lista de Pedidos Recusados</div><br>
 #{if listaRecusados.size() == 0}
-		<div class="h1 text-primary text-center">(Nenhum Pedido Foi Encontrado!)</div><br>
+		<div class="h1 text-primary text-center tituloCelular">(Nenhum Pedido Foi Encontrado!)</div><br>
 #{/if} 
 #{else}
 <div class="row">
@@ -86,7 +86,7 @@ ${pr.usuario.matricula}
 		<div class="card-text text-center">
 		<div class="sticky-top">
 		<a href="@{Administradores.download(pr.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
-		<a class="concluir" data-item="${pr.id}" href="#" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-success mt-1 mb-1 icon" >Concluir<i style="float: right; margin: 1px;" class="check icon"></i></span> </a>
+		<a class="concluir" data-item="${pr.id}" href="#Concluir" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-success mt-1 mb-1 icon" >Concluir<i style="float: right; margin: 1px;" class="check icon"></i></span> </a>
 		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
 		</div>
@@ -100,7 +100,7 @@ ${pr.usuario.matricula}
 #{/else}
 
 </div>
-<form id="con" action="@{Pedidos.concluido}">
+<form id="con" action="@{Pedidos.recusarParaConcluido}">
 	<input type="hidden" id="idPedCon" name="idPedCon" />
 	<input type="hidden" id="resposta" name="resposta" />
 </form>
@@ -109,7 +109,7 @@ ${pr.usuario.matricula}
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
-			  title: 'Mensagem de conclus�o:',
+			  title: 'Mensagem de conclusão:',
 			  input: 'textarea',
 			  inputPlaceholder: 'digite alguma mensagem complementar',
 			  inputAttributes: {

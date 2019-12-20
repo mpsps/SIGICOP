@@ -50,16 +50,33 @@
 <body onload="time()">
 <!-- MENU E CABE�ALHO EM TELA DE COMPUTADOR E EM CELULAR-->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="min-height: 10%;">
+#{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
+<div class="telaCellSigicop">
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
 		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
 		</button>
+</div>
+#{/if}
+#{else}
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
+		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
+		<!-- <span class="navbar-toggler-icon"></span> -->
+		</button>
+#{/else}
 		<a class="ui inverted basic" href="@{Gerenciador.principal}">
-		
 		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" />
-		</a>
 		<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
+		</a>
+		<div class="telaCellSigicop">
+#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
+		<div class="text-center">
+		<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="50" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
+		</div>
+#{/if}
+		</div>
 		<ul class="navbar-nav">
 #{if session.contains("adminLogado")}
 		<div class="sticky-top">
@@ -93,13 +110,14 @@
 		</a>
 		</span>
 #{/if}
-#{if listaPedidosPa != null | listaPedidosPa == null}
-  		<span>
+#{if filtroPa && listaPedidosPa || listaPedidosPa != null}
+		<span>
   		<a title="filtrar Pedidos" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 		<img src="@{'/public/images/icones/filtro.png'}" onMouseOver="this.src='@{'/public/images/icones/filtroHover.png'}'"
 		onMouseOut="this.src='@{'/public/images/icones/filtro.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		</a>
 		</span>
+  	
 #{/if}
 #{if !listaDeUsuario}
 		<span>
@@ -130,23 +148,14 @@
 		<li class="nav-item"></li>
 		
 #{/if}
-#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-		<li class="nav-item"> </li>
-		<a class="itemMenu" href="@{Gerenciador.principal}" style="margin: 1px;margin-right: 3px;">Principal</a>
-#{/if}
-#{else}	
-		<div class="text-center">
-		<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="50" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
-		</div>
-#{/else}
 #{if session.contains("adminLogado")}
 		<span class="sticky-top float-right border border-secondary rounded">
 		<span>
-		<a href="#" class="addAdm" style="padding: 0px;" id="dadosAdmin"> <!--  class="rounded-pill"-->
+		<a href="#Meus_Dados" class="addAdm" style="padding: 0px;" id="dadosAdmin"> <!--  class="rounded-pill"-->
 		<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 		onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		
-		<b class="text-white mr-1" style="position: relative; top: 8px;" >${session['adminLogado']}</b>
+		<b class="text-white mr-1 nomeUsuAdmin" style="position: relative; top: 8px;" >${session['adminLogado']}</b>
 		</span>
 		</a>
 		<span class="float-right">
@@ -164,21 +173,19 @@
 #{/if}
 	 	<span class="sticky-top float-right border border-secondary rounded ">
 		<span>
-		<a href="#" id="dadosUser">
+		<a href="#Meus_Dados" id="dadosUser">
 		<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
 		onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 5px;" alt="user" />
 	<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
 		
-		<b class="text-white mr-1 mt-1" style="position: relative; top: 8px;">${session['usuarioLogado']}</b>
+		<b class="text-white mr-1 mt-1 nomeUsuAdmin" style="position: relative; top: 8px; max-width: 60%;">${session['usuarioLogado']}</b>
 		</span>
 		</a>
 		<span class="float-right">
 		<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
 		</span>
 		</span>
-		
 #{/if}
-
 		</ul>
 		</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}

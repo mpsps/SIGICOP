@@ -7,6 +7,7 @@ import annotations.User;
 import controllers.Administradores;
 import controllers.Gerenciador;
 import controllers.Usuarios;
+import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
 import play.cache.Cache;
@@ -32,10 +33,11 @@ public class Seguranca extends Controller {
 	              flash.error("Acesso restrito aos administradores do sistema");
 	              Gerenciador.login();
 	      	    }
-	      	   
-			DadosSessao dadosSessao = (DadosSessao) Cache.get(session.getId());
-			
+	      	   DadosSessao dadosSessao = (DadosSessao) Cache.get(session.getId());
+	      		
 			if (dadosSessao == null) {
+				System.out.println("_____________________________________________________________________________________");
+				System.out.println("Usuario NÃO possui mais sessao ativa... ["+ new Date()+"]");
 				flash.error("Voce precisa logar no sistema, a sessão expirou-se");
 				Gerenciador.login();
 			}
@@ -51,6 +53,7 @@ public class Seguranca extends Controller {
 			DadosSessaoAdmin dadosSessaoAdmin = (DadosSessaoAdmin) Cache.get(session.getId());
 			
 			if (dadosSessaoAdmin == null) {
+				System.out.println("Administrador NÃO possui sessao ativa... ["+ new Date()+"]");
 				flash.error("Voce precisa logar no sistema, a sessão expirou-se");
 				Gerenciador.login();
 			}	

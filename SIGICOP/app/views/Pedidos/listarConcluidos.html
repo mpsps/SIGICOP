@@ -2,9 +2,9 @@
 #{set title:'Pedidos Concluidos' /}
 
 <div id="corpoCelular" class="heightMin">	
-	<div class="h1 text-success text-center">Lista de Pedidos Concluidos</div><br>
+	<div class="h1 text-success text-center tituloCelular">Lista de Pedidos Concluidos</div><br>
 #{if listaconcluidos.size() == 0}
-		<div class="h1 text-primary text-center">(Nenhum Pedido Foi Encontrado!)</div><br>
+		<div class="h1 text-primary text-center tituloCelular">(Nenhum Pedido Foi Encontrado!)</div><br>
 #{/if} 
 #{else}
 		<div class="row">
@@ -86,7 +86,7 @@ ${pc.usuario.matricula}
 		<div class="card-text text-center">
 		<div class="sticky-top">
 		<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
-		<a class="recusar" data-item="${pc.id}" href="#" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
+		<a class="recusar" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
 		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
 		</div>
@@ -100,7 +100,7 @@ ${pc.usuario.matricula}
 
 </div>
 
-<form id="recusa" action="@{Pedidos.recusar}">
+<form id="recusa" action="@{Pedidos. concluidoParaRecusar}">
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
 </form>
