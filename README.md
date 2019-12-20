@@ -8,19 +8,25 @@ Sistema de Gerenciamento de Impressões e Copias
  que facilite e agilize a demanda de impressões e cópias do IFRN-*CAMPUS*-JC,
  onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrdor possar gerenciar as solicitacões**
 
-## PASSO A PASSO
+## PASSO A PASSO DO USUÁRIO
 
 * O usuário deverá acessar o site da SIGICOP;
 * Quando visitar a página principal clicar em "Logar" ou em "logar agora";
 * Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
-* caso as credenciais seja de usuário comum, ele poderá visualizar seus pedidos
- anteriores e poder filtra-los, e poderá e visualizar a quantidade disponível de 
-solicitações, se não for zero perderá realizar mais;
-* Se as credenciais for de um administrador, ele poderá visualizar todos pedidos 
-solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado à dar uma justificativa,
- também poderá ver e editar seus dados;
-* Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;
+* Ao logar o usuário poderá visualizar seus pedidos anteriores (se hover), e poderá filtra-los;
+* Em "Meus Dados" (icone de usuário) poderá visualizar a quantidade disponível de solicitações, e também poderá vizualizar seu nome, email e ultimo acesso;
+* Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitacão disponivel, aparecerá o formulário, se não, aparecerá mensagem em vermelho informando que não é possivel efetuar nenhuma solicitacão;
+* Após logar, o usuário poderá sair a qualquer momento;
 
+## PASSO A PASSO DO ADMINISTRADOR
+
+* O administrador deverá acessar o site da SIGICOP;
+* Quando visitar a página principal clicar em "Logar" ou em "logar agora";
+* Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
+* Ao logar o administrador poderá visualizar os pedidos com o status "AGUARDANDO" (se houver), e poderá filtra-los;
+* Se as credenciais for de um administrador, ele poderá visualizar todos pedidos 
+solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado à dar uma justificativa, também poderá ver e editar seus dados;
+* Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;
 # Diagrama de Caso de Uso
 
 ![Caso_de_uso](https://user-images.githubusercontent.com/55263599/71190066-a21a6680-2262-11ea-8f1c-7cf2cf5c059a.jpg)
