@@ -1,10 +1,10 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Usuarios' /}
 <div id="corpoCelular">
-	<div class="h1 text-dark text-center">Cadastro de Usuarios</div>
+	<div class="h1 text-dark text-center tituloCelular">Cadastro de Usuarios</div>
 		<div class="text-center">
 #{ifErrors}
-		<h2 style="color:red">Ops...</h2>
+		<h2 style="color:red" class="tituloCelular">Ops...</h2>
 		<!--
 #{errors}
 		<li>${error.key} - ${error} - ${error.message}</li>
@@ -12,38 +12,32 @@
 							  -->
 #{/ifErrors}
 		</div>
-		<br>
 		<div class="ui middle aligned center aligned grid"">
 		<div class="column">
 		<form action="@{Usuarios.salvarUsuario} " class="ui large form" method="post" id="form">
 		<div class="ui stacked segment">
 		<label>Nome:</label>
 		<span style="color:red">#{error 'user.nomeUsu' /}</span>
-		<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control" autofocus="" value="${user?.nomeUsu}" required>
-		<br />
-		<label for="senha">Matricula:</label>
+		<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control" autofocus="" value="${user?.nomeUsu}" >
+		<label for="senha" class="mt-2">Matricula:</label>
 		<span style="color:red">#{error 'user.matricula' /}</span>
 #{if mat}		
 		<span style="color:red">Matricula Ja Existe</span>
 #{/if}
-		<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat" value="${user?.matricula}" required id="matricula" maxlength="14">
-		<br />
-		<label for="email">Email:</label>
-		<span style="color:red">#{error 'user.email' /}</span>
+		<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat" value="${user?.matricula}"   id="matricula" maxlength="14">
+		<label for="email" class="mt-2">Email:</label>
+		<span style="color:red" >#{error 'user.email' /}</span>
 #{if ema}		
 		<span style="color:red">Email Ja Existe</span>
 #{/if}
-		<input type="text" name="user.email" placeholder="Email" class="form-control" id="email" value="${user?.email}" required autocomplete="off">
-		<br/>
-		<label for="senha">Senha:</label>
+		<input type="text" name="user.email" placeholder="Email" class="form-control" id="email" value="${user?.email}"   autocomplete="off">
+		<label for="senha" class="mt-2">Senha:</label>
 		<span style="color:red">#{error 'user.senha' /}</span>
-		<input type="password" name="user.senha" placeholder="Senha" class="form-control"  id="senha" value="" required >
-		<br />
-		<label for="confimarSenha">Confirmar Senha:</label>
+		<input type="password" name="user.senha" placeholder="Senha" class="form-control"  id="senha" value=""   >
+		<label for="confimarSenha" class="mt-2">Confirmar Senha:</label>
 		<span style="color:red">#{error 'user.senha' /}</span>
-		<input type="password" name="user.confirmarSenha" placeholder="Senha" class="form-control"  id="confimarSenha" value="" required>
-		<br /> 
-		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Cadastrar" />
+		<input type="password" name="user.confirmarSenha" placeholder="Senha" class="form-control"  id="confimarSenha" value=""  >
+		<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Cadastrar" />
 		</div>
 		</form>
 		<div class="ui stacked segment">

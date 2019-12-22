@@ -50,6 +50,7 @@ public class Pedidos extends Controller {
 			
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = null;
+		
 		if(dadosDeSessao == null) {
 			dadosDeSessao = new DadosSessao();
 		}else {
@@ -57,6 +58,18 @@ public class Pedidos extends Controller {
 		}
 		if(listaDePedidos == null) {
 			listaDePedidos = new ArrayList<Pedido>();
+		}
+		String nomeArq = params.get("name");
+		
+		if(item.arquivo == null || nomeArq == null) {
+			flash.error("O Envio do Arquivo é obrigatorio");
+			fazerPedido();
+		}else if(item.qtdCopias == 0){
+			flash.error("A Quantidade de Copias é obrigatorio");
+			fazerPedido();
+		}else if(item.frenteVerso == null){
+			flash.error("Frente ou Verso é obrigatorio");
+			fazerPedido();
 		}
 		int valor;
 		if(item.frenteVerso.equals("frenteEverso")) {
@@ -83,18 +96,6 @@ public class Pedidos extends Controller {
 	//			fazerPedido();
 	//		}
 			
-		String nomeArq = params.get("name");
-			
-		if(item.arquivo == null || nomeArq == null) {
-			flash.error("O Envio do Arquivo é obrigatorio");
-			fazerPedido();
-		}else if(item.qtdCopias == 0){
-			flash.error("A Quantidade de Copias é obrigatorio");
-			fazerPedido();
-		}else if(item.frenteVerso == null){
-			flash.error("Frente ou Verso é obrigatorio");
-			fazerPedido();
-		}
 		
 		item.nomeArquivo = nomeArq;
 		item.usuario = dadosDeSessao.usuario;
@@ -160,14 +161,6 @@ public class Pedidos extends Controller {
 		
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido Cancelado!");
-	fazerPedido();
-	}
-///// CANCELA TODOS OS PEDIDOS DA CACHE /////
-	@User
-	public static void cancelarTodosPedidos() {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("cancelarTodosPedidos() ... ["+ new Date()+"]");
-		flash.success("Todos os Pedidos Foram Cancelados!");
 	fazerPedido();
 	}
 ///// ALTERAR O STATUS PARA CONCLUIDO /////
