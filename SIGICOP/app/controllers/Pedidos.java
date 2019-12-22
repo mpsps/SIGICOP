@@ -385,4 +385,21 @@ public class Pedidos extends Controller {
 		flash.success("Pedido de copia realizado com sucesso!");
 	Administradores.realizarPedido();
 	}
+///// ENTREGAR PEDIDO /////
+	@Admin
+	public static void entregarPedido(Long id) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.entregarPedido() ... ["+ new Date()+"]");
+				
+			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+			Administrador admin = Administrador.findById(dadosSessaoAdmin.admin.id);
+						
+			Pedido ped = Pedido.findById(id);
+			ped.status = StatusPedido.ENTREGUE;
+			ped.dataEntrega = new Date();
+			ped.adm = admin;
+			ped.save();
+			flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" entregue!");
+	listarConcluidos();;
+	}
 }

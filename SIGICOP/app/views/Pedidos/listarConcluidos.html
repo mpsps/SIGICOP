@@ -87,7 +87,8 @@ ${pc.usuario.matricula}
 		<div class="sticky-top">
 		<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
 		<a class="recusar" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
-		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
+		<a href="@{Pedidos.entregarPedido(pc.id)}" class="btn btn-secondary m-1 icon">Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
+			<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
 		</div>
 		</div>

@@ -133,18 +133,18 @@ public class Usuarios extends Controller {
 	}
 ///// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS /////
 	@Admin
-	public static void restaurarQtd(String qtd) {
+	public static void restaurarQtd(int qtd) {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.restaurarQtd() ... ["+ new Date()+"]");
 		
-		int restQtd = Integer.parseInt(qtd);
+	//	int restQtd = Integer.parseInt(qtd);
 		List<Usuario> listaResetarQtd = Usuario.findAll();
 		for (int i = 0; i < listaResetarQtd.size(); i++) {
 		Usuario user = listaResetarQtd.get(i);
-		user.qtdDisponivel = restQtd;
+		user.qtdDisponivel = qtd;
 		user.save();
 		}
-		flash.success("Quantidade de solicitações restaurados para "+ restQtd);
+		flash.success("Quantidade de solicitações restaurados para "+ qtd);
 	Administradores.paginaAdmin();
 	}
 ///// SAIR /////
