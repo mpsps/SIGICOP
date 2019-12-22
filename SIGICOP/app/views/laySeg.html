@@ -155,7 +155,7 @@
 		<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 		onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		
-		<b class="text-white mr-1 nomeUsuAdmin" style="position: relative; top: 8px;" >${session['adminLogado']}</b>
+		<b class="text-white mr-1 nomeUsuAdmin" style="position: relative; top: 8px;" id="nomeAdmin"></b>
 		</span>
 		</a>
 		<span class="float-right">
@@ -178,7 +178,7 @@
 		onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 5px;" alt="user" />
 	<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
 		
-		<b class="text-white mr-1 mt-1 nomeUsuAdmin" style="position: relative; top: 8px; max-width: 60%;">${session['usuarioLogado']}</b>
+		<b class="text-white mr-1 mt-1 nomeUsuAdmin" style="position: relative; top: 8px; max-width: 60%;" id="nomeUsuario"></b>
 		</span>
 		</a>
 		<span class="float-right">
@@ -354,23 +354,59 @@ $().ready(function() {
 	  $('#example').tooltip({ boundary: 'window' })
 	})
 
-function time()
-{
+function time(){
 today=new Date();
 h=today.getHours();
 m=today.getMinutes();
 s=today.getSeconds();
-if(h <10){
-	h = "0"+h;
+	if(h <10){
+		h = "0"+h;
+	}
+	if(m<10){
+		m = "0"+m;
+	}
+	if(s<10){
+		s = "0"+s;
+	}
+	document.getElementById('time').innerHTML=h+":"+m+":"+s;
+	setTimeout('time()',500);
+
+var width = window.innerWidth;
+var nomeUsuarioCompleto = '${session['usuarioLogado']}';
+var nomeAdminCompleto = '${session['adminLogado']}';
+
+if(${session.contains("usuarioLogado")}){
+	 if(width < 400){
+		 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
+		 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+		 var primeiraLetra = sobreNome.substr(0, 1)
+	
+		 console.log(nome+" "+sobreNome);
+		 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";
+	 }else{
+		 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
+		 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+	
+		 console.log(nome+" "+sobreNome);
+		 document.getElementById('nomeUsuario').innerHTML = '${session['usuarioLogado']}';
+	 }
 }
-if(m<10){
-	m = "0"+m;
+if(${session.contains("adminLogado")}){
+	 if(width < 400){
+		 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
+		 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
+		 var primeiraLetra = sobreNome.substr(0, 1)
+	
+		 console.log(nome+" "+sobreNome);
+		 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";
+	 }else{
+		 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
+		 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
+	
+		 console.log(nome+" "+sobreNome);
+		 document.getElementById('nomeAdmin').innerHTML = '${session['adminLogado']}';
+	 }
 }
-if(s<10){
-	s = "0"+s;
-}
-document.getElementById('time').innerHTML=h+":"+m+":"+s;
-setTimeout('time()',500);
 }
 </script>
 </body>

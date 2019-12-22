@@ -1,64 +1,57 @@
 #{extends 'laySeg.html' /}
 #{set title:'Solicitacao de Pedido(s)' /}
 
+
 <div id="corpoCelular">	
-				<!-- FORMULARIO DE PEDIDOS -->
 #{if usuarioBanco?.qtdDisponivel == 0}
 		<div class="jumbotron jumbotron-fluid danger" style="background:#ff4a4a;">
   		<div class="container">
-    	<h1 class="display-4 ">Você atingiu seu limite máximo de solicitacões nesse mês, mas lembresse de salvar os pedidos</h1>
-    	<p class="lead">você não podera mais realizar solicitacões, durante esse mês!</p>
+    	<div class="display-4 tituloCelular">Você atingiu seu limite máximo de solicitacões nesse mês, mas lembresse de salvar os pedidos.
   		</div>
 		</div>
+		</div>
 #{/if}
-#{else}
+#{else}	<!-- FORMULARIO DE PEDIDOS -->
 		<div class="ui middle aligned center aligned grid">
 <form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
 	<div class="ui stacked segment">
 		<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-		<br><br>
 #{if obrigatorio}
 		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
 #{/if}
-	
-		<div class="float-left botaoArquivo">
-		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" required>Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
+		<div class="float-left botaoArquivo mt-2">
+		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" >Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
 		</div>
 		<div class="float-left ml-2">
 		<span id="nomeArquivo" class="text-primary h4 text-center text-break">
 		</span>
 		</div><!-- accept=".pdf" -->
-		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" ><br /> 
- <br /><br />
+		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" >
+		<br /> 
+		<br>
+		<br>
 		<br>
 #{if obrigatorio}
 		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}
+#{/if}		
 		<div class="row">
 		 <div class="col">
 		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}" required>
-<!-- 		<select name="item.qtdCopias" class="form-control" required>
-		<option></option>
-#{list items:1..usuarioBanco.qtdDisponivel	, as:'i'}
-		<option value="${i}">${i}</option>
-#{/list}
-		</select> -->
+		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}"  >
 		</div>
-		<div class="col">		<!--  <input type="number" min="0" max="10" name="item.qtdCopias" required="" class="form-control" autofocus=""><br /> -->
+		<div class="col">
 #{if obrigatorio}
 		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
 #{/if}
 		<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
 		<div class="custom-control custom-radio custom-control-inline">
   		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" value="frente" checked="checked">
- 		 <label class="custom-control-label" for="frente">Frente</label>
+ 		 <label class="custom-control-label text-justify" for="frente">Frente</label>
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
  		 <input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" value="frenteEverso">
-  		<label class="custom-control-label" for="frenteEverso">Frente e Verso</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
+  		<label class="custom-control-label text-justify" for="frenteEverso">Posterior</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
 		</div>
-		<br />
 		</div>
 		</div>
 		<label>Descricao</label>
@@ -138,7 +131,6 @@
 					  icon: 'error',
 					  title: 'ERROR...',
 					  text: 'é obrigatório o anexo do arquivo!',
-					  footer: '<a href>Limpar e tentar novamente</a>',
 						  showCloseButton: true
 					})
 			}

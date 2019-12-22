@@ -1,28 +1,24 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Editar Senha' /}
 <div id="corpoCelular" class="heightMin">
-	<div class="h1 text-dark text-center">Alterar Senha</div>
+	<div class="h1 text-dark text-center tituloCelular">Alterar Senha</div>
 		<br>
 		<div class="ui middle aligned center aligned grid">
 		<div class="column">
 		<div class="column" style="whith: 100%; margin-bottom: 0px;">
 		<form action="@{Administradores.salvarSenha} " class="ui large form" method="post">
 		<div class="ui stacked segment"><!-- cor branca do formulario -->
-		<label for="senha">Senha:</label>
+		<label for="senha" >Senha:</label>
 		<input type="password" name="senha" placeholder="Senha" class="form-control" autofocus=""  id="senha">
 #{if seis}	
 		<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-		<br/>
-		<label for="confirmarSenha">Confirmar Senha:</label>
-		<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" class="form-control" autofocus=""  id="confirmarSenha" required>
+		<label for="confirmarSenha" class="mt-2">Confirmar Senha:</label>
+		<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" class="form-control" autofocus=""  id="confirmarSenha"  >
 #{if seis}	
 		<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-		<br /> 
-		<br /> 
-		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Editar Senha" required/>
-		<br /> 
+		<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Editar Senha"  />
 		</div>
 		</form>
 		</div>
