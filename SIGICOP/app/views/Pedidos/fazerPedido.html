@@ -22,7 +22,7 @@
 #{/if}
 	
 		<div class="float-left botaoArquivo">
-		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon"  >Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
+		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" required>Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
 		</div>
 		<div class="float-left ml-2">
 		<span id="nomeArquivo" class="text-primary h4 text-center text-break">
@@ -37,15 +37,15 @@
 		<div class="row">
 		 <div class="col">
 		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}"  >
-<!-- 		<select name="item.qtdCopias" class="form-control"  >
+		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}" required>
+<!-- 		<select name="item.qtdCopias" class="form-control" required>
 		<option></option>
 #{list items:1..usuarioBanco.qtdDisponivel	, as:'i'}
 		<option value="${i}">${i}</option>
 #{/list}
 		</select> -->
 		</div>
-		<div class="col">		<!--  <input type="number" min="0" max="10" name="item.qtdCopias"  ="" class="form-control" autofocus=""><br /> -->
+		<div class="col">		<!--  <input type="number" min="0" max="10" name="item.qtdCopias" required="" class="form-control" autofocus=""><br /> -->
 #{if obrigatorio}
 		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
 #{/if}
@@ -83,7 +83,7 @@
 		<div class="h1 text-primary">Nenhum pedido adicionado</div>
 #{/if}
 #{else}
-		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos #{/if} #{else} Salvar #{/else} <i class="save outline icon"></i></a>
+		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos <i class="save outline icon"></i> #{/if} #{else} Salvar <i class="save outline icon"></i> #{/else}</a>
 		<br><br><br>
 		<div class="container">
  		<div class="row">
@@ -138,6 +138,7 @@
 					  icon: 'error',
 					  title: 'ERROR...',
 					  text: 'é obrigatório o anexo do arquivo!',
+					  footer: '<a href>Limpar e tentar novamente</a>',
 						  showCloseButton: true
 					})
 			}

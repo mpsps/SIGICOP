@@ -2,11 +2,11 @@
 #{set title:'Cadastro de Administrador(res)' /}
 <div id="corpoCelular" class="heightMin">
 #{if !adm?.id}
-	<div class="h1 text-dark text-center tituloCelular">Cadastro de Adminstradores</div>
+	<div class="h1 text-dark text-center">Cadastro de Adminstradores</div>
 		<br>
 		#{/if}
 #{else}
-		<div class="h1 text-dark text-center tituloCelular">Editar Meus Dados</div>
+		<div class="h1 text-dark text-center">Editar Meus Dados</div>
 #{/else}
 		<div class="text-center">
 #{ifErrors}
@@ -24,24 +24,30 @@
 		<form action="@{Administradores.salvarAdm} " class="" method="post">
 		<input type="hidden" name="adm.id" value="${adm?.id}">
 		<div class="ui stacked segment">
+	
 		<label>Nome:</label>	
 		<span style="color:red">#{error 'adm.nomeAdm' /}</span>
-		<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control" autofocus="" autocomplete="off"  value="${adm?.nomeAdm}"  />
-		<label for="email" class="mt-2">Email:</label>
+		<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control" autofocus="" autocomplete="off"  value="${adm?.nomeAdm}" required/>
+		<br />
+		<label for="email">Email:</label>
 		<span style="color:red">#{error 'adm.email' /}</span>
-		<input type="email" name="adm.email" placeholder="Email" class="form-control" autofocus="" autocomplete="off" id="email" value="${adm?.email}"  />
+		<input type="email" name="adm.email" placeholder="Email" class="form-control" autofocus="" autocomplete="off" id="email" value="${adm?.email}" required/>
+		<br />
 #{if !adm?.id}
 		<label for="senha">Senha:</label>
 		<span style="color:red">#{error 'adm.senha' /}</span>
-		<input type="password" name="adm.senha" placeholder="Senha" class="form-control" autofocus=""  id="senha"  />
-		<label for="confirmarsenha" class="mt-2">Confimar Senha:</label>
+		<input type="password" name="adm.senha" placeholder="Senha" class="form-control" autofocus=""  id="senha" required/>
+		<br />
+		<label for="confirmarsenha">Confimar Senha:</label>
 		<span style="color:red">#{error 'adm.senha' /}</span>
-		<input type="password" name="adm.confirmarSenha" placeholder="Confimar Senha" class="form-control" autofocus=""  id="confirmarsenha"  />
+		<input type="password" name="adm.confirmarSenha" placeholder="Confimar Senha" class="form-control" autofocus=""  id="confirmarsenha" required/>
 #{/if}
 #{else}
-		<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2">Alterar Senha</a>
+		<a href="@{Administradores.editarSenha}" class="btn btn-dark">Alterar Senha</a>
+		<br>
 #{/else}
-		<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value=" ${ adm? 'Editar' : 'Cadastrar' }" />
+		<br />
+		<input type="submit" class="btn btn-lg btn-primary btn-block" value=" ${ adm? 'Editar' : 'Cadastrar' }" />
 		</div>
 		</form>
 	</div>

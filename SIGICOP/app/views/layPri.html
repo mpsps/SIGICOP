@@ -91,26 +91,24 @@
 		<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
   		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
   		<!-- <a class="item">Item 1</a>-->
-  		<a class="item btn-block" class="sobreNos">Sobre Nos</a>
-  		<a class="item inverted button " href="@{Usuarios.cadastroDeUsuario}">Cadastra-se</a>
+  		<a class="item" class="sobreNos">Sobre Nos</a>
   		<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
 		</div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
 <div class="pusher">
   	<div class="ui inverted vertical masthead center aligned segment">
-   		<div class="ui container p-0" >
+   		<div class="ui container sticky-top" >
 		<div class="ui large secondary inverted pointing menu ">
-        <a class="toc item pl-0 pr-0 pb-0 pt-0">
-        <img src="@{'/public/images/icones/menuIcone.png'}" style="width: 30%;" class="m-0 p-0">
+        <a class="toc item">
+        <img src="@{'/public/images/icones/menuIcone.png'}">
 		<!-- <i class="sidebar icon"></i> -->
         </a>
         <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" href="@{Gerenciador.principal}">Principal</a>
         <!--  <a class="item">Item 1</a>-->
         <a class="item" href="#" onmouseover="this.style='border-bottom:  3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
         onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" class="sobreNos">Sobre Nos</a>
-        <div class="right item m-0 p-0">
-        <a class="ui inverted button ml-0" href="@{Gerenciador.login}">Entrar</a>
-        <a class="ui inverted button active mr-0" href="@{Usuarios.cadastroDeUsuario}">Cadastra-se</a>
+        <div class="right item">
+        <a class="ui inverted button" href="@{Gerenciador.login}">Entrar</a>
 		</div>
 		</div>
 		</div>

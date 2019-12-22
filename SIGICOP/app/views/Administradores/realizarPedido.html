@@ -17,7 +17,7 @@
 		</select>
 		<br/>
 		<label for="confirmarSenha">Quantidade de cópias:</label>
-		<input type="number" name="ped.qtdCopias" class="form-control" max="" min="0" class="qtdCopias" value="${valor}"  >
+		<input type="number" name="ped.qtdCopias" class="form-control" max="" min="0" class="qtdCopias" value="${valor}" required>
 		<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
 		<div class="custom-control custom-radio custom-control-inline">
   		<input type="radio" id="frente" name="ped.frenteVerso" class="custom-control-input" value="frente" checked="checked">
@@ -31,7 +31,7 @@
 		<label>Descricao</label>
 		<textarea rows="3" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
 		<br/>
-		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Salvar"  />
+		<input type="submit" class="btn btn-lg btn-primary btn-block" value="Salvar" required/>
 		<br /> 
 		</div>
 		</form>
