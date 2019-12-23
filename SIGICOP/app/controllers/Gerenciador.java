@@ -18,6 +18,7 @@ public class Gerenciador extends Controller {
 		Cache.clear();
 	render();
 	}
+	
 ///// PAGINA DE LOGAR O USUARIO OU ADMIN /////
 	public static void login() {
 	System.out.println("_____________________________________________________________________________________");
@@ -26,6 +27,7 @@ public class Gerenciador extends Controller {
 		Cache.clear();
 	render();
 	}
+	
 ///// AUTENTIFICAR O USUARIO E ADMIN /////
 	public static void autenticar(String login, String senha) throws InterruptedException {
 	System.out.println("_____________________________________________________________________________________");

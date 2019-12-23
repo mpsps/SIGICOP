@@ -26,6 +26,7 @@ import seguranca.Seguranca;
 
 @With(Seguranca.class)
 public class Usuarios extends Controller {
+	
 ///// PAGINA DO USUARIO /////
 	@User
 	public static void paginaUsuario() {
@@ -71,8 +72,8 @@ public class Usuarios extends Controller {
 		String solicitar = "solicitar";
 	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos,solicitar, NomeDoArquivoFiltro, descricaoFiltro);
 	}
+	
 ///// TELA DE CADASTRO DE USUARIO /////
-	@User
 	public static void cadastroDeUsuario() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.cadastroDeUsuario() ...["+ new Date()+"]");
@@ -80,6 +81,7 @@ public class Usuarios extends Controller {
 		Cache.clear();
 	render();
 	}
+	
 ///// SALVAR O USUARIO /////
 	public static void salvarUsuario(@Valid Usuario user) {
 	System.out.println("_____________________________________________________________________________________");
@@ -117,6 +119,7 @@ public class Usuarios extends Controller {
 		}
 	Gerenciador.login();
 	}
+	
 ///// FAZ DOWNLOAD DO ARQUIVO DO USUARIO /////
 	@User
 	public static void download(Long id) {
@@ -131,6 +134,7 @@ public class Usuarios extends Controller {
 		System.out.println("pedido download: "+ ip.nomeArquivo);
 	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 	}
+	
 ///// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS /////
 	@Admin
 	public static void restaurarQtd(int qtd) {
@@ -147,6 +151,7 @@ public class Usuarios extends Controller {
 		flash.success("Quantidade de solicitações restaurados para "+ qtd);
 	Administradores.paginaAdmin();
 	}
+	
 ///// SAIR /////
 	@User
 	public static void sair() {

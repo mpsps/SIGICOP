@@ -27,6 +27,7 @@ import seguranca.Seguranca;
 
 @With(Seguranca.class)
 public class Pedidos extends Controller {
+	
 ///// PÁGINA DE FAZER PEDIDO /////
 	@User
 	public static void fazerPedido() {
@@ -42,6 +43,7 @@ public class Pedidos extends Controller {
 	
 	render(listaDePedidos, voltar, usuarioBanco);
 	}
+	
 ///// ADICIONA PEDIDOS NA CACHE /////
 	@User
 	public static void addPedido(@Valid Pedido item) {
@@ -105,6 +107,7 @@ public class Pedidos extends Controller {
 		Cache.set(session.getId(), dadosDeSessao);
 	fazerPedido();
 	}
+	
 ///// SALVAR PEDIDO(S) /////
 	@User
 	public static void salvar() {
@@ -133,9 +136,10 @@ public class Pedidos extends Controller {
 		flash.success("Pedido(s) salvo(s)!");
 	fazerPedido();
 	}
+	
 ///// APAGAR O PEDIDO DA CACHE /////
 	@User
-	public static void cancelarPedidos(Long idPedido) {
+	public static void cancelarPedido(Long idPedido) {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.cancelarPedidos() ...["+ new Date()+"]");
 	
@@ -162,14 +166,7 @@ public class Pedidos extends Controller {
 		flash.success("Pedido Cancelado!");
 	fazerPedido();
 	}
-///// CANCELA TODOS OS PEDIDOS DA CACHE /////
-	@User
-	public static void cancelarTodosPedidos() {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("cancelarTodosPedidos() ... ["+ new Date()+"]");
-		flash.success("Todos os Pedidos Foram Cancelados!");
-	fazerPedido();
-	}
+	
 ///// ALTERAR O STATUS PARA CONCLUIDO /////
 	@Admin
 	public static void concluido(Long idPedCon, String resposta) {
@@ -188,6 +185,7 @@ public class Pedidos extends Controller {
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" concluido!");
 	Administradores.paginaAdmin();
 	}
+	
 ///// ALTERAR O STATUS PARA RECUSADO /////
 	@Admin
 	public static void recusar(Long idPed, String motivo) {
@@ -214,6 +212,7 @@ public class Pedidos extends Controller {
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" Recusado!");
 	Administradores.paginaAdmin();
 	}
+	
 ///// DE RECUSAR PARA CONCLUIDO DECREMENTANDO /////
 	@Admin
 	public static void recusarParaConcluido(Long idPedCon, String resposta) {
@@ -238,7 +237,8 @@ public class Pedidos extends Controller {
 		ped.save();
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" concluido!");	
 	listarRecusados();
-	}	
+	}
+	
 ///// DE RECUSAR PARA CONCLUIDO DECREMENTANDO /////
 	@Admin
 	public static void concluidoParaRecusar(Long idPed, String resposta) {
@@ -263,7 +263,8 @@ public class Pedidos extends Controller {
 		ped.save();
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" concluido!");	
 	listarConcluidos();;
-	}	
+	}
+	
 ///// LISTAR TODOS OS PEDIDO CONCLUIDOS /////
 	@Admin
 	public static void listarConcluidos() {
@@ -302,6 +303,7 @@ public class Pedidos extends Controller {
 		}
 	render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro);
 	}
+	
 ///// LISTAR TODOS OS PEDIDO RECUSADOS /////
 	@Admin
 	public static void listarRecusados() {
@@ -340,6 +342,7 @@ public class Pedidos extends Controller {
 		}		
 	render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro);
 	}
+	
 ///// REALIZAR BAIXA /////
 	@SuppressWarnings("deprecation")
 	@Admin
@@ -392,6 +395,7 @@ public class Pedidos extends Controller {
 		flash.success("Pedido de copia realizado com sucesso!");
 	Administradores.realizarPedido();
 	}
+	
 ///// ENTREGAR PEDIDO /////
 	@Admin
 	public static void entregarPedido(Long id) {

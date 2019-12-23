@@ -27,6 +27,7 @@ import seguranca.Seguranca;
 
 @With(Seguranca.class)
 public class Administradores extends Controller {
+	
 ///// PÁGINA ADMIN /////
 	@Admin
 	public static void paginaAdmin() {
@@ -71,6 +72,7 @@ public class Administradores extends Controller {
 		String filtroPa = "";
 	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa);
 	}
+	
 ///// SÓ O ADMIN PADRAO PODE CADASTRAR MAIS ADMINS /////
 	@Admin
 	public static void cadastroDeAdms() {
@@ -87,6 +89,7 @@ public class Administradores extends Controller {
 	     Administradores.paginaAdmin();
 		}
 	}
+	
 ///// APOS CADASTRO FINALIZADO E MANDA PARA TELA DO ADMIN ///// 
 	@Admin
 	public static void salvarAdm(@Valid Administrador adm) {
@@ -130,6 +133,7 @@ public class Administradores extends Controller {
 	    Administradores.paginaAdmin();
 		}
 	}
+	
 ///// ENVIAR OS DADOS PARA EDITAR O ADMINISTRADOR LOGADO /////
 	@Admin
 	public static void editar() {
@@ -142,6 +146,7 @@ public class Administradores extends Controller {
 		String telaAdmin = "Tela Admin";
 		renderTemplate("Administradores/cadastroDeAdms.html", adm, telaAdmin, admBanco);
 	}
+	
 ///// EDITAR A SENHA SEPARADAMENTE /////
 	@Admin
 	public static void editarSenha() {
@@ -153,6 +158,7 @@ public class Administradores extends Controller {
 		String telaAdmin = "Tela Admin";
 		render(telaAdmin, admBanco);
 	}
+	
 ///// SALVAR A SENHA ///// 
 	@Admin
 	public static void salvarSenha(String senha, String confirmarSenha) {
@@ -180,6 +186,7 @@ public class Administradores extends Controller {
 		editarSenha();
 		}
 	}
+	
 ///// LISTA TODOS OS ADMINISTRADORES /////
 	@Admin
 	public static void listarTodosAdmins() {		
@@ -215,6 +222,7 @@ public class Administradores extends Controller {
 		Administradores.paginaAdmin();
 		}
 	}
+	
 ///// REMOVER ADMINISTRADORES /////
 	@Admin
 	public static void removerAdmin(Long id) {		
@@ -233,6 +241,7 @@ public class Administradores extends Controller {
 		Administradores.paginaAdmin();
 		}
 	}
+	
 ///// PÁGINA DE PEDIDO DE COPIA /////
 	@Admin
 	public static void realizarPedido() {
@@ -260,6 +269,7 @@ public class Administradores extends Controller {
 		}
 	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 	}
+	
 ///// PARA O ADMINISTRADOR SAIR DO SISTEMA ///// 
 	@Admin
 	public static void sair() {
