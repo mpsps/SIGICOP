@@ -31,6 +31,7 @@ public class Administradores extends Controller {
 ///// PÁGINA ADMIN /////
 	@Admin
 	public static void paginaAdmin() {
+	System.out.println("apenas para enviar o commit depois de reconfigurado!");
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Administrador.paginaAdmin() ... ["+ new Date()+"]");
 		
