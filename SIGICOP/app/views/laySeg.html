@@ -222,10 +222,7 @@
 		</div> -->
 #{/if}
 		</div>
-		<div class='overhang'></div>
-		<!--  <div class='overhang-overlay'></div>-->
-		<span class='overhang-message'></span>
-		<span class='overhang-close'></span>
+		
 <!-- CORPO DA PAGINA -->
     	<div id="container">
    
@@ -299,9 +296,9 @@ $().ready(function() {
 <script type="text/javascript">
     $("#dadosAdmin").click(function () {
 		Swal.fire({
-			  position: 'top-end',
+			  position: 'top',
 			  icon: '',
-			  title: 'Meus Dados <br> <a href="@{Administradores.editar}" class="btn primary ml-5" style="background-color: #529fed;">Editar</a>',
+			  title: '<i class="address card icon m-0 p-0 border-0"></i>Meus Dados <br> <a href="@{Administradores.editar}" class="btn primary m-0" style="background-color: #529fed;">Editar</a>',
 			  footer: 'Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email} <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if} ' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
@@ -310,9 +307,9 @@ $().ready(function() {
     
     $("#dadosUser").click(function () {
 		Swal.fire({
-			  position: 'top-end',
+			  position: 'top',
 			  icon: '',
-			  title: 'Meus Dados',
+			  title: '<i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados',
 			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}   <br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
@@ -322,10 +319,15 @@ $().ready(function() {
  
  <!-- DIALOGS DO COM AVISOS E PREENCHIMENTO DE MENSAGENS -->
  <script type="text/javascript">
+ 
+ var width = window.innerWidth;
+ 
+ if(width < 400){
+	
 	$("#restaurar").click(function() {
 		Swal.fire({
-			  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
-			  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
+			  scrollbarPadding: true,
+			  text: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br> lembre-se que essa função só é recomendada em inicio de cada mês',
 			  icon: 'question',
 			  input: 'number',
 			  inputAttributes: {
@@ -345,6 +347,31 @@ $().ready(function() {
 			})
 	});
 	
+ }else{
+		$("#restaurar").click(function() {
+			Swal.fire({
+				  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
+				  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
+				  icon: 'question',
+				  input: 'number',
+				  inputAttributes: {
+					    min: '0',
+					    max: '50'
+					  },
+				  showCancelButton: true,
+				  confirmButtonColor: '#21ac0d',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Ok',
+				  showCloseButton: true,
+				}).then((result) => {
+				  if (result.value) {	
+				$('#restQtd').val(result.value);
+				$('#formRestaurar').submit(); 
+				  }
+				})
+		});
+			
+ }
 	
 </script>
 
@@ -381,7 +408,7 @@ if(${session.contains("usuarioLogado")}){
 		 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
 		 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
 		 var primeiraLetra = sobreNome.substr(0, 1)
-	
+		 const celular = "celular";
 		 console.log(nome+" "+sobreNome);
 		 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";
 	 }else{

@@ -37,7 +37,7 @@
 		<div class="row">
 		 <div class="col">
 		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}"  >
+		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}" id="qtdCopias" >
 		</div>
 		<div class="col">
 #{if obrigatorio}
@@ -57,7 +57,7 @@
 		<label>Descricao</label>
 		<textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
 		<div class="text-center">
-		<button class="btn btn-success mt-3 icon">Adicionar <i class="paper plane outline icon"></i></button>
+		<button class="btn btn-success mt-3 icon" id="add">Adicionar <i class="paper plane outline icon"></i></button>
 		</div>
 	</div>
 </form>
@@ -121,6 +121,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function(e) {
+		
 		$("#form-pedido").submit(function(e) {
 			var arq = $("#item-arquivo").val();
 			if (arq == "") {
@@ -135,9 +136,31 @@
 					})
 			}
 			}			
-		});
-		
-	});
+		$("#add").click(function() {
+
+			var podeAdd = document.getElementById('qtdCopias');
+			console.log("qtdCopias :"+podeAdd);
+			if(podeAdd != 0){
+			const Toast = Swal.mixin({
+				  toast: true,
+				  position: 'top-end',
+				  showConfirmButton: false,
+				  timer: 3000,
+				  timerProgressBar: true,
+				  onOpen: (toast) => {
+				    toast.addEventListener('mouseenter', Swal.stopTimer)
+				    toast.addEventListener('mouseleave', Swal.resumeTimer)
+				  }
+				})
+
+				Toast.fire({
+				  icon: 'info',
+				  title: 'Pedido listado'
+				})
+			}
+	
+	})
+		})
 /*pega o nome do arquivo e jogar para o campo hiddem nomeArquivo*/
     var inputNome = document.getElementById('nomeArquivo');
 	var inputFicheiro = document.getElementById('item-arquivo');
@@ -146,6 +169,7 @@ inputFicheiro.addEventListener('change', function() {
   var nome = this.files[0].name;
   inputNome.innerHTML = nome;
   document.getElementById('arquivo').value = nome;
+	})
 });
 /***************************************************************/
 </script>
