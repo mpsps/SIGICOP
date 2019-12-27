@@ -42,9 +42,7 @@
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/cssPersonalizado.css'}">     
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/messagemArquivo.css'}">
 <!-- JS PERSONALIZADO  -->  
-		<script src="@{'/public/javascripts/meuJs/messagemArquivo.js'}" type="text/javascript" charset="${_response_encoding}"></script>  
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 </head>
@@ -191,7 +189,7 @@
 		</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 		<div name="time" id="time" class="text-white" id="hora" ></div>
-#{/if}
+#{/if}  		
 		</nav>
 		<!-- <div class="uk-alert-primary" uk-alert>
    		<a class="uk-alert-close" uk-close></a>
@@ -287,8 +285,7 @@ $().ready(function() {
     $('#matriculaDoUsuarioFiltro').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
-    $('#dataEnvtrega').mask('00/00/0000');
-   	
+    $('#dataEnvtrega').mask('00/00/0000');   	
 </script>
 
 <!-- DIALOGS DO SWEETALERT2 -->
