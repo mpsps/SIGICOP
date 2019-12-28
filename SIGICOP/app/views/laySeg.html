@@ -316,15 +316,12 @@ $().ready(function() {
  
  <!-- DIALOGS DO COM AVISOS E PREENCHIMENTO DE MENSAGENS -->
  <script type="text/javascript">
- 
- var width = window.innerWidth;
- 
- if(width < 400){
 	
 	$("#restaurar").click(function() {
 		Swal.fire({
 			  scrollbarPadding: true,
-			  text: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br> lembre-se que essa função só é recomendada em inicio de cada mês',
+			  html: '<div id="tituloCelularModal">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
+					  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
 			  icon: 'question',
 			  input: 'number',
 			  inputAttributes: {
@@ -344,31 +341,6 @@ $().ready(function() {
 			})
 	});
 	
- }else{
-		$("#restaurar").click(function() {
-			Swal.fire({
-				  title: 'Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários?',
-				  text: 'lembre-se que essa função só é recomendada em inicio de cada mês',
-				  icon: 'question',
-				  input: 'number',
-				  inputAttributes: {
-					    min: '0',
-					    max: '50'
-					  },
-				  showCancelButton: true,
-				  confirmButtonColor: '#21ac0d',
-				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Ok',
-				  showCloseButton: true,
-				}).then((result) => {
-				  if (result.value) {	
-				$('#restQtd').val(result.value);
-				$('#formRestaurar').submit(); 
-				  }
-				})
-		});
-			
- }
 	
 </script>
 

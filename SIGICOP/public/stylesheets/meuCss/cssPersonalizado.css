@@ -225,6 +225,12 @@ body {
 	font-size: 130%;
 	display: block;
 }
+#tituloCelularModal{
+	font-size: 80%;
+	text-align: left;
+	letter-spacing: 0.1;
+	word-spacing: 0.5;
+}
 }
 
 /*tela de tablet */

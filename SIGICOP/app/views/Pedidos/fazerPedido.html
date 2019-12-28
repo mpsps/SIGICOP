@@ -138,9 +138,9 @@
 			}			
 		$("#add").click(function() {
 
-			var podeAdd = document.getElementById('qtdCopias');
+			var podeAdd = document.getElementById('qtdCopias').val();
 			console.log("qtdCopias :"+podeAdd);
-			if(podeAdd != 0){
+			if(podeAdd > 0){
 			const Toast = Swal.mixin({
 				  toast: true,
 				  position: 'top-end',
