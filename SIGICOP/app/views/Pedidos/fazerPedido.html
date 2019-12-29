@@ -127,39 +127,40 @@
 			if (arq == "") {
 				/*alert("Você deve anexar um arquivo!");*/
 			e.preventDefault();
-			if (arq == ""){
 				Swal.fire({
 					  icon: 'error',
 					  title: 'ERROR...',
 					  text: 'é obrigatório o anexo do arquivo!',
 						  showCloseButton: true
 					})
-			}
+			}else{
+				
+				var podeAdd = $("#qtdCopias").val();
+				
+				console.log("qtdCopias :"+podeAdd);
+				if(podeAdd > 0){
+				const Toast = Swal.mixin({
+					  toast: true,
+					  position: 'top',
+					  showConfirmButton: false,
+					  timer: 3000,
+					  timerProgressBar: true,
+					  onOpen: (toast) => {
+					    toast.addEventListener('mouseenter', Swal.stopTimer)
+					    toast.addEventListener('mouseleave', Swal.resumeTimer)
+					  }
+					})
+					Toast.fire({
+					  icon: 'info',
+					  title: 'Pedido listado'
+					})
+					setTimeout(function(){ 
+						e.submit();
+					}, 3000);
+				
+				}
+				
 			}			
-		$("#add").click(function() {
-
-			var podeAdd = document.getElementById('qtdCopias').val();
-			console.log("qtdCopias :"+podeAdd);
-			if(podeAdd > 0){
-			const Toast = Swal.mixin({
-				  toast: true,
-				  position: 'top-end',
-				  showConfirmButton: false,
-				  timer: 3000,
-				  timerProgressBar: true,
-				  onOpen: (toast) => {
-				    toast.addEventListener('mouseenter', Swal.stopTimer)
-				    toast.addEventListener('mouseleave', Swal.resumeTimer)
-				  }
-				})
-
-				Toast.fire({
-				  icon: 'info',
-				  title: 'Pedido listado'
-				})
-			}
-	
-	})
 		})
 /*pega o nome do arquivo e jogar para o campo hiddem nomeArquivo*/
     var inputNome = document.getElementById('nomeArquivo');

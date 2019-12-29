@@ -14,16 +14,16 @@
 		<div class="form-row">
     	<div class="form-group col-md-6">
     	<label for="NomeUser">Nome do Administrador:</label>
-		<input type="text" name="nomeDoAdminFiltro" class="form-control" placeholder="Nome do Admin" id="NomeUser" maxlength="100" class="campoLimpo">
+		<input type="text" name="nomeDoAdminFiltro" class="form-control" placeholder="Nome do Admin" id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
     	</div>
     	<div class="form-group col-md-6">
     	<label for="email">Email:</label>
-		<input type="text" name="emailDoAdminFiltro" class="form-control" placeholder="Email do Admin" id="email" class="campoLimpo">
+		<input type="text" name="emailDoAdminFiltro" class="form-control" placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
     	</div>   		
   		</div>
  		<div class="text-center"">
   		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-  		<button type="reset" class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></button>
+  		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
 	 	</div>
 </fieldset>
 	</form>
@@ -67,16 +67,6 @@
 		</div>
 		</div>		
 </div>
-<!-- <script type="text/javascript">
-$().ready(function() {
-	$("#limpar").click(function() {
-	$(".campoLimpo").innerHTML = "";
-		})
-});
-
-</script> -->
-
-
 
 
 

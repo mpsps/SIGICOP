@@ -21,7 +21,7 @@
   		</div>
  		<div class="text-center">
   		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-  		<button type="reset" class="btn btn-danger icon" id="limparFiltro" onclick="apagar()">Limpar <i class="eraser icon"></i></button>
+		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
   		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 icon">Solicitar<i class="file alternate outline icon"></i></a>
 	 	</div>
 	 	</fieldset>
@@ -130,12 +130,7 @@
 #{/if}
 #{/else}
 </div>
-<script type="text/javascript"> 
-$("#limparfiltro").click(function () {
-	document.getElementById("NomeDoArquivoFiltro").value = "";
-	document.getElementById("descricaoFiltro").value = "";
-});
-</script>
+
 
 
 

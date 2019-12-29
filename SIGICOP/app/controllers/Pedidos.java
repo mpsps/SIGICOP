@@ -108,6 +108,70 @@ public class Pedidos extends Controller {
 	fazerPedido();
 	}
 	
+///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
+	@User
+	public static void addPedidoAjax(@Valid Pedido item) {
+	System.out.println("_____________________________________________________________________________________");
+	System.out.println("Pedidos.addPedidoAjax() ...["+ new Date()+"]");
+			
+		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
+		List<Pedido> listaDePedidos = null;
+		if(dadosDeSessao == null) {
+			dadosDeSessao = new DadosSessao();
+		}else {
+			listaDePedidos = dadosDeSessao.listaDePedidos;
+		}
+		if(listaDePedidos == null) {
+			listaDePedidos = new ArrayList<Pedido>();
+		}
+		int valor;
+		if(item.frenteVerso.equals("frenteEverso")) {
+			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
+			if(valor < 0) {
+			flash.error("quatidade de copia indisponivel");
+		fazerPedido();
+		}
+		dadosDeSessao.usuario.qtdDisponivel = valor;
+		Cache.set(session.getId(), dadosDeSessao);
+		}else {
+		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
+		if(valor < 0) {
+			flash.error("quatidade de copia indisponivel");
+		fazerPedido();
+		}
+		dadosDeSessao.usuario.qtdDisponivel = valor;
+		Cache.set(session.getId(), dadosDeSessao);
+		}
+	//		if (validation.hasErrors()) {
+	//			params.flash();
+	//			flash.error("Falha no Cadastro do Pedido!");
+	//			flash.keep();
+	//			fazerPedido();
+	//		}
+			
+		String nomeArq = params.get("name");
+			
+		if(item.arquivo == null || nomeArq == null) {
+			flash.error("O Envio do Arquivo é obrigatorio");
+			fazerPedido();
+		}else if(item.qtdCopias == 0){
+			flash.error("A Quantidade de Copias é obrigatorio");
+			fazerPedido();
+		}else if(item.frenteVerso == null){
+			flash.error("Frente ou Verso é obrigatorio");
+			fazerPedido();
+		}
+		
+		item.nomeArquivo = nomeArq;
+		item.usuario = dadosDeSessao.usuario;
+		
+		listaDePedidos.add(item);
+		
+		dadosDeSessao.listaDePedidos = listaDePedidos;
+		Cache.set(session.getId(), dadosDeSessao);
+	renderJSON(listaDePedidos);
+	}
+	
 ///// SALVAR PEDIDO(S) /////
 	@User
 	public static void salvar() {

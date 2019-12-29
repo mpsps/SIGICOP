@@ -1,0 +1,6 @@
+FileWriter arq = new FileWriter(
+						"C:\\projeto\\respostas.txt");
+				PrintWriter gravarArq = new PrintWriter(arq);
+
+				gravarArq.printf(dados.toString());
+				arq.close();

@@ -71,6 +71,7 @@ public class Administradores extends Controller {
 			System.out.println("Nome do Arquivo = \""+nomeDoArquivoFiltro+"\"");
 		}
 		String filtroPa = "";
+		
 	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa);
 	}
 	
@@ -216,8 +217,9 @@ public class Administradores extends Controller {
 			}else if(!nomeDoAdminFiltro.isEmpty() && !emailDoAdminFiltro.isEmpty()){
 				listarDeAdmins = Administrador.find("admPadrao = ?1 And nomeAdm LIKE ?2 AND email LIKE ?3 ", false,"%"+ nomeDoAdminFiltro+"%", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
 			}
-			String telaAdmin = "Tela Admin";
-		render(listarDeAdmins, telaAdmin, admBanco);
+			String listaAdmins = "listaAdmins";
+			String telaAdmin = "telaAdmin";
+		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin);
 		}else {
 			flash.error("Acesso restrito ao administrador padrao do sistema");
 		Administradores.paginaAdmin();

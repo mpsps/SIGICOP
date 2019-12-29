@@ -71,6 +71,10 @@
 		</style>
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
+ 		<!-- CSS PERSONALIZADO  -->
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
     </head>
 <body>   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
@@ -156,17 +160,17 @@
 		</div>
 		</div>
 		<div class="three wide column">
-		<div class="ui inverted header h4">Contatos:</div>
+		<h4 class="ui inverted header">Contatos:</h4>
 		<div class="ui inverted link list">
-		<a href="#"  class="text-decoration-none">+55 (84) 988122176</a> 
+		<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 988122176</a> 
 		<br>
-		<a href="#" class="text-decoration-none">+55 (84) 994333803</a> 
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 994333803</a> 
 		</div>
 		</div>
 		<div class="three wide column">
 		<h4 class="ui inverted header">E-mails:</h4>
-		<a href="#" class="text-decoration-none" data-toggle="tooltip" data-html="true" title="">magdiel.pereira@escolar.ifrn.edu.br</a> 
-		<a href="#" class="text-decoration-none">manacio.p@escolar.ifrn.edu.br</a> 
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
 		</div>
 		</div>
 		</div>

@@ -12,8 +12,11 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 #{get 'moreStyles' /}
 <!-- JAVASCRIPT PADRAO -->
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
 <!-- JS JQUERY -->
 		<!-- <script src="@{'/public/javascripts/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>  -->
 #{get 'moreScripts' /}
@@ -41,7 +44,10 @@
         <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/cssPersonalizado.css'}">     
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
+           
 <!-- JS PERSONALIZADO  -->  
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
@@ -86,7 +92,7 @@
 		onMouseOut="this.src='@{'/public/images/icones/adminAdd.png'}'" height="40" style="float: left; margin-right: 5px;" alt="addAdmin" />
 		</a>
 		</span>
-#{if listarDeAdmins}
+#{if listaAdmins}
   		<span>
   		<a title="filtrar Admins" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 		<img src="@{'/public/images/icones/adminFiltro.png'}" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
@@ -142,10 +148,9 @@
   		<a class="itemMenu" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{else}
-	<a href="@{Pedidos.listarRecusados}" class="itemMenu" id="recusados" style="margin: 1px;">Recusados</a>
+		<a href="@{Pedidos.listarRecusados}" class="itemMenu" id="recusados" style="margin: 1px;">Recusados</a>
 #{/else}
 		<li class="nav-item"></li>
-		
 #{/if}
 #{if session.contains("adminLogado")}
 		<span class="sticky-top float-right border border-secondary rounded">
@@ -227,9 +232,11 @@
 #{doLayout /}
 
  		</div>
-	
+		<form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
+		<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
+		</form>
 <!-- RODAP� DA PAGINA -->
-		<div class="position-bottom" id="rodapeCelular" class="rodapeEmBaixo">
+		<div class="position-bottom w-100" id="rodapeCelular" class="rodapeEmBaixo">
  		<div class="ui inverted vertical footer segment" class="dark">
 		<div class="ui container">
 		<div class="ui stackable inverted divided equal height stackable grid">
@@ -248,15 +255,15 @@
 		<div class="three wide column">
 		<h4 class="ui inverted header">Contatos:</h4>
 		<div class="ui inverted link list">
-		<a href="#"  class="text-decoration-none">+55 (84) 988122176</a> 
+		<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 988122176</a> 
 		<br>
-		<a href="#" class="text-decoration-none">+55 (84) 994333803</a> 
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 994333803</a> 
 		</div>
 		</div>
 		<div class="three wide column">
 		<h4 class="ui inverted header">E-mails:</h4>
-		<a href="#" class="text-decoration-none" data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>">magdiel.pereira@escolar.ifrn.edu.br</a> 
-		<a href="#" class="text-decoration-none">manacio.p@escolar.ifrn.edu.br</a> 
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
 		</div>
 		</div>
 		</div>
@@ -341,7 +348,6 @@ $().ready(function() {
 			})
 	});
 	
-	
 </script>
 
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
@@ -405,6 +411,21 @@ if(${session.contains("adminLogado")}){
 	 }
 }
 }
+</script>
+<script type="text/javascript"> 
+document.getElementById("limpar").addEventListener("click", function() {
+	  clearInputUrlNumberText("NomeDoArquivoFiltro");
+	  clearInputUrlNumberText("descricaoFiltro");
+	  clearInputUrlNumberText("matriculaDoUsuarioFiltro");
+	  clearInputUrlNumberText("nomeDoArquivoFiltro");
+	  clearInputUrlNumberText("emailDoAdminFiltro");
+	  clearInputUrlNumberText("nomeDoAdminFiltro");
+	});
+
+	function clearInputUrlNumberText(name) {
+	  var entradas = document.querySelectorAll("input[id='"+name+"']");
+	  [].map.call(entradas, entrada => entrada.value = '');
+	}
 </script>
 </body>
 </html>

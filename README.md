@@ -1,63 +1,63 @@
 # SIGICOP
-Sistema de Gerenciamento de Impress√µes e Copias
+Sistema de Gerenciamento de Impressıes e Copias
 
-## Descri√ß√£o:
-**A SIGICOP √© um projeto de conclus√£o do curso subsequente em inform√°tica,
+## DescriÁ„o:
+**A SIGICOP È um projeto de conclus„o do curso subsequente em inform·tica,
  realizado por Manacio Pereira de Souza ([@Manacio](https://github.com/Manacio)) e por Magdiel Pereira de Souza ([@MagdielPS](https://github.com/MagdielPS)).
- A SIGICOP √© um sistema de gerenciamento de c√≥pias e impress√µes,
- que facilite e agilize a demanda de impress√µes e c√≥pias do IFRN-CAMPUS-JC,
- onde o usu√°rio possa ter controle sobre a quantidade de solicita√ß√£o dispon√≠veis e o administrdor possar gerenciar as solicitac√µes**
+ A SIGICOP È um sistema de gerenciamento de cÛpias e impressıes,
+ que facilite e agilize a demanda de impressıes e cÛpias do IFRN-CAMPUS-JC,
+ onde o usu·rio possa ter controle sobre a quantidade de solicitaÁ„o disponÌveis e o administrdor possar gerenciar as solicitacıes**
 
 # Diagrama de Classes
 ![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263599/71190212-e6a60200-2262-11ea-9943-93c5a2809e5e.jpg)
 
-# Diagrama de Caso de Uso do Usu√°rio
+# Diagrama de Caso de Uso do Usu·rio
 ![Caso de Uso Usuario](https://user-images.githubusercontent.com/55263599/71537780-b9f78780-28ff-11ea-9626-8dc391f2091c.jpg)
 
 # Diagrama de Caso de Uso Administrador
 ![Caso de uso Administrador](https://user-images.githubusercontent.com/55263599/71537757-98969b80-28ff-11ea-974d-c886ad2fbdd8.jpg)
 
 
-# PASSO A PASSO DO USU√ÅRIO
+# PASSO A PASSO DO USU¡RIO
 
-* O usu√°rio dever√° acessar o site da SIGICOP;
-* Quando visitar a p√°gina principal clicar em "Logar" ou em "logar agora";
-* Ao entrar na p√°gina de login, fornecer o login e senha para entrar no sistema;
-* O usu√°rio ao logar, poder√° visualizar seus pedidos anteriores (se houver), e poder√° filtra-los e efetuar download;
-* Em "Meus Dados" (icone de usu√°rio) poder√° visualizar a quantidade dispon√≠vel de solicita√ß√µes, e tamb√©m poder√° vizualizar seu nome, email e ultimo acesso;
-* Poder√° solicitar pedidos de impress√µes, ao solicitar, se houver solicitac√£o disponivel, aparecer√° o formul√°rio, se n√£o, aparecer√° mensagem em vermelho informando que n√£o √© possivel efetuar nenhuma solicitac√£o;
-* Ap√≥s logar, o usu√°rio poder√° sair a qualquer momento;
+* O usu·rio dever· acessar o site da SIGICOP;
+* Quando visitar a p·gina principal clicar em "Logar" ou em "logar agora";
+* Ao entrar na p·gina de login, fornecer o login e senha para entrar no sistema;
+* O usu·rio ao logar, poder· visualizar seus pedidos anteriores (se houver), e poder· filtra-los e efetuar download;
+* Em "Meus Dados" (icone de usu·rio) poder· visualizar a quantidade disponÌvel de solicitaÁıes, e tambÈm poder· vizualizar seu nome, email e ultimo acesso;
+* Poder· solicitar pedidos de impressıes, ao solicitar, se houver solicitac„o disponivel, aparecer· o formul·rio, se n„o, aparecer· mensagem em vermelho informando que n„o È possivel efetuar nenhuma solicitac„o;
+* ApÛs logar, o usu·rio poder· sair a qualquer momento;
 
-## P√°ginas do SIGICOP para Usu√°rio
+## P·ginas da SIGICOP para Usu·rio
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## P√°ginas do SIGICOP para Usu√°rio (Vers√£o Mobile)
-![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
+## P·ginas da SIGICOP para Usu·rio - Vers„o Mobile (260 x 450)
+![passoApassoUsuario](https://user-images.githubusercontent.com/55263599/71545632-55264680-296c-11ea-8b5d-1b49adb92406.gif)
 
 # PASSO A PASSO DO ADMINISTRADOR
 
-* O administrador dever√° acessar o site da SIGICOP;
-* Quando visitar a p√°gina principal clicar em "Logar" ou em "logar agora";
-* Ao entrar na p√°gina de login, fornecer o login e senha para entrar no sistema;
-* O administrador ao logar, poder√° visualizar todos os pedidos com o status "AGUARDANDO" (se houver), filtra-los e efetuar download;
-* Em "Meus Dados" (icone do administrador) poder visualizar seu nome, email e ultimo acesso, e poder√° editar seus dados;
-* O administrador poder√° concluir ou recusar os pedidos‚Äã (se houver), se recusar ser√° obrigado‚Äã a d√° uma justificativa, se concluir, ser√° opcional a justificativa;
-* O administrador poder√° listar todos os pedidos conclu√≠dos, e poder√° filtra-los;
-* O administrador poder√° listar todos os pedidos recusados, e poder√° filtra-los;
-* O administrador em lista de conclu√≠do, poder√° entregar o pedido depois que o usu√°rio recebe a impress√£o;
-* O administrador poder√° realizar baixa para o usu√°rio, quando for pedido de c√≥pia;
-* O administrador padr√£o poder√° cadastrar novos‚Äã administradores;
-* O administrador padr√£o poder√° listar todos os administradores do sistema e remover-los;
-* O administrador padr√£o poder√° restaurar a quantidade de solicita√ß√µes de todos os usu√°rios, informando a quantidade;
-* Ao logar, o administrador poder√° sair a qualquer momento;
+* O administrador dever· acessar o site da SIGICOP;
+* Quando visitar a p·gina principal clicar em "Logar" ou em "logar agora";
+* Ao entrar na p·gina de login, fornecer o login e senha para entrar no sistema;
+* O administrador ao logar, poder· visualizar todos os pedidos com o status "AGUARDANDO" (se houver), filtra-los e efetuar download;
+* Em "Meus Dados" (icone do administrador) poder visualizar seu nome, email e ultimo acesso, e poder· editar seus dados;
+* O administrador poder· concluir ou recusar os pedidos (se houver), se recusar ser· obrigado a d· uma justificativa, se concluir, ser· opcional a justificativa;
+* O administrador poder· listar todos os pedidos concluÌdos, e poder· filtra-los;
+* O administrador poder· listar todos os pedidos recusados, e poder· filtra-los;
+* O administrador em lista de concluÌdo, poder· entregar o pedido depois que o usu·rio recebe a impress„o;
+* O administrador poder· realizar baixa para o usu·rio, quando for pedido de cÛpia;
+* O administrador padr„o poder· cadastrar novos administradores;
+* O administrador padr„o poder· listar todos os administradores do sistema e remover-los;
+* O administrador padr„o poder· restaurar a quantidade de solicitaÁıes de todos os usu·rios, informando a quantidade;
+* Ao logar, o administrador poder· sair a qualquer momento;
 
-## P√°ginas do SIGICOP para Administrador
+## P·ginas da SIGICOP para Administrador
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## P√°ginas do SIGICOP para Administrador (Vers√£o Mobile)
+## P·ginas da SIGICOP para Administrador - Vers„o Mobile (260 x 450)
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## As importa√ß√µes mais importantes utlizado nos templates layPri.html e laySeg.html:
+## As importaÁıes mais importantes utlizado nos templates layPri.html e laySeg.html:
 
 [*Jquery*](https://jquery.com/)
 ```html
@@ -86,8 +86,8 @@ Sistema de Gerenciamento de Impress√µes e Copias
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 ```
 
-## Tabela de Refer√™ncias de Sites:
-Refer√™ncias    | Categoria   | Links
+## Tabela de ReferÍncias de Sites:
+ReferÍncias    | Categoria   | Links
 -------------- | :---------: | ----
 Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home) 
 Bootstrap      | CSS | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
