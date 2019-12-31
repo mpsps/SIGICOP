@@ -27,7 +27,6 @@ import seguranca.Seguranca;
 
 @With(Seguranca.class)
 public class Administradores extends Controller {
-	
 ///// PÁGINA ADMIN /////
 	@Admin
 	public static void paginaAdmin() {
