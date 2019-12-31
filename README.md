@@ -14,7 +14,7 @@ Sistema de Gerenciamento de Impressões e Copias
 # Diagrama de Caso de Uso do Usuário
 ![Caso de Uso Usuario](https://user-images.githubusercontent.com/55263599/71537780-b9f78780-28ff-11ea-9626-8dc391f2091c.jpg)
 
-# Diagrama de Caso de Uso Administrador
+# Diagrama de Caso de Uso do Administrador
 ![Caso de uso Administrador](https://user-images.githubusercontent.com/55263599/71537757-98969b80-28ff-11ea-974d-c886ad2fbdd8.jpg)
 
 
