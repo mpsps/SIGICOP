@@ -47,7 +47,8 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
-           
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/animate.css'}">     
+		           
 <!-- JS PERSONALIZADO  -->  
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
@@ -302,10 +303,16 @@ $().ready(function() {
 		Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  title: '<i class="address card icon m-0 p-0 border-0"></i>Meus Dados <br> <a href="@{Administradores.editar}" class="btn primary m-0" style="background-color: #529fed;">Editar</a>',
+			  title: '<i class="address card icon m-0 p-0 border-0"></i>Meus Dados <br> <a href="@{Administradores.editar}" class="btn primary m-0 ml-2" style="background-color: #529fed;">Editar</a>',
 			  footer: 'Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email} <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if} ' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
+			  showClass: {
+				    popup: 'animated fadeInDown faster'
+				  },
+			hideClass: {
+				    popup: 'animated fadeOutUp faster'
+				  }
 			})
 	});
     
@@ -317,6 +324,12 @@ $().ready(function() {
 			  footer: 'Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email} <br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}   <br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}' ,
 			  showCloseButton: true,
 			  showConfirmButton: false,
+			  showClass: {
+				    popup: 'animated fadeInDown faster'
+				  },
+			  hideClass: {
+				    popup: 'animated fadeOutUp faster'
+				  }
 			})
 	});
  </script>
@@ -340,6 +353,12 @@ $().ready(function() {
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: 'Ok',
 			  showCloseButton: true,
+			  showClass: {
+				    popup: 'animated fadeInDown faster'
+				  },
+			  hideClass: {
+				    popup: 'animated fadeOutUp faster'
+				  }
 			}).then((result) => {
 			  if (result.value) {	
 			$('#restQtd').val(result.value);

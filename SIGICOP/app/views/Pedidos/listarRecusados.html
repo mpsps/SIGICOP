@@ -116,7 +116,13 @@ ${pr.usuario.matricula}
 			    'aria-label': 'Type your message here'
 			  },
 			  showCloseButton: true,
-			  showCancelButton: true
+			  showCancelButton: true,
+			  showClass: {
+				    popup: 'animated fadeInDown faster'
+				  },
+			  hideClass: {
+				    popup: 'animated fadeOutUp faster'
+				  }
 		}).then((result) => {
 			if(result.value == ""){
 				result.value = ".";

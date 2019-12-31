@@ -74,7 +74,8 @@
  		<!-- CSS PERSONALIZADO  -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/animate.css'}">       
     </head>
 <body>   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
@@ -202,12 +203,18 @@ $(".sobreNos").click(function () {
 		  position: 'top',
 		  icon: 'info',
 		  html: '<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/> <div class="text-justify w-100">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
-		  'realizado por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a> '+
+		  ' realizado por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a> '+
 		  'e por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank">(@MagdielPS)</a>. A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
 		  'a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade de solicitacão disponíveis e o administrdor possar gerenciar as solicitacões </div>',
 		  footer: '' ,
 		  showCloseButton: true,
 		  showConfirmButton: false,
+		  showClass: {
+			    popup: 'animated fadeInDown faster'
+			  },
+		  hideClass: {
+			    popup: 'animated fadeOutUp faster'
+			  }
 	})
 });
 </script>

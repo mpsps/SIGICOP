@@ -87,7 +87,7 @@ ${pc.usuario.matricula}
 		<div class="sticky-top">
 		<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
 		<a class="recusar" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
-		<a href="@{Pedidos.entregarPedido(pc.id)}" class="btn btn-secondary m-1 icon">Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
+		<a class="btn btn-secondary m-1 icon entregar" data-item="${pc.id}" >Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
 			<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
 		</div>
@@ -101,11 +101,10 @@ ${pc.usuario.matricula}
 
 </div>
 
-<form id="recusa" action="@{Pedidos. concluidoParaRecusar}">
+<form id="recusa" action="@{Pedidos.concluidoParaRecusar}">
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
 </form>
-
 <script type="text/javascript">
 	$(document).ready(function () {
 	    setTimeout(function () {
@@ -116,6 +115,25 @@ ${pc.usuario.matricula}
 	
 </script>
 <script type="text/javascript">
+
+$(".entregar").click(function() {
+	var idPedido = $(this).data("item");
+	Swal.fire({
+		  scrollbarPadding: true,
+		  html: '<div id="tituloCelularModal">Tem certeza que deseja entregar esse pedido?</div>'+
+				  '<br/> <a href="@{Pedidos.entregarPedido(pc.id)}" class="btn btn-primary m-1 icon">Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>',
+		  icon: 'question',
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  showConfirmButton: false,
+		  showClass: {
+			    popup: 'animated fadeInDown faster'
+			  },
+		  hideClass: {
+			    popup: 'animated fadeOutUp faster'
+			  }
+		})
+}); 
 	$(".recusar").click(function() {
 		var idPedido = $(this).data("item");
 		
@@ -127,7 +145,13 @@ ${pc.usuario.matricula}
 			    'aria-label': 'Type your message here'
 			  },
 			  showCloseButton: true,
-			  showCancelButton: true
+			  showCancelButton: true,
+			  showClass: {
+				    popup: 'animated fadeInDown faster'
+				  },
+			  hideClass: {
+				    popup: 'animated fadeOutUp faster'
+				  }
 		}).then((result) => {
 			if(result.value == ""){
 				Swal.fire({
@@ -135,7 +159,13 @@ ${pc.usuario.matricula}
 					  title: 'ERROR...',
 					  text: 'preencha o motivo!',
 					  footer: '<a href>Limpar e tentar novamente</a>',
-					  showCloseButton: true
+					  showCloseButton: true,
+					  showClass: {
+						    popup: 'animated pulse faster'
+						  },
+					  hideClass: {
+						    popup: 'animated fadeOutUp faster'
+						  }
 					})
 								}
 			if (result.value) {
@@ -145,6 +175,7 @@ ${pc.usuario.matricula}
 			}
 		})
 	});
+	
 </script>
 
 
