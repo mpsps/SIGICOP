@@ -90,6 +90,7 @@ body {
 	min-height: 460px;
 }
 .itemMenu{
+	text-align: center;
 	text-decoration: none;
 	color: #e6e6e6;
 	border-bottom:  3px solid #000000;
@@ -97,6 +98,7 @@ body {
 	margin: 4px 4px 4px 4px;
 }
 .itemMenu:hover{
+	text-align: center;
 	text-decoration: none;
 	color: #e6e6e6;
 	border-bottom:  3px solid #529fed;

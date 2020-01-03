@@ -1,24 +1,25 @@
-# SIGICOP
+# SIGICOP 
 Sistema de Gerenciamento de Impressões e Copias
 
 ## Descrição:
 **A SIGICOP é um projeto de conclusão do curso subsequente em informática,
- realizado por Manacio Pereira de Souza ([@Manacio](https://github.com/Manacio)) e por Magdiel Pereira de Souza ([@MagdielPS](https://github.com/MagdielPS)).
+ realizado por Manacio Pereira de Souza ([@Manacio :octocat:](https://github.com/Manacio)) e por Magdiel Pereira de Souza ([@MagdielPS :octocat:](https://github.com/MagdielPS)).
  A SIGICOP é um sistema de gerenciamento de cópias e impressões,
  que facilite e agilize a demanda de impressões e cópias do IFRN-CAMPUS-JC,
  onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrdor possar gerenciar as solicitacões**
 
-# Diagrama de Classes
+# Diagrama de Classes :page_facing_up:
 ![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263599/71190212-e6a60200-2262-11ea-9943-93c5a2809e5e.jpg)
 
-# Diagrama de Caso de Uso do Usuário
+# Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
+
 ![Caso de Uso Usuario](https://user-images.githubusercontent.com/55263599/71537780-b9f78780-28ff-11ea-9626-8dc391f2091c.jpg)
 
-# Diagrama de Caso de Uso do Administrador
+# Diagrama de Caso de Uso do Administrador ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
 ![Caso de uso Administrador](https://user-images.githubusercontent.com/55263599/71537757-98969b80-28ff-11ea-974d-c886ad2fbdd8.jpg)
 
 
-# PASSO A PASSO DO USUÁRIO
+# PASSO A PASSO DO USUÁRIO ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 
 * O usuário deverá acessar o site da SIGICOP;
 * Quando visitar a página principal clicar em "Logar" ou em "logar agora";
@@ -28,13 +29,13 @@ Sistema de Gerenciamento de Impressões e Copias
 * Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitacão disponivel, aparecerá o formulário, se não, aparecerá mensagem em vermelho informando que não é possivel efetuar nenhuma solicitacão;
 * Após logar, o usuário poderá sair a qualquer momento;
 
-## Páginas da SIGICOP para Usuário
+## Páginas da SIGICOP para Usuário :computer:
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## Páginas da SIGICOP para Usuário - Versão Mobile (260 x 450)
+## Páginas da SIGICOP para Usuário - Versão Mobile :iphone: (260 x 450)
 ![passoApassoUsuario](https://user-images.githubusercontent.com/55263599/71545632-55264680-296c-11ea-8b5d-1b49adb92406.gif)
 
-# PASSO A PASSO DO ADMINISTRADOR
+# PASSO A PASSO DO ADMINISTRADOR ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
 
 * O administrador deverá acessar o site da SIGICOP;
 * Quando visitar a página principal clicar em "Logar" ou em "logar agora";
@@ -51,13 +52,13 @@ Sistema de Gerenciamento de Impressões e Copias
 * O administrador padrão poderá restaurar a quantidade de solicitações de todos os usuários, informando a quantidade;
 * Ao logar, o administrador poderá sair a qualquer momento;
 
-## Páginas da SIGICOP para Administrador
+## Páginas da SIGICOP para Administrador :computer:
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## Páginas da SIGICOP para Administrador - Versão Mobile (260 x 450)
+## Páginas da SIGICOP para Administrador - Versão Mobile :iphone: (260 x 450)
 ![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
 
-## As importações mais importantes utlizado nos templates layPri.html e laySeg.html:
+## As importações mais importantes utlizado nos templates layPri.html e laySeg.html :exclamation: :
 
 [*Jquery*](https://jquery.com/)
 ```html
@@ -86,14 +87,15 @@ Sistema de Gerenciamento de Impressões e Copias
 <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 ```
 
-## Tabela de Referências de Sites:
+## Tabela de Referências de Sites :link::
 Referências    | Categoria   | Links
 -------------- | :---------: | ----
 Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home) 
-Bootstrap      | CSS | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
-Semantic UI      | CSS |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
-Uikit          | CSS | [Uikit](https://getuikit.com/docs/introduction) 
-Sweeetalert2     | JS |  [Sweeetalert2](https://sweetalert2.github.io/)
-Jquery          | JS |  [Jquery](https://jquery.com/)
+Bootstrap      | CSS         | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+Semantic UI    | CSS         |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
+Uikit          | CSS         | [Uikit](https://getuikit.com/docs/introduction) 
+Sweeetalert2   | JS          |  [Sweeetalert2](https://sweetalert2.github.io/)
+Animate        |CSS-ANIMAÇÃO |  [Animate](https://daneden.github.io/animate.css/)
+Jquery         | JS          |  [Jquery](https://jquery.com/)
 W3school       | Plataforma de Conhecimento |  [W3school](https://www.w3schools.com/)
 Icon8          | Plataforma de Icones | [Icons8](https://icons8.com.br/icons)

@@ -87,7 +87,7 @@ ${pc.usuario.matricula}
 		<div class="sticky-top">
 		<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
 		<a class="recusar" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;"><span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span> </a>
-		<a class="btn btn-secondary m-1 icon entregar" data-item="${pc.id}" >Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
+		<a class="btn btn-secondary m-1 icon entregar" data-item="${pc.id}" id="${pc.id}" href="#Entregar" >Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
 			<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
 		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
 		</div>
@@ -110,18 +110,18 @@ ${pc.usuario.matricula}
 	    setTimeout(function () {
 	        window.location.reload(1);
 	    }, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
-	});
-	
-	
+	});	
 </script>
 <script type="text/javascript">
-
 $(".entregar").click(function() {
-	var idPedido = $(this).data("item");
+	var id = $(this).data("item");
+	console.log("o valor do id de entregue :  "+id);
+	$('#idEnt').val(id);
 	Swal.fire({
-		  scrollbarPadding: true,
 		  html: '<div id="tituloCelularModal">Tem certeza que deseja entregar esse pedido?</div>'+
-				  '<br/> <a href="@{Pedidos.entregarPedido(pc.id)}" class="btn btn-primary m-1 icon">Entregar<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>',
+				  '<br/><form action="@{Pedidos.entregarPedido}" method="post">'
+		  		   +'<input type="hidden" id="idEnt" name="id" value="'+id+'"/>'
+			  	   +'<input type="submit" value="Entregar" class="btn btn-primary m-1 icon"/></form>',
 		  icon: 'question',
 		  showCloseButton: true,
 		  showCancelButton: true,
@@ -132,8 +132,10 @@ $(".entregar").click(function() {
 		  hideClass: {
 			    popup: 'animated fadeOutUp faster'
 			  }
-		})
+	})
 }); 
+</script>
+<script type="text/javascript">
 	$(".recusar").click(function() {
 		var idPedido = $(this).data("item");
 		

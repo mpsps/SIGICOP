@@ -94,9 +94,49 @@ body {
 .heightMin{
 	min-height: 460px;
 }
+.itemMenu{
+	text-align: center;
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #000000;
+	padding: 4px;
+	margin: 4px 4px 4px 4px;
+}
+.itemMenu:hover{
+	text-align: center;
+	text-decoration: none;
+	color: #e6e6e6;
+	border-bottom:  3px solid #529fed;
+	margin: 4px 4px 4px 4px;
+	padding-bottom: -10;
+}
+#concluidos:hover{
+	border-bottom:  3px solid #92f88f;
+	color: #92f88f;
+}
+#recusados:hover{
+	border-bottom:  3px solid #ff5555;
+	color: #ff5555;
+}
+.icon:hover  {
+	color: #d3d3d3;
+}
+.corFiltro{
+	background: #f2f8ff;
+	padding: 5%;
+	margin-left: 10%;
+	margin-right: 10%;" 
+}
+.tituloCelular {
+	font-size: 180%;
+	display: block;
+	}
 .botaoArquivo{
 	margin-left: 25%;
 	margin-right: 25%;
+	text-align: center;
+}
+.centralizarEmTlabet{
 	text-align: center;
 }
 }

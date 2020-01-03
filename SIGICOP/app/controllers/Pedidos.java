@@ -465,7 +465,8 @@ public class Pedidos extends Controller {
 	public static void entregarPedido(Long id) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Pedidos.entregarPedido() ... ["+ new Date()+"]");
-				
+		System.out.println("iiiiddddd "+id);
+
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 			Administrador admin = Administrador.findById(dadosSessaoAdmin.admin.id);
 						
