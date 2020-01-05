@@ -45,33 +45,34 @@
 		<script src="@{'/public/Semantic/js/sidebar.js'}"></script>
 		<script src="@{'/public/Semantic/js/transition.js'}"></script>
 		<script src="@{'/public/Semantic/js/meuJs.js'}"></script>
-		<!-- UIKIT CSS -->
+<!-- UIKIT CSS -->
 		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.min.css'}" />	  
-		<!-- UIKIT JS -->
+<!-- UIKIT JS -->
 		<script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
 		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>    
-		<style type="text/css">
-	.papelDeParede {
-	 background-image: url("/public/images/sigicop/papel.jpg");
-	 background-repeat: no-repeat;
-	}
-		</style>
-		<style type="text/css">
-	a[href="#top"]{
-    padding:10px;
-    position:fixed;
-    top: 90%;
-    right:40px;
-    display:none;
-    font-size: 5px;
-	}
-	a[href="#top"]:hover{
-    text-decoration:none;
-	}
-		</style>
+	<style type="text/css">
+		.papelDeParede {
+		 background-image: url("/public/images/sigicop/papel.jpg");
+		 background-repeat: no-repeat;
+		}
+	</style>
+<!-- VOLTAR AO TOPO -->
+	<style type="text/css">
+		a[href="#top"]{
+	    padding:10px;
+	    position:fixed;
+	    top: 90%;
+	    right:40px;
+	    display:none;
+	    font-size: 5px;
+		}
+		a[href="#top"]:hover{
+	    text-decoration:none;
+		}
+	</style>
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
- 		<!-- CSS PERSONALIZADO  -->
+<!-- CSS PERSONALIZADO  -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">
@@ -82,103 +83,97 @@
 <div class="ui large top fixed hidden menu border-0">
   <div class="ui container">
 		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-    	<!-- <a class="item">Item 1</a>-->
     	<a class="item sobreNos" href="#SOBRE_NOS" >Sobre Nos</a>
     	<div class="right menu">
-		<div class="item">
-        <a class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
-		</div>
-		<div class="item">
-		<a class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
-		</div>
+			<div class="item">
+	        	<a class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
+			</div>
+			<div class="item">
+				<a class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+			</div>
 		</div>
 	</div>
 </div>
 <!-- MENU ICONE A ESQUERDA-->
-		<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
-  		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-  		<!-- <a class="item">Item 1</a>-->
-  		<a class="item sobreNos" href="#SOBRE_NOS">Sobre Nos</a>
-  		<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
-  		<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
-		</div>
+<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
+	<a class="active item" href="@{Gerenciador.principal}">Principal</a>
+	<a class="item sobreNos" href="#SOBRE_NOS">Sobre Nos</a>
+	<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+	<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
+</div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
 <div class="pusher m-0">
   	<div class="ui inverted vertical masthead center aligned segment">
    		<div class="ui container sticky-top m-0 p-0" style="background: #1b1c1d;">
-		<div class="ui large secondary inverted pointing menu m-0">
-        <a class="toc item m-0 p-1">
-        <img src="@{'/public/images/icones/menuIcone.png'}">
-		<!-- <i class="sidebar icon"></i> -->
-        </a>
-        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" href="@{Gerenciador.principal}">Principal</a>
-        <!--  <a class="item">Item 1</a>-->
-        <a class="item sobreNos" href="#SOBRE_NOS"onmouseover="this.style='border-bottom:  3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
-        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" >Sobre Nos</a>
-        <div class="right item m-0 p-0">
-        <a class="ui inverted button m-0" href="@{Gerenciador.login}">Entrar</a>
-        <a class="ui inverted button active icon m-0 ml-1 border border-dark" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
-		</div>
-		</div>
+			<div class="ui large secondary inverted pointing menu m-0">
+		        <a class="toc item m-0 p-1">
+		        	<img src="@{'/public/images/icones/menuIcone.png'}">
+		        </a>
+		        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
+		        href="@{Gerenciador.principal}">Principal</a>
+		        <a class="item sobreNos" href="#SOBRE_NOS"onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" >Sobre Nos</a>
+		        <div class="right item m-0 p-0">
+			        <a class="ui inverted button m-0" href="@{Gerenciador.login}">Entrar</a>
+			        <a class="ui inverted button active icon m-0 ml-1 border border-dark" 
+			        href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+				</div>
+			</div>
 		</div>
 		<div class="ui text container m-0">
-		<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" height="25%" style="float: left; margin: 7% 25% 3% 25%; max-width: 100%;"/><br>
-		<h1 class="ui inverted header m-0">
-        IFRN <i>campus </i> João Câmara
-		</h1>
-		</span>
-		<br/>
-		<a href="@{Gerenciador.login}" class="ui huge primary button">Entrar Agora <i class="right arrow icon"></i></a>
+			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" height="25%" style="float: left; 
+			margin: 7% 25% 3% 25%; max-width: 100%;"/><br>
+			<h1 class="ui inverted header m-0">
+	        IFRN <i>campus </i> João Câmara
+			</h1>
+			<br/>
+			<a href="@{Gerenciador.login}" class="ui huge primary button">Entrar Agora <i class="right arrow icon"></i></a>
+		</div>
 	</div>
-</div>
-
 <!-- CORPO DA PAGINA-->
-
-<div class="ui vertical stripe segment">
-	<div class="ui text container text-break" style="max-height: 100%;">
-#{doLayout /}
-		<a href="#top" class="glyphicon glyphicon-chevron-up">
-		<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
-		</a>
+	<div class="ui vertical stripe segment">
+		<div class="ui text container text-break" style="max-height: 100%;">
+	#{doLayout /}
+			<a href="#top" class="glyphicon glyphicon-chevron-up">
+			<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
+			</a>
+		</div>
 	</div>
-</div>
-
 <!-- RODAP� DA PAGINA -->
-		<div class="position-bottom" id="rodapeCelular" class="rodapeEmBaixo">
+	<div class="position-bottom" id="rodapeCelular" class="rodapeEmBaixo">
  		<div class="ui inverted vertical footer segment" class="dark">
-		<div class="ui container">
-		<div class="ui stackable inverted divided equal height stackable grid">
-		<div class="three wide column">
-		<h4 class="ui inverted header">Sobre:</h4>
-		<div class="ui inverted link list">
-		<span class="sticky-top">
-		<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
-		<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
-		onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" width="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
-		</a>
-		<span class="text-white h4">SIGICOP</span>
-		</span>
+			<div class="ui container">
+				<div class="ui stackable inverted divided equal height stackable grid">
+					<div class="three wide column">
+						<h4 class="ui inverted header">Sobre:</h4>
+						<div class="ui inverted link list">
+							<span class="sticky-top">
+								<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
+									<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
+									onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" width="30" 
+									style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
+								</a>
+								<span class="text-white h4">SIGICOP</span>
+							</span>
+						</div>
+					</div>
+					<div class="three wide column">
+						<h4 class="ui inverted header">Contatos:</h4>
+						<div class="ui inverted link list">
+							<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 988122176</a><br>
+							<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 994333803</a> 
+						</div>
+					</div>
+					<div class="three wide column">
+						<h4 class="ui inverted header">E-mails:</h4>
+						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
+					</div>
+				</div>
+			</div>
 		</div>
-		</div>
-		<div class="three wide column">
-		<h4 class="ui inverted header">Contatos:</h4>
-		<div class="ui inverted link list">
-		<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 988122176</a> 
-		<br>
-		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 994333803</a> 
-		</div>
-		</div>
-		<div class="three wide column">
-		<h4 class="ui inverted header">E-mails:</h4>
-		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
-		<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
-		</div>
-		</div>
-		</div>
-		</div>
-		</div>
-</div>
-		
+	</div>
+</div>	
 <!-- JS DA PAGINA -->
 <!-- VOLTAR AO TOPO -->
 <script type="text/javascript">
@@ -194,28 +189,27 @@ $(document).ready(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
-
-});
-</script> 
-<script type="text/javascript">
-$(".sobreNos").click(function () {
-	Swal.fire({
-		  position: 'top',
-		  icon: 'info',
-		  html: '<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/> <div class="text-justify w-100">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
-		  ' realizado por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a> '+
-		  'e por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank">(@MagdielPS)</a>. A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
-		  'a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade de solicitacão disponíveis e o administrdor possar gerenciar as solicitacões </div>',
-		  footer: '' ,
-		  showCloseButton: true,
-		  showConfirmButton: false,
-		  showClass: {
+	$(".sobreNos").click(function () {
+		Swal.fire({
+			position: 'top',
+			icon: 'info',
+			html: '<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
+			'<div class="text-justify w-100">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
+			' realizado por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a> '+
+			'e por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank">(@MagdielPS)</a>.'+
+			' A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
+			'a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade'+
+			'de solicitacão disponíveis e o administrdor possar gerenciar as solicitacões. </div>',
+			showCloseButton: true,
+			showConfirmButton: false,
+			showClass: {
 			    popup: 'animated fadeInDown faster'
-			  },
-		  hideClass: {
+			},
+			hideClass: {
 			    popup: 'animated fadeOutUp faster'
-			  }
-	})
+			}
+		})
+	});
 });
 </script>
 </body>

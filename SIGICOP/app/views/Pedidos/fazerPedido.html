@@ -1,182 +1,179 @@
 #{extends 'laySeg.html' /}
 #{set title:'Solicitacao de Pedido(s)' /}
-
-
 <div id="corpoCelular">	
 #{if usuarioBanco?.qtdDisponivel == 0}
-		<div class="jumbotron jumbotron-fluid danger" style="background:#ff4a4a;">
+	<div class="jumbotron jumbotron-fluid danger" style="background:#ff4a4a;">
   		<div class="container">
-    	<div class="display-4 tituloCelular">Você atingiu seu limite máximo de solicitacões nesse mês, mas lembresse de salvar os pedidos.
-  		</div>
-		</div>
-		</div>
-#{/if}
-#{else}	<!-- FORMULARIO DE PEDIDOS -->
-		<div class="ui middle aligned center aligned grid">
-<form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
-	<div class="ui stacked segment">
-		<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-#{if obrigatorio}
-		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}
-		<div class="float-left botaoArquivo mt-2">
-		<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" >Selecione o Arquivo <i class="paperclip icon"></i> </label></div>
-		</div>
-		<div class="float-left ml-2">
-		<span id="nomeArquivo" class="text-primary h4 text-center text-break">
-		</span>
-		</div><!-- accept=".pdf" -->
-		<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" >
-		<br /> 
-		<br>
-		<br>
-		<br>
-#{if obrigatorio}
-		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}		
-		<div class="row">
-		 <div class="col">
-		<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-		<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" min="1" class="qtdCopias" value="${valor}" id="qtdCopias" >
-		</div>
-		<div class="col">
-#{if obrigatorio}
-		<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}
-		<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
-		<div class="custom-control custom-radio custom-control-inline">
-  		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" value="frente" checked="checked">
- 		 <label class="custom-control-label text-justify" for="frente">Frente</label>
-		</div>
-		<div class="custom-control custom-radio custom-control-inline">
- 		 <input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" value="frenteEverso">
-  		<label class="custom-control-label text-justify" for="frenteEverso">Posterior</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
-		</div>
-		</div>
-		</div>
-		<label>Descricao</label>
-		<textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
-		<div class="text-center">
-		<button class="btn btn-success mt-3 icon" id="add">Adicionar <i class="paper plane outline icon"></i></button>
+	    	<div class="display-4 tituloCelular">Você atingiu seu limite máximo de solicitacões nesse mês,
+	    	 mas lembresse de salvar os pedidos.
+	  		</div>
 		</div>
 	</div>
-</form>
-</div>
+#{/if}
+#{else}	
+	<div class="ui middle aligned center aligned grid">
+<!-- FORMULARIO DE PEDIDOS -->
+		<form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
+			<div class="ui stacked segment">
+				<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
+#{if obrigatorio}
+				<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}
+				<div class="float-left botaoArquivo mt-2">
+					<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" >Selecione o Arquivo
+					<i class="paperclip icon"></i></label></div>
+				</div>
+				<div class="float-left ml-2">
+					<span id="nomeArquivo" class="text-primary h4 text-center text-break"></span>
+				</div><!-- accept=".pdf" -->
+				<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" >
+				<br /><br><br><br>
+#{if obrigatorio}
+				<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}		
+				<div class="row">
+					<div class="col">
+						<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
+						<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" 
+						min="1" class="qtdCopias" value="${valor}" id="qtdCopias">
+					</div>
+					<div class="col">
+#{if obrigatorio}
+						<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
+#{/if}
+						<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
+						<div class="custom-control custom-radio custom-control-inline">
+					  		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" 
+					  		value="frente" checked="checked">
+					 		<label class="custom-control-label text-justify" for="frente">Frente</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+					 		<input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" 
+					 		value="frenteEverso">
+					  		<label class="custom-control-label text-justify" for="frenteEverso">Posterior</label>
+					  		<sub style="color: red; padding: 0; margin: 0;">2x</sup>
+						</div>
+					</div>
+				</div>
+				<label>Descricao</label>
+				<textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
+				<div class="text-center">
+					<button class="btn btn-success mt-3 icon" id="add">Adicionar<i class="paper plane outline icon"></i></button>
+				</div>
+			</div>
+		</form>
+<!-- FIM FORMULARIO DE PEDIDOS-->
+	</div>
 #{/else}
 #{ifErrors}
-		<h2 style="color:red">Ops...</h2>
-	
+	<h2 style="color:red">Ops...</h2>
 #{errors}
-		<li>${error.key} - ${error} - ${error.message}</li>
-#{/errors}
-							  
+	<li>${error.key} - ${error} - ${error.message}</li>
+#{/errors}					  
 #{/ifErrors}
-		<div class="listaPped text-center">
+	<div class="listaPped text-center">
 #{if listaDePedidos == null}
+<!-- informa se n�o houver nenhum pedido adicionado-->
 		<div class="h1 text-primary">Nenhum pedido adicionado</div>
 #{/if}
 #{else}
-		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos <i class="save outline icon"></i> #{/if} #{else} Salvar <i class="save outline icon"></i> #{/else}</a>
+		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos
+		<i class="save outline icon"></i> #{/if} #{else} Salvar<i class="save outline icon"></i> #{/else}</a>
 		<br><br><br>
 		<div class="container">
- 		<div class="row">
+	 		<div class="row">
+<!-- listar todos os pedidos adicionados(se houver)-->
 #{list items: listaDePedidos, as: 'p'}
-		<div class="col-lg-4">
-		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-		<div class="card-header">#{if listaDePedidos.size() > 1}Meus Pedidos #{/if} #{else} Meu pedido #{/else}</div>
-		<div class="card-body">
-		<h5 class="card-title">
-		<b></b>
-		</h5>
-		<div class="card-text">
-		<b>Arquivo: </b> ${p.nomeArquivo}
-		</div>
-		<div class="card-text">
-		<b>Quantidade de copias: </b> ${p.qtdCopias}
-		</div>
-		<div class="card-text">
-		<b>Frente ou verso : </b> ${p.frenteVerso}
-		</div>
-		<div class="card-text">
-#{if p.descricao} <b>Descricao: </b> ${p.descricao}<br /> #{/if}
-		</div>
-		<div class="card-text">
-		<b>Status: </b> ${p.status}
-		</div>
-		<div class="card-text">
-		<br>
-		<a href="@{Pedidos.cancelarPedido(p.id)}" class="btn btn-danger icon">Cancelar <i class="trash alternate outline icon"></i></a>
-		</div>
-		</div>
-		</div>
-		</div>
+				<div class="col-lg-4">
+					<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+						<div class="card-header">
+#{if listaDePedidos.size() > 1}Meus Pedidos #{/if} 
+#{else} Meu pedido #{/else}
+						</div>
+						<div class="card-body">
+						`	<div class="card-text">
+								<b>Arquivo: </b> ${p.nomeArquivo}
+							</div>
+							<div class="card-text">
+								<b>Quantidade de copias: </b> ${p.qtdCopias}
+							</div>
+							<div class="card-text">
+								<b>Frente ou verso : </b> ${p.frenteVerso}
+							</div>
+							<div class="card-text">
+#{if p.descricao}
+								<b>Descricao: </b> ${p.descricao}<br /> 
+#{/if}
+							</div>
+							<div class="card-text">
+								<b>Status: </b> ${p.status}
+							</div>
+							<div class="card-text">
+								<a href="@{Pedidos.cancelarPedido(p.id)}" class="btn btn-danger icon mt-2">Cancelar <i class="trash alternate outline icon"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
 #{/list}
-		</div>
+			</div>
 		</div>
 #{/else}
-
-		</div>
+	</div>
 </div>
 <!-- JS DA PAGINA -->
 <script type="text/javascript">
-
-	$(document).ready(function(e) {
-		
-		$("#form-pedido").submit(function(e) {
-			var arq = $("#item-arquivo").val();
-			if (arq == "") {
-				/*alert("Você deve anexar um arquivo!");*/
+$(document).ready(function(e) {
+// informa que � obrigat�rio o anexo do arquivo
+	$("#form-pedido").submit(function(e) {
+		var arq = $("#item-arquivo").val();
+		if (arq == "") {
+			/*alert("Você deve anexar um arquivo!");*/
 			e.preventDefault();
-				Swal.fire({
-					  icon: 'error',
-					  title: 'ERROR...',
-					  text: 'é obrigatório o anexo do arquivo!',
-					  showCloseButton: true,
-					  showClass: {
-						    popup: 'animated fadeInDown faster'
-						  },
-					  hideClass: {
-						    popup: 'animated fadeOutUp faster'
-						  }  
-					})
-			}else{
-				
-				var podeAdd = $("#qtdCopias").val();
-				
-				console.log("qtdCopias :"+podeAdd);
-				if(podeAdd > 0){
+			Swal.fire({
+				icon: 'error',
+				title: 'ERROR...',
+				text: 'é obrigatório o anexo do arquivo!',
+				showCloseButton: true,
+				showClass: {
+				    popup: 'animated fadeInDown faster'
+				},
+				hideClass: {
+					popup: 'animated fadeOutUp faster'
+				}  
+			})
+		}else{
+			var podeAdd = $("#qtdCopias").val();
+			console.log("qtdCopias :"+podeAdd);
+			if(podeAdd > 0){
 				const Toast = Swal.mixin({
-					  toast: true,
-					  position: 'top',
-					  showConfirmButton: false,
-					  timer: 3000,
-					  timerProgressBar: true,
-					  onOpen: (toast) => {
-					    toast.addEventListener('mouseenter', Swal.stopTimer)
-					    toast.addEventListener('mouseleave', Swal.resumeTimer)
-					  }
-					})
-					Toast.fire({
-					  icon: 'info',
-					  title: 'Pedido listado'
-					})
-					setTimeout(function(){ 
-						e.submit();
-					}, 3000);
-				
-				}
-				
-			}			
-		})
-/*pega o nome do arquivo e jogar para o campo hiddem nomeArquivo*/
+					toast: true,
+				  	position: 'top',
+				  	showConfirmButton: false,
+				  	timer: 3000,
+			  		timerProgressBar: true,
+				  	onOpen: (toast) => {
+				    	toast.addEventListener('mouseenter', Swal.stopTimer)
+				    	toast.addEventListener('mouseleave', Swal.resumeTimer)
+				  	}
+				})
+				Toast.fire({
+				  icon: 'info',
+				  title: 'Pedido listado'
+				})
+				setTimeout(function(){ 
+					e.submit();
+				}, 3000);
+			}
+		}			
+	})
+// pega o nome do arquivo e jogar para o campo hidden nomeArquivo
     var inputNome = document.getElementById('nomeArquivo');
 	var inputFicheiro = document.getElementById('item-arquivo');
 
-inputFicheiro.addEventListener('change', function() {
-  var nome = this.files[0].name;
-  inputNome.innerHTML = nome;
-  document.getElementById('arquivo').value = nome;
+	inputFicheiro.addEventListener('change', function() {
+  		var nome = this.files[0].name;
+  		inputNome.innerHTML = nome;
+  		document.getElementById('arquivo').value = nome;
 	})
 });
-/***************************************************************/
 </script>

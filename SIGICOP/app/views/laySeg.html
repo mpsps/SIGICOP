@@ -11,11 +11,9 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 #{get 'moreStyles' /}
 <!-- JAVASCRIPT PADRAO -->
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		
 <!-- JS JQUERY -->
 		<script src="@{'/public/javascripts/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{get 'moreScripts' /}
@@ -46,15 +44,14 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
-		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">     
-		           
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">        
 <!-- JS PERSONALIZADO  -->  
 <!-- DIALOGS DE SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CHAMAR DIALOGS DO SWEETALERT2 -->
 		<script src="@{'/public/javascripts/meuJs/dialogs.js'}"></script>
 </head>
-<body onload="time()">
+<body onload="horaEnome()">
 <!-- MENU E CABEï¿½ALHO EM TELA DE COMPUTADOR E EM CELULAR-->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="min-height: 10%;">
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
@@ -344,60 +341,59 @@ $(document).ready(function() {
 	  $('[data-toggle="tooltip"]').tooltip()
 	  $('#example').tooltip({ boundary: 'window' })
 	})
-
-function time(){
-today=new Date();
-h=today.getHours();
-m=today.getMinutes();
-s=today.getSeconds();
-	if(h <10){
-		h = "0"+h;
-	}
-	if(m<10){
-		m = "0"+m;
-	}
-	if(s<10){
-		s = "0"+s;
-	}
-	document.getElementById('time').innerHTML=h+":"+m+":"+s;
-	setTimeout('time()',500);
-
-var width = window.innerWidth;
-var nomeUsuarioCompleto = '${session['usuarioLogado']}';
-var nomeAdminCompleto = '${session['adminLogado']}';
-
-if(${session.contains("usuarioLogado")}){
-	 if(width < 400){
-		 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
-		 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
-		 var primeiraLetra = sobreNome.substr(0, 1)
-		 const celular = "celular";
-		 console.log(nome+" "+sobreNome);
-		 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";
-	 }else{
-		 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
-		 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+function horaEnome(){
+	today=new Date();
+	h=today.getHours();
+	m=today.getMinutes();
+	s=today.getSeconds();
+		if(h <10){
+			h = "0"+h;
+		}
+		if(m<10){
+			m = "0"+m;
+		}
+		if(s<10){
+			s = "0"+s;
+		}
+		document.getElementById('time').innerHTML=h+":"+m+":"+s;
+		setTimeout('time()',500);
 	
-		 console.log(nome+" "+sobreNome);
-		 document.getElementById('nomeUsuario').innerHTML = '${session['usuarioLogado']}';
-	 }
-}
-if(${session.contains("adminLogado")}){
-	 if(width < 400){
-		 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
-		 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
-		 var primeiraLetra = sobreNome.substr(0, 1)
+	var width = window.innerWidth;
+	var nomeUsuarioCompleto = '${session['usuarioLogado']}';
+	var nomeAdminCompleto = '${session['adminLogado']}';
 	
-		 console.log(nome+" "+sobreNome);
-		 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";
-	 }else{
-		 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
-		 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
-	
-		 console.log(nome+" "+sobreNome);
-		 document.getElementById('nomeAdmin').innerHTML = '${session['adminLogado']}';
-	 }
-}
+	if(${session.contains("usuarioLogado")}){
+		 if(width < 400){
+			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
+			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+			 var primeiraLetra = sobreNome.substr(0, 1)
+			 const celular = "celular";
+			 console.log(nome+" "+sobreNome);
+			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";
+		 }else{
+			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
+			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+		
+			 console.log(nome+" "+sobreNome);
+			 document.getElementById('nomeUsuario').innerHTML = '${session['usuarioLogado']}';
+		 }
+	}
+	if(${session.contains("adminLogado")}){
+		 if(width < 400){
+			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
+			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
+			 var primeiraLetra = sobreNome.substr(0, 1)
+		
+			 console.log(nome+" "+sobreNome);
+			 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";
+		 }else{
+			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
+			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
+		
+			 console.log(nome+" "+sobreNome);
+			 document.getElementById('nomeAdmin').innerHTML = '${session['adminLogado']}';
+		 }
+	}
 }
 </script>
 <script type="text/javascript"> 
@@ -413,7 +409,7 @@ document.getElementById("limpar").addEventListener("click", function() {
 	function clearInputUrlNumberText(name) {
 	  var entradas = document.querySelectorAll("input[id='"+name+"']");
 	  [].map.call(entradas, entrada => entrada.value = '');
-	}
+}
 </script>
 </body>
 </html>
