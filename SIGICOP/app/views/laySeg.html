@@ -248,99 +248,7 @@
 	</div>
 </div>
 <!-- JS DA PAGINA -->
-<!-- MESSAGEM DE ALERTA -->
 <script type="text/javascript">
-$().ready(function() {
-		setTimeout(function () {
-			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
-		}, 2000); // O valor e representado em milisegundos.
-});
-</script>
-<!-- MASCARA DE CAMPOS -->
-<script type="text/javascript">
-    $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
-    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
-    $('#qtdCopiasFiltro').mask('00');
-    $('#dataEnvio').mask('00/00/0000');
-    $('#dataEnvtrega').mask('00/00/0000');   	
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-//DIALOGS COM DADOS DO USUARIO
-	$("#dadosUser").click(function () {
-			Swal.fire({
-			  position: 'top',
-			  icon: '',
-			  html: '<div class="tituloCelularModal"><i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados </div>'+
-			  '<div class="text-left textoDados">Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email}'+
-			  '<br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-			  '<br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
-			  showCloseButton: true,
-			  showConfirmButton: false,
-			  showClass: {
-				  popup: 'animated fadeInDown faster'
-			  },
-			  hideClass: {
-				  popup: 'animated fadeOutUp faster'
-			  }
-		})
-	});
-//DIALOGS COM DADOS DO ADMIN
-	$("#dadosAdmin").click(function () {
-		Swal.fire({
-			  position: 'top',
-			  icon: '',
-			  html: '<div class="text-left sticky-top h3"><i class="address card icon m-0 p-0 border-0"></i>Meus Dados <a href="@{Administradores.editar}" class="btn m-0 ml-2" style="background-color: #529fed;">Editar</a></div>'+
-			  '<div class="text-left textoDados">Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}',
-			  showCloseButton: true,
-			  showConfirmButton: false,
-			  showClass: {
-				  popup: 'animated fadeInDown faster'
-			  },
-			  hideClass: {
-				  popup: 'animated fadeOutUp faster'
-			  }
-		})
-	});
-//DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS 		
-	$("#restaurar").click(function() {
-		Swal.fire({
-			scrollbarPadding: true,
-			html: '<div id="tituloCelularModal">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
-				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
-			icon: 'question',
-			input: 'number',
-			inputAttributes: {
-				    min: '0',
-				    max: '50'
-			},
-			showCancelButton: true,
-			confirmButtonColor: '#21ac0d',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Ok',
-			showCloseButton: true,
-			showClass: {
-				    popup: 'animated fadeInDown faster'
-			},
-			hideClass: {
-				    popup: 'animated fadeOutUp faster'
-			}
-		}).then((result) => {
-			if (result.value) {	
-				$('#restQtd').val(result.value);
-				$('#formRestaurar').submit(); 
-			}
-		})
-	});
-});
-</script>
-<!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
-<script type="text/javascript">
-	$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	  $('#example').tooltip({ boundary: 'window' })
-	})
 function horaEnome(){
 	today=new Date();
 	h=today.getHours();
@@ -396,7 +304,103 @@ function horaEnome(){
 	}
 }
 </script>
-<script type="text/javascript"> 
+<!-- MESSAGEM DE ALERTA -->
+<script type="text/javascript">
+$().ready(function() {
+		setTimeout(function () {
+			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
+		}, 2000); // O valor e representado em milisegundos.
+});
+</script>
+<!-- MASCARA DE CAMPOS -->
+<script type="text/javascript">
+    $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
+    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
+    $('#qtdCopiasFiltro').mask('00');
+    $('#dataEnvio').mask('00/00/0000');
+    $('#dataEnvtrega').mask('00/00/0000');   	
+</script>
+<!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
+<script type="text/javascript">
+$(document).ready(function() {
+//DIALOGS COM DADOS DO USUARIO
+	$("#dadosUser").click(function () {
+			Swal.fire({
+			  position: 'top',
+			  icon: '',
+			  html: '<div class="tituloCelularModal"><i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados </div>'+
+			  '<div class="text-left textoDados">Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email}'+
+			  '<br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+			  '<br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+			  showCloseButton: true,
+			  showConfirmButton: false,
+			  showClass: {
+				  popup: 'animated fadeInDown faster'
+			  },
+			  hideClass: {
+				  popup: 'animated fadeOutUp faster'
+			  }
+		})
+	});
+//DIALOGS COM DADOS DO ADMIN
+	$("#dadosAdmin").click(function () {
+		Swal.fire({
+			  position: 'top',
+			  icon: '',
+			  html: '<div class="text-center sticky-top tituloCelularModal"><i class="address card icon m-0 p-0 border-0"></i>Meus Dados <a href="@{Administradores.editar}" class="btn m-0 ml-2" style="background-color: #529fed;">Editar</a></div>'+
+			  '<div class="text-left textoDados">Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email}'+
+			  ' <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}',
+			  showCloseButton: true,
+			  showConfirmButton: false,
+			  showClass: {
+				  popup: 'animated fadeInDown faster'
+			  },
+			  hideClass: {
+				  popup: 'animated fadeOutUp faster'
+			  }
+		})
+	});
+//DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS 		
+	$("#restaurar").click(function() {
+		Swal.fire({
+			scrollbarPadding: true,
+			html: '<div id="tituloCelularModal">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
+				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+			icon: 'question',
+			input: 'number',
+			inputAttributes: {
+				    min: '0',
+				    max: '50'
+			},
+			showCancelButton: true,
+			confirmButtonColor: '#21ac0d',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Ok',
+			showCloseButton: true,
+			showClass: {
+				    popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				    popup: 'animated fadeOutUp faster'
+			}
+		}).then((result) => {
+			if (result.value) {	
+				$('#restQtd').val(result.value);
+				$('#formRestaurar').submit(); 
+			}
+		})
+	});
+});
+</script>
+<script type="text/javascript">
+$(function () {
+	  $('[data-toggle="tooltip"]').tooltip()
+	  $('#example').tooltip({ boundary: 'window' })
+	})
+</script>
+<!-- FUN��O DE LIMPAR FILTRO -->
+<script type="text/javascript">
+// FUN��O DE LIMPAR FILTRO
 document.getElementById("limpar").addEventListener("click", function() {
 	  clearInputUrlNumberText("NomeDoArquivoFiltro");
 	  clearInputUrlNumberText("descricaoFiltro");

@@ -1,3 +1,13 @@
 eclipse.preferences.version=1
+encoding//app/views/Administradores/cadastroDeAdms.html=UTF-8
+encoding//app/views/Administradores/editarSenha.html=UTF-8
+encoding//app/views/Administradores/listarTodosAdmins.html=UTF-8
+encoding//app/views/Administradores/paginaAdmin.html=UTF-8
+encoding//app/views/Administradores/realizarPedido.html=UTF-8
+encoding//app/views/Pedidos/fazerPedido.html=UTF-8
+encoding//app/views/Pedidos/listarConcluidos.html=UTF-8
+encoding//app/views/Pedidos/listarRecusados.html=UTF-8
+encoding//app/views/Usuarios/cadastroDeUsuario.html=UTF-8
+encoding//app/views/Usuarios/paginaUsuario.html=UTF-8
 encoding//app/views/layPri.html=UTF-8
 encoding/<project>=UTF-8

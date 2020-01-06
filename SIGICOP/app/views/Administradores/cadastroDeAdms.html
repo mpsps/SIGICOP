@@ -2,48 +2,46 @@
 #{set title:'Cadastro de Administrador(res)' /}
 <div id="corpoCelular" class="heightMin">
 #{if !adm?.id}
-	<div class="h1 text-dark text-center tituloCelular mb-0">Cadastro de Adminstradores</div>
-		<br>
-		#{/if}
-#{else}
-		<div class="h1 text-dark text-center tituloCelular mb-0">Editar Meus Dados</div>
-#{/else}
-		<div class="text-center mb-0">
-#{ifErrors}
-		<div class="h2">Ops...</div>
-		<!-- 
-#{errors}
-		<li>${error.key} - ${error} - ${error.message}</li>
-#{/errors}
- -->
-#{/ifErrors}			
-		</div>				
-		<div class="ui middle aligned center aligned grid mt-0">
-		<div class="column mt-0">
-		<form action="@{Administradores.salvarAdm} " class="" method="post">
-		<input type="hidden" name="adm.id" value="${adm?.id}">
-		<div class="ui stacked segment">
-		<label>Nome:</label>	
-		<span style="color:red">#{error 'adm.nomeAdm' /}</span>
-		<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control" autofocus="" autocomplete="off"  value="${adm?.nomeAdm}"  />
-		<label for="email" class="mt-2">Email:</label>
-		<span style="color:red">#{error 'adm.email' /}</span>
-		<input type="email" name="adm.email" placeholder="Email" class="form-control" autofocus="" autocomplete="off" id="email" value="${adm?.email}"  />
-#{if !adm?.id}
-		<label for="senha" class="mt-2">Senha:</label>
-		<span style="color:red">#{error 'adm.senha' /}</span>
-		<input type="password" name="adm.senha" placeholder="Senha" class="form-control" autofocus=""  id="senha"  />
-		<label for="confirmarsenha" class="mt-2">Confimar Senha:</label>
-		<span style="color:red">#{error 'adm.senha' /}</span>
-		<input type="password" name="adm.confirmarSenha" placeholder="Confimar Senha" class="form-control" autofocus=""  id="confirmarsenha"  />
+	<div class="h1 text-dark text-center tituloCelular m-0">Cadastro de Adminstradores</div><br>
 #{/if}
 #{else}
-		<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2">Alterar Senha</a>
+	<div class="h1 text-dark text-center tituloCelular m-0">Editar Meus Dados</div>
 #{/else}
-		<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value=" ${ adm? 'Editar' : 'Cadastrar' }" />
+	<div class="text-center m-0">
+#{ifErrors}
+		<div class="h2">Ops...</div>
+		<!-- #{errors} <li>${error.key} - ${error} - ${error.message}</li>#{/errors} -->
+#{/ifErrors}			
+	</div>				
+	<div class="ui middle aligned center aligned grid mt-0">
+		<div class="column mt-0">
+<!-- FORMULARIO DE CADASTRO E EDIÇÃO DO ADMIN -->
+			<form action="@{Administradores.salvarAdm} " class="m-0" method="post">
+				<input type="hidden" name="adm.id" value="${adm?.id}">
+				<div class="ui stacked segment">
+					<label>Nome:</label>	
+					<span style="color:red">#{error 'adm.nomeAdm' /}</span>
+					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control" 
+					autofocus="" autocomplete="off"  value="${adm?.nomeAdm}"/>
+					<label for="email" class="mt-2">Email:</label>
+					<span style="color:red">#{error 'adm.email' /}</span>
+					<input type="email" name="adm.email" placeholder="Email" class="form-control" 
+					autocomplete="off" id="email" value="${adm?.email}"/>
+#{if !adm?.id}
+					<label for="senha" class="mt-2">Senha:</label>
+					<span style="color:red">#{error 'adm.senha' /}</span>
+					<input type="password" name="adm.senha" placeholder="Senha" class="form-control" id="senha"  />
+					<label for="confirmarsenha" class="mt-2">Confimar Senha:</label>
+					<span style="color:red">#{error 'adm.senha' /}</span>
+					<input type="password" name="adm.confirmarSenha" placeholder="Confimar Senha" 
+					class="form-control" id="confirmarsenha"/>
+#{/if}
+#{else}
+					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2">Alterar Senha</a>
+#{/else}
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value=" ${ adm? 'Editar' : 'Cadastrar' }" />
+				</div>
+			</form>
 		</div>
-		</form>
-	</div>
-	</div>
 	</div>
 </div>

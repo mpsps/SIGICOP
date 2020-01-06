@@ -1,73 +1,75 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Pedidos Concluidos' /}
-
 <div id="corpoCelular" class="heightMin">	
 	<div class="h1 text-dark text-center tituloCelular">Lista de Administradores do Sistema</div><br>
-		<div class="row">
-  		<div class="col">
-    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
-     	<div class="card card-body m-0 p-0">
+	<div class="row">
+	  	<div class="col">
+	    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
+		     	<div class="card card-body m-0 p-0">
 #{if listarDeAdmins.size() > -1}
-		<form action="@{Administradores.listarTodosAdmins}" method="post">
-		<fieldset class="corFiltro shadow-lg rounded">
-        <legend>Filtrar Por:</legend>
-		<div class="form-row">
-    	<div class="form-group col-md-6">
-    	<label for="NomeUser">Nome do Administrador:</label>
-		<input type="text" name="nomeDoAdminFiltro" class="form-control" placeholder="Nome do Admin" id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
-    	</div>
-    	<div class="form-group col-md-6">
-    	<label for="email">Email:</label>
-		<input type="text" name="emailDoAdminFiltro" class="form-control" placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
-    	</div>   		
-  		</div>
- 		<div class="text-center"">
-  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-  		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
-	 	</div>
-</fieldset>
-	</form>
-<br><br>
+<!-- filtro por nome do admin e email do admin -->
+					<form action="@{Administradores.listarTodosAdmins}" method="post">
+						<fieldset class="corFiltro shadow-lg rounded">
+					        <legend>Filtrar Por:</legend>
+							<div class="form-row">
+						    	<div class="form-group col-md-6">
+							    	<label for="NomeUser">Nome do Administrador:</label>
+									<input type="text" name="nomeDoAdminFiltro" class="form-control" placeholder="Nome do Admin" 
+									id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
+						    	</div>
+						    	<div class="form-group col-md-6">
+							    	<label for="email">Email:</label>
+									<input type="text" name="emailDoAdminFiltro" class="form-control" placeholder="Email do Admin" 
+									id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
+						    	</div>   		
+					  		</div>
+					 		<div class="text-center">
+						  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
+						  		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
+						 	</div>
+						</fieldset>
+					</form><br><br>
+<!-- fim filtro -->
 #{/if}
+				</div>
+	    	</div>
 		</div>
-    	</div>
-  		</div>
-  		</div>
+  	</div>
 #{if listarDeAdmins.size() == 0 }
-		<div class="text-center">
-		<div class="h1 text-primary">Nenhum pedido foi encontrado</div>
-		</div>
+<!-- informa se não houver ou não encontrar nenhum admin-->
+	<div class="text-center">
+		<div class="h1 text-primary">Nenhum admin foi encontrado</div>
+	</div>
 #{/if} 
-		<div class="container">
+	<div class="container">
  		<div class="row">
 #{list items:listarDeAdmins, as:'a'}
-   		<div class="col-lg-6">
-		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-		<div class="card-body">
-		<div class="card-text">
-		<b>Nome: </b> ${a.nomeAdm}
-		</div>
-		<div class="card-text">
-		<b>Email: </b> ${a.email}
-		</div>
+<!-- lista todos os admins de acordo com o filtro, menos o padrão -->
+	   		<div class="col-lg-6">
+				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+					<div class="card-body">
+						<div class="card-text">
+							<b>Nome: </b> ${a.nomeAdm}
+						</div>
+						<div class="card-text">
+							<b>Email: </b> ${a.email}
+						</div>
 #{if a.ultimoAcesso}
-		<div class="card-text">
-		<b>Ultimo Acesso: : </b> ${a.ultimoAcesso}
-		</div>
+						<div class="card-text">
+							<b>Ultimo Acesso: : </b> ${a.ultimoAcesso}
+						</div>
 #{/if}
-		<div class="card-text text-center">
-		<div class="sticky-top">
-		<a href="@{Administradores.removerAdmin(a.id)}" class="btn btn-danger m-1 icon">Remover<i style="float: right; margin: 1px;" class="x icon"></i></a>		
-		</div>
-		</div>
-		</div>
-		</div>
- 		</div>
+						<div class="card-text text-center">
+							<div class="sticky-top">
+								<a href="@{Administradores.removerAdmin(a.id)}" class="btn btn-danger m-1 icon">
+								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
+								</a>		
+							</div>
+						</div>
+					</div>
+				</div>
+	 		</div>
 #{/list}
 		</div>
-		</div>		
+	</div>		
 </div>
-
-
-
-	

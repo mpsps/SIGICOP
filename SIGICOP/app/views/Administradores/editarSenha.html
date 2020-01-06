@@ -1,27 +1,28 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Editar Senha' /}
 <div id="corpoCelular" class="heightMin">
-	<div class="h1 text-dark text-center tituloCelular">Alterar Senha</div>
-		<br>
-		<div class="ui middle aligned center aligned grid">
+	<div class="h1 text-dark text-center tituloCelular">Alterar Senha</div><br>
+	<div class="ui middle aligned center aligned grid">
 		<div class="column">
-		<div class="column" style="whith: 100%; margin-bottom: 0px;">
-		<form action="@{Administradores.salvarSenha} " class="ui large form" method="post">
-		<div class="ui stacked segment"><!-- cor branca do formulario -->
-		<label for="senha" >Senha:</label>
-		<input type="password" name="senha" placeholder="Senha" class="form-control" autofocus=""  id="senha">
+			<div class="column" style="whith: 100%; margin-bottom: 0px;">
+				<form action="@{Administradores.salvarSenha} " class="ui large form" method="post">
+					<div class="ui stacked segment"><!-- cor branca do formulario -->
+						<label for="senha" >Senha:</label>
+						<input type="password" name="senha" placeholder="Senha" class="form-control" 
+						autofocus=""  id="senha">
 #{if seis}	
-		<span style="color:red">#{error 'user.senha' /}</span>
+						<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-		<label for="confirmarSenha" class="mt-2">Confirmar Senha:</label>
-		<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" class="form-control" autofocus=""  id="confirmarSenha"  >
+						<label for="confirmarSenha" class="mt-2">Confirmar Senha:</label>
+						<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" 
+						class="form-control" id="confirmarSenha"  >
 #{if seis}	
-		<span style="color:red">#{error 'user.senha' /}</span>
+						<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-		<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Editar Senha"  />
-		</div>
-		</form>
-		</div>
+						<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Editar Senha"  />
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>

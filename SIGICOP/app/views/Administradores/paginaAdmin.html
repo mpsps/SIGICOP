@@ -2,95 +2,120 @@
 #{set title:'Pagina Do Administrador' /}
 <div id="corpoCelular" class="heightMin">
 	<div class="text-center">
-	<div class="h1 text-dark text-center tituloCelular">Lista de Pedidos em Espera</div>
-	</div>
-		<br />
+		<div class="h1 text-dark text-center tituloCelular">Lista de Pedidos em Espera</div>
+	</div><br />
 #{if listaPedidosPa.size() == 0}
-		<div class="text-center">
-		<div class="h1 text-primary text-center tituloCelular">(Nenhum pedido em Espera)</div>
-		</div>
+<!-- informa se não houver ou não encontrar nenhum pedido-->
+	<div class="text-center">
+		<div class="h1 text-primary text-center tituloCelular">(Nenhum pedido encontrado)</div>
+	</div>
 #{/if} 
 #{if listaPedidosPa != null}
-		<div class="row">
+	<div class="row">
   		<div class="col">
-    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
-      	<div class="card card-body m-0 p-0">
+	    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
+		      	<div class="card card-body m-0 p-0">
 #{if listaPedidosPa.size() > -1}
-<form action="@{Administradores.paginaAdmin}" method="post">
-	<fieldset class="corFiltro shadow-lg rounded">
-        <legend>Filtrar Por:</legend>
-		<div class="form-row">
-    	<div class="form-group col-md-6">
-    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
-		<input type="text" name="matriculaDoUsuarioFiltro" class="form-control" placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
-    	</div>
-    	<div class="form-group col-md-6">
-    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
-		<input type="text" name="nomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
-    	</div>
-  		</div>
- 		<div class="text-center"">
-  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>	 	</div>
-	 	</fieldset>
-	</form>
-<br><br>
+<!-- filtro por matricula do usuario e nome do arquivo-->
+					<form action="@{Administradores.paginaAdmin}" method="post">
+						<fieldset class="corFiltro shadow-lg rounded">
+					        <legend>Filtrar Por:</legend>
+							<div class="form-row">
+						    	<div class="form-group col-md-6">
+							    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
+									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control" placeholder="Matricula do usuario" 
+									id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
+						    	</div>
+						    	<div class="form-group col-md-6">
+							    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
+									<input type="text" name="nomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" 
+									id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
+						    	</div>
+						  		</div>
+						 		<div class="text-center"">
+							  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
+									<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
+								</div>
+						 	</fieldset>
+						</form><br><br>
+<!-- fim filtro -->
 #{/if}
-		</div>
-    	</div>
+				</div>
+	    	</div>
   		</div>
-  		</div>	
-		<div class="container">
+  	</div>	
+	<div class="container">
  		<div class="row">
 #{list items:listaPedidosPa, as:'p'}
-   		<div class="col-lg-6">
-		<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-		<div class="card-header text-center">
-		<h6 class="text-primary">Usuario:</h6>
-${p.usuario.nomeUsu}<br />
-		<h6 class="text-primary">Matricula:</h6>
-${p.usuario.matricula}
-		</div>
-		<div class="card-body">
-		<div class="card-text">
-		<b>Arquivo: </b> ${p.nomeArquivo}
-		</div>
-		<div class="card-text">
-		<b>Quantidade de Copias: </b> ${p.qtdCopias}
-		</div>
-		<div class="card-text">
-		<b>Frente ou verso : </b> ${p.frenteVerso}
-		</div>
-		<div class="card-text">
-#{if p.descricao} <b>Descricao: </b> ${p.descricao} #{if p.descricao = ""}[sem descricao] #{/if}<br />
+ <!-- listar todos os pedidos com o status em "AGUARDANDO"-->
+	   		<div class="col-lg-6">
+				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+					<div class="card-header text-center">
+						<span class="soIcon">
+							<div class="text-primary m-0 h6">Usuario:</div>
+					${p.usuario.nomeUsu}<br />
+						</span>
+						<div class="text-primary m-0 h6">Matricula:</div>
+				${p.usuario.matricula}
+					</div>
+					<div class="card-body">
+						<div class="card-text">
+							<b>Cópias: </b> ${p.qtdCopias}
+						</div>
+						<div class="card-text">
+							<b>Frente ou verso : </b> ${p.frenteVerso}
+						</div>
+						<div class="card-text">
+							<b>Status: </b>
+							<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
+						</div>
+						<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${p.id}" 
+						 	role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
+					  	</button>
+						<div class="collapse text-left" id="collapseExample${p.id}">
+						  	<div class="card bg-dark">
+								<div class="card-text">
+									<b>Data de Envio: </b> ${p.dataEnvio}
+								</div>
+								<div class="card-text">
+									<b>Arquivo: </b> ${p.nomeArquivo}
+								</div>
+#{if p.descricao} 
+								<div class="card-text">
+									<b>Descricao: </b> ${p.descricao} 
+#{if p.descricao = ""}[sem descricao] #{/if}<br />
+								</div>
 #{/if}
-		</div>
-		<div class="card-text">
-		<b>Status: </b>
-		<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
-		</div>
-		<div class="card-text">
-		<b>Data de Envio: </b> ${p.dataEnvio}
-		</div>
-		<div class="card-text text-center">
-		<a href="@{Administradores.download(p.id)}" class="btn btn-primary m-1 icon">Fazer Download<i style="float: right; margin: 1px;" class="download icon"></i></a>
-		<div class="sticky-top">
-		<span class="btn btn-success mt-1 mb-1 ml-0 mr-0 icon" >
-		<a class="concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; font-size: 85%;; color: white; margin: 0px;" >Concluir <i style="float: right; margin: 0;" class="check icon"></i></a>
-		</span>
-		<span class="btn btn-danger mt-1 mb-1 ml-0 mr-0 icon" >
-		<a class="recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;font-size: 85%;; color: white; margin: 0px;">Recusar<i style="float: right; margin: 0;" class="x icon"></i> </a>
-		</span>
-		<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
-		onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
-		</div>
-		</div>
-		</div>
-		</div>
- 		</div>
+							</div>
+						</div>
+						<div class="card-text text-center">
+							<div class="sticky-top">
+								<a href="@{Administradores.download(p.id)}" class="btn btn-primary m-1 icon">
+								<span class="soIcon">Download</span>
+								<i style="float: right; margin: 1px;" class="download icon"></i>
+								</a>
+								<span class="btn btn-success mt-1 mb-1 ml-0 mr-0 icon" >
+									<a class="concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
+									font-size: 85%; color: white; margin: 0px;" >
+									<span class="soIcon">Concluir</span>
+									<i style="float: right; margin: 0;" class="check icon"></i>
+									</a>
+								</span>
+								<span class="btn btn-danger mt-1 mb-1 ml-0 mr-0 icon" >
+									<a class="recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
+									font-size: 85%; color: white; margin: 0px;">
+									<span class="soIcon">Recusar</span>
+									<i style="float: right; margin: 0;" class="x icon"></i>
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 #{/list}
 		</div>
-		</div>
+	</div>
 #{/if}
 </div>
 <form id="con" action="@{Pedidos.concluido}">

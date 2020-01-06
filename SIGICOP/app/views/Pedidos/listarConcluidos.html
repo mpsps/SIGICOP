@@ -3,7 +3,7 @@
 <div id="corpoCelular" class="heightMin">	
 	<div class="h1 text-success text-center tituloCelular">Lista de Pedidos Concluidos</div><br>
 #{if listaconcluidos.size() == 0}
-<!-- informa se não houver ou não encontrar nenhum pedido-->
+<!-- informa se nï¿½o houver ou nï¿½o encontrar nenhum pedido-->
 	<div class="h1 text-primary text-center tituloCelular">(Nenhum Pedido Foi Encontrado!)</div><br>
 #{/if} 
 #{else}
@@ -48,10 +48,12 @@
 	   		<div class="col-lg-6">
 				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 					<div class="card-header text-center">
-						<h6 class="text-primary">Usuario:</h6>
+						<h6 class="text-primary m-0">Usuario:</h6>
 				${pc.usuario.nomeUsu}<br />
-						<h6 class="text-primary">Matricula:</h6>
+						<span class="soIcon">
+							<h6 class="text-primary m-0">Matricula:</h6>
 				${pc.usuario.matricula}
+						</span>
 					</div>
 					<div class="card-body">
 						<div class="card-text">
@@ -61,15 +63,15 @@
 							<b>Status: </b>
 							<div class="statusConcluido text-white text-center rounded">${pc.status}</div> 
 						</div>
-						<div class="text-center mt-1">
-					  		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${pc.id}" 
-					  		role="button" aria-expanded="false" aria-controls="collapseExample">+ Informacoes
+						<div class="mt-1">
+					  		<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${pc.id}" 
+					  		role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
 				  			</button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${pc.id}">
-					  		<div class="card card-body bg-dark">
+					  		<div class="card bg-dark">
 								<div class="card-text">
-									<b>Quantidade de Copias: </b> ${pc.qtdCopias}
+									<b>CÃ³pias: </b> ${pc.qtdCopias}
 								</div>
 								<div class="card-text">
 									<b>Frente ou verso : </b> ${pc.frenteVerso}
@@ -88,20 +90,24 @@
 						</div>
 						<div class="card-text text-center">
 							<div class="sticky-top">
-								<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">Fazer Download
-								<i style="float: right; margin: 1px;" class="download icon"></i></a>
+								<a href="@{Administradores.download(pc.id)}" class="btn btn-primary m-1 icon">
+									<span class="soIcon">Download</span>
+									<i style="float: right; margin: 1px;" class="download icon"></i>
+								</a>
 								<a class="recusar" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;">
-								<span class="btn btn-danger mt-1 mb-1 icon" >Recusar<i style="float: right; margin: 1px;" class="x icon"></i></span></a>
-								<a class="btn btn-secondary m-1 icon entregar" data-item="${pc.id}" id="${pc.id}" href="#Entregar" >Entregar
-								<i style="float: right; margin: 1px;" class="file alternate outline icon"></i></a>
-									<!-- onMouseOver="this.style='color: black; font-size: medium; text-decoration: none; color: white;'" 
-							onMouseOut="this.style='color: color: white; font-size: medium; text-decoration: none; color: white;'" -->
+									<span class="btn btn-danger mt-1 mb-1 icon" ><span class="soIcon">Recusar</span>
+									<i style="float: right; margin: 1px;" class="x icon"></i></span>
+								</a>
+								<a class="btn btn-secondary m-1 icon entregar" data-item="${pc.id}" id="${pc.id}" href="#Entregar" >
+									<span class="soIcon">Entregar</span>
+									<i style="float: right; margin: 1px;" class="file alternate outline icon"></i>
+								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 	 		</div>
-	#{/list}
+#{/list}
 		</div>
 	</div>		
 </div>

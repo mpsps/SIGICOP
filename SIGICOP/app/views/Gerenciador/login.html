@@ -3,28 +3,27 @@
 <div id="corpoCelular" class="heightMin">
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
-		<div class="ui teal image header">
-		<img src="@{'/public/images/icones/usuario.png'}" class="image" title="Usuario" width="150%">
-		<div class="content text-secondary" >Insirar seu login e senha</div>
-		</div>
-		<!-- FORMULARIO DE AUTENTIFICAÇAO -->
-		<form class="ui large form " action="@{Gerenciador.autenticar}" method="post">
-		<div class="ui stacked segment">
-		<label for="login">Login:</label>
-		<!--<i class="user icon"></i>-->
-		<span class="uk-form-icon" uk-icon="icon: user"></span>
-		<input type="text" name="login" value="${login}" placeholder="login" class="form-control" autofocus=""
-		required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
-		<label for="senha" class="mt-2">Senha:</label>
-		<!-- <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span> -->
-		<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
-		<input type="password" name="senha" placeholder="Senha" class="form-control" required="" id="senha">
-		<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Logar"/>
-		</div>
-		</form>
-		<div class="ui stacked segment">
-		NÃ£o sou cadastrado: <a href="@{Usuarios.cadastroDeUsuario}"  class="tituloCelular" >Fazer cadastro</a>
-		</div>
+			<div class="ui teal image header">
+				<img src="@{'/public/images/icones/usuario.png'}" class="image" title="Usuario" width="150%">
+				<div class="content text-secondary" >Insirar seu login e senha</div>
+			</div>
+			<!-- FORMULARIO DE AUTENTIFICAÇAO -->
+			<form class="ui large form " action="@{Gerenciador.autenticar}" method="post">
+				<div class="ui stacked segment">
+					<label for="login">Login:</label>
+					<span class="uk-form-icon" uk-icon="icon: user"></span>
+					<input type="text" name="login" value="${login}" placeholder="login" class="form-control" autofocus=""
+					required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
+					<label for="senha" class="mt-2">Senha:</label>
+					<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
+					<input type="password" name="senha" placeholder="Senha" class="form-control" required="" id="senha">
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Logar"/>
+				</div>
+			</form>
+			<div class="ui stacked segment">
+				NÃ£o sou cadastrado: 
+				<a href="@{Usuarios.cadastroDeUsuario}" class="tituloCelular">Fazer cadastro</a>
+			</div>
 		</div>
 	</div>
 </div>

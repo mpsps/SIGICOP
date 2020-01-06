@@ -5,7 +5,6 @@ body {
 	height: 100%;
 }
 */
-
 .listaPped {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -162,4 +161,7 @@ body {
 #tamanhoTextoCelular{
 	font-size: 80%;
 	}
+.soIcon{
+	display: none;
+}
 }
