@@ -36,7 +36,7 @@
 		</div>
   	</div>
 #{if listarDeAdmins.size() == 0 }
-<!-- informa se não houver ou não encontrar nenhum admin-->
+<!-- informa se nï¿½o houver ou nï¿½o encontrar nenhum admin-->
 	<div class="text-center">
 		<div class="h1 text-primary">Nenhum admin foi encontrado</div>
 	</div>
@@ -44,7 +44,7 @@
 	<div class="container">
  		<div class="row">
 #{list items:listarDeAdmins, as:'a'}
-<!-- lista todos os admins de acordo com o filtro, menos o padrão -->
+<!-- lista todos os admins de acordo com o filtro, menos o padrï¿½o -->
 	   		<div class="col-lg-6">
 				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 					<div class="card-body">
@@ -61,9 +61,9 @@
 #{/if}
 						<div class="card-text text-center">
 							<div class="sticky-top">
-								<a href="@{Administradores.removerAdmin(a.id)}" class="btn btn-danger m-1 icon">
+								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-1 icon remover">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
-								</a>		
+								</a>	
 							</div>
 						</div>
 					</div>
@@ -73,3 +73,29 @@
 		</div>
 	</div>		
 </div>
+<script type="text/javascript">
+$(".remover").click(function() {
+	var id = $(this).data("item");
+	console.log("o valor do id de entregue :  "+id);
+	$('#idRem').val(id);
+	Swal.fire({
+		  html: '<div id="tituloCelularModal">Tem certeza que deseja remover esse administrador?</div>'+
+				  '<br/><form action="@{Administradores.removerAdmin}" method="post">'
+		  		   +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
+			  	   +'<input type="submit" value="Remover" class="btn btn-danger m-1 icon"/></form>',
+		  icon: 'question',
+		  showCloseButton: true,
+		  showCancelButton: true,
+		  showConfirmButton: false,
+		  showClass: {
+			    popup: 'animated fadeInDown faster'
+			  },
+		  hideClass: {
+			    popup: 'animated fadeOutUp faster'
+			  }
+	})
+}); 
+
+
+
+</script>
