@@ -26,12 +26,24 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
 <!-- SEMANTIC - CSS -->
+		<!-- <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/semantic.css'}"> -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.css'}"><!-- rodape utilizar-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.css'}"><!-- utilizado em login  -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}"><!-- rodape utilizar-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
 	 	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}">
+	 	<style type="text/css">
+	 	.notificacao {
+		  width: 4px;
+		  height: 4px;
+		  padding: 3px!important;
+		  line-height: 3px;
+		  text-align: center;
+		  border-radius: 10em;
+		}
+			 	
+	 	</style>
 <!-- SEMANTIC JS -->
 		<!--  <script src="@{'/public/Semantic/js/icons.js'}"/></script>-->
 		<script src="@{'/public/Semantic/js/semantic.js'}"/></script>
@@ -150,7 +162,7 @@
 #{/if}
 #{if session.contains("adminLogado")}
 			<span class="border rounded p-0">
-				<span id="dadosAdmin">
+				<span id="dadosAdmin"> 
 					<a href="#Meus_Dados" style="padding: 0px;"> <!--  class="rounded-pill"-->
 						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 3px;" alt="addAdmin" />
@@ -173,11 +185,20 @@
 		 	<span class="border rounded p-0">
 				<span id="dadosUser">
 					<a href="#Meus_Dados"  style="padding: 0px;">
-						<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 3px;" alt="user" />
-				<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
+							<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
+						onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 0px;" alt="user" />
 					</a>
-					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; max-width: 60%;" id="nomeUsuario"></span>
+#{if usuarioBanco?.qtdDisponivel > 14}
+						<span class="notificacao bg-success text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>						
+#{/if}	
+#{if usuarioBanco?.qtdDisponivel > 8 & usuarioBanco?.qtdDisponivel < 15}	
+							<span class="notificacao bg-warning text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>			
+#{/if}
+#{if usuarioBanco?.qtdDisponivel < 9}
+							<span class="notificacao bg-danger text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>
+#{/if}							
+				<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
+					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
 				</span>
 				<span class="float-right">
 					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
@@ -206,7 +227,7 @@
 #{/if}
 </div>
 <!-- CORPO DA PAGINA -->
- <div id="container">
+<div id="container">
 #{doLayout /}
 </div>
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
@@ -233,9 +254,9 @@
 				<div class="three wide column">
 					<h4 class="ui inverted header">Contatos:</h4>
 					<div class="ui inverted link list">
-						<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 988122176</a> 
+						<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 98147-9099</a> 
 						<br>
-						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 994333803</a> 
+						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 99433-3803</a> 
 					</div>
 				</div>
 				<div class="three wide column">
@@ -264,7 +285,7 @@ function horaEnome(){
 			s = "0"+s;
 		}
 		document.getElementById('time').innerHTML=h+":"+m+":"+s;
-		setTimeout('time()',500);
+		setTimeout('horaEnome()',500);
 	
 	var width = window.innerWidth;
 	var nomeUsuarioCompleto = '${session['usuarioLogado']}';
@@ -274,11 +295,16 @@ function horaEnome(){
 		 if(width < 400){
 			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
 			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
+			 if(sobreNome == null || sobreNome == ""){
+				 console.log(nome+" ");
+				 document.getElementById('nomeUsuario').innerHTML = nome;
+			 }else{
 			 var primeiraLetra = sobreNome.substr(0, 1)
-			 const celular = "celular";
+		
 			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";
-		 }else{
+			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";				 
+			 }			 
+		}else{
 			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaços
 			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaços
 		
@@ -290,10 +316,15 @@ function horaEnome(){
 		 if(width < 400){
 			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
 			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
+			 if(sobreNome == null || sobreNome == ""){
+				 console.log(nome+" ");
+				 document.getElementById('nomeAdmin').innerHTML = nome;
+			 }else{
 			 var primeiraLetra = sobreNome.substr(0, 1)
 		
 			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";
+			 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";				 
+			 }
 		 }else{
 			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaços
 			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaços
@@ -307,6 +338,7 @@ function horaEnome(){
 <!-- MESSAGEM DE ALERTA -->
 <script type="text/javascript">
 $().ready(function() {
+	
 		setTimeout(function () {
 			$('#messagemAlerta').hide(); // "messagemAlerta" ï¿½ o id do elemento que seja manipular.
 		}, 2000); // O valor e representado em milisegundos.
@@ -398,6 +430,7 @@ $(function () {
 	  $('#example').tooltip({ boundary: 'window' })
 	})
 </script>
+
 <!-- FUNÇÃO DE LIMPAR FILTRO -->
 <script type="text/javascript">
 // FUNÇÃO DE LIMPAR FILTRO

@@ -4,7 +4,7 @@
     <div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
 		<div class="card card-body m-0 p-0">
 #{if listaPedidos.size() > -1}
-<!-- Filtro por nome do arquivo e descrição -->
+<!-- Filtro por nome do arquivo e descriï¿½ï¿½o -->
 			<form action="@{Usuarios.filtro}" method="post">
 				<fieldset class="corFiltro shadow-lg rounded">
 			        <legend>Filtrar Por:</legend>
@@ -34,7 +34,7 @@
 	</div>
 
 #{if listaPedidos.size() == 0 }
-<!-- informa se não houver ou não encontrar nenhum pedido-->
+<!-- informa se nï¿½o houver ou nï¿½o encontrar nenhum pedido-->
 	<div class="text-center">
 		<div class="h1 text-primary">Nenhum pedido foi encontrado</div>
 	</div>
@@ -46,11 +46,11 @@
 <!-- listar todos os pedidos anteriores (se houver) -->
 	   		<div class="col-lg-6">
 				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-					<div class="card-header text-center">
+					<div class="card-header text-center pt-1 pb-1">
 						<h5 class="text-primary m-0">Pedido:</h5>
 					</div>
 					<div class="card-body">
-						<div class="card-text">
+						<div class="card-text pt-0 pb-1">
 							<b>Nome: </b> ${p.nomeArquivo}
 						</div>
 						<div class="card-text">
