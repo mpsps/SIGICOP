@@ -1,6 +1,9 @@
 body {
 	background-color: #fafaff;
 }
+.borderColorCorpo{
+	border: 0.5px solid #fafaff;
+}
 /*body>.grid {
 	height: 100%;
 }

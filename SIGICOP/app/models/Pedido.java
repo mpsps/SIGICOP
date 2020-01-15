@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 
 import net.sf.oval.constraint.MaxLength;
@@ -38,6 +39,9 @@ public class Pedido extends Model {
 	
 	@Required
 	public String nomeArquivo;
+	
+	@Transient 
+	public int idLista;
 	
 	@Required
 	@Min(1)

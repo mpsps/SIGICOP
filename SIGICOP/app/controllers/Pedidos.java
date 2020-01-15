@@ -45,6 +45,7 @@ public class Pedidos extends Controller {
 	}
 	
 ///// ADICIONA PEDIDOS NA CACHE /////
+	@SuppressWarnings("unused")
 	@User
 	public static void addPedido(@Valid Pedido item) {
 	System.out.println("_____________________________________________________________________________________");
@@ -97,6 +98,14 @@ public class Pedidos extends Controller {
 			flash.error("Frente ou Verso é obrigatorio");
 			fazerPedido();
 		}
+		
+		int idLista;
+		if(listaDePedidos.size() <= 0) {
+			idLista = 1;
+		}else {
+			idLista = dadosDeSessao.listaDePedidos.size()+1;
+		}
+		item.idLista = idLista;
 		
 		item.nomeArquivo = nomeArq;
 		item.usuario = dadosDeSessao.usuario;

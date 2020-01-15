@@ -2,39 +2,44 @@
 #{set title:'SIGICOP-Sistema de Gerenciamento de Impressoes e Copias' /}
 <div class="text-justify">
 	<div class="h1 text-center text-primary">SIGICOP</div>
-	<div class="text-center">
-		<img class="rounded-circle" src="/public/images/passoApasso/IFJC.png"
+	<!-- <div class="text-center">
+		<img class="rounded-circle" src="@{'/public/images/passoApasso/IFJC.png'}"
 		style="max-width: 100%; float: left;" width="45%" height="30%"/>
-	</div>
-	<p class="text-break">
-	A SIGICOP é um projeto de conclusão do curso subsequente em informática, realizado por Manacio Pereira de Souza
-	e por Magdiel Pereira de Souza. A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e
-	agilize a demanda de impressões e cópias do IFRN-CAMPUS-JC,onde o usuário possa ter controle sobre a quantidade 
-	de solicitacão disponíveis e o administrdor possar gerenciar as solicitacões
-	
-	PASSO A PASSO
-	O usuário deverá acessar o site da SIGICOP;
-	Quando visitar a página principal clicar em "Logar" ou em "logar agora";
-	Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
-	caso as credenciais seja de usuário comum, ele poderá visualizar seus pedidos anteriores e poder filtra-los, e poderá e visualizar a
-	 quantidade disponível de solicitacões, se não for zero perderá realizar mais;
-	Se as credenciais for de um administrador, ele poderá visualizar todos pedidos solicitados e filtra-los, poderá concluir e recusar, se recusar será obrigado à dar uma justificativa, também poderá ver e editar seus dados;
-	Se o administrador for "padrão" poderá adicionar mais administradores e remover-los;
-	Antes da computação gráfica, os processos de impressão eram totalmente manuais e analógicos, com base em reprodução de fotografias, retoques manuais, uso de fotolitos, tintas, solventes e produtos químicos, que muitas vezes demorava e não tinham os resultados que a impressão digital oferece.
-	As montagens de fotos, textos e outros elementos, que faziam parte de uma página de revista, por exemplo, eram feitas de forma manual, recortadas manualmente, com fixação através de fitas adesivas e múltiplas exposições sobre uma mesma fotografia.
+	</div> -->
+	<p class="text-break" style="text-indent: 1cm;">
+	A SIGICOP é um projeto de conclusão do curso subsequente em informática, realizado por Magdiel Pereira de Souza 
+	e por Manacio Pereira de Souza. A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e
+	agilize a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade 
+	de solicitacão disponíveis e o administrador possar gerenciar as solicitacões
 	</p>
-	<p class="text-break">
-		As prensas de impressão digital começaram a ser usadas em 1993. A ideia de uma prensa digital começou com o desenvolvimento dos computadores, que tornaram possível uma nova maneira de imprimir.
-	
-	Diferente dos outros métodos de impressão, as prensas digitais podiam imprimir uma imagem diferente em cada folha, ao passo que os outros tipos de impressão envolviam chapas que eram usadas continuamente, sem a possibilidade de alterar o conteúdo das impressões de um impresso a outro de maneira rápida.
-	</p>
-	<p class="text-break">
-	Atualmente, as prensas para impressão digital podem ser ligadas à uma rede para imprimir imagens enviadas de qualquer lugar do mundo, criando possibilidades nunca antes pensadas. Os computadores nessas prensas podem também produzir uma imagem, fornecendo uma prévia de como um livro ou libreto ficará quando for finalizado.
-	
-	À medida que os avanços tecnológicos são feitos, a impressão digital continuará a ver, nos próximos anos, aprimoramentos incríveis em eficiência.
-	
-	As prensas de impressão digital não possuem manivelas, engrenagens ou banhos de óleo, gerando muito menos gastos do que os outros métodos de impressão. Desde o surgimento da impressão digital, as outras máquinas de impressão, como impressoras offset, também evoluíram e são atualmente mais fáceis de operar, com menos engrenagens e manivelas, em uma tentativa de competir com a impressão digital.
-	</p> 
+	<div class="h2 text-center text-primary">PASSO A PASSO DO USUÁRIO <img alt="" src="@{'/public/images/icones/usu.png'}" width="35" style="position: relative; bottom: 4px;"></div>
+	<ul>
+		<li><p>O usuário deverá acessar o site da SIGICOP;</p></li>
+		<li><p>Quando visitar a página principal clicar em "Entrar" ou em "Entrar agora";</p></li>
+		<li><p>Se caso o usuário ainda não for cadastrado, dever-se se cadastrar clicando em "Cadastra-se", preencher o formulário e salvar os dados;</p></li>
+		<li><p>Ao entrar na página de login, fornecer o login e senha para entrar no sistema;</p></li>
+		<li><p>O usuário ao logar, poderá visualizar seus pedidos anteriores (se houver), e poderá filtra-los e efetuar download;</p></li>
+		<li><p>Em "Meus Dados" (icone de usuário) poderá visualizar a quantidade disponível de solicitações, e também poderá vizualizar seu nome, email e ultimo acesso;</p></li>
+		<li><p>Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitações disponível, aparecerá o formulário, se não, aparecerá mensagem em vermelho informando que não é possivel efetuar nenhuma solicitação;</p></li>
+		<li><p>Após logar, o usuário poderá sair a qualquer momento;</p></li>			
+	</ul>
+		<div class="h2 text-center text-primary">PASSO A PASSO DO ADMINISTRADOR <img alt="" src="@{'/public/images/icones/adm.png'}" width="35" style="position: relative; bottom: 4px;"></div>
+	<ul>
+		<li><p>O administrador deverá acessar o site da SIGICOP;</p></li>
+		<li><p>Quando visitar a página principal clicar em "Entrar" ou em "Entrar agora";</p></li>
+		<li><p>Ao entrar na página de login, fornecer o login e senha para entrar no sistema;</p></li>
+		<li><p>O administrador ao logar, poderá visualizar todos os pedidos com o status "AGUARDANDO" (se houver), filtra-los e efetuar download;</p></li>
+		<li><p>Em "Meus Dados" (icone do administrador) poder visualizar seu nome, email e ultimo acesso, e poderá editar seus dados;</p></li>
+		<li><p>O administrador poderá concluir ou recusar os pedidos (se houver), se recusar será obrigado a dá uma justificativa, se concluir, será opcional a justificativa;</p></li>
+		<li><p>O administrador poderá listar todos os pedidos concluídos, e poderá filtra-los;</p></li>
+		<li><p>O administrador poderá listar todos os pedidos recusados, e poderá filtra-los;</p></li>
+		<li><p>O administrador em lista de concluído, poderá entregar o pedido depois que o usuário recebe a impressão;</p></li>
+		<li><p>O administrador poderá realizar baixa para o usuário, quando for pedido de cópia;</p></li>
+		<li><p>O administrador padrão poderá cadastrar novos administradores;</p></li>
+		<li><p>O administrador padrão poderá listar todos os administradores do sistema e remover-los;</p></li>
+		<li><p>O administrador padrão poderá restaurar a quantidade de solicitações de todos os usuários, informando a quantidade;</p></li>
+		<li><p>Ao logar, o administrador poderá sair a qualquer momento;		</p></li>
+	</ul>
 </div>
 
 

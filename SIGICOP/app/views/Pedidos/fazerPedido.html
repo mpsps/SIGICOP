@@ -2,24 +2,24 @@
 #{set title:'Solicitacao de Pedido(s)' /}
 <div id="corpoCelular">	
 #{if usuarioBanco?.qtdDisponivel == 0}
-	<div class="jumbotron jumbotron-fluid danger" style="background:#ff4a4a;">
-  		<div class="container">
-	    	<div class="display-4 tituloCelular">Você atingiu seu limite máximo de solicitacões nesse mês,
-	    	 mas lembresse de salvar os pedidos.
-	  		</div>
-		</div>
-	</div>
+	<div class="py-5 text-center mb-3" style="background:#ff4a4a;">
+        <h2>Atenção!</h2>
+        <p class="lead">Você atingiu seu limite máximo de solicitacões nesse mês,
+	    	 mas para isso, lembresse de salvar os pedidos.</p>
+     </div>
 #{/if}
 #{else}	
-	<div class="ui middle aligned center aligned grid">
+<div class="row">
+        <div class="col-md-6 order-md-1">
 <!-- FORMULARIO DE PEDIDOS -->
-		<form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="ui large form">
-			<div class="ui stacked segment">
-				<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-#{if obrigatorio}
-				<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}
-				<div class="float-left botaoArquivo mt-2">
+
+<!-- FIM FORMULARIO DE PEDIDOS-->
+
+          <h4 class="mb-3"><span class="text-muted">Solicitação:</span></h4>
+          <form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                     <div class="mb-3">
+          				<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
+          		<div class="float-left mt-2">
 					<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" >Selecione o Arquivo
 					<i class="paperclip icon"></i></label></div>
 				</div>
@@ -27,22 +27,20 @@
 					<span id="nomeArquivo" class="text-primary h4 text-center text-break"></span>
 				</div><!-- accept=".pdf" -->
 				<input type="file" name="item.arquivo"  style="display:none;" class="form-control" id="item-arquivo" >
-				<br /><br><br><br>
-#{if obrigatorio}
-				<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}		
-				<div class="row">
-					<div class="col">
-						<label>Qtd de Copias:<sup style="color: red;">*</sup></label>
-						<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" 
+				<br><br><br>
+				</div>
+            <div class="row">
+              <div class="col-md-6">
+ 				<label>Cópias:<sup style="color: red;">*</sup></label>
+ 				<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" 
 						min="1" class="qtdCopias" value="${valor}" id="qtdCopias">
-					</div>
-					<div class="col">
-#{if obrigatorio}
-						<div style="color: red; margin-left: 10%;" >Obrigatorio</div><!-- receber a msg que obriga enviar o arquivo -->
-#{/if}
-						<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
-						<div class="custom-control custom-radio custom-control-inline">
+                <div class="invalid-feedback">
+                  É obrigatório inserir um nome válido.
+                </div>
+              </div>
+              <div class="col-md-6">
+				<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
+				<div class="custom-control custom-radio custom-control-inline">
 					  		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" 
 					  		value="frente" checked="checked">
 					 		<label class="custom-control-label text-justify" for="frente">Frente</label>
@@ -50,80 +48,110 @@
 						<div class="custom-control custom-radio custom-control-inline">
 					 		<input type="radio" id="frenteEverso" name="item.frenteVerso" class="custom-control-input" 
 					 		value="frenteEverso">
-					  		<label class="custom-control-label text-justify" for="frenteEverso">Posterior</label>
+					  		<label class="custom-control-label text-justify" for="frenteEverso">Frente e Verso</label>
 					  		<sub style="color: red; padding: 0; margin: 0;">2x</sup>
 						</div>
-					</div>
-				</div>
-				<label>Descricao</label>
-				<textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
-				<div class="text-center">
-					<button class="btn btn-success mt-3 icon" id="add">Adicionar<i class="paper plane outline icon"></i></button>
-				</div>
-			</div>
-		</form>
-<!-- FIM FORMULARIO DE PEDIDOS-->
-	</div>
+                <div class="invalid-feedback">
+                  É obrigatório inserir um sobre nome válido.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+			<label>Descricao</label>
+              <div class="input-group">
+                <textarea rows="3" cols="7" name="item.descricao" class="form-control" placeholder="descrição"></textarea>
+                <div class="invalid-feedback" style="width: 100%;">
+                  Seu nickname é obrigatório.
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-success btn-lg btn-block" type="submit" id="add">Adicionar<i class="paper plane outline icon"></i></button>
+            <hr class="mb-4">
+          </form>
+        </div>
 #{/else}
-#{ifErrors}
-	<h2 style="color:red">Ops...</h2>
-#{errors}
-	<li>${error.key} - ${error} - ${error.message}</li>
-#{/errors}					  
-#{/ifErrors}
-	<div class="listaPped text-center">
+ <div class="col-md-6 order-md-2">
+			<h4 class="d-flex justify-content-between align-items-center mb-3">
+				<span class="text-muted m-0">Listagem de Pedidos</span>
+#{if listaDePedidos != null}
+               	 <a href="@{Pedidos.salvar}" class="btn btn-primary m-0">Salvar
+					<span class="badge badge-secondary badge-pill float-right">${listaDePedidos?.size()}</span>
+		 		</a>
+#{/if}
+				
+			</h4>
+		<!-- 	<div class="card p-2">
+            <div class="input-group text-center">
+
+            </div>
+          </div> -->
+         <!--  <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed"> -->
+              	<div class="listaPped m-0 p-0">
 #{if listaDePedidos == null}
-<!-- informa se n�o houver nenhum pedido adicionado-->
-		<div class="h1 text-primary">Nenhum pedido adicionado</div>
+<!-- informa se n�o houver nenhum pedido adicionado-->
+		<div class="h1 text-primary" style="font-size: 120%;">Nenhum pedido adicionado</div>
 #{/if}
 #{else}
-		<a href="@{Pedidos.salvar}" class="btn btn-primary">#{if listaDePedidos.size() > 1}Salvar Todos
-		<i class="save outline icon"></i> #{/if} #{else} Salvar<i class="save outline icon"></i> #{/else}</a>
-		<br><br><br>
-		<div class="container">
-	 		<div class="row">
 <!-- listar todos os pedidos adicionados(se houver)-->
+		<div class="container">
+		<div class="row">
 #{list items: listaDePedidos, as: 'p'}
-				<div class="col-lg-4">
-					<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-						<div class="card-header">
+				<div class="col-lg-6 m-0 p-0 borderColorCorpo">
+					<div class="card text-white bg-dark mb-2 pt-0 pb-1 text-center" style="max-width: 100%;">
+						<div class="card-header m-0 p-0">
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if} 
 #{else} Meu pedido #{/else}
 						</div>
-						<div class="card-body">
-							<div class="card-text">
-								<b>Arquivo: </b> ${p.nomeArquivo}
-							</div>
-							<div class="card-text">
-								<b>Quantidade de copias: </b> ${p.qtdCopias}
+						<div class="card-body text-left m-0 pt-0 pb-0">
+							<div class="card-text mt-0">
+								<b>Cópias: </b> ${p.qtdCopias}
 							</div>
 							<div class="card-text">
 								<b>Frente ou verso : </b> ${p.frenteVerso}
 							</div>
-							<div class="card-text">
-#{if p.descricao}
-								<b>Descricao: </b> ${p.descricao}<br /> 
+							<div class="mt-1">
+					  		<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${p.idLista}" 
+					  		role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
+				  			</button>
+				  			<div class="collapse text-left" id="collapseExample${p.idLista}">
+				  			<div class="card bg-dark">
+					  			<div class="card-text">
+									<b>Arquivo: </b> ${p.nomeArquivo}
+								</div>
+								<div class="card-text">
+#{if p?.descricao}
+									<b>Descricao: </b> ${p.descricao}<br /> 
 #{/if}
+								</div>
+								<div class="card-text">
+									<b>Status: </b> ${p.status}
+								</div>
+				  			</div>
+				  			</div>
 							</div>
-							<div class="card-text">
-								<b>Status: </b> ${p.status}
-							</div>
-							<div class="card-text">
-								<a href="@{Pedidos.cancelarPedido(p.id)}" class="btn btn-danger icon mt-2">Cancelar <i class="trash alternate outline icon"></i></a>
+							<div class="card-text text-center">
+								<a href="@{Pedidos.cancelarPedido(p.id)}" class="btn btn-danger icon mt-1">Cancelar <i class="trash alternate outline icon"></i></a>
 							</div>
 						</div>
+						</div>
 					</div>
-				</div>
 #{/list}
-			</div>
-		</div>
+				</div>
 #{/else}
 	</div>
+	</div>
+
+          <!--   </li>
+          </ul> -->
+        </div>
+      </div>
 </div>
 <!-- JS DA PAGINA -->
 <script type="text/javascript">
 $(document).ready(function(e) {
-// informa que � obrigat�rio o anexo do arquivo
+// informa que � obrigat�rio o anexo do arquivo
 	$("#form-pedido").submit(function(e) {
 		var arq = $("#item-arquivo").val();
 		if (arq == "") {
@@ -176,4 +204,6 @@ $(document).ready(function(e) {
   		document.getElementById('arquivo').value = nome;
 	})
 });
+</script>
+<script type="text/javascript"> 
 </script>
