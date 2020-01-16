@@ -15,11 +15,12 @@
 
 <!-- FIM FORMULARIO DE PEDIDOS-->
 
-          <h4 class="mb-3"><span class="text-muted">Solicitação:</span></h4>
+          <div class="mb-0 mt-0 h4"><span class="text-muted">Solicitação:</span></div>
+          <hr class="mb-1">
           <form id="form-pedido" action="@{Pedidos.addPedido}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate="">
                      <div class="mb-3">
           				<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-          		<div class="float-left mt-2">
+          		<div class="float-left mt-1">
 					<div class="float-left "><label for="item-arquivo" class="btn btn-primary icon" >Selecione o Arquivo
 					<i class="paperclip icon"></i></label></div>
 				</div>
@@ -39,7 +40,7 @@
                 </div>
               </div>
               <div class="col-md-6">
-				<label>Frente e Verso:<sup style="color: red;">*</sup></label><br>
+				<label>Face: <sup style="color: red;">*</sup></label><br>
 				<div class="custom-control custom-radio custom-control-inline">
 					  		<input type="radio" id="frente" name="item.frenteVerso" class="custom-control-input" 
 					  		value="frente" checked="checked">
@@ -72,7 +73,7 @@
         </div>
 #{/else}
  <div class="col-md-6 order-md-2">
-			<h4 class="d-flex justify-content-between align-items-center mb-3">
+			<div class="d-flex justify-content-between align-items-center mb-0 h4">
 				<span class="text-muted m-0">Listagem de Pedidos</span>
 #{if listaDePedidos != null}
                	 <a href="@{Pedidos.salvar}" class="btn btn-primary m-0">Salvar
@@ -80,7 +81,8 @@
 		 		</a>
 #{/if}
 				
-			</h4>
+			</div>
+			<hr class="m-0 mb-1 mt-1">
 		<!-- 	<div class="card p-2">
             <div class="input-group text-center">
 
@@ -99,7 +101,7 @@
 		<div class="row">
 #{list items: listaDePedidos, as: 'p'}
 				<div class="col-lg-6 m-0 p-0 borderColorCorpo">
-					<div class="card text-white bg-dark mb-2 pt-0 pb-1 text-center" style="max-width: 100%;">
+					<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center" style="max-width: 100%;">
 						<div class="card-header m-0 p-0">
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if} 
 #{else} Meu pedido #{/else}
@@ -109,11 +111,11 @@
 								<b>Cópias: </b> ${p.qtdCopias}
 							</div>
 							<div class="card-text">
-								<b>Frente ou verso : </b> ${p.frenteVerso}
+								<b>Face: </b> ${p.frenteVerso}
 							</div>
 							<div class="mt-1">
 					  		<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${p.idLista}" 
-					  		role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
+					  		role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon m-0 p-0"></i><span class="soIcon">Informações</span>
 				  			</button>
 				  			<div class="collapse text-left" id="collapseExample${p.idLista}">
 				  			<div class="card bg-dark">

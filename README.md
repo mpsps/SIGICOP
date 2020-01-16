@@ -22,11 +22,13 @@ Sistema de Gerenciamento de Impressões e Copias
 # PASSO A PASSO DO USUÁRIO ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 
 * O usuário deverá acessar o site da SIGICOP;
-* Quando visitar a página principal clicar em "Logar" ou em "logar agora";
+* Quando visitar a página principal clicar em "Entrar" ou em "Entrar agora";
+* Se caso o usuário ainda não for cadastrado, deverá se cadastrar clicando em "Cadastra-se", preencher o formulário e salvar os dados;
 * Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
 * O usuário ao logar, poderá visualizar seus pedidos anteriores (se houver), e poderá filtra-los e efetuar download;
-* Em "Meus Dados" (icone de usuário) poderá visualizar a quantidade disponível de solicitações, e também poderá vizualizar seu nome, email e ultimo acesso;
+* Em "Meus Dados" (icone de usuário) poderá visualizar a quantidade disponível de solicitações, clicando poderá vizualizar seu nome, email e ultimo acesso;
 * Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitacão disponivel, aparecerá o formulário, se não, aparecerá mensagem em vermelho informando que não é possivel efetuar nenhuma solicitacão;
+* Ao solicitar, os pedido serão listado ao lado do formulário, onde o usuário poderá cancelar e salvar quando quiser;
 * Após logar, o usuário poderá sair a qualquer momento;
 
 ## Páginas da SIGICOP para Usuário :computer:

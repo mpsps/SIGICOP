@@ -6,13 +6,7 @@ body {
 }
 */
 .listaPped {
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background-color: #f1f8fe;
-  border-radius: 0.3rem;
-  padding-right: 0;
-  padding-left: 0;
-  border-radius: 0;
+  background-color: #e2eef1;
 }
 
 #hora{

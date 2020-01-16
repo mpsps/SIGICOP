@@ -5,13 +5,13 @@
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
 			<div class="column" style="whith: 100%; margin-bottom: 0px;">
-<!-- FORMUL¡RIO DE REALIZAR PEDIDO DE C”PIA -->
+<!-- FORMULÔøΩRIO DE REALIZAR PEDIDO DE CÔøΩPIA -->
 				<form action="@{Pedidos.realizarBaixa} " class="ui large form" method="post">
 					<div class="ui stacked segment"><!-- cor branca do formulario -->
 						<label for="confirmarSenha">Usu√°rio:</label>
 						<select name="ped.usuario.id" class="form-control">
 #{list items:listaDeUsuario, as: 'u'}
-							<option value="${u.id}">${u.nomeUsu}</option>
+							<option value="${u.id}">${u.matricula}</option>
 #{/list}
 						</select>
 						<div class="row">

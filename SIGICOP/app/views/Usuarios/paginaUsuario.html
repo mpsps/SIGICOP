@@ -15,7 +15,7 @@
 							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
 				    	</div>
 				      	<div class="form-group col-md-6">
-					      	<label for="descricaoFiltro">Descricao:</label>
+					      	<label for="descricaoFiltro">Descrição:</label>
 					      	<input  name="descricaoFiltro"  class="form-control" id="descricaoFiltro"  placeholder="Descricao" 
 					      	value="${descricaoFiltro}" />
 				      	</div>
@@ -80,17 +80,17 @@
 						<div class="text-center mt-1">
 					  		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${p.id}" 
 					  		role="button" aria-expanded="false" aria-controls="collapseExample">
-					    	+ Informacoes
+					    	+ Informações
 					  		</button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${p.id}">
 							<div class="card bg-dark m-0">
 								<div class="card-text">
-									<b>Frente ou verso : </b> ${p.frenteVerso}
+									<b>Face: </b> ${p.frenteVerso}
 								</div>
 								<div class="card-text">
 #{if p.descricao}
-									<b>Descricao: </b> ${p.descricao}<br />
+									<b>Descrição: </b> ${p.descricao}<br />
 #{/if}
 								</div>
 								<div class="card-text">

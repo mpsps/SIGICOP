@@ -69,7 +69,30 @@
 		a[href="#top"]:hover{
 	    text-decoration:none;
 		}
-	</style>
+		
+		/* Largura da barra de rolagem */
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+		
+		/* Fundo da barra de rolagem */
+		::-webkit-scrollbar-track-piece {
+			background-color: #1b1c1d;
+			border-left: 1px solid #1b1c1d
+		}
+		
+		/* Cor do indicador de rolagem */
+		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
+			{
+			background-color: #529fed
+		}
+		
+		/* Cor do indicador de rolagem - ao passar o mouse */
+		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
+			{
+			background-color: #007bff
+		}
+		</style>
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
@@ -193,14 +216,14 @@ $(document).ready(function(){
 	$(".sobreNos").click(function () {
 		Swal.fire({
 			position: 'top',
-			icon: 'info',
-			html: '<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
-			'<div class="text-justify w-100">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
-			' realizado por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a> '+
-			'e por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank">(@MagdielPS)</a>.'+
+			icon: '',
+			html: '<div class="bg-dark text-white p-3 pb-5" style="margin: -20px;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
+			'<div class="text-justify w-100" style="text-indent: 1cm;">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
+			' realizado por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank">(@MagdielPS)</a> '+
+			'e por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank">(@Manacio)</a>.'+
 			' A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
 			'a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade'+
-			'de solicitacão disponíveis e o administrdor possar gerenciar as solicitacões. </div>',
+			'de solicitacão disponíveis e o administrador possar gerenciar as solicitações. </div></div>',
 			showCloseButton: true,
 			showConfirmButton: false,
 			showClass: {

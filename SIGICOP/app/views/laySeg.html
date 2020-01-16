@@ -53,6 +53,30 @@
         <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
+		<style type="text/css">
+		/* Largura da barra de rolagem */
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+		
+		/* Fundo da barra de rolagem */
+		::-webkit-scrollbar-track-piece {
+			background-color: #1b1c1d;
+			border-left: 1px solid #1b1c1d
+		}
+		
+		/* Cor do indicador de rolagem */
+		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
+			{
+			background-color: #529fed
+		}
+		
+		/* Cor do indicador de rolagem - ao passar o mouse */
+		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
+			{
+			background-color: #007bff
+		}
+		</style>
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
