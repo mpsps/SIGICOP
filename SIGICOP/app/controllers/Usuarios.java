@@ -13,6 +13,7 @@ import annotations.Admin;
 import annotations.User;
 import models.Administrador;
 import models.DadosSessao;
+import models.DadosSessaoAdmin;
 import models.Pedido;
 import models.StatusPedido;
 import models.Usuario;
@@ -77,6 +78,24 @@ public class Usuarios extends Controller {
 	public static void cadastroDeUsuario() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.cadastroDeUsuario() ...["+ new Date()+"]");
+		String usuario = session.get("usuarioLogado");
+		String admin = session.get("adminLogado");
+		if(usuario != null) {
+			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
+			if(dadosSessao != null) {
+				Usuario usu = Usuario.findById(dadosSessao.usuario.id);
+				usu.ultimoAcessoUsu = new Date();
+				usu.save();				
+			}
+		}
+		if(admin != null) {
+			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+				if(dadosSessaoAdmin != null) {
+					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					adm.ultimoAcesso = new Date();
+					adm.save();
+			}
+		}
 		session.clear();
 		Cache.clear();
 	render();

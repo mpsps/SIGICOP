@@ -13,7 +13,25 @@ public class Gerenciador extends Controller {
 //// MANDA PARA A PAGINA PRINCIPAL /////
 	public static void principal() {
 	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Gerenciador.principal() ... ["+ new Date()+"]");		
+	System.out.println("Gerenciador.principal() ... ["+ new Date()+"]");
+		String usuario = session.get("usuarioLogado");
+		String admin = session.get("adminLogado");
+		if(usuario != null) {
+			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
+			if(dadosSessao != null) {
+				Usuario usu = Usuario.findById(dadosSessao.usuario.id);
+				usu.ultimoAcessoUsu = new Date();
+				usu.save();				
+			}
+		}
+		if(admin != null) {
+			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+				if(dadosSessaoAdmin != null) {
+					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					adm.ultimoAcesso = new Date();
+					adm.save();
+			}
+		}
 		session.clear();
 		Cache.clear();
 	render();
@@ -22,7 +40,25 @@ public class Gerenciador extends Controller {
 ///// PAGINA DE LOGAR O USUARIO OU ADMIN /////
 	public static void login() {
 	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Gerenciador.login() ... ["+ new Date()+"]");		
+	System.out.println("Gerenciador.login() ... ["+ new Date()+"]");
+		String usuario = session.get("usuarioLogado");
+		String admin = session.get("adminLogado");
+		if(usuario != null) {
+			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
+			if(dadosSessao != null) {
+				Usuario usu = Usuario.findById(dadosSessao.usuario.id);
+				usu.ultimoAcessoUsu = new Date();
+				usu.save();				
+			}
+		}
+		if(admin != null) {
+			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+				if(dadosSessaoAdmin != null) {
+					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					adm.ultimoAcesso = new Date();
+					adm.save();
+			}
+		}
 		session.clear();
 		Cache.clear();
 	render();

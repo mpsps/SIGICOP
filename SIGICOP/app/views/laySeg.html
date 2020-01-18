@@ -284,7 +284,7 @@
 				<div class="three wide column">
 					<h4 class="ui inverted header">Sobre:</h4>
 					<div class="ui inverted link list">
-						<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
+						<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none">
 							<div  class="sticky-top">
 								<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
 								onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
@@ -413,10 +413,11 @@ $(document).ready(function() {
 			Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  html: '<div class="tituloCelularModal"><i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados </div>'+
-			  '<div class="text-left textoDados">Usuario: ${usuarioBanco?.nomeUsu} <br> Email: ${usuarioBanco?.email}'+
-			  '<br>  Quantidade de Copias disponiveis: ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-			  '<br> Ultimo acesso: ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+			  html: '<div class="text-center h4"><i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados </div>'+
+			  '<div class="text-left font-size-celular"><img src="/public/images/icones/usuNome.png" width="" title="Nome"> - ${usuarioBanco?.nomeUsu} <br>'+
+			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${usuarioBanco?.email}'+
+			  '<br><img src="/public/images/icones/usuQtd.png" width="" title="Qtd Disponivel"> - ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+			  '<br><img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			  showClass: {
@@ -432,9 +433,11 @@ $(document).ready(function() {
 		Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  html: '<div class="text-center sticky-top tituloCelularModal"><i class="address card icon m-0 p-0 border-0"></i>Meus Dados <a href="@{Administradores.editar}" class="btn m-0 ml-2" style="background-color: #529fed;">Editar</a></div>'+
-			  '<div class="text-left textoDados">Administrador: ${admBanco?.nomeAdm} <br> Email: ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso} Ultimo acesso: ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}',
+			  html: '<div class="text-center sticky-top h4 m-0"><span class="soIcon"><i class="address card icon m-0 p-0 border-0"></i></span>Meus Dados'+
+			  ' <a href="@{Administradores.editar}" class="btn m-0 ml-0 p-1" style="background-color: #529fed;">Editar</a></div>'+
+			  '<div class="text-left font-size-celular"><img src="/public/images/icones/admNome.png" width="" title="Nome"> - ${admBanco?.nomeAdm} <br>'+
+			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${admBanco?.email}'+
+			  ' <br> #{if admBanco?.ultimoAcesso} <img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}',
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			  showClass: {

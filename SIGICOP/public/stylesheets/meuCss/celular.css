@@ -8,7 +8,6 @@ body {
 .listaPped {
   background-color: #e2eef1;
 }
-
 #hora{
 	color: white;
 	font-family: sans-serif;
@@ -157,5 +156,12 @@ body {
 	}
 .soIcon{
 	display: none;
+}
+.font-size-celular{
+	font-size: 80%;
+}
+.imagem-celular{
+	width: 25px;
+	float: left;
 }
 }

@@ -4,8 +4,8 @@
 	<div class="ui middle aligned center aligned grid">
 		<div class="column pl-3 pr-3 pt-0 pb-0">
 			<div class="ui teal image header ml-0 mr-0 mb-2 mt-1">
-				<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 p-0" title="Usuario" width="150%">
-				<div class="content text-secondary m-0 p-0" >Insirar seu login e senha</div>
+				<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 p-0 imagem-celular" title="Usuario" width="150%">
+				<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular" >Insirar seu login e senha</div>
 			</div>
 			<!-- FORMULARIO DE AUTENTIFICAÇAO -->
 			<form class="ui large form " action="@{Gerenciador.autenticar}" method="post">
@@ -22,7 +22,7 @@
 			</form>
 			<div class="ui stacked segment">
 				NÃ£o sou cadastrado: 
-				<a href="@{Usuarios.cadastroDeUsuario}" class="tituloCelular">Fazer cadastro</a>
+				<a href="@{Usuarios.cadastroDeUsuario}" class="tituloCelular text-decoration-none">Fazer cadastro</a>
 			</div>
 		</div>
 	</div>
