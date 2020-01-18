@@ -246,9 +246,9 @@ public class Administradores extends Controller {
 	
 ///// PÁGINA DE PEDIDO DE COPIA /////
 	@Admin
-	public static void realizarPedido() {
+	public static void realizarPedidoCopia() {
 	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Administradores.realizarPedido() ... ["+ new Date()+"]");
+	System.out.println("Administradores.realizarPedidoCopia() ... ["+ new Date()+"]");
 		
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;

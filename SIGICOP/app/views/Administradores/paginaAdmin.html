@@ -63,13 +63,13 @@
 							<b>Cópias: </b> ${p.qtdCopias}
 						</div>
 						<div class="card-text">
-							<b>Frente ou verso : </b> ${p.frenteVerso}
+							<b>Face: </b> ${p.frenteVerso}
 						</div>
 						<div class="card-text">
 							<b>Status: </b>
 							<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
 						</div>
-						<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${p.id}" 
+						<button class="btn btn-outline-info mt-1 m-0 mb-1 btn-sm btn-block" data-toggle="collapse" href="#collapseExample${p.id}" 
 						 	role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
 					  	</button>
 						<div class="collapse text-left" id="collapseExample${p.id}">
@@ -90,24 +90,21 @@
 						</div>
 						<div class="card-text text-center">
 							<div class="sticky-top">
-								<a href="@{Administradores.download(p.id)}" class="btn btn-primary m-1 icon">
+								<a class="btn btn-primary m-1 icon" href="@{Administradores.download(p.id)}" style="font-size: auto; 
+								text-decoration: none; font-size: 85%; color: white; margin: 0px;">
 								<span class="soIcon">Download</span>
 								<i style="float: right; margin: 1px;" class="download icon"></i>
 								</a>
-								<span class="btn btn-success mt-1 mb-1 ml-0 mr-0 icon" >
-									<a class="concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
-									font-size: 85%; color: white; margin: 0px;" >
-									<span class="soIcon">Concluir</span>
-									<i style="float: right; margin: 0;" class="check icon"></i>
-									</a>
-								</span>
-								<span class="btn btn-danger mt-1 mb-1 ml-0 mr-0 icon" >
-									<a class="recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
-									font-size: 85%; color: white; margin: 0px;">
-									<span class="soIcon">Recusar</span>
-									<i style="float: right; margin: 0;" class="x icon"></i>
-									</a>
-								</span>
+								<a class="btn btn-success m-1 icon concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
+								font-size: 85%; color: white; margin: 0px;" >
+								<span class="soIcon">Concluir</span>
+								<i style="float: right; margin: 1px;" class="check icon"></i>
+								</a>
+								<a class="btn btn-danger m-1 icon recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
+								font-size: 85%; color: white; margin: 0px;">
+								<span class="soIcon">Recusar</span>
+								<i style="float: right; margin: 1px;" class="x icon"></i>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -125,8 +122,9 @@
 <form id="recusa" action="@{Pedidos.recusar}">
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
-</form>
+</form> 
 <script type="text/javascript">
+
 	$(document).ready(function () {
 	    setTimeout(function () {
 	        window.location.reload(1);

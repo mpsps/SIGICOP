@@ -2,22 +2,22 @@
 #{set title:'Login' /}
 <div id="corpoCelular" class="heightMin">
 	<div class="ui middle aligned center aligned grid">
-		<div class="column">
-			<div class="ui teal image header">
-				<img src="@{'/public/images/icones/usuario.png'}" class="image" title="Usuario" width="150%">
-				<div class="content text-secondary" >Insirar seu login e senha</div>
+		<div class="column pl-3 pr-3 pt-0 pb-0">
+			<div class="ui teal image header ml-0 mr-0 mb-2 mt-1">
+				<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 p-0" title="Usuario" width="150%">
+				<div class="content text-secondary m-0 p-0" >Insirar seu login e senha</div>
 			</div>
 			<!-- FORMULARIO DE AUTENTIFICAÇAO -->
 			<form class="ui large form " action="@{Gerenciador.autenticar}" method="post">
-				<div class="ui stacked segment">
-					<label for="login">Login:</label>
+				<div class="ui stacked segment pl-2 pr-2 pb-1 pt-1">
+					<label for="login" class="mt-1">Login:</label>
 					<span class="uk-form-icon" uk-icon="icon: user"></span>
 					<input type="text" name="login" value="${login}" placeholder="login" class="form-control" autofocus=""
 					required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
 					<label for="senha" class="mt-2">Senha:</label>
 					<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
 					<input type="password" name="senha" placeholder="Senha" class="form-control" required="" id="senha">
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Logar"/>
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 mb-1" value="Logar"/>
 				</div>
 			</form>
 			<div class="ui stacked segment">

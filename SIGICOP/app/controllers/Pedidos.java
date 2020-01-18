@@ -417,56 +417,57 @@ public class Pedidos extends Controller {
 	}
 	
 ///// REALIZAR BAIXA /////
-	@SuppressWarnings("deprecation")
 	@Admin
 	public static void realizarBaixa(Pedido ped) {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.realizarBaixa() ... ["+ new Date()+"]");
-				
+		
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		Administrador admBanco = dadosSessaoAdmin.admin;
+		
 		if(ped.qtdCopias == 0){
 			flash.error("A Quantidade de Copias é obrigatorio");
-			Administradores.realizarPedido();
+			Administradores.realizarPedidoCopia();
 		}else if(ped.frenteVerso == null){
 			flash.error("Frente ou Verso é obrigatorio");
-			Administradores.realizarPedido();
+			Administradores.realizarPedidoCopia();
 		}
 		int valor;
 		if(ped.frenteVerso.equals("frenteEverso")) {
 			valor = ped.usuario.qtdDisponivel - (ped.qtdCopias * 2);
 			if(valor < 0) {
 			flash.error("quatidade de copia indisponivel");
-			Administradores.realizarPedido();
+			Administradores.realizarPedidoCopia();
 			}
 			ped.usuario.qtdDisponivel = valor;
 			if(valor < 0) {
 			flash.error("quatidade de copia indisponivel");
-			Administradores.realizarPedido();
+			Administradores.realizarPedidoCopia();
 			}
 		}else {
 		valor = ped.usuario.qtdDisponivel - ped.qtdCopias;
 			if(valor < 0) {
 				flash.error("quatidade de copia indisponivel");
-				fazerPedido();
+				Administradores.realizarPedidoCopia();
 			}
 			ped.usuario.qtdDisponivel = valor;
-			Cache.set(session.getId(), ped);
 			if(valor < 0) {
 				flash.error("quatidade de copia indisponivel");
-				fazerPedido();
+				Administradores.realizarPedidoCopia();
 			}
 		}
-		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		
 		ped.nomeArquivo = "Copia do Usuário: "+ped.usuario.matricula+" "+new Date().getDate()+" "+ new Date().getHours()+":"+new Date().getMinutes();
 		ped.dataEnvio = new Date();
-		ped.adm = dadosSessaoAdmin.admin;
+		ped.adm = admBanco;
 		ped.atendimento = "Copia realizada pelo Admin: "+ dadosSessaoAdmin.admin.nomeAdm;
 		ped.dataAtendimento = new Date();
 		ped.dataEntrega = new Date();
 		ped.status = StatusPedido.ENTREGUE;
 		ped.usuario.save();
 		ped.save();
-		flash.success("Pedido de copia realizado com sucesso!");
-	Administradores.realizarPedido();
+		flash.success("Pedido de copia do usuário "+ped.usuario.nomeUsu+" realizado com sucesso!");
+	Administradores.realizarPedidoCopia();
 	}
 	
 ///// ENTREGAR PEDIDO /////

@@ -69,7 +69,6 @@
 		a[href="#top"]:hover{
 	    text-decoration:none;
 		}
-		
 		/* Largura da barra de rolagem */
 		::-webkit-scrollbar {
 			width: 10px;
@@ -84,15 +83,16 @@
 		/* Cor do indicador de rolagem */
 		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
-			background-color: #529fed
+			background-color: #529fed;
+			border-radius: 5px;
 		}
 		
 		/* Cor do indicador de rolagem - ao passar o mouse */
 		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
-			background-color: #007bff
-		}
-		</style>
+			background-color: #007bff;
+			border-radius: 5px;
+		}		</style>
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
@@ -134,7 +134,7 @@
 		        </a>
 		        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
 		        href="@{Gerenciador.principal}">Principal</a>
-		        <a class="item sobreNos" href="#SOBRE_NOS"onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+		        <a class="item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
 		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" >Sobre Nos</a>
 		        <div class="right item m-0 p-0">
 			        <a class="ui inverted button m-0" href="@{Gerenciador.login}">Entrar</a>

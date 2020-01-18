@@ -1,13 +1,13 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Realizar copia' /}
 <div id="corpoCelular" class="heightMin">
-	<div class="h1 text-dark text-center tituloCelular">Realizar Pedido de Cópia</div><br>
-	<div class="ui middle aligned center aligned grid">
-		<div class="column">
-			<div class="column" style="whith: 100%; margin-bottom: 0px;">
+	<div class="h1 text-dark text-center tituloCelular m-0 p-0">Realizar Pedido de Cópia</div><br>
+	<div class="ui middle aligned center aligned grid p-0">
+		<div class="row p-0">
+			<div class="col-md-6 order-md-1 m-0 p-0">
 <!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA -->
-				<form action="@{Pedidos.realizarBaixa} " class="ui large form" method="post">
-					<div class="ui stacked segment"><!-- cor branca do formulario -->
+				<form action="@{Pedidos.realizarBaixa}" class="ui large form m-0 p-1 pt-0" method="post">
+					<div class="ui stacked segment m-0 p-3 pt-0"><!-- cor branca do formulario -->
 						<label for="confirmarSenha">Usuário:</label>
 						<select name="ped.usuario.id" class="form-control">
 #{list items:listaDeUsuario, as: 'u'}
@@ -16,12 +16,12 @@
 						</select>
 						<div class="row">
 							<div class="col-6">
-								<label for="confirmarSenha" class="mt-2">Quantidade de cópias:</label>
+								<label for="confirmarSenha" class="mt-2">Cópias:<sup style="color: red;">*</sup></label>
 								<input type="number" name="ped.qtdCopias" class="form-control" max="" min="0" class="qtdCopias" 
 								value="${valor}"  >
 							</div>
 							<div class="col-6">
-								<label class=" mt-2"">Frente e Verso:<sup style="color: red;">*</sup></label><br>
+								<label class=" mt-2"">Face:<sup style="color: red;">*</sup></label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 							  		<input type="radio" id="frente" name="ped.frenteVerso" class="custom-control-input" 
 							  		value="frente" checked="checked">
@@ -34,9 +34,9 @@
 								</div>
 							</div>
 						</div>
-						<label class="mt-2">Descricao</label>
+						<label class="mt-1">Descricao</label>
 						<textarea rows="3" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
-						<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Salvar"/>
+						<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Salvar"/>
 					</div>
 				</form>
 			</div>

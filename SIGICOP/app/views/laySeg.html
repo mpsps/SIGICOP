@@ -53,6 +53,19 @@
         <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
+<style type="text/css">
+		a[href="#top"]{
+	    padding: 4%;
+	    position: fixed;
+	    top: 82.5%;
+	    right: 2.5%;
+	    display:none;
+	    font-size: 5px;
+		}
+		a[href="#top"]:hover{
+	    text-decoration:none;
+		}
+</style>
 		<style type="text/css">
 		/* Largura da barra de rolagem */
 		::-webkit-scrollbar {
@@ -68,13 +81,15 @@
 		/* Cor do indicador de rolagem */
 		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
-			background-color: #529fed
+			background-color: #529fed;
+			border-radius: 5px;
 		}
 		
 		/* Cor do indicador de rolagem - ao passar o mouse */
 		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
-			background-color: #007bff
+			background-color: #007bff;
+			border-radius: 5px;
 		}
 		</style>
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
@@ -160,7 +175,7 @@
 #{/if}
 #{if !listaDeUsuario}
 				<span>
-		  			<a title="realizar baixa" href="@{Administradores.realizarPedido}" class="addAdm" style="padding: 0px; float: left;">
+		  			<a title="realizar baixa" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
 						<img class="itemMenu m-0"" src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
@@ -183,20 +198,6 @@
 #{else}
 			<a href="@{Pedidos.listarRecusados}" class="itemMenu m-0" id="recusados">Recusados</a>
 #{/else}
-#{/if}
-#{if session.contains("adminLogado")}
-			<span class="border rounded p-0">
-				<span id="dadosAdmin"> 
-					<a href="#Meus_Dados" style="padding: 0px;"> <!--  class="rounded-pill"-->
-						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
-						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 3px;" alt="addAdmin" />
-					</a>
-					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
-				</span>
-				<span class="float-right">
-					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
-				</span>
-			</span>
 #{/if}
 #{if session.contains("usuarioLogado")}
 #{if solicitar}
@@ -225,11 +226,26 @@
 					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
 				</span>
 				<span class="float-right">
-					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon" style="margin: 0;"></i></a>
+					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon m-0"></i></a>
 				</span>
 			</span>
 #{/if}
 		</ul>
+#{if session.contains("adminLogado")}
+			<div class="border rounded p-0" style="height: 42px;">
+				<span id="dadosAdmin"> 
+					<a href="#Meus_Dados" style="padding: 0px;"> <!--  class="rounded-pill"-->
+						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
+						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 0px;" alt="addAdmin" />
+					</a>
+					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
+				</span>
+				<span class="float-right">
+					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger icon ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
+				</span>
+			</div>
+#{/if}
+		
 	</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 	<div id="time" class="text-white m-0" id="hora" ></div>
@@ -238,14 +254,13 @@
 <div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
 #{if flash.error}
-	<div class="uk-alert-danger" uk-alert class="messagemDeAlerta" id="messagemAlerta">
-   		<a class="uk-alert-close" uk-close></a>
+	<div class="uk-alert-danger p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
+   		<!-- <a class="uk-alert-close" uk-close></a> -->
    		<p>${flash.error}</p>
 	</div>
 #{/if} 
 #{if flash.success}
-	<div class="uk-alert-success" uk-alert class="messagemDeAlerta" id="messagemAlerta">
-    	<a class="uk-alert-close" uk-close></a>
+	<div class="uk-alert-success p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
    		<p>${flash.success}</p>
 	</div>
 #{/if}
@@ -253,6 +268,9 @@
 <!-- CORPO DA PAGINA -->
 <div id="container">
 #{doLayout /}
+	<a href="#top" class="">
+		<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
+	</a>
 </div>
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
@@ -362,7 +380,17 @@ function horaEnome(){
 <!-- MESSAGEM DE ALERTA -->
 <script type="text/javascript">
 $().ready(function() {
-	
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 300) {
+            $('a[href="#top"]').fadeIn();
+        } else{
+			$('a[href="#top"]').fadeOut();
+        }
+    });   
+    $('a[href="#top"]').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+    });
 		setTimeout(function () {
 			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
 		}, 2000); // O valor e representado em milisegundos.
@@ -372,6 +400,7 @@ $().ready(function() {
 <script type="text/javascript">
     $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
     $('#matriculaDoUsuarioFiltro').mask('00000000000000');
+    $('#matricula').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
     $('#dataEnvtrega').mask('00/00/0000');   	
