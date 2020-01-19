@@ -129,7 +129,8 @@ $(document).ready(function () {
 			  html: '<div id="tituloCelularModal">Tem certeza que deseja entregar esse pedido?</div>'+
 					  '<br/><form action="@{Pedidos.entregarPedido}" method="post">'
 			  		   +'<input type="hidden" id="idEnt" name="id" value="'+id+'"/>'
-				  	   +'<input type="submit" value="Entregar" class="btn btn-primary m-1 icon"/></form>',
+				  	   +'<span class="btn btn-primary m-1 p-0 icon"><input type="submit" value="Entregar" class="btn btn-primary m-1 icon" />'
+				  	   +'<i style="margin: 1px;" class="file alternate outline icon ml-0 pl-0"></i></span></form>',
 			  icon: 'question',
 			  showCloseButton: true,
 			  showCancelButton: true,

@@ -256,12 +256,12 @@
 #{if flash.error}
 	<div class="uk-alert-danger p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
    		<!-- <a class="uk-alert-close" uk-close></a> -->
-   		<p>${flash.error}</p>
+   		<div class="font-size-celular">${flash.error}</div>
 	</div>
 #{/if} 
 #{if flash.success}
 	<div class="uk-alert-success p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
-   		<p>${flash.success}</p>
+   		<div class="font-size-celular">${flash.success}</div>
 	</div>
 #{/if}
 </div>
@@ -486,7 +486,7 @@ $(function () {
 	  $('#example').tooltip({ boundary: 'window' })
 	})
 </script>
-
+#{if temFiltro}
 <!-- FUNÇÃO DE LIMPAR FILTRO -->
 <script type="text/javascript">
 // FUNÇÃO DE LIMPAR FILTRO
@@ -504,6 +504,7 @@ document.getElementById("limpar").addEventListener("click", function() {
 	  [].map.call(entradas, entrada => entrada.value = '');
 }
 </script>
+#{/if}
 </body>
 </html>
 

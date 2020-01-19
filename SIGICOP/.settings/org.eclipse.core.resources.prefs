@@ -10,5 +10,7 @@ encoding//app/views/Pedidos/listarConcluidos.html=UTF-8
 encoding//app/views/Pedidos/listarRecusados.html=UTF-8
 encoding//app/views/Usuarios/cadastroDeUsuario.html=UTF-8
 encoding//app/views/Usuarios/paginaUsuario.html=UTF-8
+encoding//app/views/errors/404.html=UTF-8
+encoding//app/views/errors/500.html=UTF-8
 encoding//app/views/layPri.html=UTF-8
 encoding/<project>=UTF-8

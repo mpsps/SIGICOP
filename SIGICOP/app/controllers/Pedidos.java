@@ -1,5 +1,8 @@
 package controllers;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +19,7 @@ import play.data.validation.Valid;
 import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
+import models.Historico;
 import models.Pedido;
 import models.StatusPedido;
 import models.Usuario;
@@ -374,7 +378,8 @@ public class Pedidos extends Controller {
 			"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",StatusPedido.CONCLUIDO,  admBanco).fetch();
 			System.out.println("Tentou filtrar pedidos concluidos com conteudo!(só nome do arquivo)");
 		}
-	render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro);
+		String temFiltro = "tem";
+	render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
 	}
 	
 ///// LISTAR TODOS OS PEDIDO RECUSADOS /////
@@ -412,8 +417,9 @@ public class Pedidos extends Controller {
 			listaRecusados = Pedido.find("lower(descricao) like ?1 AND status like ?2 AND adm_id = ?3",
 			"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",StatusPedido.RECUSADO,  admBanco).fetch();
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");			
-		}		
-	render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro);
+		}	
+		String temFiltro = "tem ";
+	render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
 	}
 	
 ///// REALIZAR BAIXA /////
@@ -472,7 +478,7 @@ public class Pedidos extends Controller {
 	
 ///// ENTREGAR PEDIDO /////
 	@Admin
-	public static void entregarPedido(Long id) {
+	public static void entregarPedido(Long id) throws IOException{
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Pedidos.entregarPedido() ... ["+ new Date()+"]");
 		System.out.println("iiiiddddd "+id);
@@ -485,7 +491,56 @@ public class Pedidos extends Controller {
 			ped.dataEntrega = new Date();
 			ped.adm = admin;
 			ped.save();
+			
+			gerarRelatorio(ped);
+	listarConcluidos();
+	}
+	
+///// GERAR RELATÓRIO DO PEDIDO /////
+	@Admin
+	public static void gerarRelatorio(Pedido ped) throws IOException {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.geraRelatorio() ... ["+ new Date()+"]");
+		
+			System.out.println("__________________Gerando relatório...__________________");
+//			Historico historico = new Historico();
+		try {
+			FileWriter arq = new FileWriter("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historico\\"+ped.id+"_relatorio.txt");
+			PrintWriter gravarArq = new PrintWriter(arq);
+			
+			gravarArq.println("+-------------------Relatorio:------------------+");
+			gravarArq.println("USUÁRIO: "+ped.usuario.nomeUsu);
+			System.out.println("USUÁRIO: "+ped.usuario.nomeUsu);
+			gravarArq.println("ADMINISTRADOR: "+ped.adm.nomeAdm);
+			System.out.println("ADMINISTRADOR: "+ped.adm.nomeAdm);
+			gravarArq.println("ID: "+ped.id); 
+			System.out.println("ID: "+ped.id);
+			gravarArq.println("NOME DO ARQUIVO: "+ped.nomeArquivo);
+			System.out.println("NOME DO ARQUIVO: "+ped.nomeArquivo);
+			gravarArq.println("QTD DE CÓPIAS: "+ped.qtdCopias);
+			System.out.println("QTD DE CÓPIAS: "+ped.qtdCopias);
+			gravarArq.println("FACE: "+ped.frenteVerso);
+			System.out.println("FACE: "+ped.frenteVerso);
+			gravarArq.println("DESCRIÇÃO: "+ped.descricao);
+			System.out.println("DESCRIÇÃO: "+ped.descricao);
+			gravarArq.println("DATA DE ENVIO: "+ped.dataEnvio);
+			System.out.println("DATA DE ENVIO: "+ped.dataEnvio);
+			gravarArq.println("DATA DE ATENDIMENTO: "+ped.dataAtendimento);
+			System.out.println("DATA DE ATENDIMENTO: "+ped.dataAtendimento);
+			gravarArq.println("DATA DE ENTREGA: "+ped.dataEntrega);
+			System.out.println("DATA DE ENTREGA: "+ped.dataEntrega);
+			gravarArq.println("STATUS: "+ped.status);
+			System.out.println("STATUS: "+ped.status);
+			gravarArq.println("+--------------Fim de Relatorio------------------+");
+			
+			arq.close();
 			flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" entregue!");
-	listarConcluidos();;
+			System.out.println("__________________relatório criado__________________");
+		} catch (Exception e) {
+			System.out.println("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
+			flash.error("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
+		listarConcluidos();
+		}
+	listarConcluidos();
 	}
 }

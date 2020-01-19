@@ -40,7 +40,8 @@ public class Usuarios extends Controller {
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
 		listaPedidos = Pedido.find("usuario_id = ?1 ", usuarioBanco.id).fetch();	
 		String solicitar = "solicitar";
-	render(usuarioBanco, listaPedidos, solicitar);
+		String temFiltro = "tem";
+	render(usuarioBanco, listaPedidos, solicitar, temFiltro);
 	}
 		
 ///// FILTRO DE PEDIDOS NA PAGINA DO USUARIO /////
@@ -71,7 +72,8 @@ public class Usuarios extends Controller {
 			System.out.println("Tentou filtrar com conteudo!(só descricao)");
 		}
 		String solicitar = "solicitar";
-	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos,solicitar, NomeDoArquivoFiltro, descricaoFiltro);
+		String temFiltro = "tem";
+	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos,solicitar, NomeDoArquivoFiltro, descricaoFiltro, temFiltro);
 	}
 	
 ///// TELA DE CADASTRO DE USUARIO /////

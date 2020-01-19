@@ -70,8 +70,8 @@ public class Administradores extends Controller {
 			System.out.println("Nome do Arquivo = \""+nomeDoArquivoFiltro+"\"");
 		}
 		String filtroPa = "";
-		
-	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa);
+		String temFiltro = "tem";
+	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa, temFiltro);
 	}
 	
 ///// SÓ O ADMIN PADRAO PODE CADASTRAR MAIS ADMINS /////
@@ -218,7 +218,8 @@ public class Administradores extends Controller {
 			}
 			String listaAdmins = "listaAdmins";
 			String telaAdmin = "telaAdmin";
-		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin);
+			String temFiltro = "tem";
+		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin, temFiltro);
 		}else {
 			flash.error("Acesso restrito ao administrador padrao do sistema");
 		Administradores.paginaAdmin();
