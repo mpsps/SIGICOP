@@ -71,20 +71,17 @@
 		::-webkit-scrollbar {
 			width: 10px;
 		}
-		
 		/* Fundo da barra de rolagem */
 		::-webkit-scrollbar-track-piece {
 			background-color: #1b1c1d;
 			border-left: 1px solid #1b1c1d
 		}
-		
 		/* Cor do indicador de rolagem */
 		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
 			background-color: #529fed;
 			border-radius: 5px;
 		}
-		
 		/* Cor do indicador de rolagem - ao passar o mouse */
 		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
@@ -104,9 +101,9 @@
 </head>
 <body onload="horaEnome()">
 <!-- MENU E CABE�ALHO EM TELA DE COMPUTADOR E EM CELULAR-->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="min-height: 10%;">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="max-width: 100%;"">
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
-	<div class="telaCellSigicop">
+	<div class="desaparecer-celular">
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
 			<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
@@ -125,7 +122,7 @@
 		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" />
 	</a>
 	<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
-		<div class="telaCellSigicop">
+		<div class="desaparecer-celular">
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
 			<div class="text-center">
 				<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
@@ -175,7 +172,7 @@
 #{/if}
 #{if !listaDeUsuario}
 				<span>
-		  			<a title="realizar baixa" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
+		  			<a title="realizar c�pia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
 						<img class="itemMenu m-0"" src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
@@ -184,28 +181,29 @@
 	
 			</div>
 #{if telaAdmin}
-			<a href="@{Administradores.paginaAdmin}" class="itemMenu m-0">Página Admin</a>
+			<a href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
 #{/if}
 #{if listaconcluidos}
-	  		<a class="itemMenu" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+	  		<a class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{else}
-			<a href="@{Pedidos.listarConcluidos}" class="itemMenu m-0" id="concluidos">Concluidos</a>
+			<a href="@{Pedidos.listarConcluidos}" class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
 #{/else}
 #{if listaRecusados}
-	  		<a class="itemMenu" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+	  		<a class="itemMenu font-size-celular" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{else}
-			<a href="@{Pedidos.listarRecusados}" class="itemMenu m-0" id="recusados">Recusados</a>
+			<a href="@{Pedidos.listarRecusados}" class="itemMenu m-0 font-size-celular" id="recusados">Recusados</a>
 #{/else}
 #{/if}
 #{if session.contains("usuarioLogado")}
 #{if solicitar}
-	 		<a href="@{Pedidos.fazerPedido}" style="margin: 1px; margin-right: 5px;" class="itemMenu">Solicitar</a>
-	  		<a class="itemMenu" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+	 		<a href="@{Pedidos.fazerPedido}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
+	  		<a class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+	  		aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{if voltar}
-	 		<a href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu">Voltar</a>
+	 		<a href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Voltar</a>
 #{/if}
 		 	<span class="border rounded p-0">
 				<span id="dadosUser">
@@ -214,16 +212,16 @@
 						onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 0px;" alt="user" />
 					</a>
 #{if usuarioBanco?.qtdDisponivel > 14}
-						<span class="notificacao bg-success text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>						
+						<span class="notificacao bg-success text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>						
 #{/if}	
 #{if usuarioBanco?.qtdDisponivel > 8 & usuarioBanco?.qtdDisponivel < 15}	
-							<span class="notificacao bg-warning text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>			
+							<span class="notificacao bg-warning text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>			
 #{/if}
 #{if usuarioBanco?.qtdDisponivel < 9}
-							<span class="notificacao bg-danger text-white m-0" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>
+							<span class="notificacao bg-danger text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>
 #{/if}							
 				<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
-					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
+					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
 				</span>
 				<span class="float-right">
 					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon m-0"></i></a>
@@ -238,7 +236,7 @@
 						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 0px;" alt="addAdmin" />
 					</a>
-					<span class="text-white mr-0 mt-0 text-md" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
+					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
 				</span>
 				<span class="float-right">
 					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger icon ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
@@ -296,15 +294,15 @@
 				<div class="three wide column">
 					<h4 class="ui inverted header">Contatos:</h4>
 					<div class="ui inverted link list">
-						<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 98147-9099</a> 
+						<a href="#"  class="text-decoration-none" id="font-size-celular">+55 (84) 98147-9099</a> 
 						<br>
-						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 99433-3803</a> 
+						<a href="#" class="text-decoration-none" id="font-size-celular">+55 (84) 99433-3803</a> 
 					</div>
 				</div>
 				<div class="three wide column">
 					<h4 class="ui inverted header">E-mails:</h4>
-					<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
-					<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
+					<a href="#" class="text-decoration-none" class="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+					<a href="#" class="text-decoration-none" class="font-size-celular">manacio.p@escolar.ifrn.edu.br</a> 
 				</div>
 			</div>
 		</div>
@@ -433,7 +431,7 @@ $(document).ready(function() {
 		Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  html: '<div class="text-center sticky-top h4 m-0"><span class="soIcon"><i class="address card icon m-0 p-0 border-0"></i></span>Meus Dados'+
+			  html: '<div class="text-center sticky-top h4 m-0"><span class="desaparecer-celular"><i class="address card icon m-0 p-0 border-0"></i></span>Meus Dados'+
 			  ' <a href="@{Administradores.editar}" class="btn m-0 ml-0 p-1" style="background-color: #529fed;">Editar</a></div>'+
 			  '<div class="text-left font-size-celular"><img src="/public/images/icones/admNome.png" width="" title="Nome"> - ${admBanco?.nomeAdm} <br>'+
 			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${admBanco?.email}'+

@@ -14,8 +14,8 @@ public class Gerenciador extends Controller {
 	public static void principal() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Gerenciador.principal() ... ["+ new Date()+"]");
+	
 		String usuario = session.get("usuarioLogado");
-		String admin = session.get("adminLogado");
 		if(usuario != null) {
 			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
 			if(dadosSessao != null) {
@@ -24,10 +24,11 @@ public class Gerenciador extends Controller {
 				usu.save();				
 			}
 		}
+		String admin = session.get("adminLogado");
 		if(admin != null) {
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 				if(dadosSessaoAdmin != null) {
-					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					Administrador adm = Administrador.findById(dadosSessaoAdmin.admin.id);
 					adm.ultimoAcesso = new Date();
 					adm.save();
 			}
@@ -41,8 +42,8 @@ public class Gerenciador extends Controller {
 	public static void login() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Gerenciador.login() ... ["+ new Date()+"]");
+	
 		String usuario = session.get("usuarioLogado");
-		String admin = session.get("adminLogado");
 		if(usuario != null) {
 			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
 			if(dadosSessao != null) {
@@ -51,10 +52,11 @@ public class Gerenciador extends Controller {
 				usu.save();				
 			}
 		}
+		String admin = session.get("adminLogado");
 		if(admin != null) {
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 				if(dadosSessaoAdmin != null) {
-					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					Administrador adm = Administrador.findById(dadosSessaoAdmin.admin.id);
 					adm.ultimoAcesso = new Date();
 					adm.save();
 			}

@@ -47,7 +47,7 @@ public class Inicializador extends Job {
 			magdiel.qtdDisponivel = 20;
 			magdiel.save();
 			
-			Usuario manacio= new Usuario();
+			Usuario manacio = new Usuario();
 			manacio.nomeUsu = "Manacio Pereira de Souza";
 			manacio.matricula = "20181064110023";
 			String senhaCriptManacio = CriptografiaUtils.criptografarMD5("123456");
@@ -55,6 +55,15 @@ public class Inicializador extends Job {
 			manacio.email = "manacio@gmail.com";
 			manacio.qtdDisponivel = 20;
 			manacio.save();
+			
+			Usuario usuario = new Usuario();
+			usuario.nomeUsu = "Usuario Sobrenome da Geração";
+			usuario.matricula = "20181064110025";
+			String senhaCriptUsuario = CriptografiaUtils.criptografarMD5("123456");
+			usuario.senha = senhaCriptUsuario;
+			usuario.email = "usuario@email.com";
+			usuario.qtdDisponivel = 20;
+			usuario.save();
 			
 			Pedido pedMagdiel1 = new Pedido();
 			pedMagdiel1.nomeArquivo = "Arquivo de teste do nome 1";

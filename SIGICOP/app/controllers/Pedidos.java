@@ -49,7 +49,6 @@ public class Pedidos extends Controller {
 	}
 	
 ///// ADICIONA PEDIDOS NA CACHE /////
-	@SuppressWarnings("unused")
 	@User
 	public static void addPedido(@Valid Pedido item) {
 	System.out.println("_____________________________________________________________________________________");
@@ -57,6 +56,7 @@ public class Pedidos extends Controller {
 			
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = null;
+		
 		if(dadosDeSessao == null) {
 			dadosDeSessao = new DadosSessao();
 		}else {
@@ -89,8 +89,8 @@ public class Pedidos extends Controller {
 	//			flash.keep();
 	//			fazerPedido();
 	//		}
-			
-		String nomeArq = params.get("name");
+		
+		String nomeArq = params.get("name"); // recebe o nome do arquivo	
 			
 		if(item.arquivo == null || nomeArq == null) {
 			flash.error("O Envio do Arquivo é obrigatorio");
@@ -102,12 +102,17 @@ public class Pedidos extends Controller {
 			flash.error("Frente ou Verso é obrigatorio");
 			fazerPedido();
 		}
-		
-		int idLista;
+		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
+		int idLista = 0;
 		if(listaDePedidos.size() <= 0) {
 			idLista = 1;
 		}else {
-			idLista = dadosDeSessao.listaDePedidos.size()+1;
+			Pedido ultimoPedido = new Pedido();
+			for (int i = 0; i < dadosDeSessao.listaDePedidos.size(); i++) {
+				ultimoPedido = dadosDeSessao.listaDePedidos.get(i);
+			}
+		// pegar o idLista do ultimo pedido e soma mais 1 para o proximo
+			idLista = ultimoPedido.idLista + 1;
 		}
 		item.idLista = idLista;
 		
@@ -121,69 +126,7 @@ public class Pedidos extends Controller {
 	fazerPedido();
 	}
 	
-///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
-	@User
-	public static void addPedidoAjax(@Valid Pedido item) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.addPedidoAjax() ...["+ new Date()+"]");
-			
-		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
-		List<Pedido> listaDePedidos = null;
-		if(dadosDeSessao == null) {
-			dadosDeSessao = new DadosSessao();
-		}else {
-			listaDePedidos = dadosDeSessao.listaDePedidos;
-		}
-		if(listaDePedidos == null) {
-			listaDePedidos = new ArrayList<Pedido>();
-		}
-		int valor;
-		if(item.frenteVerso.equals("frenteEverso")) {
-			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
-			if(valor < 0) {
-			flash.error("quatidade de copia indisponivel");
-		fazerPedido();
-		}
-		dadosDeSessao.usuario.qtdDisponivel = valor;
-		Cache.set(session.getId(), dadosDeSessao);
-		}else {
-		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
-		if(valor < 0) {
-			flash.error("quatidade de copia indisponivel");
-		fazerPedido();
-		}
-		dadosDeSessao.usuario.qtdDisponivel = valor;
-		Cache.set(session.getId(), dadosDeSessao);
-		}
-	//		if (validation.hasErrors()) {
-	//			params.flash();
-	//			flash.error("Falha no Cadastro do Pedido!");
-	//			flash.keep();
-	//			fazerPedido();
-	//		}
-			
-		String nomeArq = params.get("name");
-			
-		if(item.arquivo == null || nomeArq == null) {
-			flash.error("O Envio do Arquivo é obrigatorio");
-			fazerPedido();
-		}else if(item.qtdCopias == 0){
-			flash.error("A Quantidade de Copias é obrigatorio");
-			fazerPedido();
-		}else if(item.frenteVerso == null){
-			flash.error("Frente ou Verso é obrigatorio");
-			fazerPedido();
-		}
-		
-		item.nomeArquivo = nomeArq;
-		item.usuario = dadosDeSessao.usuario;
-		
-		listaDePedidos.add(item);
-		
-		dadosDeSessao.listaDePedidos = listaDePedidos;
-		Cache.set(session.getId(), dadosDeSessao);
-	renderJSON(listaDePedidos);
-	}
+
 	
 ///// SALVAR PEDIDO(S) /////
 	@User
@@ -219,25 +162,27 @@ public class Pedidos extends Controller {
 	public static void cancelarPedido(Long idPedido) {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.cancelarPedidos() ...["+ new Date()+"]");
+	System.out.println(idPedido);
 	
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
-		List<Pedido> listaDePedidos = dadosDeSessao.listaDePedidos;
+	
 		
 		for (int i = 0; i <dadosDeSessao.listaDePedidos.size(); i++) {
-			if (listaDePedidos.get(i).id == idPedido) {
+			System.out.println(dadosDeSessao.listaDePedidos.get(i).idLista);
+			if (dadosDeSessao.listaDePedidos.get(i).idLista == idPedido) {
 				// devolver a quantidade disponivel
-			if(listaDePedidos.get(i).frenteVerso.equals("frenteEverso")) {
-				dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel + (listaDePedidos.get(i).qtdCopias * 2); 
+			if(dadosDeSessao.listaDePedidos.get(i).frenteVerso.equals("frenteEverso")) {
+				dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel + (dadosDeSessao.listaDePedidos.get(i).qtdCopias * 2); 
 			}else {
-				dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel + listaDePedidos.get(i).qtdCopias;
+				dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel + dadosDeSessao.listaDePedidos.get(i).qtdCopias;
 			}
-				listaDePedidos.remove(i);
+			dadosDeSessao.listaDePedidos.remove(i);
 			}
 		}
-		if(listaDePedidos.size() == 0) {
-			listaDePedidos = null;	
+		if(dadosDeSessao.listaDePedidos.size() == 0) {
+			dadosDeSessao.listaDePedidos = null;	
 		}
-		 dadosDeSessao.listaDePedidos = listaDePedidos; 
+		
 		
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido Cancelado!");
@@ -327,6 +272,7 @@ public class Pedidos extends Controller {
 						
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
+		
 		if(ped.frenteVerso.equals("frenteEverso")) {
 			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2);
 		}else {
@@ -347,18 +293,20 @@ public class Pedidos extends Controller {
 	public static void listarConcluidos() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.listarConcluidos() ... ["+ new Date()+"]");
+	
 		String matriculaDoUsuarioFiltro = params.get("matriculaDoUsuarioFiltro");
 		String nomeDoArquivoFiltro = params.get("nomeDoArquivoFiltro");
+		
 		if (matriculaDoUsuarioFiltro == null && nomeDoArquivoFiltro == null) {
 			matriculaDoUsuarioFiltro = "";
 			nomeDoArquivoFiltro = "";
+		}else {
+			System.out.println("Matricula: "+matriculaDoUsuarioFiltro);
+			System.out.println("Nome do Arquivo: "+nomeDoArquivoFiltro);			
 		}
-		System.out.println("Matricula: "+matriculaDoUsuarioFiltro);
-		System.out.println("Nome do Arquivo: "+nomeDoArquivoFiltro);
 	
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
-		String telaAdmin = "Tela Admin";
 					
 		List<Pedido> listaconcluidos = new ArrayList<Pedido>();
 			
@@ -378,6 +326,7 @@ public class Pedidos extends Controller {
 			"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",StatusPedido.CONCLUIDO,  admBanco).fetch();
 			System.out.println("Tentou filtrar pedidos concluidos com conteudo!(só nome do arquivo)");
 		}
+		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem";
 	render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
 	}
@@ -387,18 +336,20 @@ public class Pedidos extends Controller {
 	public static void listarRecusados() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.listarRecusados() ... ["+ new Date()+"]");
+	
 		String matriculaDoUsuarioFiltro = params.get("matriculaDoUsuarioFiltro");
 		String nomeDoArquivoFiltro = params.get("nomeDoArquivoFiltro");
+		
 		if (matriculaDoUsuarioFiltro == null && nomeDoArquivoFiltro == null) {
-		matriculaDoUsuarioFiltro = "";
-		nomeDoArquivoFiltro = "";
+			matriculaDoUsuarioFiltro = "";
+			nomeDoArquivoFiltro = "";
+		}else {
+			System.out.println("Matricula: "+matriculaDoUsuarioFiltro);
+			System.out.println("Nome do Arquivo: "+nomeDoArquivoFiltro);			
 		}
-		System.out.println("Matricula: "+matriculaDoUsuarioFiltro);
-		System.out.println("Nome do Arquivo: "+nomeDoArquivoFiltro);
 	
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
-		String telaAdmin = "Tela Admin";
 					
 		List<Pedido> listaRecusados = new ArrayList<Pedido>();
 				
@@ -418,6 +369,7 @@ public class Pedidos extends Controller {
 			"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",StatusPedido.RECUSADO,  admBanco).fetch();
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");			
 		}	
+		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem ";
 	render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
 	}
@@ -481,7 +433,7 @@ public class Pedidos extends Controller {
 	public static void entregarPedido(Long id) throws IOException{
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Pedidos.entregarPedido() ... ["+ new Date()+"]");
-		System.out.println("iiiiddddd "+id);
+		System.out.println("id do pedido = "+id);
 
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 			Administrador admin = Administrador.findById(dadosSessaoAdmin.admin.id);
@@ -491,51 +443,52 @@ public class Pedidos extends Controller {
 			ped.dataEntrega = new Date();
 			ped.adm = admin;
 			ped.save();
-			
+			// gerar relatório
 			gerarRelatorio(ped);
+			
 	listarConcluidos();
 	}
 	
-///// GERAR RELATÓRIO DO PEDIDO /////
+///// GERAR RELATÓRIO DO PEDIDO APÓS DE ENTREGUE /////
 	@Admin
 	public static void gerarRelatorio(Pedido ped) throws IOException {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Pedidos.geraRelatorio() ... ["+ new Date()+"]");
 		
-			System.out.println("__________________Gerando relatório...__________________");
+			System.out.println("|__________________Gerando relatório...__________________|");
 //			Historico historico = new Historico();
 		try {
 			FileWriter arq = new FileWriter("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historico\\"+ped.id+"_relatorio.txt");
 			PrintWriter gravarArq = new PrintWriter(arq);
 			
-			gravarArq.println("+-------------------Relatorio:------------------+");
-			gravarArq.println("USUÁRIO: "+ped.usuario.nomeUsu);
-			System.out.println("USUÁRIO: "+ped.usuario.nomeUsu);
-			gravarArq.println("ADMINISTRADOR: "+ped.adm.nomeAdm);
-			System.out.println("ADMINISTRADOR: "+ped.adm.nomeAdm);
-			gravarArq.println("ID: "+ped.id); 
-			System.out.println("ID: "+ped.id);
-			gravarArq.println("NOME DO ARQUIVO: "+ped.nomeArquivo);
-			System.out.println("NOME DO ARQUIVO: "+ped.nomeArquivo);
-			gravarArq.println("QTD DE CÓPIAS: "+ped.qtdCopias);
-			System.out.println("QTD DE CÓPIAS: "+ped.qtdCopias);
-			gravarArq.println("FACE: "+ped.frenteVerso);
-			System.out.println("FACE: "+ped.frenteVerso);
-			gravarArq.println("DESCRIÇÃO: "+ped.descricao);
-			System.out.println("DESCRIÇÃO: "+ped.descricao);
-			gravarArq.println("DATA DE ENVIO: "+ped.dataEnvio);
-			System.out.println("DATA DE ENVIO: "+ped.dataEnvio);
-			gravarArq.println("DATA DE ATENDIMENTO: "+ped.dataAtendimento);
-			System.out.println("DATA DE ATENDIMENTO: "+ped.dataAtendimento);
-			gravarArq.println("DATA DE ENTREGA: "+ped.dataEntrega);
-			System.out.println("DATA DE ENTREGA: "+ped.dataEntrega);
-			gravarArq.println("STATUS: "+ped.status);
-			System.out.println("STATUS: "+ped.status);
-			gravarArq.println("+--------------Fim de Relatorio------------------+");
+			gravarArq.println("|________________Relatório do pedido "+ped.id+"__________________|");
+			gravarArq.println("|USUÁRIO: "+ped.usuario.nomeUsu);
+			System.out.println("|USUÁRIO: "+ped.usuario.nomeUsu);
+			gravarArq.println("|ADMINISTRADOR: "+ped.adm.nomeAdm);
+			System.out.println("|ADMINISTRADOR: "+ped.adm.nomeAdm);
+			gravarArq.println("|ID DO PEDIDO: "+ped.id+"                                        |"); 
+			System.out.println("|ID DO PEDIDO: "+ped.id+"                                        |");
+			gravarArq.println("|NOME DO ARQUIVO: "+ped.nomeArquivo);
+			System.out.println("|NOME DO ARQUIVO: "+ped.nomeArquivo);
+			gravarArq.println("|QTD DE CÓPIAS: "+ped.qtdCopias+"                                        |");
+			System.out.println("|QTD DE CÓPIAS: "+ped.qtdCopias+"                                        |");
+			gravarArq.println("|FACE: "+ped.frenteVerso);
+			System.out.println("|FACE: "+ped.frenteVerso);
+			gravarArq.println("|DESCRIÇÃO: "+ped.descricao);
+			System.out.println("|DESCRIÇÃO: "+ped.descricao);
+			gravarArq.println("|DATA DE ENVIO: "+ped.dataEnvio+"       |");
+			System.out.println("|DATA DE ENVIO: "+ped.dataEnvio+"       |");
+			gravarArq.println("|DATA DE ATENDIMENTO: "+ped.dataAtendimento+" |");
+			System.out.println("|DATA DE ATENDIMENTO: "+ped.dataAtendimento+" |");
+			gravarArq.println("|DATA DE ENTREGA: "+ped.dataEntrega+"     |");
+			System.out.println("|DATA DE ENTREGA: "+ped.dataEntrega+"     |");
+			gravarArq.println("|STATUS: "+ped.status);
+			System.out.println("|STATUS: "+ped.status);
+			gravarArq.println("|___________________Fim de Relatorio_____________________|");
 			
 			arq.close();
 			flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" entregue!");
-			System.out.println("__________________relatório criado__________________");
+			System.out.println("|___________________relatório criado_____________________|");
 		} catch (Exception e) {
 			System.out.println("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
 			flash.error("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
@@ -543,4 +496,68 @@ public class Pedidos extends Controller {
 		}
 	listarConcluidos();
 	}
+///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
+//	@User
+//	public static void addPedidoAjax(@Valid Pedido item) {
+//	System.out.println("_____________________________________________________________________________________");
+//	System.out.println("Pedidos.addPedidoAjax() ...["+ new Date()+"]");
+//			
+//		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
+//		List<Pedido> listaDePedidos = null;
+//		
+//		if(dadosDeSessao == null) {
+//			dadosDeSessao = new DadosSessao();
+//		}else {
+//			listaDePedidos = dadosDeSessao.listaDePedidos;
+//		}
+//		if(listaDePedidos == null) {
+//			listaDePedidos = new ArrayList<Pedido>();
+//		}
+//		int valor;
+//		if(item.frenteVerso.equals("frenteEverso")) {
+//			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
+//			if(valor < 0) {
+//			flash.error("quatidade de copia indisponivel");
+//		fazerPedido();
+//		}
+//		dadosDeSessao.usuario.qtdDisponivel = valor;
+//		Cache.set(session.getId(), dadosDeSessao);
+//		}else {
+//		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
+//		if(valor < 0) {
+//			flash.error("quatidade de copia indisponivel");
+//		fazerPedido();
+//		}
+//		dadosDeSessao.usuario.qtdDisponivel = valor;
+//		Cache.set(session.getId(), dadosDeSessao);
+//		}
+//	//		if (validation.hasErrors()) {
+//	//			params.flash();
+//	//			flash.error("Falha no Cadastro do Pedido!");
+//	//			flash.keep();
+//	//			fazerPedido();
+//	//		}
+//			
+//		String nomeArq = params.get("name");
+//			
+//		if(item.arquivo == null || nomeArq == null) {
+//			flash.error("O Envio do Arquivo é obrigatorio");
+//			fazerPedido();
+//		}else if(item.qtdCopias == 0){
+//			flash.error("A Quantidade de Copias é obrigatorio");
+//			fazerPedido();
+//		}else if(item.frenteVerso == null){
+//			flash.error("Frente ou Verso é obrigatorio");
+//			fazerPedido();
+//		}
+//		
+//		item.nomeArquivo = nomeArq;
+//		item.usuario = dadosDeSessao.usuario;
+//		
+//		listaDePedidos.add(item);
+//		
+//		dadosDeSessao.listaDePedidos = listaDePedidos;
+//		Cache.set(session.getId(), dadosDeSessao);
+//	renderJSON(listaDePedidos);
+//	}
 }

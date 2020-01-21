@@ -3,40 +3,40 @@
 <div id="corpoCelular" class="heightMin">
 	<div class="h1 text-dark text-center tituloCelular m-0 p-0">Realizar Pedido de Cópia</div><br>
 	<div class="ui middle aligned center aligned grid p-0">
-		<div class="row p-0">
+		<div class="row p-0 font-size-celular">
 			<div class="col-md-6 order-md-1 m-0 p-0">
 <!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA -->
-				<form action="@{Pedidos.realizarBaixa}" class="ui large form m-0 p-1 pt-0" method="post">
-					<div class="ui stacked segment m-0 p-3 pt-0"><!-- cor branca do formulario -->
-						<label for="confirmarSenha">Usuário:</label>
-						<select name="ped.usuario.id" class="form-control">
+				<form action="@{Pedidos.realizarBaixa}" class="ui large form m-0 p-1 pt-0 font-size-celular" method="post">
+					<div class="ui stacked segment m-0 p-2 pt-0 pt-0"><!-- cor branca do formulario -->
+						<label for="confirmarSenha" class="font-size-celular border-bottom">Usuário:</label>
+						<select name="ped.usuario.id" class="form-control hei-input-celular font-size-celular">
 #{list items:listaDeUsuario, as: 'u'}
-							<option value="${u.id}">${u.matricula}</option>
+							<option value="${u.id}" class="font-size-celular">${u.matricula}</option>
 #{/list}
 						</select>
 						<div class="row">
 							<div class="col-6">
-								<label for="confirmarSenha" class="mt-2">Cópias:<sup style="color: red;">*</sup></label>
-								<input type="number" name="ped.qtdCopias" class="form-control" max="" min="0" class="qtdCopias" 
+								<label for="confirmarSenha" class="mt-2 font-size-celular border-bottom">Cópias:<sup style="color: red;">*</sup></label>
+								<input type="number" name="ped.qtdCopias" class="form-control hei-input-celular" max="" min="0" class="qtdCopias" 
 								value="${valor}"  >
 							</div>
 							<div class="col-6">
-								<label class=" mt-2"">Face:<sup style="color: red;">*</sup></label><br>
+								<label class=" mt-2 font-size-celular border-bottom">Face:<sup style="color: red;">*</sup></label><br>
 								<div class="custom-control custom-radio custom-control-inline">
 							  		<input type="radio" id="frente" name="ped.frenteVerso" class="custom-control-input" 
 							  		value="frente" checked="checked">
-							 		<label class="custom-control-label" for="frente">Frente</label>
+							 		<label class="custom-control-label font-size-celular" for="frente">Frente</label>
 								</div>
 									<div class="custom-control custom-radio custom-control-inline">
 							 		<input type="radio" id="frenteEverso" name="ped.frenteVerso" class="custom-control-input" 
 							 		value="frenteEverso">
-							  		<label class="custom-control-label" for="frenteEverso">Posterior</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
+							  		<label class="custom-control-label font-size-celular" for="frenteEverso">Posterior</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
 								</div>
 							</div>
 						</div>
-						<label class="mt-1">Descricao</label>
-						<textarea rows="3" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
-						<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Salvar"/>
+						<label class="mt-1 font-size-celular border-bottom">Descricao</label>
+						<textarea rows="2" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
+						<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular" value="Salvar"/>
 					</div>
 				</form>
 			</div>

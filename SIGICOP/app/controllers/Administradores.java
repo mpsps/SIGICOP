@@ -30,7 +30,6 @@ public class Administradores extends Controller {
 ///// PÁGINA ADMIN /////
 	@Admin
 	public static void paginaAdmin() {
-	System.out.println("apenas para enviar o commit depois de reconfigurado!");
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Administrador.paginaAdmin() ... ["+ new Date()+"]");
 		
@@ -87,29 +86,32 @@ public class Administradores extends Controller {
 			render(telaAdmin, admBanco);
 		}else {
 			flash.error("Acesso restrito ao administrador padrao do sistema");
-	     Administradores.paginaAdmin();
+	     paginaAdmin();
 		}
 	}
 	
 ///// APOS CADASTRO FINALIZADO E MANDA PARA TELA DO ADMIN ///// 
 	@Admin
 	public static void salvarAdm(@Valid Administrador adm) {
-	DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
-	Administrador admBanco = dadosSessaoAdmin.admin;
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		Administrador admBanco = dadosSessaoAdmin.admin;
 		
 		if(admBanco.admPadrao) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.salvarAdm() ... ["+ new Date()+"]");
+		
 		Administrador adminBancoEmail = Administrador.find("email = ?1", adm.email).first();
+		// se o id do adm for nulo é pq está cadastrando um novo
 		if(adm.id == null) {
 			if(adminBancoEmail != null){
 				flash.error("Email ja exite!");
-				cadastroDeAdms();
+				String email = "Esse Email Já Existe";
+			renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, email);
 			}else {				
 				if (validation.hasErrors()) {
 					params.flash();
-				flash.error("Falha no Cadastro do Usuario!");
-				cadastroDeAdms();
+					flash.error("Falha no Cadastro do Usuario!");
+				renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco);
 				}
 			boolean senhaIguais = adm.compararSenha();
 
@@ -119,7 +121,8 @@ public class Administradores extends Controller {
 				adm.senha = senhaCript;
 			}else {
 				flash.error("Comparacao de senha invalida!");
-				cadastroDeAdms();
+				String comparar = "Não Está Compatível";
+				renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar);
 			}
 			}
 		}else {
@@ -131,7 +134,7 @@ public class Administradores extends Controller {
 		paginaAdmin();
 		}else {
 			flash.error("Acesso restrito ao administrador padrao do sistema");
-	    Administradores.paginaAdmin();
+	    paginaAdmin();
 		}
 	}
 	
@@ -191,8 +194,8 @@ public class Administradores extends Controller {
 ///// LISTA TODOS OS ADMINISTRADORES /////
 	@Admin
 	public static void listarTodosAdmins() {		
-	DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
-	Administrador admBanco = dadosSessaoAdmin.admin;
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		Administrador admBanco = dadosSessaoAdmin.admin;
 		
 		if(admBanco.admPadrao) {
 		System.out.println("_____________________________________________________________________________________");
@@ -229,9 +232,9 @@ public class Administradores extends Controller {
 ///// REMOVER ADMINISTRADORES /////
 	@Admin
 	public static void removerAdmin(Long id) {		
-	DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
-	Administrador admBanco = dadosSessaoAdmin.admin;
-		
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		Administrador admBanco = dadosSessaoAdmin.admin;
+			
 		if(admBanco.admPadrao) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.removerAdmin() ... ["+ new Date()+"]");
@@ -285,6 +288,7 @@ public class Administradores extends Controller {
 		admin.save();
 		session.clear();
 		Cache.clear();
+		
 		flash.success("Voce saiu do sistema");
 	Gerenciador.login();
 	}

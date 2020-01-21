@@ -9,37 +9,46 @@
 #{/else}
 	<div class="text-center m-0">
 #{ifErrors}
-		<div class="h2">Ops...</div>
-		<!-- #{errors} <li>${error.key} - ${error} - ${error.message}</li>#{/errors} -->
-#{/ifErrors}			
-	</div>				
+		<span class="h2 m-0" style="color:red">Ops...</span>
+		<!--#{errors}
+		<li>${error.key} - ${error} - ${error.message}</li>
+		#{/errors}-->
+#{/ifErrors}
+	</div>			
 	<div class="ui middle aligned center aligned grid mt-0">
 		<div class="column mt-0">
-<!-- FORMULARIO DE CADASTRO E EDIÇÃO DO ADMIN -->
-			<form action="@{Administradores.salvarAdm} " class="m-0" method="post">
+<!-- FORMULARIO DE CADASTRO E EDIï¿½ï¿½O DO ADMIN -->
+			<form action="@{Administradores.salvarAdm} " class="m-0 " method="post">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
-				<div class="ui stacked segment">
-					<label>Nome:</label>	
+				<div class="ui stacked segment" style="margin-top: -3.5%;">
+					<label class="font-size-celular m-1">Nome:</label>	
 					<span style="color:red">#{error 'adm.nomeAdm' /}</span>
-					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control" 
+					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control hei-input-celular font-size-celular" 
 					autofocus="" autocomplete="off"  value="${adm?.nomeAdm}"/>
-					<label for="email" class="mt-2">Email:</label>
+					<label for="email" class="m-1 font-size-celular">Email:</label>
 					<span style="color:red">#{error 'adm.email' /}</span>
-					<input type="email" name="adm.email" placeholder="Email" class="form-control" 
+#{if email}		
+					<span style="color:red">${email}</span>
+#{/if}
+					<input type="email" name="adm.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
 					autocomplete="off" id="email" value="${adm?.email}"/>
 #{if !adm?.id}
-					<label for="senha" class="mt-2">Senha:</label>
+					<label for="senha" class="m-1  font-size-celular">Senha:</label>
 					<span style="color:red">#{error 'adm.senha' /}</span>
-					<input type="password" name="adm.senha" placeholder="Senha" class="form-control" id="senha"  />
-					<label for="confirmarsenha" class="mt-2">Confimar Senha:</label>
-					<span style="color:red">#{error 'adm.senha' /}</span>
-					<input type="password" name="adm.confirmarSenha" placeholder="Confimar Senha" 
-					class="form-control" id="confirmarsenha"/>
+					<input type="password" name="adm.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" id="senha"  />
+					<label for="confirmarsenha" class="m-1  font-size-celular">Confimar Senha:</label>
+#{if comparar}		
+					<span style="color:red">${comparar}</span>
+#{/if}
+					<input type="password" name="adm.confirmarSenha" placeholder="Confirmar Senha" 
+					class="form-control hei-input-celular font-size-celular" id="confirmarsenha"/>
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
 #{/if}
 #{else}
-					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2">Alterar Senha</a>
+					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular">Alterar Senha</a>
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Editar" />					
 #{/else}
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value=" ${ adm? 'Editar' : 'Cadastrar' }" />
+				
 				</div>
 			</form>
 		</div>

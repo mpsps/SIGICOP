@@ -80,8 +80,8 @@ public class Usuarios extends Controller {
 	public static void cadastroDeUsuario() {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.cadastroDeUsuario() ...["+ new Date()+"]");
+	
 		String usuario = session.get("usuarioLogado");
-		String admin = session.get("adminLogado");
 		if(usuario != null) {
 			DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);
 			if(dadosSessao != null) {
@@ -90,10 +90,11 @@ public class Usuarios extends Controller {
 				usu.save();				
 			}
 		}
+		String admin = session.get("adminLogado");
 		if(admin != null) {
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 				if(dadosSessaoAdmin != null) {
-					Administrador adm = Usuario.findById(dadosSessaoAdmin.admin.id);
+					Administrador adm = Administrador.findById(dadosSessaoAdmin.admin.id);
 					adm.ultimoAcesso = new Date();
 					adm.save();
 			}
@@ -112,12 +113,12 @@ public class Usuarios extends Controller {
 		Usuario userBancoEmail = Usuario.find("email = ?1", user.email).first();
 		if(userBancoMat != null) {
 			flash.error("Matricula Já Existente!");
-			String mat = "Matricula Já Existe!";
-			renderTemplate("usuarios/cadastroDeUsuario.html", user, mat);
+			String mat = "Essa Matricula Já Existe";
+		renderTemplate("usuarios/cadastroDeUsuario.html", user, mat);
 		}else if (userBancoEmail != null){
 			flash.error("Matricula Já Existente!");
-			String ema = "email Já Existe!";
-			renderTemplate("usuarios/cadastroDeUsuario.html", user, ema);
+			String email = "Esse Email Já Existe";
+		renderTemplate("usuarios/cadastroDeUsuario.html", user, email);
 		}else {
 			///// COMPARAR SENHAS /////
 			boolean userSenhaCompara = user.compararSenha();
@@ -127,15 +128,14 @@ public class Usuarios extends Controller {
 				if (validation.hasErrors()) {
 					params.flash();
 					flash.error("Falha no Cadastro do Usuario!");
-					renderTemplate("Usuarios/cadastroDeUsuario.html", user);
+				renderTemplate("Usuarios/cadastroDeUsuario.html", user);
 				}
 				flash.success("Usuário Cadastrado com Sucesso!");
 				user.save();
 			}else {
-				if(!userSenhaCompara) {
-					flash.error("Confimarçao de senha invalida!");		
-				}
-				renderTemplate("Usuarios/cadastroDeUsuario.html", user);
+				flash.error("Confimarçao de senha invalida!");	
+				String comparar = "Não Está Compatível";
+			renderTemplate("Usuarios/cadastroDeUsuario.html", user, comparar);
 			}	
 		}
 	Gerenciador.login();
@@ -185,6 +185,7 @@ public class Usuarios extends Controller {
 		usu.save();
 		session.clear();
 		Cache.clear();
+		
 		flash.success("Voce saiu do sistema");
 		Gerenciador.login();
 	}

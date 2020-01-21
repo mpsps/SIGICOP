@@ -55,9 +55,9 @@ body {
 	display: block;
 	position: fixed;
 	top: 12%;
-	left: 1%;
-	right: 1%;
-	width: 92%;
+	left: 2%;
+	right: 2%;
+	max-width: 80%;
 	z-index: 9999;
 	margin: auto;
 	box-shadow: 1px 1px 5px black;
@@ -72,13 +72,6 @@ body {
   margin-bottom: auto;
   height: 100%;
 	}
-.sairUsu{
- 	position: relative;
- 	top: 0;
-	float: right;
-	text-align: right;
-	padding-top: 0;
-	}
 #corpoCelular{	
  	margin-bottom: 10%;
  	margin-top: 30%;
@@ -88,14 +81,6 @@ body {
 #rodapeCelular{
 	margin-top: 15%;	
 	min-height:100%;
-	}
-#menuCorpo{
-	max-width: 100%;
-	display: none;
-	}
-.info{
-	font-size: 18px;
-	font-family: sans-serif;
 	}
 .itemMenu{
 	text-align: center;
@@ -129,17 +114,8 @@ body {
 	margin-left: 5%;
 	margin-right: 5%;" 
 	}
-.botaoArquivo{
-	margin-left: 5%;
-	margin-right: 5%;
-	text-align: center;
-	}
-.telaCellSigicop{
+.desaparecer-celular{
 	display: none;
-	}
-.nomeUsuAdmin{
-	font-size: 80%;
-	letter-spacing: 0.5;
 	}
 .tituloCelular {
 	font-size: 130%;
@@ -151,17 +127,14 @@ body {
 	letter-spacing: 0.1;
 	word-spacing: 0.5;
 	}
-#tamanhoTextoCelular{
-	font-size: 80%;
-	}
-.soIcon{
-	display: none;
-}
 .font-size-celular{
 	font-size: 80%;
 }
 .imagem-celular{
 	width: 25px;
 	float: left;
+}
+.hei-input-celular{
+	height: 30px;
 }
 }

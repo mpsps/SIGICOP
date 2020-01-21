@@ -11,7 +11,7 @@
 	</div>
 #{/if} 
 #{if listaPedidosPa != null}
-	<div class="row">
+	<div class="row font-size-celular">
   		<div class="col">
 	    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
 		      	<div class="card card-body m-0 p-0">
@@ -23,18 +23,20 @@
 							<div class="form-row">
 						    	<div class="form-group col-md-6">
 							    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
-									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control" placeholder="Matricula do usuario" 
+									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control hei-input-celular font-size-celular" 
+									placeholder="Matricula do usuario" 
 									id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
 						    	</div>
 						    	<div class="form-group col-md-6">
 							    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
-									<input type="text" name="nomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo" 
+									<input type="text" name="nomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
+									placeholder="Nome do Arquivo" 
 									id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
 						    	</div>
 						  		</div>
 						 		<div class="text-center"">
-							  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-									<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
+							  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
+									<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
 								</div>
 						 	</fieldset>
 						</form><br><br>
@@ -44,14 +46,14 @@
 	    	</div>
   		</div>
   	</div>	
-	<div class="container">
+	<div class="container font-size-celular">
  		<div class="row">
 #{list items:listaPedidosPa, as:'p'}
  <!-- listar todos os pedidos com o status em "AGUARDANDO"-->
 	   		<div class="col-lg-6">
 				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
-						<span class="soIcon">
+						<span class="desaparecer-celular">
 							<div class="text-primary m-0 h6">Usuario:</div>
 					${p.usuario.nomeUsu}<br />
 						</span>
@@ -69,8 +71,8 @@
 							<b>Status: </b>
 							<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
 						</div>
-						<button class="btn btn-outline-info mt-1 m-0 mb-1 btn-sm btn-block" data-toggle="collapse" href="#collapseExample${p.id}" 
-						 	role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="soIcon">Informacoes</span>
+						<button class="btn btn-outline-info mt-1 m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+						 	role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="desaparecer-celular">Informacoes</span>
 					  	</button>
 						<div class="collapse text-left" id="collapseExample${p.id}">
 						  	<div class="card bg-dark">
@@ -92,17 +94,17 @@
 							<div class="sticky-top">
 								<a class="btn btn-primary m-1 icon" href="@{Administradores.download(p.id)}" style="font-size: auto; 
 								text-decoration: none; font-size: 85%; color: white; margin: 0px;">
-								<span class="soIcon">Download</span>
+								<span class="desaparecer-celular">Download</span>
 								<i style="float: right; margin: 1px;" class="download icon"></i>
 								</a>
 								<a class="btn btn-success m-1 icon concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
 								font-size: 85%; color: white; margin: 0px;" >
-								<span class="soIcon">Concluir</span>
+								<span class="desaparecer-celular">Concluir</span>
 								<i style="float: right; margin: 1px;" class="check icon"></i>
 								</a>
 								<a class="btn btn-danger m-1 icon recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
 								font-size: 85%; color: white; margin: 0px;">
-								<span class="soIcon">Recusar</span>
+								<span class="desaparecer-celular">Recusar</span>
 								<i style="float: right; margin: 1px;" class="x icon"></i>
 								</a>
 							</div>
@@ -165,7 +167,7 @@ $(document).ready(function(){
 						  popup: 'animated fadeOutUp faster'
 					  }
 					})
-								}
+				}
 			if (result.value) {
 				$('#idPed').val(idPedido);
 				$('#motivo').val(result.value);

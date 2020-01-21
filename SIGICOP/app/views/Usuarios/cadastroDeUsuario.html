@@ -14,34 +14,36 @@
 		<div class="column p-0">
 <!-- formulario de cadastro de usu�rio -->
 			<form action="@{Usuarios.salvarUsuario} " class="ui large form m-0 pt-0" method="post" id="form">
-				<div class="ui stacked segment ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 text-left">
+				<div class="ui stacked segment ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
 					<label class="m-1 font-size-celular">Nome:</label>
 					<span style="color:red">#{error 'user.nomeUsu' /}</span>
-					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control" autofocus=""
+					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular" autofocus=""
 					value="${user?.nomeUsu}"  >
 					<label for="senha" class="m-1 font-size-celular">Matricula:</label>
 					<span style="color:red">#{error 'user.matricula' /}</span>
 #{if mat}		
-					<span style="color:red">Matricula Ja Existe</span>
+					<span style="color:red">${mat}</span>
 #{/if}
-					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat" 
+					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular" 
 					value="${user?.matricula}"  id="matricula" maxlength="14">
 					<label for="email" class="m-1 font-size-celular">Email:</label>
 					<span style="color:red">#{error 'user.email' /}</span>
-#{if ema}		
-					<span style="color:red">Email Ja Existe</span>
+#{if email}		
+					<span style="color:red">${email}</span>
 #{/if}
-					<input type="text" name="user.email" placeholder="Email" class="form-control" id="email" 
+					<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular" id="email" 
 					value="${user?.email}"   autocomplete="off">
 					<label for="senha" class="m-1 font-size-celular">Senha:</label>
 					<span style="color:red">#{error 'user.senha' /}</span>
-					<input type="password" name="user.senha" placeholder="Senha" class="form-control" 
+					<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular" 
 					id="senha" value="">
 					<label for="confimarSenha" class="m-1 font-size-celular">Confirmar Senha:</label>
-					<span style="color:red">#{error 'user.senha' /}</span>
-					<input type="password" name="user.confirmarSenha" placeholder="Senha" class="form-control" 
+#{if comparar}		
+					<span style="color:red">${comparar}</span>
+#{/if}
+					<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" class="form-control hei-input-celular" 
 					id="confimarSenha" value="">
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2" value="Cadastrar" />
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular" value="Cadastrar" />
 				</div>
 			</form>
 			<div class="ui stacked segment pt-2 pb-3 mt-2 mb-1">

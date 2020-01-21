@@ -2,17 +2,17 @@
 #{set title:'Solicitacao de Pedido(s)' /}
 <div id="corpoCelular">
 #{if usuarioBanco?.qtdDisponivel == 0}
-	<div class="py-5 text-center mb-3" style="background: #ff4a4a;">
-		<h2>Atenção!</h2>
+	<div class="py-5 text-center mb-3 alert alert-warning" >
+		<h2 style="color: #ff4a4a;">Atenção!</h2>
 		<p class="lead">Você atingiu seu limite máximo de solicitacões
 			nesse mês, mas para isso, lembresse de salvar os pedidos.</p>
 	</div>
 #{/if} #{else}
 	<div class="row">
-		<div class="col-md-6 order-md-1">
+		<div class="col-md-6 order-md-1 font-size-celular">
 <!-- FORMULARIO DE PEDIDOS -->
 			<div class="mb-0 mt-0 h4">
-				<span class="text-muted">Solicitação:</span>
+				<span class="text-muted font-size-celular">Solicitação:</span>
 			</div>
 			<hr class="mb-1">
 			<form id="form-pedido" action="@{Pedidos.addPedido}" method="post"
@@ -21,13 +21,13 @@
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
 					<div class="float-left mt-1">
 						<div class="float-left ">
-							<label for="item-arquivo" class="btn btn-primary icon">Selecione
+							<label for="item-arquivo" class="btn btn-primary icon font-size-celular">Selecione
 								o Arquivo <i class="paperclip icon"></i>
 							</label>
 						</div>
 					</div>
 					<div class="float-left ml-2">
-						<span id="nomeArquivo" class="text-primary h4 text-center text-break"></span>
+						<span id="nomeArquivo" class="text-primary h6 text-center text-break"></span>
 					</div>
 					<!-- accept=".pdf" -->
 					<input type="file" name="item.arquivo" style="display: none;"
@@ -35,12 +35,12 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<label>Cópias:<sup style="color: red;">*</sup></label> 
-						<input type="number" name="item.qtdCopias" class="form-control" max="${usuarioBanco?.qtdDisponivel}" 
-							min="1" class="qtdCopias" value="${valor}" id="qtdCopias">
+						<label class="border-bottom">Cópias:<sup style="color: red;">*</sup></label> 
+						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular" max="${usuarioBanco?.qtdDisponivel}" 
+							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
 					<div class="col-md-6">
-						<label>Face: <sup style="color: red;">*</sup></label><br>
+						<label class="border-bottom">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
 								class="custom-control-input" value="frente" checked="checked">
@@ -55,13 +55,13 @@
 					</div>
 				</div>
 				<div class="mb-3">
-					<label>Descricao:</label>
+					<label class="border-bottom">Descricao:</label>
 					<div class="input-group">
-						<textarea rows="3" cols="7" name="item.descricao"
+						<textarea rows="2" cols="7" name="item.descricao"
 							class="form-control" placeholder="descrição"></textarea>
 					</div>
 				</div>
-				<button class="btn btn-success btn-lg btn-block" type="submit" id="add">
+				<button class="btn btn-success btn-lg btn-block font-size-celular" type="submit" id="add">
 					Adicionar<i class="paper plane outline icon"></i>
 				</button>
 				<hr class="mb-4">
@@ -69,9 +69,11 @@
 		</div>
 <!-- FIM FORMULARIO DE PEDIDOS-->
 #{/else}
-		<div class="col-md-6 order-md-2">
-			<div class="d-flex justify-content-between align-items-center h4 mb-3 p-0">
-				<span class="text-muted m-0 p-0">Listagem de Pedidos</span> 
+#{if usuarioBanco?.qtdDisponivel == 0}
+<!-- LISTAGEM EM BAIXO DO AVISO, COM 4 ITENS EM CADA LINHA-->
+		<div class="col-md-12 order-md-2 font-size-celular">
+			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 ">
+				<span class="text-muted m-0 p-0 font-size-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
 				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>
@@ -82,12 +84,13 @@
 #{if listaDePedidos == null}
 <!-- informa se n�o houver nenhum pedido adicionado-->
 				<div class="h1 text-primary text-center rounded-pill" style="font-size: 140%;">Nenhum pedido adicionado</div>
-#{/if} #{else}
+#{/if} 
+#{else}
 <!-- listar todos os pedidos adicionados(se houver)-->
 				<div class="container">
 					<div class="row">
 #{list items: listaDePedidos, as: 'p'}
-						<div class="col-lg-6 m-0 p-0 borderColorCorpo">
+						<div class="col-lg-3 m-0 p-0 borderColorCorpo">
 							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center" style="max-width: 100%;">
 								<div class="card-header m-0 p-0">
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if}
@@ -95,15 +98,18 @@
 								</div>
 								<div class="card-body text-left m-0 pt-0 pb-0">
 									<div class="card-text mt-0">
+										<b>Id lista: </b> ${p.idLista}
+									</div>
+									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
 									<div class="card-text">
 										<b>Face: </b> ${p.frenteVerso}
 									</div>
 									<div class="mt-1">
-										<button class="btn btn-outline-info m-0 mb-1" data-toggle="collapse" href="#collapseExample${p.idLista}"
+										<button class="btn btn-outline-info m-0 mb-1 font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
 											role="button" aria-expanded="false" aria-controls="collapseExample">
-											<i class="plus icon m-0 p-0"></i><span class="soIcon">Informações</span>
+											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular">Informações</span>
 										</button>
 										<div class="collapse text-left" id="collapseExample${p.idLista}">
 											<div class="card bg-dark">
@@ -121,7 +127,7 @@
 										</div>
 									</div>
 									<div class="card-text text-center">
-										<a href="@{Pedidos.cancelarPedido(p.id)}" class="btn btn-danger icon mt-1">Cancelar <i
+										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger icon mt-1 font-size-celular">Cancelar <i
 											class="trash alternate outline icon"></i>
 										</a>
 									</div>
@@ -135,6 +141,82 @@
 				</div>
 			</div>
 		</div>
+<!-- FIM DE LISTAGEM EM BAIXO DO AVISO, COM 4 ITENS EM CADA LINHA-->
+#{/if}
+#{else}
+<!-- LISTAGEM AO LADO DO FORMULÁRIOO, COM 2 ITENS EM CADA LINHA-->
+		<div class="col-md-6 order-md-2 font-size-celular">
+			<div class="d-flex justify-content-between align-items-center h4 mb-3 p-0 ">
+				<span class="text-muted m-0 p-0 font-size-celular">Listagem de Pedidos</span> 
+#{if listaDePedidos != null} 
+				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
+				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>
+				</a> 
+#{/if}
+			</div>
+			<div class="listaPped m-0 p-0">
+#{if listaDePedidos == null}
+<!-- informa se n�o houver nenhum pedido adicionado-->
+				<div class="h1 text-primary text-center rounded-pill" style="font-size: 140%;">Nenhum pedido adicionado</div>
+#{/if} 
+#{else}
+<!-- listar todos os pedidos adicionados(se houver)-->
+				<div class="container">
+					<div class="row">
+#{list items: listaDePedidos, as: 'p'}
+						<div class="col-lg-6 m-0 p-0 borderColorCorpo">
+							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center" style="max-width: 100%;">
+								<div class="card-header m-0 p-0">
+#{if listaDePedidos.size() > 1}Meus Pedidos #{/if}
+#{else} Meu	pedido #{/else}		
+								</div>
+								<div class="card-body text-left m-0 pt-0 pb-0">
+									<div class="card-text mt-0">
+										<b>Id lista: </b> ${p.idLista}
+									</div>
+									<div class="card-text mt-0">
+										<b>Cópias: </b> ${p.qtdCopias}
+									</div>
+									<div class="card-text">
+										<b>Face: </b> ${p.frenteVerso}
+									</div>
+									<div class="mt-1">
+										<button class="btn btn-outline-info m-0 mb-1 font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
+											role="button" aria-expanded="false" aria-controls="collapseExample">
+											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular font-size-celular">Informações</span>
+										</button>
+										<div class="collapse text-left" id="collapseExample${p.idLista}">
+											<div class="card bg-dark">
+												<div class="card-text">
+													<b>Arquivo: </b> ${p.nomeArquivo}
+												</div>
+												<div class="card-text">
+#{if p?.descricao} <b>Descricao: </b> ${p.descricao}<br />
+#{/if}
+												</div>
+												<div class="card-text">
+													<b>Status: </b> ${p.status}
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-text text-center">
+										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger icon mt-1 font-size-celular">Cancelar <i
+											class="trash alternate outline icon"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+#{/list}
+					</div>
+<!-- fim de listagem de todos os pedidos adicionados-->
+#{/else}
+				</div>
+			</div>
+		</div>
+<!-- FIM DE LISTAGEM AO LADO DO FORMULÁRIOO, COM 2 ITENS EM CADA LINHA-->
+#{/else}
 	</div>
 </div>
 <!-- JS DA PAGINA -->
@@ -164,7 +246,7 @@ $(document).ready(function(e) {
 			if(podeAdd > 0){
 				const Toast = Swal.mixin({
 					toast: true,
-				  	position: 'top',
+				  	position: 'top-right',
 				  	showConfirmButton: false,
 				  	timer: 3000,
 			  		timerProgressBar: true,
@@ -175,7 +257,7 @@ $(document).ready(function(e) {
 				})
 				Toast.fire({
 				  icon: 'info',
-				  title: 'Listando Pedido'
+				  title: '<span class="font-size-celular">Adicionando Pedido</span>'
 				})
 				setTimeout(function(){ 
 					e.submit();

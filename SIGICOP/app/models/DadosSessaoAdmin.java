@@ -6,5 +6,5 @@ import java.util.List;
 
 public class DadosSessaoAdmin implements Serializable {
 	public Administrador admin;
-	public String descricao;
+//	public String descricao;
 }

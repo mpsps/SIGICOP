@@ -5,25 +5,27 @@
 		<div class="card card-body m-0 p-0">
 #{if listaPedidos.size() > -1}
 <!-- Filtro por nome do arquivo e descri��o -->
-			<form action="@{Usuarios.filtro}" method="post">
+			<form action="@{Usuarios.filtro}" method="post" class="font-size-celular">
 				<fieldset class="corFiltro shadow-lg rounded">
 			        <legend>Filtrar Por:</legend>
 					<div class="form-row">
 				   		<div class="form-group col-md-6">
 					    	<label for="NomeDoArquivoFiltro">Nome do Arquivo:</label>
-							<input type="text" name="NomeDoArquivoFiltro" class="form-control" placeholder="Nome do Arquivo"
+							<input type="text" name="NomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
+							placeholder="Nome do Arquivo"
 							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
 				    	</div>
 				      	<div class="form-group col-md-6">
 					      	<label for="descricaoFiltro">Descrição:</label>
-					      	<input  name="descricaoFiltro"  class="form-control" id="descricaoFiltro"  placeholder="Descricao" 
+					      	<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
+					      	id="descricaoFiltro"  placeholder="Descricao" 
 					      	value="${descricaoFiltro}" />
 				      	</div>
 			  		</div>
 			 		<div class="text-center">
-				  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-						<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
-				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 icon">Solicitar
+				  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
+						<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 icon font-size-celular">Solicitar
 				  		<i class="file alternate outline icon"></i></a>
 				 	</div>
 				</fieldset>
@@ -40,7 +42,7 @@
 	</div>
 #{/if} 
 #{else}
-	<div class="container">
+	<div class="container font-size-celular">
  		<div class="row">
 #{list items:listaPedidos, as:'p'}
 <!-- listar todos os pedidos anteriores (se houver) -->
@@ -78,7 +80,7 @@
 						</div>
 #{/if}
 						<div class="text-center mt-1">
-					  		<button class="btn btn-outline-info" data-toggle="collapse" href="#collapseExample${p.id}" 
+					  		<button class="btn btn-outline-info font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
 					  		role="button" aria-expanded="false" aria-controls="collapseExample">
 					    	+ Informações
 					  		</button>
@@ -119,7 +121,7 @@
 							</div>
 						</div>
 						<div class="card-text text-center">
-							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1 icon" style="font-size: 85%;">Fazer Download
+							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1 icon font-size-celular">Fazer Download
 							<i style="float: right; margin: 1px;" class="download icon"></i></a>
 						</div>
 					</div>

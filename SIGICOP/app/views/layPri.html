@@ -125,8 +125,8 @@
 	<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
 </div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
-<div class="pusher m-0">
-  	<div class="ui inverted vertical masthead center aligned segment">
+<div class="pusher m-0 font-size-celular" style="max-width: 100%;">
+  	<div class="ui inverted vertical masthead center aligned segment m-0">
    		<div class="ui container sticky-top m-0 p-0" style="background: #1b1c1d;">
 			<div class="ui large secondary inverted pointing menu m-0">
 		        <a class="toc item m-0 p-1">
@@ -155,7 +155,7 @@
 	</div>
 <!-- CORPO DA PAGINA-->
 	<div class="ui vertical stripe segment">
-		<div class="ui text container text-break" style="max-height: 100%;">
+		<div class="ui text container text-break p-0" style="max-height: 100%; margin-top: -6%;">
 	#{doLayout /}
 			<a href="#top" class="glyphicon glyphicon-chevron-up">
 			<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
@@ -183,15 +183,15 @@
 					<div class="three wide column">
 						<h4 class="ui inverted header">Contatos:</h4>
 						<div class="ui inverted link list">
-							<a href="#"  class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 98147-9099</a> 
+							<a href="#"  class="text-decoration-none" class="font-size-celular">+55 (84) 98147-9099</a> 
 							<br>
-							<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">+55 (84) 99433-3803</a>
+							<a href="#" class="text-decoration-none" class="font-size-celular">+55 (84) 99433-3803</a>
 						</div>
 					</div>
 					<div class="three wide column">
 						<h4 class="ui inverted header">E-mails:</h4>
-						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
-						<a href="#" class="text-decoration-none" id="tamanhoTextoCelular">manacio.p@escolar.ifrn.edu.br</a> 
+						<a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+						<a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a> 
 					</div>
 				</div>
 			</div>

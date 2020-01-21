@@ -5,21 +5,21 @@
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
 			<div class="column" style="whith: 100%; margin-bottom: 0px;">
-				<form action="@{Administradores.salvarSenha} " class="ui large form" method="post">
+				<form action="@{Administradores.salvarSenha} " class="ui large form font-size-celular" method="post">
 					<div class="ui stacked segment"><!-- cor branca do formulario -->
-						<label for="senha" >Senha:</label>
-						<input type="password" name="senha" placeholder="Senha" class="form-control" 
+						<label for="senha" class="font-size-celular">Senha:</label>
+						<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
 						autofocus=""  id="senha">
 #{if seis}	
 						<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-						<label for="confirmarSenha" class="mt-2">Confirmar Senha:</label>
+						<label for="confirmarSenha" class="mt-2 font-size-celular">Confirmar Senha:</label>
 						<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" 
-						class="form-control" id="confirmarSenha"  >
+						class="form-control hei-input-celular font-size-celular" id="confirmarSenha"  >
 #{if seis}	
 						<span style="color:red">#{error 'user.senha' /}</span>
 #{/if}
-						<input type="submit" class="btn btn-lg btn-primary btn-block mt-3" value="Editar Senha"  />
+						<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Editar Senha"  />
 					</div>
 				</form>
 			</div>

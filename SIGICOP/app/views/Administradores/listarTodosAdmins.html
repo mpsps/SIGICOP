@@ -8,24 +8,24 @@
 		     	<div class="card card-body m-0 p-0">
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->
-					<form action="@{Administradores.listarTodosAdmins}" method="post">
+					<form action="@{Administradores.listarTodosAdmins}" method="post" class="font-size-celular">
 						<fieldset class="corFiltro shadow-lg rounded">
 					        <legend>Filtrar Por:</legend>
 							<div class="form-row">
 						    	<div class="form-group col-md-6">
 							    	<label for="NomeUser">Nome do Administrador:</label>
-									<input type="text" name="nomeDoAdminFiltro" class="form-control" placeholder="Nome do Admin" 
+									<input type="text" name="nomeDoAdminFiltro" class="form-control hei-input-celular font-size-celular" placeholder="Nome do Admin" 
 									id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
 						    	</div>
 						    	<div class="form-group col-md-6">
 							    	<label for="email">Email:</label>
-									<input type="text" name="emailDoAdminFiltro" class="form-control" placeholder="Email do Admin" 
-									id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
+									<input type="text" name="emailDoAdminFiltro" class="form-control hei-input-celular font-size-celular" 
+									placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
 						    	</div>   		
 					  		</div>
 					 		<div class="text-center">
-						  		<button type="submit" class="btn btn-primary icon">Filtrar <i class="filter icon"></i></button>
-						  		<span class="btn btn-danger icon" id="limpar">Limpar <i class="eraser icon"></i></span>
+						  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
+						  		<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 						 	</div>
 						</fieldset>
 					</form><br><br>
@@ -41,13 +41,13 @@
 		<div class="h1 text-primary">Nenhum admin foi encontrado</div>
 	</div>
 #{/if} 
-	<div class="container">
+	<div class="container font-size-celular">
  		<div class="row">
 #{list items:listarDeAdmins, as:'a'}
 <!-- lista todos os admins de acordo com o filtro, menos o padr�o -->
-	   		<div class="col-lg-6">
-				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
-					<div class="card-body">
+	   		<div class="col-lg-4">
+				<div class="card text-white bg-dark mb-1" style="max-width: 100%;">
+					<div class="card-body mb-0">
 						<div class="card-text">
 							<b>Nome: </b> ${a.nomeAdm}
 						</div>
@@ -59,12 +59,10 @@
 							<b>Ultimo Acesso: : </b> ${a.ultimoAcesso}
 						</div>
 #{/if}
-						<div class="card-text text-center">
-							<div class="sticky-top">
-								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-1 icon remover">
+						<div class="text-center m-0">
+								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-0 mt-1 icon remover font-size-celular">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
 								</a>	
-							</div>
 						</div>
 					</div>
 				</div>
