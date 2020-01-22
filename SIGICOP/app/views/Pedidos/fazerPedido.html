@@ -262,6 +262,20 @@ $(document).ready(function(e) {
 				setTimeout(function(){ 
 					e.submit();
 				}, 3000);
+			}else{
+				e.preventDefault();
+				Swal.fire({
+					icon: 'error',
+					title: 'ERROR...',
+					text: 'quantidade indísponivel!',
+					showCloseButton: true,
+					showClass: {
+					    popup: 'animated fadeInDown faster'
+					},
+					hideClass: {
+						popup: 'animated fadeOutUp faster'
+					}  
+				})
 			}
 		}			
 	})

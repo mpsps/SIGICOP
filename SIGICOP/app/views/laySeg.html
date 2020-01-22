@@ -100,7 +100,7 @@
 		<script src="@{'/public/javascripts/meuJs/dialogs.js'}"></script>
 </head>
 <body onload="horaEnome()">
-<!-- MENU E CABEÔøΩALHO EM TELA DE COMPUTADOR E EM CELULAR-->
+<!-- MENU E CABE√áALHO EM TELA DE COMPUTADOR E EM CELULAR-->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="max-width: 100%;"">
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
 	<div class="desaparecer-celular">
@@ -172,7 +172,7 @@
 #{/if}
 #{if !listaDeUsuario}
 				<span>
-		  			<a title="realizar cÛpia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
+		  			<a title="realizar cÔøΩpia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
 						<img class="itemMenu m-0"" src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
@@ -247,7 +247,10 @@
 	</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 	<div id="time" class="text-white m-0" id="hora" ></div>
-#{/if}  		
+#{/if}
+#{else}
+	<div id="time" class="text-white m-0" id="hora" style="display: none;"></div>
+#{/else}  		
 </nav>
 <div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
@@ -266,15 +269,18 @@
 <!-- CORPO DA PAGINA -->
 <div id="container">
 #{doLayout /}
+	
 	<a href="#top" class="">
 		<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
 	</a>
 </div>
+#{if session.contains("usuarioLogado")}
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
 	<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
 </form>
-<!-- RODAPÔøΩ DA PAGINA -->
+#{/if}
+<!-- RODAP√â DA PAGINA -->
 <div class="position-bottom w-100" id="rodapeCelular" class="rodapeEmBaixo">
  	<div class="ui inverted vertical footer segment" class="dark">
 		<div class="ui container">
@@ -333,8 +339,8 @@ function horaEnome(){
 	
 	if(${session.contains("usuarioLogado")}){
 		 if(width < 400){
-			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaÁos
-			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaÁos
+			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaÔøΩos
+			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaÔøΩos
 			 if(sobreNome == null || sobreNome == ""){
 				 console.log(nome+" ");
 				 document.getElementById('nomeUsuario').innerHTML = nome;
@@ -345,8 +351,8 @@ function horaEnome(){
 			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";				 
 			 }			 
 		}else{
-			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaÁos
-			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaÁos
+			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espaÔøΩos
+			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espaÔøΩos
 		
 			 console.log(nome+" "+sobreNome);
 			 document.getElementById('nomeUsuario').innerHTML = '${session['usuarioLogado']}';
@@ -354,8 +360,8 @@ function horaEnome(){
 	}
 	if(${session.contains("adminLogado")}){
 		 if(width < 400){
-			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaÁos
-			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaÁos
+			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaÔøΩos
+			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaÔøΩos
 			 if(sobreNome == null || sobreNome == ""){
 				 console.log(nome+" ");
 				 document.getElementById('nomeAdmin').innerHTML = nome;
@@ -366,8 +372,8 @@ function horaEnome(){
 			 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";				 
 			 }
 		 }else{
-			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaÁos
-			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaÁos
+			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espaÔøΩos
+			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espaÔøΩos
 		
 			 console.log(nome+" "+sobreNome);
 			 document.getElementById('nomeAdmin').innerHTML = '${session['adminLogado']}';
@@ -403,6 +409,7 @@ $().ready(function() {
     $('#dataEnvio').mask('00/00/0000');
     $('#dataEnvtrega').mask('00/00/0000');   	
 </script>
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
 <script type="text/javascript">
 $(document).ready(function() {
@@ -478,16 +485,11 @@ $(document).ready(function() {
 	});
 });
 </script>
-<script type="text/javascript">
-$(function () {
-	  $('[data-toggle="tooltip"]').tooltip()
-	  $('#example').tooltip({ boundary: 'window' })
-	})
-</script>
+#{/if}
 #{if temFiltro}
-<!-- FUN«√O DE LIMPAR FILTRO -->
+<!-- FUN√á√ÉO QUE LIMPAR FILTRO -->
 <script type="text/javascript">
-// FUN«√O DE LIMPAR FILTRO
+// FUN√á√ÉO QUE LIMPAR FILTRO
 document.getElementById("limpar").addEventListener("click", function() {
 	  clearInputUrlNumberText("NomeDoArquivoFiltro");
 	  clearInputUrlNumberText("descricaoFiltro");

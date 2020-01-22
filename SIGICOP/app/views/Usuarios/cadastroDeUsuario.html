@@ -4,7 +4,7 @@
 	<div class="h1 text-dark text-center tituloCelular m-0">Cadastro de Usuarios</div>
 	<div class="text-center m-0">
 #{ifErrors}
-		<h2 style="color:red">Ops...</h2>
+		<h2 style="color: red;" >Ops...</h2>
 		<!--#{errors}
 		<li>${error.key} - ${error} - ${error.message}</li>
 		#{/errors}-->
@@ -13,36 +13,47 @@
 	<div class="ui middle aligned center aligned grid p-0 mt-1">
 		<div class="column p-0">
 <!-- formulario de cadastro de usu�rio -->
-			<form action="@{Usuarios.salvarUsuario} " class="ui large form m-0 pt-0" method="post" id="form">
+			<form id="form-usuario" action="@{Usuarios.salvarUsuario} " class="ui large form m-0 pt-0" method="post">
 				<div class="ui stacked segment ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
-					<label class="m-1 font-size-celular">Nome:</label>
-					<span style="color:red">#{error 'user.nomeUsu' /}</span>
-					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular" autofocus=""
-					value="${user?.nomeUsu}"  >
+					<label class="m-1 font-size-celular" for="nomeUsuario">Nome:</label>
+					<span id="validacaoServidoNomeUsuario" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.nomeUsu' /}</span>
+					<span id="validarNameUser"></span>
+					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular font-size-celular"
+					value="${user?.nomeUsu}" id="nomeUsuario" onchange="validarNome()">
+					 
 					<label for="senha" class="m-1 font-size-celular">Matricula:</label>
-					<span style="color:red">#{error 'user.matricula' /}</span>
+					<span id="validacaoServidoMatricula"  class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.matricula' /}</span>
 #{if mat}		
-					<span style="color:red">${mat}</span>
+					<span id="validacaoServidoMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular">${mat}</span>
 #{/if}
-					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular" 
-					value="${user?.matricula}"  id="matricula" maxlength="14">
+					<span id="validarMatricula"></span>
+					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular font-size-celular" 
+					value="${user?.matricula}"  id="matricula" maxlength="14" onchange="validarMatricula()">
+					
 					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span style="color:red">#{error 'user.email' /}</span>
+					<span id="validacaoServidoEmail"  class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.email' /}</span>
 #{if email}		
-					<span style="color:red">${email}</span>
+					<span id="validacaoServidoEmail" class="alert-danger shadow-sm rounded p-0 font-size-celular">${email}</span>
 #{/if}
-					<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular" id="email" 
-					value="${user?.email}"   autocomplete="off">
+					<span id="validarEmail"></span>
+					<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
+					id="email" value="${user?.email}" autocomplete="off" onchange="validarEmail()">
+					
 					<label for="senha" class="m-1 font-size-celular">Senha:</label>
-					<span style="color:red">#{error 'user.senha' /}</span>
-					<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular" 
-					id="senha" value="">
-					<label for="confimarSenha" class="m-1 font-size-celular">Confirmar Senha:</label>
+					<span class="alert-danger shadow-sm rounded p-0 font-size-celular" 
+					id="validacaoServidoSenha">#{error 'user.senha' /}</span>
+					<span id="validarSenha"></span>
+					<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
+					id="senha" value="" onchange="validarSenha()">
+					
+					<label for="confimar" class="m-1 font-size-celular">Confirmar Senha:</label>
 #{if comparar}		
-					<span style="color:red">${comparar}</span>
-#{/if}
-					<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" class="form-control hei-input-celular" 
-					id="confimarSenha" value="">
+					<span class="alert-danger shadow-sm rounded p-0 font-size-celular" id="validacaoServidoComfirmar">${comparar}</span>
+#{/if}				
+					<span id="Comparar"></span>
+					<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" 
+					class="form-control hei-input-celular font-size-celular" id="confimar" value="" onchange="validarSenha()">
+					<!-- BOTÃO DE CADASTRO -->
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular" value="Cadastrar" />
 				</div>
 			</form>
@@ -52,3 +63,124 @@
 		</div>
 	</div>
 </div>
+<!-- validação ao alterar algum dado do formulário -->
+<script type="text/javascript">
+
+	function validarNome(){
+		var nomeUsuario = document.getElementById("nomeUsuario").value;
+		console.log(nomeUsuario);
+		// nome do usuário
+		if (nomeUsuario == '') {
+		 	document.getElementById("nomeUsuario").style = 'border-color: #dc3545;' // vermelho
+		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
+		}else{
+		 	document.getElementById("nomeUsuario").style = 'border-color: #28a745;'
+		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
+		 var nomeUsuarioOk = "nomeUsuarioOk";
+		}		
+	}
+	function validarMatricula(){
+		var matricula = document.getElementById("matricula").value;
+		// matricula
+		console.log(matricula);
+		if (matricula == '') {
+			console.log(matricula+'sem nada'); 
+		 	document.getElementById("matricula").style = 'border-color: #dc3545;'; // vermelho
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
+#{if mat}
+		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
+#{/if}
+		}else if(matricula.length > 13 & matricula.length < 18){
+			document.getElementById("matricula").style = 'border-color: #28a745;'
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
+#{if mat}
+		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
+#{/if}
+		var matriculaOk = "matriculaOk";	
+		} if(matricula.length < 14 & matricula.length > 0){
+		 	document.getElementById("matricula").style = 'border-color: #dc3545;' // vermelho
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínimo 14 caracteres</span>';
+		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
+#{if mat}
+		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
+#{/if}
+		}
+	}
+	function validarEmail(){
+		var email = document.getElementById("email").value;
+		// email
+		console.log(email);
+		if (email == '') {
+		 	document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
+		 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
+		}else{
+			usuario = email.substring(0, email.indexOf("@"));
+			dominio = email.substring(email.indexOf("@")+ 1, email.length);
+			 
+			if ((usuario.length >=1) &&
+			    (dominio.length >=3) && 
+			    (usuario.search("@")==-1) && 
+			    (dominio.search("@")==-1) &&
+			    (usuario.search(" ")==-1) && 
+			    (dominio.search(" ")==-1) &&
+			    (dominio.search(".")!=-1) &&      
+			    (dominio.indexOf(".") >=1)&& 
+			    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+			 	document.getElementById("email").style = 'border-color: #28a745;';
+			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
+			 	var emailOk = "emailOk";
+			}else{
+				document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
+			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">email invalido</span>';
+			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
+			}
+		}
+	}
+	function validarSenha(){
+		var senha = document.getElementById("senha").value;
+		var confimarSenha = document.getElementById("confimar").value;
+	
+		// comparar senha
+		if (confimarSenha.length < 6) {
+	        console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
+	        document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+#{if comparar}
+		 	document.getElementById("validacaoServidoComfirmar").style = 'display: none;'
+#{/if}
+		}else{
+			document.getElementById("confimar").style = 'border-color: none;';
+	 		document.getElementById("Comparar").innerHTML = '<span style="display: none;"></span>';
+		} 
+		// senha
+	 	if (senha.length < 6) {
+			console.log("A senha precisa ter pelo menos seis caracteres.");
+			document.getElementById("senha").style = 'border-color: #dc3545;' // vermelho
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+	 		document.getElementById("validacaoServidoSenha").style = 'display: none;'
+		}else{
+	 		document.getElementById("senha").style = 'border-color: none;';
+	 		document.getElementById("validarSenha").innerHTML = '<span style="display: none;"></span>';
+	 		document.getElementById("validacaoServidoSenha").style = 'display: none;';
+	 		document.getElementById("senha").style = 'border-color: #28a745;';
+		}
+		// se a senha é compativel com confirmação senha
+		if (senha != '' & confimarSenha != '' & senha != confimarSenha) {
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
+		 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
+		}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
+		 	document.getElementById("confimar").style = 'border-color: #28a745;';
+		}
+	}
+		/* $(".entregar").click(function() { 
+			)};*/
+</script>

@@ -92,7 +92,12 @@
 			{
 			background-color: #007bff;
 			border-radius: 5px;
-		}		</style>
+		}
+		.fechar {
+		  -webkit-box-sizing: inherit;
+		          box-sizing: inherit;
+		}		
+		</style>
 <!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
@@ -101,7 +106,7 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
     </head>
-<body>   
+<body onload="bemVindo()">   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
 <div class="ui large top fixed hidden menu border-0">
   <div class="ui container">
@@ -120,7 +125,7 @@
 <!-- MENU ICONE A ESQUERDA-->
 <div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
 	<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-	<a class="item sobreNos" href="#SOBRE_NOS">Sobre Nos</a>
+	<a onclick="this.style='display: none;'" class="item sobreNos" href="#SOBRE_NOS">Sobre Nos</a>
 	<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
 	<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
 </div>
@@ -200,6 +205,23 @@
 </div>	
 <!-- JS DA PAGINA -->
 <!-- VOLTAR AO TOPO -->
+<script type="text/javascript">
+function bemVindo(){
+/* 	Swal.fire({
+		position: 'top',
+		icon: '',
+		html: '<div style="background-color: #1b1c1d; margin: -20px;"></div>',
+		showCloseButton: true,
+		showConfirmButton: false,
+		showClass: {
+		    popup: 'animated fadeInDown faster'
+		},
+		hideClass: {
+		    popup: 'animated fadeOutUp faster'
+		}
+	}); */
+}
+</script>
 <script type="text/javascript">
 $(document).ready(function(){
     $(window).scroll(function(){

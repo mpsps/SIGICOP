@@ -2,7 +2,7 @@
 # For example, for French create a messages.fr file
 #
 
-validation.required=Campo obrigatório
+validation.required=obrigatório
 validation.future=Informe uma data futura
 validation.min= Não pode ter valor menor que %2$d
 validation.minSize= No minimo %2$d caracteres

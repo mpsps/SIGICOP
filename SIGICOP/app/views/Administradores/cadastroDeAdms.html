@@ -9,7 +9,7 @@
 #{/else}
 	<div class="text-center m-0">
 #{ifErrors}
-		<span class="h2 m-0" style="color:red">Ops...</span>
+		<span class="h2 m-0" style="color: red;">Ops...</span>
 		<!--#{errors}
 		<li>${error.key} - ${error} - ${error.message}</li>
 		#{/errors}-->
@@ -21,30 +21,39 @@
 			<form action="@{Administradores.salvarAdm} " class="m-0 " method="post">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
 				<div class="ui stacked segment" style="margin-top: -3.5%;">
-					<label class="font-size-celular m-1">Nome:</label>	
-					<span style="color:red">#{error 'adm.nomeAdm' /}</span>
+					<label class="font-size-celular m-1" for="nomeAdm">Nome:</label>	
+					<span id="validacaoServidoNomeAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.nomeAdm' /}</span>
+					<span id="validarNomeAdmin"></span>
 					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control hei-input-celular font-size-celular" 
-					autofocus="" autocomplete="off"  value="${adm?.nomeAdm}"/>
+					 autocomplete="off" id="nomeAdm" value="${adm?.nomeAdm}" onchange="validarNomeAdmin()">
+					 
 					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span style="color:red">#{error 'adm.email' /}</span>
+					<span id="validacaoServidoEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.email' /}</span>
 #{if email}		
-					<span style="color:red">${email}</span>
+					<span id="validacaoServidorExisteEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">${email}</span>
 #{/if}
+					<span id="validarEmailAdmin"></span>
 					<input type="email" name="adm.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
-					autocomplete="off" id="email" value="${adm?.email}"/>
+					autocomplete="off" id="email" value="${adm?.email}" onchange="validarEmailAdmin()">
 #{if !adm?.id}
-					<label for="senha" class="m-1  font-size-celular">Senha:</label>
-					<span style="color:red">#{error 'adm.senha' /}</span>
-					<input type="password" name="adm.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" id="senha"  />
-					<label for="confirmarsenha" class="m-1  font-size-celular">Confimar Senha:</label>
+					<label for="inputSenhaA" class="m-1 font-size-celular">Senha:</label>
+					<span id="validacaoServidorsenhaA" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.senha' /}</span>
+					<span id="validarSeA"></span>
+					<input type="password" name="adm.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
+					id="inputSenhaA" onchange="validarsenhaAdm()">
+					
+					<label for="confimar" class="m-1  font-size-celular">Confimar Senha:</label>
 #{if comparar}		
-					<span style="color:red">${comparar}</span>
+					<span id="validacaoServidoComfirmarAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">${comparar}</span>
 #{/if}
+					<span id="Comparar"></span>
 					<input type="password" name="adm.confirmarSenha" placeholder="Confirmar Senha" 
-					class="form-control hei-input-celular font-size-celular" id="confirmarsenha"/>
+					class="form-control hei-input-celular font-size-celular" id="confimar" onchange="validarsenhaAdm()">
+					
+					<!-- BOTÃO DE CADASTRAR -->
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
 #{/if}
-#{else}
+#{else}				<!-- BOTÃO DE EDITAR -->
 					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular">Alterar Senha</a>
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Editar" />					
 #{/else}
@@ -54,3 +63,140 @@
 		</div>
 	</div>
 </div>
+<!-- validação ao alterar algum dado do formulário -->
+<script type="text/javascript">
+function validarNomeAdmin(){		// nome do campo
+	var nome= document.getElementById('nomeAdm').value;
+	// nome do admin
+	if (nome == '') {
+	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>'
+	 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
+	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+	}else {
+	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>'
+	 	document.getElementById("nomeAdm").style = 'border-color: #28a745'
+	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+	}		
+}
+function validarEmailAdmin(){        // nome do campo
+	var email = document.getElementById("email").value;
+	// email
+	console.log(email);
+	if (email == '') {
+	 	document.getElementById("email").style = 'border-color: #dc3545;'
+	 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+	 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'
+	}else{
+		usuario = email.substring(0, email.indexOf("@"));
+		dominio = email.substring(email.indexOf("@")+ 1, email.length);
+		 
+		if ((usuario.length >=1) &&
+		    (dominio.length >=3) && 
+		    (usuario.search("@")==-1) && 
+		    (dominio.search("@")==-1) &&
+		    (usuario.search(" ")==-1) && 
+		    (dominio.search(" ")==-1) &&
+		    (dominio.search(".")!=-1) &&      
+		    (dominio.indexOf(".") >=1)&& 
+		    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+		 	document.getElementById("email").style = 'border-color: #28a745;';
+		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'	
+#{if email}	
+		 	document.getElementById("validacaoServidorExisteEmailAdmin").style = 'display: none;'
+#{/if}
+		}else{
+			document.getElementById("email").style = 'border-color: #dc3545;';
+		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">email invalido</span>';
+		 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'
+#{if email}	
+		 	document.getElementById("validacaoServidorExisteEmailAdmin").style = 'display: none;'
+#{/if}
+		}
+	}
+}
+// VALIDA A SENHA DO ADMIN
+/* function validarsenhaAdm(){
+	var senhaAdm = document.getElementById("senhaAdm").value;
+	var inputConfimarAdm = document.getElementById("inputConfimarAdm").value;
+		
+	// comparar senha do admin
+	if (inputConfimarAdm.length < 6) {
+	    console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
+	    document.getElementById("inputConfimarAdm").style = 'border-color: #dc3545;' // vermelho
+	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+#{if comparar}
+	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
+#{/if}
+	}else{
+		document.getElementById("inputConfimarAdm").style = 'border-color: none;';
+		document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+	} 
+	// senha admin
+	if (senhaAdm.length < 6) {
+		console.log("A senha precisa ter pelo menos seis caracteres.");
+		document.getElementById("senhaAdm").style = 'border-color: #dc3545;' // vermelho
+	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+		document.getElementById("validacaoServidorsenhaAdm").style = 'display: none;'
+	}else{
+		document.getElementById("senhaAdm").style = 'border-color: none;';
+		document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		document.getElementById("validacaoServidorsenhaAdm").style = 'display: none;';
+		document.getElementById("senhaAdm").style = 'border-color: #28a745;';
+	}
+	// se a senha é compativel com confirmação senha
+	if (senhaAdm != '' & inputConfimarAdm != '' & senhaAdm != inputConfimarAdm) {
+	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
+	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
+	 	document.getElementById("inputConfimarAdm").style = 'border-color: #dc3545;' // vermelho
+	}else if(senhaAdm == confimarSenha & senhaAdm.length > 0 & confimarSenha.length > 0){
+	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
+	 	document.getElementById("inputConfimarAdm").style = 'border-color: #28a745;';
+	}
+} */
+</script>
+<script type="text/javascript">
+function validarsenhaAdm(){
+	var senha = document.getElementById("inputSenhaA").value;
+	var confimarSenha = document.getElementById("confimar").value;
+	
+	// comparar senha
+	if (confimarSenha.length < 6) {
+        console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
+        document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+#{if comparar}
+	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
+#{/if}
+	}else{
+		document.getElementById("confimar").style = 'border-color: none;';
+ 		document.getElementById("Comparar").innerHTML = '<span style="display: none;"></span>';
+	} 
+	// senha
+ 	if (senha.length < 6) {
+		console.log("A senha precisa ter pelo menos seis caracteres.");
+		document.getElementById("inputSenhaA").style = 'border-color: #dc3545;' // vermelho
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+ 		document.getElementById("validacaoServidorsenhaA").style = 'display: none;'
+	}else{
+ 		document.getElementById("inputSenhaA").style = 'border-color: none;';
+ 		document.getElementById("validarSeA").innerHTML = '<span style="display: none;"></span>';
+ 		document.getElementById("validacaoServidorsenhaA").style = 'display: none;';
+ 		document.getElementById("inputSenhaA").style = 'border-color: #28a745;';
+	}
+	// se a senha é compativel com confirmação senha
+	if (senha != '' & confimarSenha != '' & senha != confimarSenha) {
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
+	 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
+#{if comparar}
+	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
+#{/if}
+	}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
+	 	document.getElementById("confimar").style = 'border-color: #28a745;';
+	}
+}
+</script>

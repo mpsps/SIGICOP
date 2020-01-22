@@ -22,15 +22,15 @@ public class Inicializador extends Job {
 			Administrador admPadrao = new Administrador();
 			admPadrao.admPadrao = true;
 			admPadrao.nomeAdm = "Admin Padrao";
-			admPadrao.email = "adm@gmail.com";
+			admPadrao.email = "padrao@email.com";
 			String senhaCript = CriptografiaUtils.criptografarMD5("123456");
 			admPadrao.senha = senhaCript;
 			admPadrao.save();
 			
 			Administrador adm = new Administrador();
 			adm.admPadrao = false;
-			adm.nomeAdm = "Admin";
-			adm.email = "adm@g.com";
+			adm.nomeAdm = "Admin Comum";
+			adm.email = "comum@email.com";
 			String senhaCriptAdm = CriptografiaUtils.criptografarMD5("123456");
 			adm.senha = senhaCriptAdm;
 			adm.save();
@@ -65,14 +65,14 @@ public class Inicializador extends Job {
 			usuario.qtdDisponivel = 20;
 			usuario.save();
 			
-			Pedido pedMagdiel1 = new Pedido();
-			pedMagdiel1.nomeArquivo = "Arquivo de teste do nome 1";
-			pedMagdiel1.dataEnvio = new Date();
-			pedMagdiel1.descricao = "Pedido de Magdiel1";
-			pedMagdiel1.frenteVerso = "frente";
-			pedMagdiel1.qtdCopias = 5;
-			pedMagdiel1.usuario = magdiel;
-			pedMagdiel1.save();
+			Pedido pedUsuario = new Pedido();
+			pedUsuario.nomeArquivo = "Arquivo de teste";
+			pedUsuario.dataEnvio = new Date();
+			pedUsuario.descricao = "Pedido do usuario de testes";
+			pedUsuario.frenteVerso = "frente";
+			pedUsuario.qtdCopias = 5;
+			pedUsuario.usuario = usuario;
+			pedUsuario.save();
 //			
 //			Pedido pedMagdiel2 = new Pedido();
 //			pedMagdiel2.nomeArquivo = "Arquivo de teste do nome 2";
