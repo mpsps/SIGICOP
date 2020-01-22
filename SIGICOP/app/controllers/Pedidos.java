@@ -458,7 +458,7 @@ public class Pedidos extends Controller {
 			System.out.println("|__________________Gerando relatório...__________________|");
 //			Historico historico = new Historico();
 		try {
-			FileWriter arq = new FileWriter("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historico\\"+ped.id+"_relatorio.txt");
+			FileWriter arq = new FileWriter("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\"+ped.id+"_relatorio.txt");
 			PrintWriter gravarArq = new PrintWriter(arq);
 			
 			gravarArq.println("|________________Relatório do pedido "+ped.id+"__________________|");

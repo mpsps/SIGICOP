@@ -115,46 +115,6 @@ function validarEmailAdmin(){        // nome do campo
 		}
 	}
 }
-// VALIDA A SENHA DO ADMIN
-/* function validarsenhaAdm(){
-	var senhaAdm = document.getElementById("senhaAdm").value;
-	var inputConfimarAdm = document.getElementById("inputConfimarAdm").value;
-		
-	// comparar senha do admin
-	if (inputConfimarAdm.length < 6) {
-	    console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
-	    document.getElementById("inputConfimarAdm").style = 'border-color: #dc3545;' // vermelho
-	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
-#{if comparar}
-	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
-#{/if}
-	}else{
-		document.getElementById("inputConfimarAdm").style = 'border-color: none;';
-		document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-	} 
-	// senha admin
-	if (senhaAdm.length < 6) {
-		console.log("A senha precisa ter pelo menos seis caracteres.");
-		document.getElementById("senhaAdm").style = 'border-color: #dc3545;' // vermelho
-	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
-		document.getElementById("validacaoServidorsenhaAdm").style = 'display: none;'
-	}else{
-		document.getElementById("senhaAdm").style = 'border-color: none;';
-		document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-		document.getElementById("validacaoServidorsenhaAdm").style = 'display: none;';
-		document.getElementById("senhaAdm").style = 'border-color: #28a745;';
-	}
-	// se a senha é compativel com confirmação senha
-	if (senhaAdm != '' & inputConfimarAdm != '' & senhaAdm != inputConfimarAdm) {
-	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
-	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
-	 	document.getElementById("inputConfimarAdm").style = 'border-color: #dc3545;' // vermelho
-	}else if(senhaAdm == confimarSenha & senhaAdm.length > 0 & confimarSenha.length > 0){
-	 	document.getElementById("validarsenhaAdm").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-	 	document.getElementById("validarCompararAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
-	 	document.getElementById("inputConfimarAdm").style = 'border-color: #28a745;';
-	}
-} */
 </script>
 <script type="text/javascript">
 function validarsenhaAdm(){

@@ -23,9 +23,9 @@
 				      	</div>
 			  		</div>
 			 		<div class="text-center">
-				  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
-						<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 icon font-size-celular">Solicitar
+				  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 butaoIconTexto font-size-celular">Solicitar
 				  		<i class="file alternate outline icon"></i></a>
 				 	</div>
 				</fieldset>
@@ -80,7 +80,7 @@
 						</div>
 #{/if}
 						<div class="text-center mt-1">
-					  		<button class="btn btn-outline-info font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+					  		<button class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
 					  		role="button" aria-expanded="false" aria-controls="collapseExample">
 					    	+ Informações
 					  		</button>
@@ -121,8 +121,8 @@
 							</div>
 						</div>
 						<div class="card-text text-center">
-							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1 icon font-size-celular">Fazer Download
-							<i style="float: right; margin: 1px;" class="download icon"></i></a>
+							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-1  btn-sm btn-block butaoIconTexto font-size-celular">Fazer Download
+							<i style="margin: 1px;" class="download icon"></i></a>
 						</div>
 					</div>
 				</div>

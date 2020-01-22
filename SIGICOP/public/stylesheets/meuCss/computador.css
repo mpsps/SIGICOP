@@ -50,6 +50,9 @@
 #corMenu{
 	background: #1b1c1d;
 }
+.butaoIconTexto:hover  {
+	color: #d3d3d3;
+}
 /**************************/
 /***tela de computador*****/
 /**************************/
@@ -108,9 +111,6 @@
 	border-bottom:  3px solid #ff5555;
 	color: #ff5555;
 }
-.icon:hover  {
-	color: #d3d3d3;
-}
 .corFiltro{
 	background: #f2f8ff;
 	padding: 5%;
@@ -121,5 +121,15 @@
 	margin-left: 20%;
 	margin-right: 20%;
 	text-align: center;
+}
+.btn-sm-computador {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+.btn-block-computador {
+  display: block;
+  width: 100%;
 }
 }

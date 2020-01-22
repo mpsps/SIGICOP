@@ -29,8 +29,8 @@
 						    	</div>
 					  		</div>
 					 		<div class="text-center"">
-						  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
-						  		<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+						  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						  		<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 						 	</div>
 						</fieldset>
 					</form><br><br>
@@ -88,13 +88,13 @@
 						</div>
 						<div class="card-text text-center">
 							<div class="sticky-top">
-								<a href="@{Administradores.download(pr.id)}" class="btn btn-primary m-1 icon font-size-celular">
+								<a class="concluir font-size-celular" data-item="${pr.id}" href="#Concluir" style="font-size: medium; text-decoration: none; color: white;">
+									<span class="btn btn-success mt-1 mb-1 butaoIconTexto font-size-celular" ><span class="desaparecer-celular">Concluir</span>
+									<i style="float: right; margin: 1px;" class="check icon"></i></span>
+								</a>
+								<a href="@{Administradores.download(pr.id)}" class="btn-sm-computador btn-block-computador btn btn-primary m-1 butaoIconTexto font-size-celular">
 									<span class="desaparecer-celular">Download</span>
 									<i style="float: right; margin: 1px;" class="download icon"></i>
-								</a>
-								<a class="concluir font-size-celular" data-item="${pr.id}" href="#Concluir" style="font-size: medium; text-decoration: none; color: white;">
-									<span class="btn btn-success mt-1 mb-1 icon font-size-celular" ><span class="desaparecer-celular">Concluir</span>
-									<i style="float: right; margin: 1px;" class="check icon"></i></span>
 								</a>
 							</div>
 						</div>

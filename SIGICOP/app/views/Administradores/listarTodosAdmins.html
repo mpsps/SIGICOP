@@ -24,8 +24,8 @@
 						    	</div>   		
 					  		</div>
 					 		<div class="text-center">
-						  		<button type="submit" class="btn btn-primary icon font-size-celular">Filtrar <i class="filter icon"></i></button>
-						  		<span class="btn btn-danger icon font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+						  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						  		<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 						 	</div>
 						</fieldset>
 					</form><br><br>
@@ -60,7 +60,7 @@
 						</div>
 #{/if}
 						<div class="text-center m-0">
-								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-0 mt-1 icon remover font-size-celular">
+								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-0 mt-1 butaoIconTexto remover font-size-celular">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
 								</a>	
 						</div>
@@ -80,7 +80,7 @@ $(".remover").click(function() {
 		  html: '<div id="tituloCelularModal">Tem certeza que deseja remover esse administrador?</div>'+
 				  '<br/><form action="@{Administradores.removerAdmin}" method="post">'
 		  		   +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
-			  	   +'<input type="submit" value="Remover" class="btn btn-danger m-1 icon"/></form>',
+			  	   +'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
 		  icon: 'question',
 		  showCloseButton: true,
 		  showCancelButton: true,

@@ -19,9 +19,9 @@
 				enctype="multipart/form-data" class="needs-validation" novalidate="">
 				<div class="mb-3">
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-					<div class="float-left mt-1">
+					<div class="float-left m-0">
 						<div class="float-left ">
-							<label for="item-arquivo" class="btn btn-primary icon font-size-celular">Selecione
+							<label for="item-arquivo" class="btn btn-primary butaoIconTexto font-size-celular m-0">Selecione
 								o Arquivo <i class="paperclip icon"></i>
 							</label>
 						</div>
@@ -35,30 +35,30 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<label class="border-bottom">Cópias:<sup style="color: red;">*</sup></label> 
-						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular" max="${usuarioBanco?.qtdDisponivel}" 
+						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 
+						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
 							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
 					<div class="col-md-6">
-						<label class="border-bottom">Face: <sup style="color: red;">*</sup></label><br>
+						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
-								class="custom-control-input" value="frente" checked="checked">
+								class="custom-control-input m-0" value="frente" checked="checked">
 							<label class="custom-control-label text-justify" for="frente">Frente</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frenteEverso" name="item.frenteVerso"
-								class="custom-control-input" value="frenteEverso"> <label
+								class="custom-control-input m-0" value="frenteEverso"> <label
 								class="custom-control-label text-justify" for="frenteEverso">Frente
 								e Verso</label> <sub style="color: red; padding: 0; margin: 0;">2x</sup>
 						</div>
 					</div>
 				</div>
 				<div class="mb-3">
-					<label class="border-bottom">Descricao:</label>
+					<label class="border-bottom m-0 mb-1">Descricao:</label>
 					<div class="input-group">
 						<textarea rows="2" cols="7" name="item.descricao"
-							class="form-control" placeholder="descrição"></textarea>
+							class="form-control m-0" placeholder="descrição"></textarea>
 					</div>
 				</div>
 				<button class="btn btn-success btn-lg btn-block font-size-celular" type="submit" id="add">
@@ -98,16 +98,13 @@
 								</div>
 								<div class="card-body text-left m-0 pt-0 pb-0">
 									<div class="card-text mt-0">
-										<b>Id lista: </b> ${p.idLista}
-									</div>
-									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
 									<div class="card-text">
 										<b>Face: </b> ${p.frenteVerso}
 									</div>
 									<div class="mt-1">
-										<button class="btn btn-outline-info m-0 mb-1 font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
+										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
 											role="button" aria-expanded="false" aria-controls="collapseExample">
 											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular">Informações</span>
 										</button>
@@ -123,11 +120,14 @@
 												<div class="card-text">
 													<b>Status: </b> ${p.status}
 												</div>
+												<div class="card-text mt-0">
+													<b>Id lista: </b> ${p.idLista}
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="card-text text-center">
-										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger icon mt-1 font-size-celular">Cancelar <i
+										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
 											class="trash alternate outline icon"></i>
 										</a>
 									</div>
@@ -172,16 +172,13 @@
 								</div>
 								<div class="card-body text-left m-0 pt-0 pb-0">
 									<div class="card-text mt-0">
-										<b>Id lista: </b> ${p.idLista}
-									</div>
-									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
 									<div class="card-text">
 										<b>Face: </b> ${p.frenteVerso}
 									</div>
 									<div class="mt-1">
-										<button class="btn btn-outline-info m-0 mb-1 font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
+										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
 											role="button" aria-expanded="false" aria-controls="collapseExample">
 											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular font-size-celular">Informações</span>
 										</button>
@@ -197,11 +194,14 @@
 												<div class="card-text">
 													<b>Status: </b> ${p.status}
 												</div>
+												<div class="card-text mt-0">
+													<b>Id lista: </b> ${p.idLista}
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="card-text text-center">
-										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger icon mt-1 font-size-celular">Cancelar <i
+										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
 											class="trash alternate outline icon"></i>
 										</a>
 									</div>
@@ -257,7 +257,7 @@ $(document).ready(function(e) {
 				})
 				Toast.fire({
 				  icon: 'info',
-				  title: '<span class="font-size-celular">Adicionando Pedido</span>'
+				  title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
 				})
 				setTimeout(function(){ 
 					e.submit();

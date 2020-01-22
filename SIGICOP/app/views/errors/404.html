@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>Not found</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=${_response_encoding}"/>    
-    </head>
-    <body>
+#{extends 'laySeg.html' /} 
+#{set title:'Not found' /}
         #{if play.mode.name() == 'DEV'}
             #{404 result /}
         #{/if}
@@ -15,5 +9,3 @@
                 ${result.message}
             </p>
         #{/else}
-    </body>
-</html>

@@ -197,6 +197,9 @@
 #{/else}
 #{/if}
 #{if session.contains("usuarioLogado")}
+#{if listaPedidos}
+#{/if}
+
 #{if solicitar}
 	 		<a href="@{Pedidos.fazerPedido}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
 	  		<a class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
@@ -224,7 +227,7 @@
 					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
 				</span>
 				<span class="float-right">
-					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger icon">Sair <i class="sign out alternate icon m-0"></i></a>
+					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto">Sair <i class="sign out alternate icon m-0"></i></a>
 				</span>
 			</span>
 #{/if}
@@ -239,7 +242,7 @@
 					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
 				</span>
 				<span class="float-right">
-					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger icon ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
+					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
 				</span>
 			</div>
 #{/if}
@@ -418,7 +421,7 @@ $(document).ready(function() {
 			Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  html: '<div class="text-center h4"><i class="address card outline icon m-0 p-0 border-0"></i> Meus Dados </div>'+
+			  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
 			  '<div class="text-left font-size-celular"><img src="/public/images/icones/usuNome.png" width="" title="Nome"> - ${usuarioBanco?.nomeUsu} <br>'+
 			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${usuarioBanco?.email}'+
 			  '<br><img src="/public/images/icones/usuQtd.png" width="" title="Qtd Disponivel"> - ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+

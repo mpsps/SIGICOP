@@ -185,25 +185,39 @@ public class Administradores extends Controller {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.salvarSenha() ... ["+ new Date()+"]");
 			
-		DadosSessaoAdmin dadosSessao = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
+		Administrador admBanco = dadosSessaoAdmin.admin;
+		String telaAdmin = "Tela Admin";
 		
-		if(senha.equals(confirmarSenha) && !senha.isEmpty() && !confirmarSenha.isEmpty()&& senha != null && confirmarSenha != null) {
-				if(senha.length() > 5) {
-				Administrador admBanco = Administrador.findById(dadosSessao.admin.id);
-				String senhaCript = CriptografiaUtils.criptografarMD5(senha);
-				admBanco.senha = senhaCript;
-				admBanco.save();
-				dadosSessao.admin = admBanco;
-				Cache.set(session.getId(), dadosSessao);
-				flash.success("senha alterada com sucesso!");
-				editar();
+		if (senha == null && confirmarSenha == null) {
+			senha = "";
+			confirmarSenha = "";
+		}
+		
+		if( !senha.isEmpty() && !confirmarSenha.isEmpty()) {
+			if(senha.length() > 5 && confirmarSenha.length() > 5) {
+				if(senha.equals(confirmarSenha)) {
+					String senhaCript = CriptografiaUtils.criptografarMD5(senha);
+					admBanco.senha = senhaCript;
+					admBanco.save();
+					dadosSessaoAdmin.admin = admBanco;
+					Cache.set(session.getId(), dadosSessaoAdmin);
+					flash.success("senha alterada com sucesso!");
+					editar();	
+				}else {
+					flash.error("as senha não são compatíveis!");
+					String seis = "incompatíveis";
+				renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
+				}
 			}else {
 				flash.error("No minimo 6 caracteres!");
-				editarSenha();
+				String seis = "no minimo 6 caracteres";
+			renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
 			}
 		}else{
-			flash.error("Confimarçao de senha invalida!");
-		editarSenha();
+			flash.error("falha na alteração de senha!");
+			String seis = "obrigatório";
+		renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
 		}
 	}
 	

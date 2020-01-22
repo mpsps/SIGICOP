@@ -1,52 +1,4 @@
-body {
-	background-color: #fafaff;
-}
-/*body>.grid {
-	height: 100%;
-}
-*/
-.listaPped {
-  background-color: #e2eef1;
-}
-#hora{
-	color: white;
-	font-family: sans-serif;
-	font-weight: bolder;
-	text-align:  right;
-	position: relative;
-	right: 2px;
-}
-.statusAguardando{
-    color: white;
-    font-weight: bold;
-	background: #529fed;	
-}
 
-.statusConcluido{
-	color: white;
-	font-weight: bold;
-	background: #5eed4e;
-}
-
-.statusRecusado{
-    color: white;
-	font-weight: bold;
-	background:#ff3535;
-}
-.statusEntregue{
-	color: white;
-	font-weight: bold;
-	background: #aeb7d2;
-}
-.image {
-	margin-top: -100px;
-}
-.column {
-	max-width: 450px;
-}
-#corMenu{
-	background: #1b1c1d;
-}
 /**************************/
 /****tela de celular*******/
 /**************************/
@@ -105,7 +57,7 @@ body {
 	border-bottom:  3px solid #ff5555;
 	color: #ff5555;
 	}
-.icon:hover  {
+.butaoIconTexto:hover  {
 	color: rgba(10, 10, 10, 1);
 	}
 .corFiltro{
