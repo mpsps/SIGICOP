@@ -3,7 +3,7 @@
 #
 
 validation.required=obrigatório
-validation.future=Informe uma data futura
-validation.min= Não pode ter valor menor que %2$d
-validation.minSize= No minimo %2$d caracteres
-validation.email= email invalido
+validation.future=informe uma data futura
+validation.min= não pode ter valor menor que %2$d
+validation.minSize= no minimo %2$d caracteres
+validation.email= email inválido

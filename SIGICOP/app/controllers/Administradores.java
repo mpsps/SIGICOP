@@ -102,56 +102,73 @@ public class Administradores extends Controller {
 		
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
-				
+		String telaAdmin = "Tela Admin";
+		
 		Administrador adminBancoEmail = Administrador.find("email = ?1", adm.email).first();
 		
-		if(adm.id == null) {// se o id do adm for nulo é pq o aadmin padrão está cadastrando um novo
-//			if(admBanco.admPadrao) {// verificar se é o admin padrão
-				if(adminBancoEmail != null){
-					flash.error("Email ja exite!");
-					String email = "Esse Email Já Existe";
-				renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, email);
-				}else {				
-					if (validation.hasErrors()) {
+		if(adm.id == null) {// se o id do adm for nulo é pq o admin padrão está cadastrando um novo
+				if(adminBancoEmail != null){ // se for diferente de nulo então existe admin com esse email
+					if (validation.hasErrors()) { // enviar todos os erros se só preencer email
 						params.flash();
-						flash.error("Falha no Cadastro do Usuario!");
 					}
-					boolean senhaIguais = adm.compararSenha();
-		
-					if(senhaIguais) {
-						flash.success("Administrador "+ adm.nomeAdm+" cadastrado com sucesso!");
-						String senhaCript = CriptografiaUtils.criptografarMD5(adm.senha );
-						adm.senha = senhaCript;
-					}else {
-						flash.error("Comparacao de senha invalida!");
-						String comparar = "Não Está Compatível";
-						renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar);
+					flash.error("Email ja exite!");
+					String email = "esse Email Já Existe";
+				renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, email, telaAdmin);
+				}else { // se não, então não possui nenhum admin com esse email		
+					if (validation.hasErrors()) { // guarda o(s) erro(s) se houver
+						params.flash();
 					}
-//				}
+					// verificar se o tamanho de senha e confirmarSenha são superior a 5
+					if(adm.senha.length() > 5 && adm.confirmarSenha.length() > 5 ) { 
+						boolean senhaIguais = adm.compararSenha();
+						
+						if(senhaIguais) {
+							String senhaCript = CriptografiaUtils.criptografarMD5(adm.senha); // criptografa a senha
+							adm.senha = senhaCript; // adm.senha recebe a senha criptografada
+						}else {
+							if (validation.hasErrors()) { // guarda o(s) erro(s) se houver
+								params.flash();
+							}
+							flash.error("comparação de senha inválida!");
+							String comparar = "não está compatível";
+						renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin);
+						}
+					}else { //se não, então senha e confirmarSenha são inferiores a 6
+						flash.error("no mínimo 6 caracteres!");
+						String comparar = "no mínimo 6 caracteres";
+					renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin);
+					}
+				if (validation.hasErrors()) { // verificar depois de tudo se contém algum erro
+					validation.keep();
+					flash.error("Falha no Cadastro do Usuario!");
+				cadastroDeAdms();
+				}else { // se não contém nenhum erro, então permite cadastrar
+					flash.success("O administrador "+adm.nomeAdm+" cadastrado com sucesso!");
+					adm.save(); // salvar o admin após cadastrar
+				paginaAdmin();
+				}
 			}
-		}else {// se não estiver cadastrando é pq está editando
-			dadosSessaoAdmin.admin = adm;
-			Cache.set(session.getId(), dadosSessaoAdmin);
-		}
-		if(!adm.nomeAdm.isEmpty() && !adm.email.isEmpty()) {
-			if(adm.id == null) {
-				flash.success("O administrador "+adm.nomeAdm+" cadastrado com sucesso!");				
-			}else {
+		}else { // se não estiver cadastrando é pq está editando
+			if(adm.nomeAdm == null && adm.email == null) { // se vier nulo, transformar em vazio
+				adm.nomeAdm = "";
+				adm.email = "";
+			}
+			if(!adm.nomeAdm.isEmpty() && !adm.email.isEmpty()) { // verificar se está vazio
 				flash.success("O administrador "+adm.nomeAdm+" editado com sucesso!");				
-			}
-			adm.save(); // salvar mesmo estando cadastrando ou editando	
-		}else {
-			if (validation.hasErrors()) {
-				params.flash();
-				flash.error("Falha!");
-			renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco);
+				adm.save(); // salvar o admin após editar	
+				
+				dadosSessaoAdmin.admin = adm; // salvar o admin na cache após editar 
+				Cache.set(session.getId(), dadosSessaoAdmin);
+				session.put("adminLogado", adm.nomeAdm); // salvar o nome do admin na sessão após editar 
+			paginaAdmin();
+			}else {
+				if (validation.hasErrors()) {
+					params.flash();
+					flash.error("Falha ao editar o admin!");
+				editar(); // manda parar editar(), se ocorrer algun erro
+				}
 			}
 		}
-		Administrador admEditadoBanco = Administrador.findById(admBanco.id);// busca o admin para setar na cache
-		dadosSessaoAdmin.admin = admEditadoBanco;
-		Cache.set(session.getId(), dadosSessaoAdmin);// salvar o admin na cache após editar 
-		session.put("adminLogado", admEditadoBanco.nomeAdm); // salvar o nome do admin na sessão após editar 
-	paginaAdmin();
 	}
 	
 ///// ENVIAR OS DADOS PARA EDITAR O ADMINISTRADOR LOGADO /////
@@ -211,7 +228,7 @@ public class Administradores extends Controller {
 				}
 			}else {
 				flash.error("No minimo 6 caracteres!");
-				String seis = "no minimo 6 caracteres";
+				String seis = "no mínimo 6 caracteres";
 			renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
 			}
 		}else{

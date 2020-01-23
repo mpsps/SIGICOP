@@ -155,7 +155,7 @@
 		 	document.getElementById("validacaoServidoComfirmar").style = 'display: none;'
 #{/if}
 		}else{
-			document.getElementById("confimar").style = 'border-color: none;';
+			document.getElementById("confimar").style = 'border-color: #28a745;';
 	 		document.getElementById("Comparar").innerHTML = '<span style="display: none;"></span>';
 		} 
 		// senha
@@ -177,7 +177,7 @@
 		 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
 		}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
 		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
 		 	document.getElementById("confimar").style = 'border-color: #28a745;';
 		}
 	}

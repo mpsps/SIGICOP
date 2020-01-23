@@ -2,14 +2,14 @@
 #{set title:'Cadastro de Administrador(res)' /}
 <div id="corpoCelular" class="heightMin">
 #{if !adm?.id}
-	<div class="h1 text-dark text-center tituloCelular m-0">Cadastro de Adminstradores</div><br>
+	<div class="h1 text-dark text-center tituloCelular";">Cadastro de Adminstradores</div><br>
 #{/if}
 #{else}
-	<div class="h1 text-dark text-center tituloCelular m-0">Editar Meus Dados</div>
+	<div class="h1 text-dark text-center tituloCelular">Editar Meus Dados</div>
 #{/else}
 	<div class="text-center m-0">
 #{ifErrors}
-		<span class="h2 m-0" style="color: red;">Ops...</span>
+		<div class="h2 m-0 ops" style="color: red;">Ops...</div>
 		<!--#{errors}
 		<li>${error.key} - ${error} - ${error.message}</li>
 		#{/errors}-->
@@ -20,31 +20,31 @@
 <!-- FORMULARIO DE CADASTRO E EDI��O DO ADMIN -->
 			<form action="@{Administradores.salvarAdm} " class="m-0 " method="post">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
-				<div class="ui stacked segment" style="margin-top: -3.5%;">
+				<div class="ui stacked segment p-2-celular" style="margin-top: -3.5%;">
 					<label class="font-size-celular m-1" for="nomeAdm">Nome:</label>	
-					<span id="validacaoServidoNomeAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.nomeAdm' /}</span>
+					<span id="validacaoServidoNomeAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.nomeAdm' /}</span>
 					<span id="validarNomeAdmin"></span>
 					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control hei-input-celular font-size-celular" 
 					 autocomplete="off" id="nomeAdm" value="${adm?.nomeAdm}" onchange="validarNomeAdmin()">
 					 
 					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span id="validacaoServidoEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.email' /}</span>
+					<span id="validacaoServidoEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.email' /}</span>
 #{if email}		
-					<span id="validacaoServidorExisteEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">${email}</span>
+					<span id="validacaoServidorExisteEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
 #{/if}
 					<span id="validarEmailAdmin"></span>
 					<input type="email" name="adm.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
 					autocomplete="off" id="email" value="${adm?.email}" onchange="validarEmailAdmin()">
 #{if !adm?.id}
 					<label for="inputSenhaA" class="m-1 font-size-celular">Senha:</label>
-					<span id="validacaoServidorsenhaA" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'adm.senha' /}</span>
+					<span id="validacaoServidorsenhaA" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.senha' /}</span>
 					<span id="validarSeA"></span>
 					<input type="password" name="adm.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
 					id="inputSenhaA" onchange="validarsenhaAdm()">
 					
-					<label for="confimar" class="m-1  font-size-celular">Confimar Senha:</label>
+					<label for="confimar" class="m-1 mr-0 font-size-celular">Confimar Senha:</label>
 #{if comparar}		
-					<span id="validacaoServidoComfirmarAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular">${comparar}</span>
+					<span id="validacaoServidoComfirmarAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${comparar}</span>
 #{/if}
 					<span id="Comparar"></span>
 					<input type="password" name="adm.confirmarSenha" placeholder="Confirmar Senha" 
@@ -69,11 +69,11 @@ function validarNomeAdmin(){		// nome do campo
 	var nome= document.getElementById('nomeAdm').value;
 	// nome do admin
 	if (nome == '') {
-	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>'
+	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>'
 	 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
 	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
 	}else {
-	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>'
+	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>'
 	 	document.getElementById("nomeAdm").style = 'border-color: #28a745'
 	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
 	}		
@@ -84,7 +84,7 @@ function validarEmailAdmin(){        // nome do campo
 	console.log(email);
 	if (email == '') {
 	 	document.getElementById("email").style = 'border-color: #dc3545;'
-	 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+	 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
 	 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'
 	}else{
 		usuario = email.substring(0, email.indexOf("@"));
@@ -100,14 +100,14 @@ function validarEmailAdmin(){        // nome do campo
 		    (dominio.indexOf(".") >=1)&& 
 		    (dominio.lastIndexOf(".") < dominio.length - 1)) {
 		 	document.getElementById("email").style = 'border-color: #28a745;';
-		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
 		 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'	
 #{if email}	
 		 	document.getElementById("validacaoServidorExisteEmailAdmin").style = 'display: none;'
 #{/if}
 		}else{
 			document.getElementById("email").style = 'border-color: #dc3545;';
-		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">email invalido</span>';
+		 	document.getElementById("validarEmailAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">email invalido</span>';
 		 	document.getElementById("validacaoServidoEmailAdmin").style = 'display: none;'
 #{if email}	
 		 	document.getElementById("validacaoServidorExisteEmailAdmin").style = 'display: none;'
@@ -125,19 +125,19 @@ function validarsenhaAdm(){
 	if (confimarSenha.length < 6) {
         console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
         document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
-	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">no mínino 6 caracteres</span>';
 #{if comparar}
 	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
 #{/if}
 	}else{
-		document.getElementById("confimar").style = 'border-color: none;';
+		document.getElementById("confimar").style = 'border-color: #28a745;';
  		document.getElementById("Comparar").innerHTML = '<span style="display: none;"></span>';
 	} 
 	// senha
  	if (senha.length < 6) {
 		console.log("A senha precisa ter pelo menos seis caracteres.");
 		document.getElementById("inputSenhaA").style = 'border-color: #dc3545;' // vermelho
-	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">no mínino 6 caracteres</span>';
  		document.getElementById("validacaoServidorsenhaA").style = 'display: none;'
 	}else{
  		document.getElementById("inputSenhaA").style = 'border-color: none;';
@@ -147,15 +147,15 @@ function validarsenhaAdm(){
 	}
 	// se a senha é compativel com confirmação senha
 	if (senha != '' & confimarSenha != '' & senha != confimarSenha) {
-	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
-	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
 	 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
 #{if comparar}
 	 	document.getElementById("validacaoServidoComfirmarAdmin").style = 'display: none;'
 #{/if}
 	}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
-	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-	 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular">compatível<i class="check icon m-0"></i></span>';
+	 	document.getElementById("validarSeA").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
+	 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
 	 	document.getElementById("confimar").style = 'border-color: #28a745;';
 	}
 }
