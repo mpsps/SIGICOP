@@ -38,7 +38,7 @@
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/sidebar.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/transition.css'}">
-	  	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}">
+	  	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/SIGICOP.css'}">
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/jquery.min.js'}"></script>
 		<script src="@{'/public/Semantic/js/visibility.js'}"></script>
@@ -51,29 +51,31 @@
 		<script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
 		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>    
 	<style type="text/css">
-		.papelDeParede {
-		 background-image: url("/public/images/sigicop/papel.jpg");
-		 background-repeat: no-repeat;
+		.cabecalhoPrinciopal{
+			margin-bottom: -10% !important;
 		}
 	</style>
 <!-- VOLTAR AO TOPO -->
 	<style type="text/css">
+/* VOLTAR AO TOPO */
 		a[href="#top"]{
-	    padding:10px;
-	    position:fixed;
-	    top: 90%;
-	    right:40px;
-	    display:none;
-	    font-size: 5px;
+		    padding:10px;
+		    position:fixed;
+		    top: 85%;
+		    right: 5%;
+		    margin-bottom: 1%;
+		    display:none;
+		    font-size: 5px;
 		}
 		a[href="#top"]:hover{
-	    text-decoration:none;
+			text-decoration:none;
 		}
+/* BARRA DE ROLAGEM PERSONALIZADA */
 		/* Largura da barra de rolagem */
 		::-webkit-scrollbar {
 			width: 10px;
 		}
-		
+
 		/* Fundo da barra de rolagem */
 		::-webkit-scrollbar-track-piece {
 			background-color: #1b1c1d;
@@ -106,12 +108,12 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
     </head>
-<body onload="bemVindo()">   
+<body onload="bemVindo()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
 <div class="ui large top fixed hidden menu border-0">
   <div class="ui container">
 		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-    	<a class="item sobreNos" href="#SOBRE_NOS" >Sobre Nos</a>
+    	<a class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
     	<div class="right menu">
 			<div class="item">
 	        	<a class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
@@ -123,52 +125,62 @@
 	</div>
 </div>
 <!-- MENU ICONE A ESQUERDA-->
-<div class="ui vertical inverted sidebar menu" style="max-width: 100%;">
+<div class="ui vertical inverted sidebar menu" style="max-width: 60%;">
 	<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-	<a onclick="this.style='display: none;'" class="item sobreNos" href="#SOBRE_NOS">Sobre Nos</a>
+	<a class="item toc sobreNos" href="#SOBRE_NOS">Sobre Nós</a>
 	<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
-	<a class="btn btn-primary btn-lg btn-block" href="@{Gerenciador.login}" >Entrar Agora </a>
+	<a class="item bg-primary" href="@{Gerenciador.login}">Entrar Agora </a>
 </div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
-<div class="pusher m-0 font-size-celular" style="max-width: 100%;">
-  	<div class="ui inverted vertical masthead center aligned segment m-0">
-   		<div class="ui container sticky-top m-0 p-0" style="background: #1b1c1d;">
-			<div class="ui large secondary inverted pointing menu m-0">
-		        <a class="toc item m-0 p-1">
+<div class="pusher m-0 font-size-celular p-0-celular m-0-celular" >
+  	<div class="ui inverted vertical masthead segment center aligned m-0 p-0-celular
+  	 m-0-celular pb-1-celular p-0-celular" style="">
+			<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
+		        <a class="toc item">
 		        	<img src="@{'/public/images/icones/menuIcone.png'}">
 		        </a>
+		        <div class="item">
 		        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
 		        href="@{Gerenciador.principal}">Principal</a>
-		        <a class="item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
-		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" >Sobre Nos</a>
-		        <div class="right item m-0 p-0">
-			        <a class="ui inverted button m-0" href="@{Gerenciador.login}">Entrar</a>
-			        <a class="ui inverted button active butaoIconTexto m-0 ml-1 border border-dark" 
-			        href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+		        </div>
+		        <div class="item m-0"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" -->
+		        <a class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
+		        onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
+		        </div>
+		        <div class="right item m-0">
+			        <a class="ui inverted button m-0 font-size-celular pr-0-celular pl-0-celular desaparecer-celular" 
+			        href="@{Gerenciador.login}">Entrar</a>
+			        <a class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white"  
+			        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
 				</div>
 			</div>
-		</div>
-		<div class="ui text container m-0">
-			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" height="25%" style="float: left; 
-			margin: 7% 25% 3% 25%; max-width: 100%;"/><br>
-			<h1 class="ui inverted header m-0">
+		<div class="ui text p-0-celular m-0-celular font-size-celular">
+			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="width: 30%;" class="image-sigicop"/>
+			<br>
+			<div class="h1 m-0 font-size-celular tituloCelular m-0-celular">
 	        IFRN <i>campus </i> João Câmara
-			</h1>
+			</div>
 			<br/>
-			<a href="@{Gerenciador.login}" class="ui huge primary button">Entrar Agora <i class="right arrow icon"></i></a>
+			<a href="@{Gerenciador.login}" class="ui huge font-size-celular btn-lg btn-primary text-decoration-none botao-computador" 
+			style="letter-spacing: 0.5px; padding: 3%;">Entrar Agora <i class="right arrow icon m-0-celular"></i></a>
 		</div>
 	</div>
+	
 <!-- CORPO DA PAGINA-->
-	<div class="ui vertical stripe segment">
-		<div class="ui text container text-break p-0" style="max-height: 100%; margin-top: -6%;">
+<!--/////////////////////////////////////////////////////////////////////////////////////-->
+	<div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
+		<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
 	#{doLayout /}
-			<a href="#top" class="glyphicon glyphicon-chevron-up">
+			<a href="#top" class="sticky-top topCelular">
 			<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
 			</a>
 		</div>
 	</div>
+<!--/////////////////////////////////////////////////////////////////////////////////////-->
+
 <!-- RODAP� DA PAGINA -->
-	<div class="position-bottom" id="rodapeCelular" class="rodapeEmBaixo">
+	<div class="position-bottom text-break" id="rodapeCelular" class="rodapeEmBaixo">
  		<div class="ui inverted vertical footer segment" class="dark">
 			<div class="ui container">
 				<div class="ui stackable inverted divided equal height stackable grid">
@@ -195,7 +207,7 @@
 					</div>
 					<div class="three wide column">
 						<h4 class="ui inverted header">E-mails:</h4>
-						<a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+						<a href="#" class="text-decoration-none" id="font-size-celular">magdielpereira07@gmail.com</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
 						<a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a> 
 					</div>
 				</div>
@@ -235,12 +247,17 @@ $(document).ready(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
+    
 	$(".sobreNos").click(function () {
+		setTimeout('apresentacao()',400);
+	});
+});
+	function apresentacao(){
 		Swal.fire({
 			position: 'top',
 			icon: '',
-			html: '<div class="bg-dark text-white p-3 pb-5" style="margin: -20px;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
-			'<div class="text-justify w-100" style="text-indent: 1cm;">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
+			html: '<div class="text-white p-3 pb-5 font-size-celular mb-n2" style="margin: -18px; background-color: #1b1c1d;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
+			'<div class="text-justify w-100" style="text-indent: 5%;">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
 			' realizado por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank" class="text-decoration-none">(@MagdielPS)</a> '+
 			'e por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank" class="text-decoration-none">(@Manacio)</a>.'+
 			' A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
@@ -256,9 +273,8 @@ $(document).ready(function(){
 			hideClass: {
 			    popup: 'animated fadeOutUp faster'
 			}
-		})
-	});
-});
+		});	
+	}
 </script>
 </body>
 </html>

@@ -9,7 +9,6 @@
 .listaPped {
   background-color: #e2eef1;
 }
-
 #hora{
 	color: white;
 	font-family: sans-serif;
@@ -46,7 +45,7 @@
 .column {
 	max-width: 450px;
 }
-#corMenu{
+.corMenu{
 	background: #1b1c1d;
 }
 .butaoIconTexto:hover  {
@@ -135,5 +134,18 @@
 		font-family: Times New Romans;
 		font-size: 85%;
 		letter-spacing: 0.5px;
+	}
+	.container-computador{
+		margin-left: 5% !important;
+		margin-right: 5% !important;
+		margin-top: 0 !important;
+	}
+	.botao-computador{
+		margin-top: 50px !important;
+		padding: 20px !important;
+	}
+	img[id="topo"]{
+		height: 50px;
+		width: 50px;
 	}
 }

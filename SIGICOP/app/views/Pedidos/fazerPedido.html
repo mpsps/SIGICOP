@@ -1,6 +1,6 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Solicitacao de Pedido(s)' /}
-<div id="corpoCelular">
+<div id="corpoCelular" class="heightMin" style="max-width: 100%;">
 #{if usuarioBanco?.qtdDisponivel == 0}
 	<div class="py-5 text-center mb-3 alert alert-warning" >
 		<h2 style="color: #ff4a4a;">Atenção!</h2>
@@ -8,15 +8,15 @@
 			nesse mês, mas para isso, lembresse de salvar os pedidos.</p>
 	</div>
 #{/if} #{else}
-	<div class="row">
-		<div class="col-md-6 order-md-1 font-size-celular">
+	<div class="row tamanho-celular m-0-celular ml-n1-celular">
+		<div class="col-md-6 font-size-celular">
 <!-- FORMULARIO DE PEDIDOS -->
-			<div class="mb-0 mt-0 h4">
+			<div class="mb-0 mt-0 h4 m-0-celular">
 				<span class="text-muted font-size-celular">Solicitação:</span>
 			</div>
 			<hr class="mb-1">
 			<form id="form-pedido" action="@{Pedidos.addPedido}" method="post"
-				enctype="multipart/form-data" class="needs-validation" novalidate="">
+				enctype="multipart/form-data" class="m-0-celular" novalidate="">
 				<div class="mb-3">
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
 					<div class="float-left m-0">
@@ -33,13 +33,13 @@
 					<input type="file" name="item.arquivo" style="display: none;"
 						class="form-control" id="item-arquivo"> <br><br><br>
 				</div>
-				<div class="row">
-					<div class="col-md-6">
+				<div class="row p-0-celular m-0-celular">
+					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 
 						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
 							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
@@ -73,7 +73,7 @@
 <!-- LISTAGEM EM BAIXO DO AVISO, COM 4 ITENS EM CADA LINHA-->
 		<div class="col-md-12 order-md-2 font-size-celular">
 			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 ">
-				<span class="text-muted m-0 p-0 font-size-celular">Listagem de Pedidos</span> 
+				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
 				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>
@@ -145,9 +145,9 @@
 #{/if}
 #{else}
 <!-- LISTAGEM AO LADO DO FORMULÁRIOO, COM 2 ITENS EM CADA LINHA-->
-		<div class="col-md-6 order-md-2 font-size-celular">
-			<div class="d-flex justify-content-between align-items-center h4 mb-3 p-0 ">
-				<span class="text-muted m-0 p-0 font-size-celular">Listagem de Pedidos</span> 
+		<div class="col-md-6 font-size-celular">
+			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 ">
+				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
 				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>

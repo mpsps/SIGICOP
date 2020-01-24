@@ -1,7 +1,7 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Usuarios' /}
 <div id="corpoCelular">
-	<div class="h1 text-dark text-center tituloCelular m-0">Cadastro de Usuarios</div>
+	<div class="h1 text-dark text-center tituloCelular m-0 mb-2 mb-2 celular mt-n4 mt-n2-celular">Cadastro de Usuarios</div>
 	<div class="text-center m-0">
 #{ifErrors}
 		<h2 style="color: red;" >Ops...</h2>
@@ -10,37 +10,37 @@
 		#{/errors}-->
 #{/ifErrors}
 	</div>
-	<div class="ui middle aligned center aligned grid p-0 mt-1">
-		<div class="column p-0">
+	<div class="ui middle aligned center aligned grid p-0 mt-1 mt-2-celular p-0-celular m-0-celular">
+		<div class="column p-0 m-0 p-0-celular m-0-celular">
 <!-- formulario de cadastro de usu�rio -->
-			<form id="form-usuario" action="@{Usuarios.salvarUsuario} " class="ui large form m-0 pt-0" method="post">
-				<div class="ui stacked segment ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
+			<div class="ui stacked segment mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
+			<form id="form-usuario" action="@{Usuarios.salvarUsuario} " class="form m-0 pt-0" method="post">
 					<label class="m-1 font-size-celular" for="nomeUsuario">Nome:</label>
-					<span id="validacaoServidoNomeUsuario" class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.nomeUsu' /}</span>
+					<span id="validacaoServidoNomeUsuario" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>
 					<span id="validarNameUser"></span>
 					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular font-size-celular"
-					value="${user?.nomeUsu}" id="nomeUsuario" onchange="validarNome()">
+					value="${user?.nomeUsu}" id="nomeUsuario" autocomplete="off" onchange="validarNome()">
 					 
 					<label for="senha" class="m-1 font-size-celular">Matricula:</label>
-					<span id="validacaoServidoMatricula"  class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.matricula' /}</span>
+					<span id="validacaoServidoMatricula"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.matricula' /}</span>
 #{if mat}		
-					<span id="validacaoServidoMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular">${mat}</span>
+					<span id="validacaoServidoMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${mat}</span>
 #{/if}
 					<span id="validarMatricula"></span>
 					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular font-size-celular" 
-					value="${user?.matricula}"  id="matricula" maxlength="14" onchange="validarMatricula()">
+					value="${user?.matricula}"  id="matricula" maxlength="14" autocomplete="off" onchange="validarMatricula()">
 					
 					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span id="validacaoServidoEmail"  class="alert-danger shadow-sm rounded p-0 font-size-celular">#{error 'user.email' /}</span>
+					<span id="validacaoServidoEmail"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.email' /}</span>
 #{if email}		
-					<span id="validacaoServidoEmail" class="alert-danger shadow-sm rounded p-0 font-size-celular">${email}</span>
+					<span id="validacaoServidoEmail" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
 #{/if}
 					<span id="validarEmail"></span>
 					<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
 					id="email" value="${user?.email}" autocomplete="off" onchange="validarEmail()">
 					
 					<label for="senha" class="m-1 font-size-celular">Senha:</label>
-					<span class="alert-danger shadow-sm rounded p-0 font-size-celular" 
+					<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" 
 					id="validacaoServidoSenha">#{error 'user.senha' /}</span>
 					<span id="validarSenha"></span>
 					<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
@@ -48,18 +48,19 @@
 					
 					<label for="confimar" class="m-1 font-size-celular">Confirmar Senha:</label>
 #{if comparar}		
-					<span class="alert-danger shadow-sm rounded p-0 font-size-celular" id="validacaoServidoComfirmar">${comparar}</span>
+					<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" id="validacaoServidoComfirmar">${comparar}</span>
 #{/if}				
 					<span id="Comparar"></span>
 					<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" 
 					class="form-control hei-input-celular font-size-celular" id="confimar" value="" onchange="validarSenha()">
 					<!-- BOTÃO DE CADASTRO -->
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular butaoIconTexto" value="Cadastrar" />
-				</div>
 			</form>
-			<div class="ui stacked segment pt-2 pb-3 mt-2 mb-1">
-				<a href="@{Gerenciador.login}" class="mt-1 mb-1 text-decoration-none">Ir para a página de login</a>
+			<hr class="mt-3">
+			<div class="pb-3">
+				<a href="@{Gerenciador.login}" class="mt-1 mb-1">Ir para a página de login</a>
 			</div>
+				</div>
 		</div>
 	</div>
 </div>
@@ -67,18 +68,25 @@
 <script type="text/javascript">
 
 	function validarNome(){
-		var nomeUsuario = document.getElementById("nomeUsuario").value;
-		console.log(nomeUsuario);
 		// nome do usuário
+		var nomeUsuario = document.getElementById("nomeUsuario").value;
+		var nome = nomeUsuario.split(' ')[0];// separar str por espa�os
+		var sobreNome = nomeUsuario.split(' ')[1];// separar str por espa�os
+		console.log(nomeUsuario);
 		if (nomeUsuario == '') {
 		 	document.getElementById("nomeUsuario").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
 		 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
-		}else{
-		 	document.getElementById("nomeUsuario").style = 'border-color: #28a745;'
-		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
-		 var nomeUsuarioOk = "nomeUsuarioOk";
+		}else {
+			if(sobreNome == null || sobreNome == ""){
+				document.getElementById("nomeUsuario").style = 'border-color: #dc3545;' // vermelho
+				document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">o sobrenome é obrigatório</span>';
+				document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
+			}else{
+				document.getElementById("nomeUsuario").style = 'border-color: #28a745;'
+			 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
+			 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
+			}
 		}		
 	}
 	function validarMatricula(){
@@ -88,14 +96,14 @@
 		if (matricula == '') {
 			console.log(matricula+'sem nada'); 
 		 	document.getElementById("matricula").style = 'border-color: #dc3545;'; // vermelho
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
 		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
 #{if mat}
 		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
 #{/if}
 		}else if(matricula.length > 13 & matricula.length < 18){
 			document.getElementById("matricula").style = 'border-color: #28a745;'
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
 		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
 #{if mat}
 		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
@@ -103,7 +111,7 @@
 		var matriculaOk = "matriculaOk";	
 		} if(matricula.length < 14 & matricula.length > 0){
 		 	document.getElementById("matricula").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínimo 14 caracteres</span>';
+		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">no mínimo 14 caracteres</span>';
 		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
 #{if mat}
 		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
@@ -116,7 +124,7 @@
 		console.log(email);
 		if (email == '') {
 		 	document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">obrigatório</span>';
+		 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
 		 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
 		}else{
 			usuario = email.substring(0, email.indexOf("@"));
@@ -132,12 +140,12 @@
 			    (dominio.indexOf(".") >=1)&& 
 			    (dominio.lastIndexOf(".") < dominio.length - 1)) {
 			 	document.getElementById("email").style = 'border-color: #28a745;';
-			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
 			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
 			 	var emailOk = "emailOk";
 			}else{
 				document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
-			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">email invalido</span>';
+			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">email inválido</span>';
 			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
 			}
 		}
@@ -150,7 +158,7 @@
 		if (confimarSenha.length < 6) {
 	        console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
 	        document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm m-0-celular m-0">mínino 6 caracteres</span>';
 #{if comparar}
 		 	document.getElementById("validacaoServidoComfirmar").style = 'display: none;'
 #{/if}
@@ -162,7 +170,7 @@
 	 	if (senha.length < 6) {
 			console.log("A senha precisa ter pelo menos seis caracteres.");
 			document.getElementById("senha").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">no mínino 6 caracteres</span>';
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">mínino 6 caracteres</span>';
 	 		document.getElementById("validacaoServidoSenha").style = 'display: none;'
 		}else{
 	 		document.getElementById("senha").style = 'border-color: none;';
@@ -172,12 +180,12 @@
 		}
 		// se a senha é compativel com confirmação senha
 		if (senha != '' & confimarSenha != '' & senha != confimarSenha) {
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular">inconpatível</span>';
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular">inconpatível</span>';
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
 		 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
 		}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
+		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
 		 	document.getElementById("confimar").style = 'border-color: #28a745;';
 		}
 	}

@@ -14,13 +14,13 @@
 		<li>${error.key} - ${error} - ${error.message}</li>
 		#{/errors}-->
 #{/ifErrors}
-	</div>			
-	<div class="ui middle aligned center aligned grid mt-0">
-		<div class="column mt-0">
+	</div>			 
+	<div class="ui middle aligned center aligned grid mt-0 m-0-celular p-0-celular">
+		<div class="column mt-0 m-0-celular p-0-celular">
 <!-- FORMULARIO DE CADASTRO E EDI��O DO ADMIN -->
-			<form action="@{Administradores.salvarAdm} " class="m-0 " method="post">
+			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2" method="post">
+				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
-				<div class="ui stacked segment p-2-celular" style="margin-top: -3.5%;">
 					<label class="font-size-celular m-1" for="nomeAdm">Nome:</label>	
 					<span id="validacaoServidoNomeAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.nomeAdm' /}</span>
 					<span id="validarNomeAdmin"></span>
@@ -57,7 +57,6 @@
 					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular">Alterar Senha</a>
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Editar" />					
 #{/else}
-				
 				</div>
 			</form>
 		</div>
@@ -66,17 +65,25 @@
 <!-- validação ao alterar algum dado do formulário -->
 <script type="text/javascript">
 function validarNomeAdmin(){		// nome do campo
-	var nome= document.getElementById('nomeAdm').value;
 	// nome do admin
-	if (nome == '') {
+	var nome = document.getElementById('nomeAdm').value;
+	var sobreNome = nome.split(' ')[1];// separar a segunda str por espa�os
+	
+	if (nome == '') { // se nome contém nada
 	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>'
 	 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
 	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
 	}else {
-	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>'
-	 	document.getElementById("nomeAdm").style = 'border-color: #28a745'
-	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
-	}		
+		if(sobreNome == null || sobreNome == ""){
+			document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">sobrenome é obrigatório</span>'
+		 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
+		 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+		}else{
+		 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>'
+			document.getElementById("nomeAdm").style = 'border-color: #28a745'
+			document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+		}
+	}
 }
 function validarEmailAdmin(){        // nome do campo
 	var email = document.getElementById("email").value;

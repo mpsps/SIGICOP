@@ -29,7 +29,6 @@ import play.db.jpa.Model;
 
 @Entity
 public class Pedido extends Model {		
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Long id;

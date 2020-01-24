@@ -711,7 +711,7 @@
 .ui.huge.buttons .button,
 .ui.huge.buttons .or,
 .ui.huge.button {
-  font-size: 1.42857143rem;
+  font-size: 100%;
 }
 .ui.massive.buttons .button,
 .ui.massive.buttons .or,

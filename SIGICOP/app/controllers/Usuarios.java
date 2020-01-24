@@ -113,11 +113,11 @@ public class Usuarios extends Controller {
 		Usuario userBancoEmail = Usuario.find("email = ?1", user.email).first();
 		if(userBancoMat != null) {
 			flash.error("Matricula Já Existente!");
-			String mat = "Essa Matricula Já Existe";
+			String mat = "essa matricula já existe";
 		renderTemplate("usuarios/cadastroDeUsuario.html", user, mat);
 		}else if (userBancoEmail != null){
 			flash.error("Matricula Já Existente!");
-			String email = "Esse Email Já Existe";
+			String email = "esse email já existe";
 		renderTemplate("usuarios/cadastroDeUsuario.html", user, email);
 		}else {
 			///// COMPARAR SENHAS /////

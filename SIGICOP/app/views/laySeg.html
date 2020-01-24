@@ -22,9 +22,8 @@
 		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 <!-- BOOTSTRAP JS -->
 		<!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
+<!-- 		<script src="@{'/public/bootstrap/js/popper.js'}" ></script>		
+ -->		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
 <!-- SEMANTIC - CSS -->
 		<!-- <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/semantic.css'}"> -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
@@ -53,41 +52,43 @@
         <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
-<style type="text/css">
-		a[href="#top"]{
-	    padding: 4%;
-	    position: fixed;
-	    top: 82.5%;
-	    right: 2.5%;
-	    display:none;
-	    font-size: 5px;
-		}
-		a[href="#top"]:hover{
-	    text-decoration:none;
-		}
-</style>
 		<style type="text/css">
-		/* Largura da barra de rolagem */
-		::-webkit-scrollbar {
-			width: 10px;
-		}
-		/* Fundo da barra de rolagem */
-		::-webkit-scrollbar-track-piece {
-			background-color: #1b1c1d;
-			border-left: 1px solid #1b1c1d
-		}
-		/* Cor do indicador de rolagem */
-		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
+/* VOLTAR AO TOPO */
+			a[href="#top"]{
+			    padding:10px;
+			    position:fixed;
+			    top: 85%;
+			    right: 5%;
+			    margin-bottom: 1%;
+			    display:none;
+			    font-size: 5px;
+			}
+
+			a[href="#top"]:hover{
+		    	text-decoration:none;
+			}
+/* BARRA DE ROLAGEM PERSONALIZADA */
+			/* Largura da barra de rolagem */
+			::-webkit-scrollbar {
+				width: 10px;
+			}
+			/* Fundo da barra de rolagem */
+			::-webkit-scrollbar-track-piece {
+				background-color: #1b1c1d;
+				border-left: 1px solid #1b1c1d
+			}
+			/* Cor do indicador de rolagem */
+			::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
-			background-color: #529fed;
-			border-radius: 5px;
-		}
-		/* Cor do indicador de rolagem - ao passar o mouse */
-		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
+				background-color: #529fed;
+				border-radius: 5px;
+			}
+			/* Cor do indicador de rolagem - ao passar o mouse */
+			::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
-			background-color: #007bff;
-			border-radius: 5px;
-		}
+				background-color: #007bff;
+				border-radius: 5px;
+			}
 		</style>
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
@@ -99,11 +100,24 @@
 <!-- CHAMAR DIALOGS DO SWEETALERT2 -->
 		<script src="@{'/public/javascripts/meuJs/dialogs.js'}"></script>
 </head>
-<body onload="horaEnome()">
+<body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR E EM CELULAR-->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="corMenu" style="max-width: 100%;"">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 corMenu m-0-celular" 
+style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
+#{if result?.message}
+
+<div class="" style="margin-left: 10%; margin-right: 10%;" >
+		
+		<div class="itemMenu float-left"><div class="h5">Not Found</div>${result.message}
+		</div>
+</div>
+		<a href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
+		<div id="time" class="text-white m-0 ml-5" id="hora"></div>
+#{/if}
+#{else}
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
 	<div class="desaparecer-celular">
+	
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
 			<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
@@ -112,7 +126,7 @@
 	</div>
 #{/if}
 #{else}
-	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
+	<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
 		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
@@ -131,7 +145,7 @@
 		</div>
 		<ul class="navbar-nav">
 #{if session.contains("adminLogado")}
-			<div class="sticky-top">
+			<div class="sticky-top text-center">
 #{if admBanco?.admPadrao}
 		<!-- VEREFICAR SE � O ADMIN PADRAO -->
 				<span> <a title="Adicionar Admin" href="@{Administradores.cadastroDeAdms}" class="addAdm" style="padding: 0px; float: left;">
@@ -253,7 +267,8 @@
 #{/if}
 #{else}
 	<div id="time" class="text-white m-0" id="hora" style="display: none;"></div>
-#{/else}  		
+#{/else}
+#{/else} 		
 </nav>
 <div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
@@ -269,14 +284,17 @@
 	</div>
 #{/if}
 </div>
+
 <!-- CORPO DA PAGINA -->
+<!--/////////////////////////////////////////////////////////////////////////////////////-->
 <div id="container">
 #{doLayout /}
-	
-	<a href="#top" class="">
-		<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
+	<a href="#top" class="sticky-top">
+		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
 	</a>
 </div>
+<!--/////////////////////////////////////////////////////////////////////////////////////-->
+
 #{if session.contains("usuarioLogado")}
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
@@ -284,7 +302,7 @@
 </form>
 #{/if}
 <!-- RODAPÉ DA PAGINA -->
-<div class="position-bottom w-100" id="rodapeCelular" class="rodapeEmBaixo">
+<div class="position-bottom w-100 m-0-celular text-break" id="rodapeCelular" class="rodapeEmBaixo">
  	<div class="ui inverted vertical footer segment" class="dark">
 		<div class="ui container">
 			<div class="ui stackable inverted divided equal height stackable grid">
@@ -292,11 +310,9 @@
 					<h4 class="ui inverted header">Sobre:</h4>
 					<div class="ui inverted link list">
 						<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none">
-							<div  class="sticky-top">
 								<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
 								onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
-								<h4 class="text-white">SIGICOP</h4>
-							</div>
+								<div class="text-white h4">SIGICOP</div>
 						</a>
 					</div>
 				</div>
@@ -310,7 +326,7 @@
 				</div>
 				<div class="three wide column">
 					<h4 class="ui inverted header">E-mails:</h4>
-					<a href="#" class="text-decoration-none" class="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
+					<a href="#" class="text-decoration-none" class="font-size-celular">magdielpereira07@gmail.com</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
 					<a href="#" class="text-decoration-none" class="font-size-celular">manacio.p@escolar.ifrn.edu.br</a> 
 				</div>
 			</div>

@@ -11,14 +11,12 @@
 	</div>
 #{/if} 
 #{if listaPedidosPa != null}
-	<div class="row font-size-celular">
-  		<div class="col">
-	    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
-		      	<div class="card card-body m-0 p-0">
+	<div class="row font-size-celular m-0-celular p-0-celular">
+	    	<div class="collapse multi-collapse bg-white" id="multiCollapseExample1">
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
-					<form action="@{Administradores.paginaAdmin}" method="post">
-						<fieldset class="corFiltro shadow-lg rounded">
+					<form action="@{Administradores.paginaAdmin}" method="post" class="m-0-celular p-0-celular">
+						<fieldset class="corFiltro shadow-lg rounded m-0-celular p-0-celular">
 					        <legend>Filtrar Por:</legend>
 							<div class="form-row">
 						    	<div class="form-group col-md-6">
@@ -34,7 +32,7 @@
 									id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
 						    	</div>
 						  		</div>
-						 		<div class="text-center"">
+						 		<div class="text-center">
 							  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 									<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
 								</div>
@@ -42,9 +40,7 @@
 						</form><br><br>
 <!-- fim filtro -->
 #{/if}
-				</div>
 	    	</div>
-  		</div>
   	</div>	
 	<div class="container font-size-celular">
  		<div class="row">

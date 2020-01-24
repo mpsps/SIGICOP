@@ -1,28 +1,28 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Login' /}
-<div id="corpoCelular" class="heightMin" style="max-width: 100%;">
-	<div class="ui middle aligned center aligned grid">
-		<div class="column pl-3 pr-3 pt-0 pb-0">
-			<div class="ui teal image header ml-0 mr-0 mb-2 mt-1">
-				<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 p-0 imagem-celular" title="Usuario" width="150%">
-				<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular" >Insirar seu login e senha</div>
-			</div>
+<div id="corpoCelular" class="heightMin text-center" style="max-width: 100%;">
+	<div class="ui teal image header ml-0 mr-0 mb-2 mt-1 m-0-celular p-0-celular pl-0-celular pr-0-celular m-n1-celular">
+		<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 ml-1-celular p-0 imagem-celular" title="Usuario" width="150%">
+		<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular" >Insirar seu login e senha</div>
+	</div>
+	<div class="ui middle aligned center aligned grid p-0 m-0 mt-1 p-2-celular p-0-celular m-0-celular">
+		<div class="column p-0 ui stacked segment p-3 pt-1 pl-4 pr-4 p-1-celular pl-2-celular pr-2-celular">
 			<!-- FORMULARIO DE AUTENTIFICAÇAO -->
-			<form class="ui large form " action="@{Gerenciador.autenticar}" method="post">
-				<div class="ui stacked segment pl-3 pl-3 pr-3 pb-2 pt-2">
-					<label for="login" class="mt-2">Login:</label>
-					<span class="uk-form-icon" uk-icon="icon: user"></span>
-					<input type="text" name="login" value="${login}" placeholder="login" class="form-control hei-input-celular font-size-celular" autofocus=""
-					required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
-					<label for="senha" class="mt-2">Senha:</label>
-					<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
-					<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" required="" id="senha">
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 mb-1 font-size-celular" value="Logar"/>
-				</div>
+			<form class="ui large form p-1-celular" action="@{Gerenciador.autenticar}" method="post">
+				<label for="login" class="mt-0 mt-1-celular">Login:</label>
+				<span class="uk-form-icon" uk-icon="icon: user"></span>
+				<input type="text" name="login" value="${login}" placeholder="login" class="form-control hei-input-celular font-size-celular" autofocus=""
+				required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
+				<label for="senha" class="mt-2">Senha:</label>
+				<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
+				<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" required="" id="senha">
+				<!-- BOTÃO DE ENVIO -->
+				<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Logar"/>
 			</form>
-			<div class="ui stacked segment">
-				<div>NÃ£o sou cadastrado:</div>
-				<a href="@{Usuarios.cadastroDeUsuario}" class="text-decoration-none">Fazer cadastro</a>
+			<hr class="mt-3">
+			<div class="m-3 mt-1">
+				<span class="block-celular">NÃ£o sou cadastrado:</span>
+				<a href="@{Usuarios.cadastroDeUsuario}" class="">Fazer cadastro</a>
 			</div>
 		</div>
 	</div>
