@@ -135,7 +135,7 @@ public class Administradores extends Controller {
 						}
 					}else { //se não, então senha e confirmarSenha são inferiores a 6
 						flash.error("no mínimo 6 caracteres!");
-						String comparar = "no mínimo 6 caracteres";
+						String comparar = "mínimo 6 caracteres";
 					renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin);
 					}
 				if (validation.hasErrors()) { // verificar depois de tudo se contém algum erro

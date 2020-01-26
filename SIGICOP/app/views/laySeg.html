@@ -106,7 +106,7 @@
 style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 #{if result?.message}
 
-<div class="" style="margin-left: 10%; margin-right: 10%;" >
+<div class="" style="margin-left: 10%; margin-right: 10%;">
 		
 		<div class="itemMenu float-left"><div class="h5">Not Found</div>${result.message}
 		</div>
@@ -143,7 +143,7 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 			</div>
 #{/if}
 		</div>
-		<ul class="navbar-nav">
+		<ul class="navbar-nav m-0-celular">
 #{if session.contains("adminLogado")}
 			<div class="sticky-top text-center">
 #{if admBanco?.admPadrao}
@@ -263,7 +263,7 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 		
 	</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div id="time" class="text-white m-0" id="hora" ></div>
+	<div id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
 #{/if}
 #{else}
 	<div id="time" class="text-white m-0" id="hora" style="display: none;"></div>
@@ -287,7 +287,7 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 
 <!-- CORPO DA PAGINA -->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
-<div id="container">
+<div id="container" class="p-0-celular mt-0-celular">
 #{doLayout /}
 	<a href="#top" class="sticky-top">
 		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
@@ -423,10 +423,11 @@ $().ready(function() {
 <script type="text/javascript">
     $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
     $('#matriculaDoUsuarioFiltro').mask('00000000000000');
-    $('#matricula').mask('00000000000000');
+    $('#campoMatricula').mask('00000000000000');
     $('#qtdCopiasFiltro').mask('00');
     $('#dataEnvio').mask('00/00/0000');
-    $('#dataEnvtrega').mask('00/00/0000');   	
+    $('#dataEnvtrega').mask('00/00/0000');
+/*     $('#campoNome').mask('s');    */
 </script>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
@@ -522,6 +523,320 @@ document.getElementById("limpar").addEventListener("click", function() {
 	  var entradas = document.querySelectorAll("input[id='"+name+"']");
 	  [].map.call(entradas, entrada => entrada.value = '');
 }
+</script>
+#{/if}
+#{if session.contains("adminLogado") || !session.contains("usuarioLogado")}
+<!-- VALIDAÇÃO AO ALTERAR ALGUM DADO DO FORMULÁRIO -->
+<script type="text/javascript">
+// VALIDAÇÃO DE NOME
+function validarNome(){							/* campo do nome */
+	var campoNome = document.getElementById('campoNome').value;
+												/* span de mensagem do campo nome  */
+	var validarNomeMsg = document.getElementById('validarNomeMsg');
+												/* span de mensagem de servidor do campo nome */
+	var servidorNomeMsg = document.getElementById('servidorNomeMsg');
+	/* console.log(campoNome); */
+	var nome = campoNome.split(' ')[0]; // separar o primeiro nome
+	var sobreNome = campoNome.split(' ')[1]; // separar o sobrenome
+	
+	jQuery('#campoNome').keyup(function () { 
+	    this.value = this.value.replace(/[^a-zA-Z àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕ]/g,'');// só permite letras e espaços
+	});
+
+	campoNome = campoNome.toLowerCase().replace(/(?:^|\s)\S/g, function(capitalize) { return capitalize.toUpperCase(); });
+
+	if (campoNome == '') { // verificar se campoNome está vazio
+		validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
+	 	servidorNomeMsg.style = 'display: none;'
+	 	document.getElementById("campoNome").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoNome vermelho
+	 	validarNomeMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	'validacaoMsgm">obrigatório</span>';
+	}else { // se não, apagar a mensagem e a cor do campo da  validação anterior
+		validarNomeMsg.style = 'display: none;'
+		servidorNomeMsg.style = 'display: none;'
+		document.getElementById("campoNome").style = 'border-color: none; background-color: none;'
+
+		if(campoNome.length > 3 & sobreNome == null | sobreNome == ""){ // verificar se o sobreNome está vazio
+			validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
+			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
+			validarNomeMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm"> o sobrenome é obrigatório</span>';
+		}else if(campoNome.length > 3){
+			document.getElementById("campoNome").style = 'border-color: #84e19b; background-color: #f0fbf3;'// campoNome verde
+			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
+			validarNomeMsg.style = 'display: none;'// "desativa" a span validarNomeMsg
+			document.getElementById("campoNome").value = campoNome;			
+		}
+	}
+}
+	
+// VALIDAÇÃO DE MATRICULA
+function validarMatricula(){				/* campo da matricula */
+	var campoMatricula = document.getElementById("campoMatricula").value;
+											/* span de validação do campo da matricula */
+	var validarMatriculaMsg = document.getElementById("validarMatriculaMsg");
+											/* span de validação do servidor campo da matricula */
+	var servidorMatriculaMsg = document.getElementById("servidorMatriculaMsg");										
+#{if mat}									/* span de validação do servidor campo da matricula existente */
+	var servidorMatriculaExiste = document.getElementById("servidorMatriculaExiste");											
+#{/if}
+		
+	if (campoMatricula == '') { // verificar se o campoMatricula está vazio
+		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
+	 	document.getElementById("campoMatricula").style = 'border-color: #e87d88; background-color: #fef5f7;'; // campoMatricula vermelho
+	 	validarMatriculaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	'validacaoMsgm">obrigatório</span>';
+	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+#{if mat}
+	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExiste
+#{/if}
+	}else if(campoMatricula.length > 0 & campoMatricula.length < 14){ // verificar se campoMatricula é maior que 0 e menor que 14
+		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
+	 	document.getElementById("campoMatricula").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoMatricula vermelho
+	 	validarMatriculaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	'validacaoMsgm">no mínimo 14 caracteres</span>';
+	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+#{if mat}
+	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
+#{/if}
+	}
+	if(campoMatricula.length > 13 & campoMatricula.length < 18){
+		document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: #f0fbf3;' // campoMatricula verde
+		servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+	 	validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
+#{if mat}
+	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
+#{/if}	
+	} 
+}
+	
+// VALIDAÇÃO DE EMAIL
+function validarEmail(){			/* campo do email */
+	var campoEmail = document.getElementById("campoEmail").value;
+									/* span de validação do campo do email */
+	var validarEmailMsg = document.getElementById("validarEmailMsg");
+									/* span de validação do servidor campo do email */
+	var servidorEmailMsg = document.getElementById("servidorEmailMsg");										
+#{if email}							/* span de validação do servidor campo do email existente */
+	var servidorEmailExiste = document.getElementById("servidorEmailExiste");											
+#{/if}
+
+	if (campoEmail == '') { // verificar se o campoMatricula está vazio
+	 	document.getElementById("campoEmail").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoEmail vermelho
+	 	validarEmailMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	'validacaoMsgm">obrigatório</span>';
+	 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+	}else{ // se não, então verificar se é email válido
+		usuario = campoEmail.substring(0, campoEmail.indexOf("@"));
+		dominio = campoEmail.substring(campoEmail.indexOf("@")+ 1, campoEmail.length);
+		 
+		if ((usuario.length >=1) &&
+		    (dominio.length >=3) && 
+		    (usuario.search("@")==-1) && 
+		    (dominio.search("@")==-1) &&
+		    (usuario.search(" ")==-1) && 
+		    (dominio.search(" ")==-1) &&
+		    (dominio.search(".")!=-1) &&      
+		    (dominio.indexOf(".") >=1)&& 
+		    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+		 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: #f0fbf3;';
+		 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+#{if email}
+		 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
+#{/if}
+		 	validarEmailMsg.style = 'display: none;' // "desativa" a span validarEmailMsg
+		}else{ // se não, então o email não é válido
+			validarEmailMsg.style = 'display: inline;'// "ativa" a span validarEmailMsg
+			document.getElementById("campoEmail").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoEmail vermelho
+			validarEmailMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">email inválido</span>';
+			servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+#{if email}
+		 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
+#{/if}
+		}
+	}
+}
+
+// VALIDAÇÃO DE SENHA
+function validarSenha(){			/* campo senha */
+	var campoSenha = document.getElementById('campoSenha').value;
+									/* campo de confirmar senha */
+	var campoConfirmar = document.getElementById('campoConfirmar').value;
+									/* span de mensagem do campo de senha */
+	var validarSenhaMsg = document.getElementById('validarSenhaMsg');
+									/* span de mensagem do campo de comparar */
+	var validarCompararMsg = document.getElementById('validarCompararMsg');
+									/* span de mensagem do servidor do campo de senha */
+	var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
+									/* span de mensagem do servidor do campo de comparar */
+	var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
+									
+ 	if (campoSenha.length > 1 & campoSenha.length < 6) { // verifica se a campoSenha tem maior que 1 e menor que 6 caracteres
+		servidorSenhaMsg.style = 'display: none;'// "desativa" a span validarSenhaMsg
+ 		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
+		document.getElementById('campoSenha').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoSenha vermelho
+		validarSenhaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm">mínino 6 caracteres</span>';
+	}else if(campoSenha == ''){ // verifica se o campo senha está vazio
+		servidorSenhaMsg.style = 'display: none;'// "desativa" a span servidorSenhaMsg
+		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
+		document.getElementById('campoSenha').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoSenha vermelho
+		validarSenhaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm">obrigatório</span>';
+	} else if(campoSenha.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
+ 		servidorSenhaMsg.style = 'display: none;'; // "desativa" a span servidorSenhaMsg
+ 		validarSenhaMsg.style = "display: none;"; // "desativa" a span validarSenhaMsg
+ 		document.getElementById('campoSenha').style = 'border-color: #84e19b; background-color: #f0fbf3;'; // campoSenha verde
+	} 
+ 	// verifica se o campoSenha é igual ao campoConfirmar e se campoSenha tem mais de 5 caracteres
+	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){ 
+		validarCompararMsg.style = 'display: inline;'; // "desativa" a span validarComparaMsg
+		validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm"><i class="check icon m-0"></i></span>';
+	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
+		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm"><i class="x icon m-0"></i></span>';
+	}
+	senha = document.getElementById("campoSenha").value;
+	forca = 0;
+	mostra = document.getElementById("mostrar");
+	if((senha.length >= 5) && (senha.length < 10)){
+		if(!isNaN(senha)){
+			forca += 0;
+		}else{			
+			forca += 5;
+		}
+	}else if((senha.length>=10) && (senha.length <= 14)){
+		if(!isNaN(senha)){
+			forca += 5;
+		}else{			
+			forca += 25;
+		}
+	}else if(senha.length>14){
+		if(!isNaN(senha)){
+			forca += 25;
+		}else{			
+			forca += 30;
+		}
+	}
+	if(senha.match(/[a-z]+/)){
+		forca += 5;
+	}
+	if(senha.match(/[0-9]+/)){
+		forca += 5;
+	}
+	if(senha.match(/[A-Z]+/)){
+		forca += 5;
+	}
+	if(senha.match(/[çÇ]+/)){
+		forca += 5;
+	}
+	if(senha.match(/#+/)){
+		forca += 5;
+	}
+	if(senha.match(/!+/)){
+		forca += 5;
+	}
+	if(senha.match(/@+/)){
+		forca += 5;
+	}
+	if(senha.match(/[$]+/)){
+		forca += 5;
+	}
+	if(senha.match(/%+/)){
+		forca += 5;
+	}
+	if(senha.match(/[&]+/)){
+		forca += 5;
+	}
+	if(senha.match(/[+]+/)){
+		forca += 5;
+	}
+	if(senha.match(/_+/)){
+		forca += 5;
+	}
+	if(senha.match(/[-]+/)){
+		forca += 5;
+	}
+	if(senha.match(/[?]+/)){
+		forca += 5;
+	}
+	if(senha.match(/.+/)){
+		forca += 5;
+	}
+	if(senha.match(/,+/)){
+		forca += 5;
+	}
+	if(senha.match(/[*]+/)){
+		forca += 5;
+	}
+	if(senha.match(/.+/)){
+		forca += 5;
+	}
+	if(senha.match(/[ ]+/)){
+		forca += 10;
+	}
+	if(senha.match(/[àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕ]+/)){
+		forca += 10;
+	}
+	if(forca >= 100){
+		forca = 100;
+	}
+	if(forca < 30){
+		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: red; font-size: 8px;" class="">fraca</div>';
+	}else if((forca >= 30) && (forca < 60)){
+		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: yellow; font-size: 8px; color: black !important;" class="">justa</div>';
+	}else if((forca >= 60) && (forca < 85)){
+		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: blue; font-size: 8px;" class="">forte</div>';
+	}else{
+		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: green; font-size: 8px;" class="">exelente</div>';
+	}
+}
+	
+// VALIDAÇÃO DE CONFIRMAR SENHA
+function validarConfirmarSenha(){			/* campo senha */
+	var campoSenha = document.getElementById('campoSenha').value;
+											/* campo de confirmar senha */
+	var campoConfirmar = document.getElementById('campoConfirmar').value;
+											/* span de mensagem do campo de senha */
+	var validarSenhaMsg = document.getElementById('validarSenhaMsg');
+											/* span de mensagem do campo de comparar */
+	var validarCompararMsg = document.getElementById('validarCompararMsg');
+											/* span de mensagem do servidor do campo de senha */
+	var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
+											/* span de mensagem do servidor do campo de comparar */
+	var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
+			
+	if (campoConfirmar.length > 2 & campoConfirmar.length < 6) { // verifica se a campoConfirmar tem maior que 2 e menor que 6 caracteres
+		document.getElementById('campoConfirmar').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoConfirmar vermelho
+		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm">mínino 6 caracteres</span>';
+#{if comparar}			
+		servidorConfirmarSenhaMsg.style = 'display: none;'
+#{/if}
+	}else if(campoConfirmar == ''){ // verifica se o campo senha está vazio
+		document.getElementById('campoConfirmar').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoConfirmar vermelho
+		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm">obrigatório</span>';
+#{if comparar}			
+		servidorConfirmarSenhaMsg.style = 'display: none;' // "desativar" a span servidorConfirmarSenhaMsg
+#{/if}
+	}else if(campoConfirmar.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
+		validarCompararMsg.style = "display: none;"; // "desativar" a span validarCompararMsg 
+		document.getElementById('campoConfirmar').style = 'border-color: #84e19b; background-color: #f0fbf3;'; // campoConfirmar verde
+	}
+	// verifica se o campoSenha é igual ao campoConfirmar e se campoConfirmar tem mais de 5 caracteres
+	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){
+		validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
+		validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm"><i class="check icon m-0"></i></span>';
+	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
+		validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
+		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular '+
+		'validacaoMsgm"><i class="x icon m-0"></i></span>';			
+	}
+} 
 </script>
 #{/if}
 </body>

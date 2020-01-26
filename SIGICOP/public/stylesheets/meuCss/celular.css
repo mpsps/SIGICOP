@@ -27,15 +27,14 @@
 		margin: 0 !important;
 	}
 	a[href="#top"]{
-	    padding: 5px;
+	    padding: 0px 0px 0px 0px;
 	    position: fixed;
 	    top: 90%;
-	    right: 5px;
-	    margin-bottom: 20px;
+	    right: 4px;
 	    display:none;
 	    font-size: 5px;
-	    width: 40px;
-	    height: 40px;
+	    width: auto;
+	    height: auto;
 	}
 	a[href="#top"]:hover{
 		text-decoration: none;

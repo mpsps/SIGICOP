@@ -6,22 +6,29 @@
 		<div class="row m-0-celular p-0-celular mt-0-celular">
 		<div class="column m-0-celular p-0-celular mt-0-celular">
 			<div class="m-0-celular p-0-celular">
-					<div class="ui stacked segment mt-0-celular"><!-- cor branca do formulario -->
+					<div class="ui stacked segment p-2-celular mt-0-celular"><!-- cor branca do formulario -->
 				<form action="@{Administradores.salvarSenha} " class="ui large form m-0-celular p-0-celular" method="post">
-						<label for="inputSenhaAE" class="font-size-celular">Senha:</label>
-						<span id="validarSeA"></span>
+						<label for="campoSenha" class="font-size-celular">Senha:</label>
+						<span id="validarSenhaMsg"></span>
+						<span id="servidorSenhaMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">
 #{if seis}	
-						<span id="validacaoServidorEditSenha" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${seis}</span>
+						${seis}
 #{/if}
+						</span>
 						<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
-						autofocus=""  id="inputSenhaAE" onchange="validarSenhaAdmEditar()">
-						<label for="confirmar" class="mt-2 font-size-celular">Confirmar Senha:</label>
-						<span id="Comparar"></span>
+						autofocus="autofocus" id="campoSenha" onkeyup="javascript:validarSenha()">
+						
+						<div id="mostrar" class="p-0 m-0 mb-n1 mt-1" style=" height: 12px; border: 1px solid white;  width: ; color: white;"></div>
+						<label for="campoConfirmar" class="mt-2 font-size-celular mt-n1-celular">Confirmar Senha:</label>
+						<span id="validarCompararMsg"></span>
+						<span id="validacaoSevidorEditSenhaCom" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">
 #{if seis}	
-						<span id="validacaoSevidorEditSenhaCom" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${seis}</span>
+						${seis}
 #{/if}
+						</span>
 						<input type="password" name="confirmarSenha" placeholder="Confirmar Senha" 
-						class="form-control hei-input-celular font-size-celular" id="confirmar" onchange="validarSenhaAdmEditar()" >
+						class="form-control hei-input-celular font-size-celular" id="campoConfirmar" onkeyup="javascript:validarConfirmarSenha()" >
+						<!-- BUTÃO DE EDITAR SENHA -->
 						<input type="submit" class="btn btn-md btn-primary btn-block mt-3 font-size-celular" value="Editar Senha"  />
 				</form>
 				<hr class="mt-3">
@@ -35,7 +42,7 @@
 		
 		</div>
 </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function validarSenhaAdmEditar(){
 	var senha = document.getElementById("inputSenhaAE").value;
 	var confirmarSenha = document.getElementById("confirmar").value;
@@ -85,4 +92,4 @@ function validarSenhaAdmEditar(){
 	 	document.getElementById("confirmar").style = 'border-color: #28a745;';
 	}
 }
-</script>
+</script> -->

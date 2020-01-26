@@ -1,10 +1,10 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Usuarios' /}
 <div id="corpoCelular">
-	<div class="h1 text-dark text-center tituloCelular m-0 mb-2 mb-2 celular mt-n4 mt-n2-celular">Cadastro de Usuarios</div>
+	<div class="h1 text-dark text-center tituloCelular m-0 mb-2 mb-2 celular mt-n4 mt-n3-celular">Cadastro de Usuarios</div>
 	<div class="text-center m-0">
 #{ifErrors}
-		<h2 style="color: red;" >Ops...</h2>
+		<div style="color: red;" class="h2 m-0-celular p-0-celular mt-n3-celular" >Ops...</div>
 		<!--#{errors}
 		<li>${error.key} - ${error} - ${error.message}</li>
 		#{/errors}-->
@@ -15,44 +15,44 @@
 <!-- formulario de cadastro de usu�rio -->
 			<div class="ui stacked segment mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
 			<form id="form-usuario" action="@{Usuarios.salvarUsuario} " class="form m-0 pt-0" method="post">
-					<label class="m-1 font-size-celular" for="nomeUsuario">Nome:</label>
-					<span id="validacaoServidoNomeUsuario" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>
-					<span id="validarNameUser"></span>
+					<label class="m-1 font-size-celular" for="campoNome">Nome:</label>
+					<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>
+					<span id="validarNomeMsg"></span>
 					<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular font-size-celular"
-					value="${user?.nomeUsu}" id="nomeUsuario" autocomplete="off" onchange="validarNome()">
+					value="${user?.nomeUsu}" id="campoNome" autocomplete="off" onkeyup="javascript:validarNome()">
 					 
-					<label for="senha" class="m-1 font-size-celular">Matricula:</label>
-					<span id="validacaoServidoMatricula"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.matricula' /}</span>
+					<label for="campoMatricula" class="m-1 font-size-celular">Matricula:</label>
+					<span id="servidorMatriculaMsg"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.matricula' /}</span>
 #{if mat}		
-					<span id="validacaoServidoMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${mat}</span>
+					<span id="servidorMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${mat}</span>
 #{/if}
-					<span id="validarMatricula"></span>
+					<span id="validarMatriculaMsg"></span>
 					<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular font-size-celular" 
-					value="${user?.matricula}"  id="matricula" maxlength="14" autocomplete="off" onchange="validarMatricula()">
+					value="${user?.matricula}"  id="campoMatricula" maxlength="14" autocomplete="off" onkeyup="javascript:validarMatricula()">
 					
-					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span id="validacaoServidoEmail"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.email' /}</span>
+					<label for="campoEmail" class="m-1 font-size-celular">Email:</label>
+					<span id="servidorEmailMsg"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.email' /}</span>
 #{if email}		
-					<span id="validacaoServidoEmail" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
+					<span id="servidorEmailExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
 #{/if}
-					<span id="validarEmail"></span>
+					<span id="validarEmailMsg"></span>
 					<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
-					id="email" value="${user?.email}" autocomplete="off" onchange="validarEmail()">
-					
-					<label for="senha" class="m-1 font-size-celular">Senha:</label>
+					id="campoEmail" value="${user?.email}" autocomplete="off" onkeyup="javascript:validarEmail()">
+					<label for="campoSenha" class="m-1 font-size-celular">Senha:</label>
 					<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" 
-					id="validacaoServidoSenha">#{error 'user.senha' /}</span>
-					<span id="validarSenha"></span>
+					id="servidorSenhaMsg">#{error 'user.senha' /}</span>
+					<span id="validarSenhaMsg"></span>
 					<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
-					id="senha" value="" onchange="validarSenha()">
+					id="campoSenha" value="" onkeyup="javascript:validarSenha()">
 					
-					<label for="confimar" class="m-1 font-size-celular">Confirmar Senha:</label>
+					<div id="mostrar" class="p-0 m-0 mb-n1 mt-1" style=" height: 12px; border: 1px solid white;  width: ; color: white;"></div>
+					<label for="campoConfirmar" class="m-1 mt-0 p-0 font-size-celular  mt-n1-celular">Confirmar Senha:</label>
 #{if comparar}		
-					<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" id="validacaoServidoComfirmar">${comparar}</span>
+					<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" id="servidorConfirmarSenhaMsg">${comparar}</span>
 #{/if}				
-					<span id="Comparar"></span>
+					<span id="validarCompararMsg"></span>
 					<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" 
-					class="form-control hei-input-celular font-size-celular" id="confimar" value="" onchange="validarSenha()">
+					class="form-control hei-input-celular font-size-celular" id="campoConfirmar" value="" onkeyup="javascript:validarConfirmarSenha()">
 					<!-- BOTÃO DE CADASTRO -->
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular butaoIconTexto" value="Cadastrar" />
 			</form>
@@ -64,131 +64,3 @@
 		</div>
 	</div>
 </div>
-<!-- validação ao alterar algum dado do formulário -->
-<script type="text/javascript">
-
-	function validarNome(){
-		// nome do usuário
-		var nomeUsuario = document.getElementById("nomeUsuario").value;
-		var nome = nomeUsuario.split(' ')[0];// separar str por espa�os
-		var sobreNome = nomeUsuario.split(' ')[1];// separar str por espa�os
-		console.log(nomeUsuario);
-		if (nomeUsuario == '') {
-		 	document.getElementById("nomeUsuario").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
-		 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
-		}else {
-			if(sobreNome == null || sobreNome == ""){
-				document.getElementById("nomeUsuario").style = 'border-color: #dc3545;' // vermelho
-				document.getElementById("validarNameUser").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">o sobrenome é obrigatório</span>';
-				document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
-			}else{
-				document.getElementById("nomeUsuario").style = 'border-color: #28a745;'
-			 	document.getElementById("validarNameUser").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
-			 	document.getElementById("validacaoServidoNomeUsuario").style = 'display: none;'
-			}
-		}		
-	}
-	function validarMatricula(){
-		var matricula = document.getElementById("matricula").value;
-		// matricula
-		console.log(matricula);
-		if (matricula == '') {
-			console.log(matricula+'sem nada'); 
-		 	document.getElementById("matricula").style = 'border-color: #dc3545;'; // vermelho
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
-		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
-#{if mat}
-		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
-#{/if}
-		}else if(matricula.length > 13 & matricula.length < 18){
-			document.getElementById("matricula").style = 'border-color: #28a745;'
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
-#{if mat}
-		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
-#{/if}
-		var matriculaOk = "matriculaOk";	
-		} if(matricula.length < 14 & matricula.length > 0){
-		 	document.getElementById("matricula").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarMatricula").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">no mínimo 14 caracteres</span>';
-		 	document.getElementById("validacaoServidoMatricula").style = 'display: none;'
-#{if mat}
-		 	document.getElementById("validacaoServidoMatriculaExiste").style = 'display: none;'
-#{/if}
-		}
-	}
-	function validarEmail(){
-		var email = document.getElementById("email").value;
-		// email
-		console.log(email);
-		if (email == '') {
-		 	document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>';
-		 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
-		}else{
-			usuario = email.substring(0, email.indexOf("@"));
-			dominio = email.substring(email.indexOf("@")+ 1, email.length);
-			 
-			if ((usuario.length >=1) &&
-			    (dominio.length >=3) && 
-			    (usuario.search("@")==-1) && 
-			    (dominio.search("@")==-1) &&
-			    (usuario.search(" ")==-1) && 
-			    (dominio.search(" ")==-1) &&
-			    (dominio.search(".")!=-1) &&      
-			    (dominio.indexOf(".") >=1)&& 
-			    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-			 	document.getElementById("email").style = 'border-color: #28a745;';
-			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
-			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
-			 	var emailOk = "emailOk";
-			}else{
-				document.getElementById("email").style = 'border-color: #dc3545;' // vermelho
-			 	document.getElementById("validarEmail").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">email inválido</span>';
-			 	document.getElementById("validacaoServidoEmail").style = 'display: none;'
-			}
-		}
-	}
-	function validarSenha(){
-		var senha = document.getElementById("senha").value;
-		var confimarSenha = document.getElementById("confimar").value;
-	
-		// comparar senha
-		if (confimarSenha.length < 6) {
-	        console.log("A senhaComparar precisa ter pelo menos seis caracteres.");
-	        document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm m-0-celular m-0">mínino 6 caracteres</span>';
-#{if comparar}
-		 	document.getElementById("validacaoServidoComfirmar").style = 'display: none;'
-#{/if}
-		}else{
-			document.getElementById("confimar").style = 'border-color: #28a745;';
-	 		document.getElementById("Comparar").innerHTML = '<span style="display: none;"></span>';
-		} 
-		// senha
-	 	if (senha.length < 6) {
-			console.log("A senha precisa ter pelo menos seis caracteres.");
-			document.getElementById("senha").style = 'border-color: #dc3545;' // vermelho
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">mínino 6 caracteres</span>';
-	 		document.getElementById("validacaoServidoSenha").style = 'display: none;'
-		}else{
-	 		document.getElementById("senha").style = 'border-color: none;';
-	 		document.getElementById("validarSenha").innerHTML = '<span style="display: none;"></span>';
-	 		document.getElementById("validacaoServidoSenha").style = 'display: none;';
-	 		document.getElementById("senha").style = 'border-color: #28a745;';
-		}
-		// se a senha é compativel com confirmação senha
-		if (senha != '' & confimarSenha != '' & senha != confimarSenha) {
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">inconpatível</span>';
-		 	document.getElementById("confimar").style = 'border-color: #dc3545;' // vermelho
-		}else if(senha == confimarSenha & senha.length > 0 & confimarSenha.length > 0){
-		 	document.getElementById("validarSenha").innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("Comparar").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>';
-		 	document.getElementById("confimar").style = 'border-color: #28a745;';
-		}
-	}
-		/* $(".entregar").click(function() { 
-			)};*/
-</script>

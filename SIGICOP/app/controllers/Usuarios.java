@@ -134,7 +134,7 @@ public class Usuarios extends Controller {
 				user.save();
 			}else {
 				flash.error("Confimarçao de senha invalida!");	
-				String comparar = "Não Está Compatível";
+				String comparar = "não está compatível";
 			renderTemplate("Usuarios/cadastroDeUsuario.html", user, comparar);
 			}	
 		}

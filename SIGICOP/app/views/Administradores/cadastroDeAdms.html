@@ -1,11 +1,11 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Administrador(res)' /}
-<div id="corpoCelular" class="heightMin">
+<div id="corpoCelular" class="heightMin m-0-celular p-2-celular" id="tamanho-corpo-celular">
 #{if !adm?.id}
-	<div class="h1 text-dark text-center tituloCelular";">Cadastro de Adminstradores</div><br>
+	<div class="h1 text-dark text-center tituloCelular mt-2-celular pt-5-celular mb-n2-celular">Cadastro de Adminstradores</div><br>
 #{/if}
 #{else}
-	<div class="h1 text-dark text-center tituloCelular">Editar Meus Dados</div>
+	<div class="h1 text-dark text-center tituloCelular mt-2-celular pt-5-celular">Editar Meus Dados</div>
 #{/else}
 	<div class="text-center m-0">
 #{ifErrors}
@@ -19,43 +19,44 @@
 		<div class="column mt-0 m-0-celular p-0-celular">
 <!-- FORMULARIO DE CADASTRO E EDI��O DO ADMIN -->
 			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2" method="post">
-				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
+				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
-					<label class="font-size-celular m-1" for="nomeAdm">Nome:</label>	
-					<span id="validacaoServidoNomeAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.nomeAdm' /}</span>
-					<span id="validarNomeAdmin"></span>
+					<label class="font-size-celular m-1" for="campoNome">Nome:</label>	
+					<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.campoNome' /}</span>
+					<span id="validarNomeMsg"></span>
 					<input type="text" name="adm.nomeAdm" placeholder="nome" class="form-control hei-input-celular font-size-celular" 
-					 autocomplete="off" id="nomeAdm" value="${adm?.nomeAdm}" onchange="validarNomeAdmin()">
+					 autocomplete="off" id="campoNome" value="${adm?.nomeAdm}" onkeyup="javascript:validarNome()">
 					 
-					<label for="email" class="m-1 font-size-celular">Email:</label>
-					<span id="validacaoServidoEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.email' /}</span>
+					<label for="campoEmail" class="m-1 font-size-celular">Email:</label>
+					<span id="servidorEmailMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.email' /}</span>
 #{if email}		
-					<span id="validacaoServidorExisteEmailAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
+					<span id="servidorEmailExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
 #{/if}
-					<span id="validarEmailAdmin"></span>
+					<span id="validarEmailMsg"></span>
 					<input type="email" name="adm.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
-					autocomplete="off" id="email" value="${adm?.email}" onchange="validarEmailAdmin()">
+					autocomplete="off" id="campoEmail" value="${adm?.email}" onkeyup="javascript:validarEmail()">
 #{if !adm?.id}
-					<label for="inputSenhaA" class="m-1 font-size-celular">Senha:</label>
-					<span id="validacaoServidorsenhaA" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.senha' /}</span>
-					<span id="validarSeA"></span>
+					<label for="campoSenha" class="m-1 font-size-celular">Senha:</label>
+					<span id="servidorSenhaMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.senha' /}</span>
+					<span id="validarSenhaMsg"></span>
 					<input type="password" name="adm.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
-					id="inputSenhaA" onchange="validarsenhaAdm()">
+					id="campoSenha" onkeyup="javascript:validarSenha()">
 					
-					<label for="confimar" class="m-1 mr-0 font-size-celular">Confimar Senha:</label>
+					<div id="mostrar" class="p-0 m-0 mb-n1 mt-1" style=" height: 12px; border: 1px solid white;  width: ; color: white;"></div>
+					<label for="campoConfirmar" class="m-1 mr-0 font-size-celular mt-n1-celular">Confimar Senha:</label>
 #{if comparar}		
-					<span id="validacaoServidoComfirmarAdmin" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${comparar}</span>
+					<span id="servidorConfirmarSenhaMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${comparar}</span>
 #{/if}
-					<span id="Comparar"></span>
+					<span id="validarCompararMsg"></span>
 					<input type="password" name="adm.confirmarSenha" placeholder="Confirmar Senha" 
-					class="form-control hei-input-celular font-size-celular" id="confimar" onchange="validarsenhaAdm()">
+					class="form-control hei-input-celular font-size-celular" id="campoConfirmar" onkeyup="javascript:validarConfirmarSenha()">
 					
 					<!-- BOTÃO DE CADASTRAR -->
 					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
 #{/if}
 #{else}				<!-- BOTÃO DE EDITAR -->
-					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular">Alterar Senha</a>
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Editar" />					
+					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular m-0-celular mt-1-celular">Alterar Senha</a>
+					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular mt-1-celular" value="Editar" />					
 #{/else}
 				</div>
 			</form>
@@ -63,25 +64,25 @@
 	</div>
 </div>
 <!-- validação ao alterar algum dado do formulário -->
-<script type="text/javascript">
-function validarNomeAdmin(){		// nome do campo
+<!-- <script type="text/javascript">
+function validarNomeMsg(){		// nome do campo
 	// nome do admin
-	var nome = document.getElementById('nomeAdm').value;
+	var nome = document.getElementById('campoNome').value;
 	var sobreNome = nome.split(' ')[1];// separar a segunda str por espa�os
 	
 	if (nome == '') { // se nome contém nada
-	 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>'
-	 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
-	 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+	 	document.getElementById("validarNomeMsg").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">obrigatório</span>'
+	 	document.getElementById("campoNome").style = 'border-color: #dc3545;'
+	 	document.getElementById("servidorNomeMsg").style = 'display: none;'
 	}else {
 		if(sobreNome == null || sobreNome == ""){
-			document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">sobrenome é obrigatório</span>'
-		 	document.getElementById("nomeAdm").style = 'border-color: #dc3545;'
-		 	document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+			document.getElementById("validarNomeMsg").innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">sobrenome é obrigatório</span>'
+		 	document.getElementById("campoNome").style = 'border-color: #dc3545;'
+		 	document.getElementById("servidorNomeMsg").style = 'display: none;'
 		}else{
-		 	document.getElementById("validarNomeAdmin").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>'
-			document.getElementById("nomeAdm").style = 'border-color: #28a745'
-			document.getElementById("validacaoServidoNomeAdmin").style = 'display: none;'
+		 	document.getElementById("validarNomeMsg").innerHTML = '<span class="alert-success shadow-sm rounded p-0 font-size-celular validacaoMsgm"><i class="check icon m-0"></i></span>'
+			document.getElementById("campoNome").style = 'border-color: #28a745'
+			document.getElementById("servidorNomeMsg").style = 'display: none;'
 		}
 	}
 }
@@ -166,4 +167,4 @@ function validarsenhaAdm(){
 	 	document.getElementById("confimar").style = 'border-color: #28a745;';
 	}
 }
-</script>
+</script> -->
