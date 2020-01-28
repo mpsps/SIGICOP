@@ -9,23 +9,33 @@
 				<fieldset class="corFiltro shadow-lg rounded">
 			        <legend>Filtrar Por:</legend>
 					<div class="form-row">
-				   		<div class="form-group col-md-6">
-					    	<label for="NomeDoArquivoFiltro">Nome do Arquivo:</label>
+				   		<div class="form-group col-md-12">
+					    	<label for="NomeDoArquivoFiltro" class="m-0-celular">Nome do Arquivo:</label>
 							<input type="text" name="NomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
 							placeholder="Nome do Arquivo"
 							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
 				    	</div>
 				      	<div class="form-group col-md-6">
-					      	<label for="descricaoFiltro">Descrição:</label>
+					      	<label for="descricaoFiltro" class="m-0-celular">Descrição:</label>
 					      	<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
 					      	id="descricaoFiltro"  placeholder="Descricao" 
 					      	value="${descricaoFiltro}" />
+				      	</div>
+				      	<div class="form-group col-md-6">
+					      	<label for="statusFiltro" class="m-0-celular">Status:</label>
+					      	<select name="statusFiltro" id="statusFiltro" class="form-control hei-input-celular font-size-celular">
+					      		<option value="TODOS" class="m-0-celular p-0-celular">--TODOS--</option>
+					      		<option value="AGUARDANDO" class="m-0-celular p-0-celular">AGUARDANDO</option>
+					      		<option value="ENTREGUE" class="m-0-celular p-0-celular">ENTREGUE</option>
+					      		<option value="CONCLUIDO" class="m-0-celular p-0-celular">CONCLUIDO</option>
+					      		<option value="RECUSADO" class="m-0-celular p-0-celular">RECUSADO</option>
+					      	</select>
 				      	</div>
 			  		</div>
 			 		<div class="text-center">
 				  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 						<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 butaoIconTexto font-size-celular">Solicitar
+				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 butaoIconTexto font-size-celular block-celular">Solicitar
 				  		<i class="file alternate outline icon"></i></a>
 				 	</div>
 				</fieldset>

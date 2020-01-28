@@ -1,10 +1,10 @@
-body {
+/* body {
 	background-color: #fafaff;
 }
-/*body>.grid {
+body>.grid {
 	height: 100%;
 }
-*/
+
 
 .listaPped {
   background-color: #e2eef1;
@@ -48,7 +48,7 @@ body {
 }
 #corMenu{
 	background: #1b1c1d;
-}
+} */
 /*tela de tablet */
 @media (max-width: 749px) { 
 	@media (min-width: 501px){

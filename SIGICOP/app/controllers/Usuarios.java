@@ -1,11 +1,16 @@
 package controllers;
 
 import java.io.File;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.SimpleEmail;
 
 import com.mysql.fabric.xmlrpc.base.Array;
 
@@ -20,6 +25,7 @@ import models.Usuario;
 import play.cache.Cache;
 import play.data.validation.Valid;
 import play.db.jpa.Blob;
+import play.libs.Mail;
 import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.CriptografiaUtils;
@@ -39,41 +45,109 @@ public class Usuarios extends Controller {
 		
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
 		listaPedidos = Pedido.find("usuario_id = ?1 ", usuarioBanco.id).fetch();	
+		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>();
+		listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>();
+		listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>();
+		listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
+
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
-	render(usuarioBanco, listaPedidos, solicitar, temFiltro);
+	render(usuarioBanco, listaPedidos, solicitar, temFiltro, listaPedidosConcluidos, listaPedidosRecusados, listaPedidosEntregues);
 	}
 		
 ///// FILTRO DE PEDIDOS NA PAGINA DO USUARIO /////
 	@User
-	public static void filtro(String NomeDoArquivoFiltro, String descricaoFiltro) {
+	public static void filtro(String NomeDoArquivoFiltro, String descricaoFiltro, String statusFiltro) {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.filtro() ... ["+ new Date()+"]");	
 			
 		DadosSessao dadosSessao = Cache.get(session.getId(), DadosSessao.class);				
 		Usuario usuarioBanco = dadosSessao.usuario;
 		
+		StatusPedido status = StatusPedido.AGUARDANDO;
+		
+		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>();
+		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>();
+		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>();
+		
+		if(statusFiltro == null) {
+			statusFiltro = "";
+		}
+		
+		if (NomeDoArquivoFiltro == null && descricaoFiltro == null) {
+			NomeDoArquivoFiltro = "";
+			descricaoFiltro = "";
+		}
+		if(NomeDoArquivoFiltro.equals("") && descricaoFiltro.equals("") && statusFiltro.equals("TODOS")) {
+			paginaUsuario();
+		}
+		
+		if(statusFiltro.equals("ENTREGUE")) {
+			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+			status = StatusPedido.ENTREGUE;
+		}else if(statusFiltro.equals("CONCLUIDO")) {
+			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
+			status = StatusPedido.CONCLUIDO;
+		}else if(statusFiltro.equals("RECUSADO")) {
+			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
+			status = StatusPedido.RECUSADO;
+		}else if(statusFiltro.equals("AGUARDANDO")){
+			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
+			status = StatusPedido.AGUARDANDO;
+		}else {
+			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
+		}
+		
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
 			
 		if (NomeDoArquivoFiltro.isEmpty() && descricaoFiltro.isEmpty()) {
-			listaPedidos = Pedido.find("usuario_id = ?1", usuarioBanco).fetch();
+			if(statusFiltro.equals("TODOS")) {
+				listaPedidos = Pedido.find("usuario_id = ?1", usuarioBanco).fetch();
+			}else {
+				listaPedidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco, status).fetch();	
+			}
 			System.out.println("Tentou filtrar sem nada!");
 		}else if(!NomeDoArquivoFiltro.isEmpty() || !descricaoFiltro.isEmpty()){
-			listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND usuario_id = ?3",
-			"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%","%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
+			if(statusFiltro.equals("TODOS")) {
+				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND usuario_id = ?3",
+						"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%","%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
+			}else {
+				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND usuario_id = ?3 AND status = ?4",
+						"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%","%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco, status).fetch();		
+			}
 			System.out.println("Tentou filtrar com conteudo!(só Nome do Arquivo e Descricao)"+ descricaoFiltro.trim().replaceAll("\\s+"," "));
 		}else if(!NomeDoArquivoFiltro.isEmpty() || descricaoFiltro.isEmpty()){
-			listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND usuario_id = ?2",
-			"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
+			if(statusFiltro.equals("TODOS")) {
+				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND usuario_id = ?2",
+						"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
+			}else {
+				listaPedidos = Pedido.find("lower(nomeArquivo) like ?1 AND usuario_id = ?2 AND status = ?3",
+						"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", usuarioBanco, status).fetch();
+			}
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");
 		}else if(!descricaoFiltro.isEmpty()|| NomeDoArquivoFiltro.isEmpty()){
-			listaPedidos = Pedido.find("lower(descricao) like ?1 AND usuario_id = ?2",
-			"%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
-			System.out.println("Tentou filtrar com conteudo!(só descricao)");
+			if(statusFiltro.equals("TODOS")) {
+				listaPedidos = Pedido.find("lower(descricao) like ?1 AND usuario_id = ?2",
+						"%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco).fetch();
+				System.out.println("Tentou filtrar com conteudo!(só descricao)");
+			}else {
+				listaPedidos = Pedido.find("lower(descricao) like ?1 AND usuario_id = ?2 AND status = ?3",
+						"%" + descricaoFiltro.trim().toLowerCase() + "%", usuarioBanco, status).fetch();
+			}
+			System.out.println("Tentou filtrar com conteudo!(só descricao)");		
 		}
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
-	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos,solicitar, NomeDoArquivoFiltro, descricaoFiltro, temFiltro);
+	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos, solicitar, NomeDoArquivoFiltro, descricaoFiltro, temFiltro, statusFiltro, listaPedidosConcluidos, listaPedidosEntregues, listaPedidosRecusados);
 	}
 	
 ///// TELA DE CADASTRO DE USUARIO /////
@@ -105,7 +179,7 @@ public class Usuarios extends Controller {
 	}
 	
 ///// SALVAR O USUARIO /////
-	public static void salvarUsuario(@Valid Usuario user) {
+	public static void salvarUsuario(@Valid Usuario user) throws EmailException {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Usuarios.salvarUsuario() ... ["+ new Date()+"]");
 		
@@ -131,6 +205,17 @@ public class Usuarios extends Controller {
 				renderTemplate("Usuarios/cadastroDeUsuario.html", user);
 				}
 				flash.success("Usuário Cadastrado com Sucesso!");
+				try {
+//					SimpleEmail email = new SimpleEmail();
+//					email.setFrom("magdielpereira07@gmail.com.br");
+//					email.addTo("magdiel.pereira@escolar.ifrn.edu.br");
+//					email.setSubject("subject");
+//					email.setMsg("você está cadastrado na SIGICOP");
+//					Mail.send(email);
+				} catch (Exception e) {
+					System.out.println(e);
+					System.out.println("falha no envio do email");
+				}
 				user.save();
 			}else {
 				flash.error("Confimarçao de senha invalida!");	

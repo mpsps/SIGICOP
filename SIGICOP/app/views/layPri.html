@@ -58,16 +58,15 @@
 <!-- VOLTAR AO TOPO -->
 	<style type="text/css">
 /* VOLTAR AO TOPO */
-		a[href="#top"]{
+		a[href="#topPrincipal"]{
 		    padding:10px;
 		    position:fixed;
 		    top: 85%;
 		    right: 5%;
-		    margin-bottom: 1%;
 		    display:none;
 		    font-size: 5px;
 		}
-		a[href="#top"]:hover{
+		a[href="#topPrincipal"]:hover{
 			text-decoration:none;
 		}
 /* BARRA DE ROLAGEM PERSONALIZADA */
@@ -137,43 +136,46 @@
   	 m-0-celular pb-1-celular p-0-celular" style="">
 			<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
 		        <a class="toc item">
-		        	<img src="@{'/public/images/icones/menuIcone.png'}">
+		        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
 		        </a>
-		        <div class="item">
+		        <div class="item pl-1 pr-1">
 		        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
 		        href="@{Gerenciador.principal}">Principal</a>
 		        </div>
-		        <div class="item m-0"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+		        <div class="item m-0 pl-1 pr-1"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
 		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" -->
 		        <a class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
 		        onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
 		        </div>
 		        <div class="right item m-0">
-			        <a class="ui inverted button m-0 font-size-celular pr-0-celular pl-0-celular desaparecer-celular" 
+			        <a class="ui inverted button m-0 font-size-celular botao-principal" 
 			        href="@{Gerenciador.login}">Entrar</a>
-			        <a class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white"  
+			        <a class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
 			        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
 				</div>
 			</div>
-		<div class="ui text p-0-celular m-0-celular font-size-celular">
+		<div class="p-0-celular m-0-celular font-size-celular">
 			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="width: 30%;" class="image-sigicop"/>
 			<br>
 			<div class="h1 m-0 font-size-celular tituloCelular m-0-celular">
 	        IFRN <i>campus </i> João Câmara
 			</div>
 			<br/>
-			<a href="@{Gerenciador.login}" class="ui huge font-size-celular btn-lg btn-primary text-decoration-none botao-computador" 
-			style="letter-spacing: 0.5px; padding: 3%;">Entrar Agora <i class="right arrow icon m-0-celular"></i></a>
+			
+		</div>
+		<div class="mt-5 pt-3 pt-2-celular mt-2-celular m-0">
+		<a href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
+			style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora <i class="right arrow icon m-0 m-0-celular"></i></a>
 		</div>
 	</div>
 	
-<!-- CORPO DA PAGINA-->
+<!-- CONTEÚDO DA PÁGINA-->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 	<div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
 		<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
 	#{doLayout /}
-			<a href="#top" class="sticky-top topCelular">
-			<img src="@{'/public/images/icones/voltarTopo.png'}" height="50" width="50"/>
+			<a href="#topPrincipal" class="sticky-top">
+			<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
 			</a>
 		</div>
 	</div>
@@ -200,15 +202,16 @@
 					<div class="three wide column">
 						<h4 class="ui inverted header">Contatos:</h4>
 						<div class="ui inverted link list">
-							<a href="#"  class="text-decoration-none" class="font-size-celular">+55 (84) 98147-9099</a> 
+						Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
 							<br>
-							<a href="#" class="text-decoration-none" class="font-size-celular">+55 (84) 99433-3803</a>
+						Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
 						</div>
 					</div>
 					<div class="three wide column">
 						<h4 class="ui inverted header">E-mails:</h4>
-						<a href="#" class="text-decoration-none" id="font-size-celular">magdielpereira07@gmail.com</a> <!-- data-toggle="tooltip" data-html="true" title="<div class='media'><div class='media-body'><img src='@{'/public/images/passoApasso/IFJC.png'}' width='100%' /></div></div>" -->
-						<a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a> 
+						IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
+						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
+						Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br>
 					</div>
 				</div>
 			</div>
@@ -238,12 +241,12 @@ function bemVindo(){
 $(document).ready(function(){
     $(window).scroll(function(){
         if ($(this).scrollTop() > 500) {
-            $('a[href="#top"]').fadeIn();
+            $('a[href="#topPrincipal"]').fadeIn();
         } else {
-            $('a[href="#top"]').fadeOut();
+            $('a[href="#topPrincipal"]').fadeOut();
         }
     });
-    $('a[href="#top"]').click(function(){
+    $('a[href="#topPrincipal"]').click(function(){
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });

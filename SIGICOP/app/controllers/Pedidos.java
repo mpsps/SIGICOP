@@ -41,11 +41,18 @@ public class Pedidos extends Controller {
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = dadosDeSessao.listaDePedidos;
 		dadosDeSessao.listaDePedidos = listaDePedidos; 
+		Usuario usuarioBanco = dadosDeSessao.usuario;
+			
+		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>();
+		listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
+		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>();
+		listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
+		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>();
+		listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 		
 		String voltar = "voltar";
-		Usuario usuarioBanco = dadosDeSessao.usuario;
 	
-	render(listaDePedidos, voltar, usuarioBanco);
+	render(listaDePedidos, voltar, usuarioBanco, listaPedidosConcluidos, listaPedidosEntregues, listaPedidosRecusados);
 	}
 	
 ///// ADICIONA PEDIDOS NA CACHE /////

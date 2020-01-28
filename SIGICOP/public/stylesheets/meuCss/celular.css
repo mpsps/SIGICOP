@@ -4,25 +4,25 @@
 /**************************/
 @media (max-width: 500px){ 
 	html{
-		max-width: 100% !important;
+		max-width: 260px !important;
 		min-width: 260px !important;
 		margin: 0 !important;
 		width: 100% !important;		
 	}
 	body{
-		max-width: 100% !important;
+		max-width: 260px !important;
 		min-width: 260px !important;
 		margin: 0 !important;
 		width: 100% !important;
 	}
 	#tamanho-corpo-celular{
-		max-width: 100% !important;
+		max-width: 260px!important;
 		min-width: 260px !important;
 		margin: 0 !important;
 		width: 100% !important;	
 	}
 	.tamanho-celular{
-		max-width: 100% !important;
+		max-width: 260px !important;
 		min-width: 259px !important;
 		margin: 0 !important;
 	}
@@ -39,6 +39,19 @@
 	a[href="#top"]:hover{
 		text-decoration: none;
 	}
+	a[href="#topPrincipal"]{
+	    padding: 0px 0px 0px 0px;
+	    position: fixed;
+	    top: 90%;
+	    right: 4px;
+	    display:none;
+	    font-size: 5px;
+	    width: auto;
+	    height: auto;
+	}
+	a[href="#topPrincipal"]:hover{
+		text-decoration: none;
+	}
 	#rodapeCelular{
 		width: 100% !important;
 		min-width: 260px !important;
@@ -47,9 +60,9 @@
 		display: block;
 		position: fixed;
 		top: 12%;
-		left: 2%;
-		right: 2%;
-		max-width: 80%;
+		left: 3%;
+		right: 3%;
+		max-width: 94%;
 		z-index: 9999;
 		margin: auto;
 		box-shadow: 1px 1px 5px black;
@@ -140,6 +153,9 @@
 		width: 25px;
 		float: left;
 	}
+	.menu-celular{
+		max-width: 30px !important;
+	}
 	.hei-input-celular{
 		height: 30px;
 	}
@@ -158,6 +174,9 @@
 	.botao-celular{
 		width: 70%;
 		height: 70%;
+	}
+	.botao-principal{
+		font-size: 10px !important;
 	}
 /* Margins */
 /* Margin-0-celular */

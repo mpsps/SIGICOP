@@ -51,6 +51,21 @@
 .butaoIconTexto:hover  {
 	color: #d3d3d3;
 }
+.concluidos:hover{
+	border-bottom:  3px solid #92f88f !important;
+	color: #92f88f;
+	background-color: #32383e !important;
+}
+.recusados:hover{
+	border-bottom:  3px solid #ff5555 !important;
+	color: #ff5555;
+	background-color: #32383e !important;
+}
+.entregues:hover{
+	border-bottom:  3px solid #aeb7d2 !important;
+	color: #ff5555;
+	background-color: #32383e !important;
+}
 /**************************/
 /***tela de computador*****/
 /**************************/
@@ -143,6 +158,10 @@
 	.botao-computador{
 		margin-top: 50px !important;
 		padding: 20px !important;
+	}
+	.entrarAgora{
+		width: 20% !important;
+		height: 5% !important;
 	}
 	img[id="topo"]{
 		height: 50px;
