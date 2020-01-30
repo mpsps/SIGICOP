@@ -95,15 +95,13 @@
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
 		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">        
 <!-- JS PERSONALIZADO  -->  
-<!-- DIALOGS DE SWEETALERT2 -->
+<!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
-<!-- CHAMAR DIALOGS DO SWEETALERT2 -->
-		<script src="@{'/public/javascripts/meuJs/dialogs.js'}"></script>
 </head>
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR E EM CELULAR-->
-<!-- //////////////////////////////////////// MENU FIXO ///////////////////////////////////////////////  -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 m-0 corMenu m-0-celular" 
+<!-- //////////MENU FIXO //////////  -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 m-0 corMenu m-0-celular shadow-sm animated slideInDown faster" 
 style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 
 #{if result?.message}
@@ -150,18 +148,18 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 		<ul class="navbar-nav m-0-celular">
 		
 #{if session.contains("adminLogado")}
-<!-- //////////////////////////// MENU DO ADMINISTRADOR /////////////////////////////// -->
+<!-- ///////////// MENU DO ADMINISTRADOR //////////// -->
 			<div class="sticky-top text-center">
 			
 #{if admBanco?.admPadrao}
-		<!-- VEREFICAR SE � O ADMIN PADRAO -->
+		<!-- VEREFICAR SE É O ADMIN PADRAO -->
 				<span> <a title="Adicionar Admin" href="@{Administradores.cadastroDeAdms}" class="addAdm" style="padding: 0px; float: left;">
 					<img class="itemMenu m-0" src="@{'/public/images/icones/adminAdd.png'}" onMouseOver="this.src='@{'/public/images/icones/adminAddHover.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/adminAdd.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 				</a>
 				</span>
 				
-#{if listaAdmins}
+#{if listaAdmins != null}
 		  		<span>
 		  			<a title="filtrar Admins" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminFiltro.png'}" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
@@ -196,7 +194,7 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 
 #{if !listaDeUsuario}
 				<span>
-		  			<a title="realizar c�pia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
+		  			<a title="realizar cópia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
 						<img class="itemMenu m-0"" src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
@@ -206,21 +204,21 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 			</div>
 			
 #{if telaAdmin}
-			<a href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
+			<a title="página do administrador" href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
 #{/if}
 
-#{if listaconcluidos}
-	  		<a class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+#{if listaconcluidos != null}
+	  		<a title="filtar pedidos concluidos" class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{else}
-			<a href="@{Pedidos.listarConcluidos}" class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
+			<a title="pedidos concluidos" href="@{Pedidos.listarConcluidos}" class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
 #{/else}
 
-#{if listaRecusados}
-	  		<a class="itemMenu font-size-celular" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+#{if listaRecusados != null}
+	  		<a title="filtar pedidos recusados" class="itemMenu font-size-celular" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 #{else}
-			<a href="@{Pedidos.listarRecusados}" class="itemMenu m-0 font-size-celular" id="recusados">Recusados</a>
+			<a title="pedidos recusados" href="@{Pedidos.listarRecusados}" class="itemMenu m-0 font-size-celular" id="recusados">Recusados</a>
 #{/else}
 
 #{if session.contains("adminLogado")}
@@ -230,18 +228,18 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 0px;" alt="addAdmin" />
 					</a>
-					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
+					<span title="nome do administrador" class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
 				</span>
 				<span class="float-right">
-					<a href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
+					<a title="sair" href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
 				</span>
 			</div>
 #{/if}
-<!-- //////////////////////////// FIM DO MENU DO ADMINISTRADOR/////////////////////////////// -->
+<!-- ////////// FIM DO MENU DO ADMINISTRADOR //////////// -->
 #{/if}
 
 #{if session.contains("usuarioLogado")}
-<!-- //////////////////////////// MENU DO USUÁRIO /////////////////////////////// -->
+<!-- ////////// MENU DO USUÁRIO //////////// -->
 <div class="sticky-top mt-1 p-0" style="margin-bottom: -3px;">  
 	
 #{if listaPedidosConcluidos}
@@ -285,8 +283,8 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 </div>
 
 #{if solicitar}
-	 		<a href="@{Pedidos.fazerPedido}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
-	  		<a class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
+	  		<a title="filtar pedidos" class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 	  		aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 
@@ -309,13 +307,13 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 							<span class="notificacao bg-danger text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>
 #{/if}							
 				<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
-					<span class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
+					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
 				</span>
 				<span class="float-right">
-					<a href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto">Sair <i class="sign out alternate icon m-0"></i></a>
+					<a title="sair" href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto">Sair <i class="sign out alternate icon m-0"></i></a>
 				</span>
 			</span>
-<!-- //////////////////////////// FIM DO MENU DO USUÁRIO /////////////////////////////// -->			
+<!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->			
 #{/if}
 		</ul>
 		
@@ -324,21 +322,21 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 	<div id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
 #{/if}
 #{else}
-	<div id="time" class="text-white m-0" id="hora" style="display: none;"></div>
+	<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
 #{/else}
 #{/else} 		
 </nav>
-<!-- //////////////////////////////////////// FIM DE MENU FIXO ///////////////////////////////////////////////  -->
+<!-- //////////// FIM DE MENU FIXO ////////////////  -->
 <div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
 #{if flash.error}
-	<div class="uk-alert-danger p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
+	<div class="uk-alert-danger p-2 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
    		<!-- <a class="uk-alert-close" uk-close></a> -->
    		<div class="font-size-celular">${flash.error}</div>
 	</div>
 #{/if} 
 #{if flash.success}
-	<div class="uk-alert-success p-2" uk-alert class="messagemDeAlerta" id="messagemAlerta">
+	<div class="uk-alert-success p-2 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
    		<div class="font-size-celular">${flash.success}</div>
 	</div>
 #{/if}
@@ -346,12 +344,12 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 
 <!-- CONTEÚDO DA PÁGINA -->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
-<div id="container" class="p-0-celular mt-0-celular">
-#{doLayout /}
-	<a href="#top" class="sticky-top">
-		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
-	</a>
-</div>
+<!--  --><div id="container" class="p-0-celular mt-0-celular">
+<!--  -->#{doLayout /}
+<!--  -->	<a href="#top" class="sticky-top animated slideInUp faster">
+<!--  -->		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
+<!--  -->	</a>
+<!--  --></div>
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 
 #{if session.contains("usuarioLogado")}
@@ -391,6 +389,9 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="text-white-50 text-center h-75 d-inline-block w-100" style="background-color: black;">
+	®2020
 	</div>
 </div>
 <!-- JS DA PAGINA -->
@@ -524,11 +525,11 @@ $(document).ready(function() {
 		Swal.fire({
 			  position: 'top',
 			  icon: '',
-			  html: '<div class="text-center sticky-top h4 m-0"><span class="desaparecer-celular"><i class="address card icon m-0 p-0 border-0"></i></span>Meus Dados'+
-			  ' <a href="@{Administradores.editar}" class="btn m-0 ml-0 p-1" style="background-color: #529fed;">Editar</a></div>'+
+			  html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
 			  '<div class="text-left font-size-celular"><img src="/public/images/icones/admNome.png" width="" title="Nome"> - ${admBanco?.nomeAdm} <br>'+
 			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso} <img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}',
+			  ' <br> #{if admBanco?.ultimoAcesso} <img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
+			  '<a href="@{Administradores.editar}" class="btn btn-block btn-primary mt-2">Editar</a>',
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			  showClass: {

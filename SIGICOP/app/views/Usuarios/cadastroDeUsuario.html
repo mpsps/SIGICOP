@@ -1,6 +1,6 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Usuarios' /}
-<div id="corpoCelular">
+<div id="corpoCelular" class="animated slideInDown faster">
 	<div class="h1 text-dark text-center tituloCelular m-0 mb-2 mb-2 celular mt-n4 mt-n3-celular">Cadastro de Usuarios</div>
 	<div class="text-center m-0">
 #{ifErrors}
@@ -13,7 +13,7 @@
 	<div class="ui middle aligned center aligned grid p-0 mt-1 mt-2-celular p-0-celular m-0-celular">
 		<div class="column p-0 m-0 p-0-celular m-0-celular">
 <!-- formulario de cadastro de usu�rio -->
-			<div class="ui stacked segment mb-0 mt-0 pl-3 pr-3 pb-2 pt-0">
+			<div class="ui stacked segment mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 shadow">
 			<form id="form-usuario" action="@{Usuarios.salvarUsuario} " class="form m-0 pt-0" method="post">
 					<label class="m-1 font-size-celular" for="campoNome">Nome:</label>
 					<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>

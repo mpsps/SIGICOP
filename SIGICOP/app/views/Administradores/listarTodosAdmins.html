@@ -2,43 +2,38 @@
 #{set title:'Pedidos Concluidos' /}
 <div id="corpoCelular" class="heightMin">	
 	<div class="h1 text-dark text-center tituloCelular">Lista de Administradores do Sistema</div><br>
-	<div class="row">
-	  	<div class="col">
-	    	<div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
-		     	<div class="card card-body m-0 p-0">
+#{if listarDeAdmins != null}
+	    	<div class="collapse multi-collapse m-0 p-0 animated zoomIn faster" id="multiCollapseExample1">
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->
-					<form action="@{Administradores.listarTodosAdmins}" method="post" class="font-size-celular">
-						<fieldset class="corFiltro shadow-lg rounded">
-					        <legend>Filtrar Por:</legend>
-							<div class="form-row">
-						    	<div class="form-group col-md-6">
+					<form action="@{Administradores.listarTodosAdmins}" method="post" class="font-size-celular shadow-lg rounded corFiltro m-0-celular pt-1-celular">
+						<fieldset class="mb-0-celular">
+					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
+							<div class="form-row m-0">
+						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
 							    	<label for="NomeUser">Nome do Administrador:</label>
 									<input type="text" name="nomeDoAdminFiltro" class="form-control hei-input-celular font-size-celular" placeholder="Nome do Admin" 
 									id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
 						    	</div>
-						    	<div class="form-group col-md-6">
+						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
 							    	<label for="email">Email:</label>
 									<input type="text" name="emailDoAdminFiltro" class="form-control hei-input-celular font-size-celular" 
 									placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
 						    	</div>   		
 					  		</div>
-					 		<div class="text-center">
+					 		<div class="text-center mt-1-celular">
 						  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 						  		<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 						 	</div>
 						</fieldset>
-					</form><br><br>
+					</form><br>
 <!-- fim filtro -->
 #{/if}
-				</div>
-	    	</div>
-		</div>
   	</div>
 #{if listarDeAdmins.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum admin-->
-	<div class="text-center">
-		<div class="h1 text-primary">Nenhum admin foi encontrado</div>
+	<div class="text-center shadow p-2">
+		<div class="h1 text-primary font-size-celular">Nenhum admin foi encontrado</div>
 	</div>
 #{/if} 
 	<div class="container font-size-celular">
@@ -46,7 +41,7 @@
 #{list items:listarDeAdmins, as:'a'}
 <!-- lista todos os admins de acordo com o filtro, menos o padr�o -->
 	   		<div class="col-lg-4">
-				<div class="card text-white bg-dark mb-1" style="max-width: 100%;">
+				<div class="card text-white bg-dark mb-1 shadow-lg" style="max-width: 100%;">
 					<div class="card-body mb-0">
 						<div class="card-text">
 							<b>Nome: </b> ${a.nomeAdm}
@@ -69,7 +64,8 @@
 	 		</div>
 #{/list}
 		</div>
-	</div>		
+	</div>
+#{/if}		
 </div>
 <script type="text/javascript">
 $(".remover").click(function() {

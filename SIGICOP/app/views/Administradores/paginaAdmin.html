@@ -4,50 +4,40 @@
 	<div class="text-center">
 		<div class="h1 text-dark text-center tituloCelular">Lista de Pedidos em Espera</div>
 	</div><br />
-#{if listaPedidosPa.size() == 0}
-<!-- informa se não houver ou não encontrar nenhum pedido-->
-	<div class="text-center">
-		<div class="h1 text-primary text-center tituloCelular">(Nenhum pedido encontrado)</div>
-	</div>
-#{/if} 
 #{if listaPedidosPa != null}
-	<div class="row font-size-celular m-0-celular p-0-celular">
-	    	<div class="collapse multi-collapse bg-white" id="multiCollapseExample1">
+	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
-					<form action="@{Administradores.paginaAdmin}" method="post" class="m-0-celular p-0-celular">
-						<fieldset class="corFiltro shadow-lg rounded m-0-celular p-0-celular">
-					        <legend>Filtrar Por:</legend>
-							<div class="form-row">
-						    	<div class="form-group col-md-6">
-							    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
+					<form action="@{Administradores.paginaAdmin}" method="post" class="font-size-celular shadow-lg rounded corFiltro m-0-celular pt-1-celular">
+						<fieldset class="mb-0-celular">
+					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
+							<div class="form-row m-0">
+						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							    	<label for="matriculaDoUsuarioFiltro" class="">Matricula do Usuário:</label>
 									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Matricula do usuario" 
-									id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
+									placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
 						    	</div>
-						    	<div class="form-group col-md-6">
-							    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
+						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							    	<label for="nomeDoArquivoFiltro" class="">Nome do Arquivo:</label>
 									<input type="text" name="nomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Nome do Arquivo" 
-									id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
+									placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
 						    	</div>
 						  		</div>
-						 		<div class="text-center">
+						 		<div class="text-center mt-1-celular">
 							  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 									<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
 								</div>
 						 	</fieldset>
-						</form><br><br>
+						</form><br>
 <!-- fim filtro -->
 #{/if}
-	    	</div>
-  	</div>	
+	    </div>
 	<div class="container font-size-celular">
  		<div class="row">
 #{list items:listaPedidosPa, as:'p'}
  <!-- listar todos os pedidos com o status em "AGUARDANDO"-->
 	   		<div class="col-lg-6">
-				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+				<div class="card text-white bg-dark mb-3 shadow-lg" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
 						<span class="desaparecer-celular">
 							<div class="text-primary m-0 h6">Usuario:</div>
@@ -112,6 +102,12 @@
 		</div>
 	</div>
 #{/if}
+#{if listaPedidosPa.size() == 0}
+<!-- informa se não houver ou não encontrar nenhum pedido-->
+	<div class="text-center">
+		<div class="h1 text-primary text-center tituloCelular">(Nenhum pedido encontrado)</div>
+	</div>
+#{/if} 
 </div>
 <form id="con" action="@{Pedidos.concluido}">
 	<input type="hidden" id="idPedCon" name="idPedCon" />

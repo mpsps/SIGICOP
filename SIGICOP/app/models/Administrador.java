@@ -33,21 +33,26 @@ public class Administrador extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Long id;
-	public boolean admPadrao;
+	
+	public boolean admPadrao = false;
+	
 	@Required
-	@MaxSize(45)
 	public String nomeAdm;
+	
 	@Required
 	@Email
 	public String email;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date ultimoAcesso;
+	
 	@Required
 	@MinSize(6)
 	public String senha;
+	
 	@Transient
 	public String confirmarSenha;
-	@Temporal(TemporalType.TIMESTAMP)
-	public Date ultimoAcesso;
-
+	
 	public boolean compararSenha() {
 
 		if (senha.equals(confirmarSenha)) {

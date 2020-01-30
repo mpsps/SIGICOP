@@ -115,6 +115,8 @@
 		border-bottom:  3px solid #529fed;
 		margin: 1px 1px 1px 1px;
 		padding-bottom: -10;
+		background-color: #32383e !important;
+		border-radius: 20px 20px 1px 1px;
 	}
 	#concluidos:hover{
 		border-bottom:  3px solid #92f88f;

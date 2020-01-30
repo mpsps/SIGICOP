@@ -2,26 +2,26 @@
 #{set title:'Solicitacao de Pedido(s)' /}
 <div id="corpoCelular" class="heightMin" style="max-width: 100%;">
 #{if usuarioBanco?.qtdDisponivel == 0}
-	<div class="py-5 text-center mb-3 alert alert-warning" >
+	<div class="py-5 text-center mb-3 alert alert-warning m-1-celular p-1-celular shadow" >
 		<h2 style="color: #ff4a4a;">Atenção!</h2>
-		<p class="lead">Você atingiu seu limite máximo de solicitacões
+		<p class="lead font-size-celular">Você atingiu seu limite máximo de solicitacões
 			nesse mês, mas para isso, lembresse de salvar os pedidos.</p>
 	</div>
-#{/if} #{else}
+#{/if} 
+#{else}
 	<div class="row tamanho-celular m-0-celular ml-n1-celular">
-		<div class="col-md-6 font-size-celular">
-<!-- FORMULARIO DE PEDIDOS -->
-			<div class="mb-0 mt-0 h4 m-0-celular">
-				<span class="text-muted font-size-celular">Solicitação:</span>
+		<div class="col-md-6 font-size-celular pt-1-celular p-1-celular mt-n3-celular">
+			<div class="m-0 p-2 h5 m-0-celular shadow bg-white rounded mt-0-celular p-1-celular mb-2-celular">
+				<span class="text-muted font-size-celular m-0 p-0">Solicitação:</span>
 			</div>
-			<hr class="mb-1">
+<!-- FORMULARIO DE PEDIDOS -->
 			<form id="form-pedido" action="@{Pedidos.addPedido}" method="post"
-				enctype="multipart/form-data" class="m-0-celular" novalidate="">
+				enctype="multipart/form-data" class="m-0-celular shadow p-3 mb-5 mt-2 bg-white rounded" novalidate="">
 				<div class="mb-3">
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
 					<div class="float-left m-0">
 						<div class="float-left ">
-							<label for="item-arquivo" class="btn btn-primary butaoIconTexto font-size-celular m-0">Selecione
+							<label for="item-arquivo" class="btn btn-block btn-primary butaoIconTexto font-size-celular m-0">Selecione
 								o Arquivo <i class="paperclip icon"></i>
 							</label>
 						</div>
@@ -33,13 +33,13 @@
 					<input type="file" name="item.arquivo" style="display: none;"
 						class="form-control" id="item-arquivo"> <br><br><br>
 				</div>
-				<div class="row p-0-celular m-0-celular">
+				<div class="row p-0-celular mt-1-celular">
 					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 
 						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
 							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
-					<div class="col-md-6 p-0-celular m-0-celular">
+					<div class="col-md-6 p-0-celular m-0-celular m-0 p-0">
 						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
@@ -49,8 +49,8 @@
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frenteEverso" name="item.frenteVerso"
 								class="custom-control-input m-0" value="frenteEverso"> <label
-								class="custom-control-label text-justify" for="frenteEverso">Frente
-								e Verso</label> <sub style="color: red; padding: 0; margin: 0;">2x</sup>
+								class="custom-control-label text-left" for="frenteEverso">
+								Frente e Verso<sub style="color: red; padding: 0; margin: 0; word-spacing: 1px;">2x</sup></label> 
 						</div>
 					</div>
 				</div>
@@ -64,23 +64,22 @@
 				<button class="btn btn-success btn-lg btn-block font-size-celular" type="submit" id="add">
 					Adicionar<i class="paper plane outline icon"></i>
 				</button>
-				<hr class="mb-4">
 			</form>
-		</div>
 <!-- FIM FORMULARIO DE PEDIDOS-->
+		</div>
 #{/else}
 #{if usuarioBanco?.qtdDisponivel == 0}
 <!-- LISTAGEM EM BAIXO DO AVISO, COM 4 ITENS EM CADA LINHA-->
-		<div class="col-md-12 order-md-2 font-size-celular">
-			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 ">
+		<div class="col-md-12 order-md-2 font-size-celular mt-2-celular p-1-celular">
+			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 shadow p-2 mb-1 bg-white rounded">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
-				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>
+				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
 			</div>
-			<div class="listaPped m-0 p-0">
+			<div class="shadow p-3 mb-5 bg-white rounded m-0 p-0">
 #{if listaDePedidos == null}
 <!-- informa se n�o houver nenhum pedido adicionado-->
 				<div class="h1 text-primary text-center rounded-pill" style="font-size: 140%;">Nenhum pedido adicionado</div>
@@ -91,7 +90,7 @@
 					<div class="row">
 #{list items: listaDePedidos, as: 'p'}
 						<div class="col-lg-3 m-0 p-0 borderColorCorpo">
-							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center" style="max-width: 100%;">
+							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center animated pulse faster" style="max-width: 100%;">
 								<div class="card-header m-0 p-0">
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if}
 #{else} Meu	pedido #{/else}		
@@ -145,16 +144,16 @@
 #{/if}
 #{else}
 <!-- LISTAGEM AO LADO DO FORMULÁRIOO, COM 2 ITENS EM CADA LINHA-->
-		<div class="col-md-6 font-size-celular">
-			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 ">
+		<div class="col-md-6 font-size-celular mt-2-celular p-1-celular">
+			<div class="d-flex justify-content-between align-items-center h5 shadow p-2 mb-1 bg-white rounded mb-3 p-0">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
-				<span class="badge badge-secondary badge-pill float-right m-0">${listaDePedidos?.size()}</span>
+				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
 			</div>
-			<div class="listaPped m-0 p-0">
+			<div class="shadow p-3 mb-5 bg-white rounded m-0 p-0">
 #{if listaDePedidos == null}
 <!-- informa se n�o houver nenhum pedido adicionado-->
 				<div class="h1 text-primary text-center rounded-pill" style="font-size: 140%;">Nenhum pedido adicionado</div>
@@ -165,7 +164,7 @@
 					<div class="row">
 #{list items: listaDePedidos, as: 'p'}
 						<div class="col-lg-6 m-0 p-0 borderColorCorpo">
-							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center" style="max-width: 100%;">
+							<div class="card text-white bg-dark mb-0 pt-0 pb-1 text-center animated pulse faster" style="max-width: 100%;">
 								<div class="card-header m-0 p-0">
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if}
 #{else} Meu	pedido #{/else}		

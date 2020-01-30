@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ import javax.persistence.Transient;
 import play.data.validation.Email;
 import play.data.validation.Max;
 import play.data.validation.MaxSize;
+import play.data.validation.Min;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.data.validation.Unique;
@@ -26,23 +28,35 @@ public class Usuario extends Model{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Long id;
+	
 	@Required
 	@MaxSize(45)
 	public String nomeUsu;
+	
 	@Required
 	public String matricula;
-	@Required
-	@MinSize(6)
-	public String senha;
-	@Transient
-	public String confirmarSenha;
+	
 	@Required
 	@Email
 	public String email;
-	@Max(20)
+
+	@Min(0)
 	public int qtdDisponivel = 20;
+
+	@Required
+	@Enumerated(EnumType.STRING)
+	public TipoUsuario tipo = TipoUsuario.ALUNO;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date ultimoAcessoUsu;
+	
+	@Required
+	@MinSize(6)
+	public String senha;
+	
+	@Transient
+	public String confirmarSenha;
+		
 //	public Usuario() {
 //		qtdDisponivel = 20;
 //	}

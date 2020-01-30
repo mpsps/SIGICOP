@@ -34,9 +34,9 @@ public class Pedidos extends Controller {
 	
 ///// PÁGINA DE FAZER PEDIDO /////
 	@User
-	public static void fazerPedido() {
+	public static void solicitar() {
 	System.out.println("_____________________________________________________");
-	System.out.println("Pedidos.fazerPedido() ...["+ new Date()+"]");
+	System.out.println("Pedidos.solicitar() ...["+ new Date()+"]");
 			
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = dadosDeSessao.listaDePedidos;
@@ -77,7 +77,7 @@ public class Pedidos extends Controller {
 			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
 			if(valor < 0) {
 			flash.error("quatidade de copia indisponivel");
-		fazerPedido();
+		solicitar();
 		}
 		dadosDeSessao.usuario.qtdDisponivel = valor;
 		Cache.set(session.getId(), dadosDeSessao);
@@ -85,7 +85,7 @@ public class Pedidos extends Controller {
 		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
 		if(valor < 0) {
 			flash.error("quatidade de copia indisponivel");
-		fazerPedido();
+		solicitar();
 		}
 		dadosDeSessao.usuario.qtdDisponivel = valor;
 		Cache.set(session.getId(), dadosDeSessao);
@@ -94,20 +94,20 @@ public class Pedidos extends Controller {
 	//			params.flash();
 	//			flash.error("Falha no Cadastro do Pedido!");
 	//			flash.keep();
-	//			fazerPedido();
+	//			solicitar();
 	//		}
 		
 		String nomeArq = params.get("name"); // recebe o nome do arquivo	
 			
 		if(item.arquivo == null || nomeArq == null) {
 			flash.error("O Envio do Arquivo é obrigatorio");
-			fazerPedido();
+			solicitar();
 		}else if(item.qtdCopias == 0){
 			flash.error("A Quantidade de Copias é obrigatorio");
-			fazerPedido();
+			solicitar();
 		}else if(item.frenteVerso == null){
 			flash.error("Frente ou Verso é obrigatorio");
-			fazerPedido();
+			solicitar();
 		}
 		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
 		int idLista = 0;
@@ -130,7 +130,7 @@ public class Pedidos extends Controller {
 		
 		dadosDeSessao.listaDePedidos = listaDePedidos;
 		Cache.set(session.getId(), dadosDeSessao);
-	fazerPedido();
+	solicitar();
 	}
 	
 
@@ -161,7 +161,7 @@ public class Pedidos extends Controller {
 		dadosDeSessao.listaDePedidos = null;
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido(s) salvo(s)!");
-	fazerPedido();
+	solicitar();
 	}
 	
 ///// APAGAR O PEDIDO DA CACHE /////
@@ -193,7 +193,7 @@ public class Pedidos extends Controller {
 		
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido Cancelado!");
-	fazerPedido();
+	solicitar();
 	}
 	
 ///// ALTERAR O STATUS PARA CONCLUIDO /////
@@ -525,7 +525,7 @@ public class Pedidos extends Controller {
 //			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
 //			if(valor < 0) {
 //			flash.error("quatidade de copia indisponivel");
-//		fazerPedido();
+//		solicitar();
 //		}
 //		dadosDeSessao.usuario.qtdDisponivel = valor;
 //		Cache.set(session.getId(), dadosDeSessao);
@@ -533,7 +533,7 @@ public class Pedidos extends Controller {
 //		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
 //		if(valor < 0) {
 //			flash.error("quatidade de copia indisponivel");
-//		fazerPedido();
+//		solicitar();
 //		}
 //		dadosDeSessao.usuario.qtdDisponivel = valor;
 //		Cache.set(session.getId(), dadosDeSessao);
@@ -542,20 +542,20 @@ public class Pedidos extends Controller {
 //	//			params.flash();
 //	//			flash.error("Falha no Cadastro do Pedido!");
 //	//			flash.keep();
-//	//			fazerPedido();
+//	//			solicitar();
 //	//		}
 //			
 //		String nomeArq = params.get("name");
 //			
 //		if(item.arquivo == null || nomeArq == null) {
 //			flash.error("O Envio do Arquivo é obrigatorio");
-//			fazerPedido();
+//			solicitar();
 //		}else if(item.qtdCopias == 0){
 //			flash.error("A Quantidade de Copias é obrigatorio");
-//			fazerPedido();
+//			solicitar();
 //		}else if(item.frenteVerso == null){
 //			flash.error("Frente ou Verso é obrigatorio");
-//			fazerPedido();
+//			solicitar();
 //		}
 //		
 //		item.nomeArquivo = nomeArq;

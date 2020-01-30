@@ -10,7 +10,7 @@
 <!-- CSS PADR�O -->
 		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 #{get 'moreStyles' /}
-<!-- JAVASCRIPT PADRAO -->
+<!-- JAVASCRIPT PADRÃO -->
         <script src="@{'/public/javascripts/popper.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <!-- JAVASCRIPT PERSONALIZADA -->
         <!--<script src="@{'/public/javascripts/mascaras.js'}" type="text/javascript" charset="${_response_encoding}"></script>-->
@@ -39,6 +39,7 @@
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/sidebar.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/transition.css'}">
 	  	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/SIGICOP.css'}">
+	  	
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/jquery.min.js'}"></script>
 		<script src="@{'/public/Semantic/js/visibility.js'}"></script>
@@ -51,6 +52,18 @@
 		<script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
 		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>    
 	<style type="text/css">
+		.notificacao {
+		  width: 4px;
+		  height: 4px;
+		  padding: 3px !important;
+		  line-height: 3px;
+		  text-align: center;
+		  border-radius: 10em;
+		  font-size: 10px !important;
+		  position: relative;
+		  bottom: 12px;
+		  right: 5px;
+		}
 		.cabecalhoPrinciopal{
 			margin-bottom: -10% !important;
 		}
@@ -99,7 +112,7 @@
 		          box-sizing: inherit;
 		}		
 		</style>
-<!-- MODAL DE AVISO QUE OBRIGATORIO O ANEXO DO ARQUIVO -->
+<!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
@@ -131,9 +144,9 @@
 	<a class="item bg-primary" href="@{Gerenciador.login}">Entrar Agora </a>
 </div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
-<div class="pusher m-0 font-size-celular p-0-celular m-0-celular" >
+<div class="pusher m-0 font-size-celular p-0-celular m-0-celular">
   	<div class="ui inverted vertical masthead segment center aligned m-0 p-0-celular
-  	 m-0-celular pb-1-celular p-0-celular" style="">
+  	 m-0-celular pb-1-celular p-0-celular shadow" style="">
 			<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
 		        <a class="toc item">
 		        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
@@ -171,14 +184,14 @@
 	
 <!-- CONTEÚDO DA PÁGINA-->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
-	<div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
-		<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
-	#{doLayout /}
-			<a href="#topPrincipal" class="sticky-top">
-			<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
-			</a>
-		</div>
-	</div>
+<!--  --><div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
+<!--  -->	<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
+<!--  -->#{doLayout /}
+<!--  -->		<a href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
+<!--  -->		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
+<!--  -->		</a>
+<!--  -->	</div>
+<!--  --></div>
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 
 <!-- RODAP� DA PAGINA -->
@@ -216,6 +229,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="text-white-50 text-center h-75 d-inline-block w-100" style="background-color: black;">
+	®2020
 	</div>
 </div>	
 <!-- JS DA PAGINA -->
@@ -266,7 +282,7 @@ $(document).ready(function(){
 			' A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
 			'a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade'+
 			'de solicitacão disponíveis e o administrador possar gerenciar as solicitações. </div></div>',
-			footer: '<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none"  style="font-size: 140%;">'+
+			footer: '<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none m-n3"  style="font-size: 140%;">'+
 			'<img src="/public/images/icones/gitHover.png">Projeto no GitHub</a>',
 			showCloseButton: true,
 			showConfirmButton: false,

@@ -1,54 +1,52 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Pagina do Usuario' /}
 <div id="corpoCelular" class="heightMin">
-    <div class="collapse multi-collapse m-0 p-0" id="multiCollapseExample1">
-		<div class="card card-body m-0 p-0">
+    <div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
 #{if listaPedidos.size() > -1}
-<!-- Filtro por nome do arquivo e descri��o -->
-			<form action="@{Usuarios.filtro}" method="post" class="font-size-celular">
-				<fieldset class="corFiltro shadow-lg rounded">
-			        <legend>Filtrar Por:</legend>
-					<div class="form-row">
-				   		<div class="form-group col-md-12">
+<!-- Filtro por nome do arquivo e descrição -->
+			<form action="@{Usuarios.filtro}" method="post" class="font-size-celular shadow-lg rounded corFiltro m-0-celular pt-1-celular">
+				<fieldset class="mb-0-celular">
+			        <legend class="mb-0">Filtrar Por:</legend>
+					<div class="form-row m-0">
+				   		<div class="form-group col-md-12 mt-1-celular mb-0-celular">
 					    	<label for="NomeDoArquivoFiltro" class="m-0-celular">Nome do Arquivo:</label>
 							<input type="text" name="NomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
 							placeholder="Nome do Arquivo"
 							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
 				    	</div>
-				      	<div class="form-group col-md-6">
+				      	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
 					      	<label for="descricaoFiltro" class="m-0-celular">Descrição:</label>
 					      	<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
 					      	id="descricaoFiltro"  placeholder="Descricao" 
 					      	value="${descricaoFiltro}" />
 				      	</div>
-				      	<div class="form-group col-md-6">
+				      	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
 					      	<label for="statusFiltro" class="m-0-celular">Status:</label>
 					      	<select name="statusFiltro" id="statusFiltro" class="form-control hei-input-celular font-size-celular">
-					      		<option value="TODOS" class="m-0-celular p-0-celular">--TODOS--</option>
-					      		<option value="AGUARDANDO" class="m-0-celular p-0-celular">AGUARDANDO</option>
-					      		<option value="ENTREGUE" class="m-0-celular p-0-celular">ENTREGUE</option>
-					      		<option value="CONCLUIDO" class="m-0-celular p-0-celular">CONCLUIDO</option>
-					      		<option value="RECUSADO" class="m-0-celular p-0-celular">RECUSADO</option>
+					      		<option value="TODOS" #{if statusFiltro.equals("TODOS")}selected #{/if} class="m-0-celular p-0-celular">--TODOS--</option>
+					      		<option value="AGUARDANDO" #{if statusFiltro.equals("AGUARDANDO")}selected #{/if} class="m-0-celular p-0-celular">AGUARDANDO</option>
+					      		<option value="ENTREGUE" #{if statusFiltro.equals("ENTREGUE")}selected #{/if} class="m-0-celular p-0-celular">ENTREGUE</option>
+					      		<option value="CONCLUIDO" #{if statusFiltro.equals("CONCLUIDO")}selected #{/if} class="m-0-celular p-0-celular">CONCLUIDO</option>
+					      		<option value="RECUSADO" #{if statusFiltro.equals("RECUSADO")}selected #{/if} class="m-0-celular p-0-celular">RECUSADO</option>
 					      	</select>
 				      	</div>
 			  		</div>
-			 		<div class="text-center">
+			 		<div class="text-center mt-1-celular">
 				  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 						<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-				  		<a href="@{Pedidos.fazerPedido}" class="btn btn-success mt-2 mb-2 butaoIconTexto font-size-celular block-celular">Solicitar
+				  		<a href="@{Pedidos.solicitar}" class="btn btn-success mb-1-celular mt-1-celular butaoIconTexto font-size-celular block-celular">Solicitar
 				  		<i class="file alternate outline icon"></i></a>
 				 	</div>
 				</fieldset>
-			</form>
+			</form><br>
 <!-- fim Filtro -->
 #{/if}
-		</div>
 	</div>
 
 #{if listaPedidos.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
 	<div class="text-center">
-		<div class="h1 text-primary">Nenhum pedido foi encontrado</div>
+		<div class="h1 text-primary font-size-celular shadow p-2 m-2">Nenhum pedido foi encontrado</div>
 	</div>
 #{/if} 
 #{else}
@@ -57,7 +55,7 @@
 #{list items:listaPedidos, as:'p'}
 <!-- listar todos os pedidos anteriores (se houver) -->
 	   		<div class="col-lg-6">
-				<div class="card text-white bg-dark mb-3" style="max-width: 100%;">
+				<div class="card text-white bg-dark mb-3 shadow-lg m-0" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
 						<h5 class="text-primary m-0">Pedido:</h5>
 					</div>

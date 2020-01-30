@@ -33,14 +33,14 @@ public class Pedido extends Model {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Long id;
 	
+	@Transient 
+	public int idLista;
+	
 	@Required
 	public Blob arquivo;
 	
 	@Required
 	public String nomeArquivo;
-	
-	@Transient 
-	public int idLista;
 	
 	@Required
 	@Min(1)
@@ -57,7 +57,8 @@ public class Pedido extends Model {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date dataEntrega;
-
+	
+	@Required
 	@Enumerated(EnumType.STRING)
 	public StatusPedido status = StatusPedido.AGUARDANDO;
 

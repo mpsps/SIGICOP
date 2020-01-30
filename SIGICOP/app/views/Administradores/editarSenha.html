@@ -1,12 +1,12 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Editar Senha' /}
-<div id="corpoCelular" class="heightMin">
+<div id="corpoCelular" class="heightMin animated slideInDown faster">
 	<div class="h1 text-dark text-center tituloCelular mb-n2">Alterar Senha</div><br>
 	<div class="ui middle aligned center aligned grid m-0-celular p-0-celular mt-0-celular">
 		<div class="row m-0-celular p-0-celular mt-0-celular">
 		<div class="column m-0-celular p-0-celular mt-0-celular">
 			<div class="m-0-celular p-0-celular">
-					<div class="ui stacked segment p-2-celular mt-0-celular"><!-- cor branca do formulario -->
+					<div class="ui stacked segment p-2-celular mt-0-celular shadow animated slideInDown lower"><!-- cor branca do formulario -->
 				<form action="@{Administradores.salvarSenha} " class="ui large form m-0-celular p-0-celular" method="post">
 						<label for="campoSenha" class="font-size-celular">Senha:</label>
 						<span id="validarSenhaMsg"></span>

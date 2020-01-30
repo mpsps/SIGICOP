@@ -42,8 +42,7 @@ public class Administradores extends Controller {
 		if (matriculaDoUsuarioFiltro == null && nomeDoArquivoFiltro == null) {
 			matriculaDoUsuarioFiltro = "";
 			nomeDoArquivoFiltro = "";
-		}
-					
+		}			
 		List<Pedido> listaPedidosPa = new ArrayList<Pedido>();
 			
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty() ) {

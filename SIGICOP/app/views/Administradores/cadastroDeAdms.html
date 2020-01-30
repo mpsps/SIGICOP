@@ -1,6 +1,6 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Administrador(res)' /}
-<div id="corpoCelular" class="heightMin m-0-celular p-2-celular" id="tamanho-corpo-celular">
+<div id="corpoCelular" class="heightMin m-0-celular p-2-celular animated slideInDown faster" id="tamanho-corpo-celular">
 #{if !adm?.id}
 	<div class="h1 text-dark text-center tituloCelular mt-2-celular pt-5-celular mb-n2-celular">Cadastro de Adminstradores</div><br>
 #{/if}
@@ -17,8 +17,8 @@
 	</div>			 
 	<div class="ui middle aligned center aligned grid mt-0 m-0-celular p-0-celular">
 		<div class="column mt-0 m-0-celular p-0-celular">
-<!-- FORMULARIO DE CADASTRO E EDI��O DO ADMIN -->
-			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2" method="post">
+<!-- FORMULARIO DE CADASTRO E EDIÇÃO DO ADMIN -->
+			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2 shadow animated slideInDown lower" method="post">
 				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
 					<label class="font-size-celular m-1" for="campoNome">Nome:</label>	
