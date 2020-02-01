@@ -449,7 +449,6 @@ public class Pedidos extends Controller {
 			ped.status = StatusPedido.ENTREGUE;
 			ped.dataEntrega = new Date();
 			ped.adm = admin;
-			ped.save();
 			// gerar relatório
 			gerarRelatorio(ped);
 			
@@ -494,6 +493,7 @@ public class Pedidos extends Controller {
 			gravarArq.println("|___________________Fim de Relatorio_____________________|");
 			
 			arq.close();
+			ped.save();
 			flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" entregue!");
 			System.out.println("|___________________relatório criado_____________________|");
 		} catch (Exception e) {

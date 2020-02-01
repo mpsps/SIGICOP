@@ -17,7 +17,7 @@
 <!-- FORMULARIO DE PEDIDOS -->
 			<form id="form-pedido" action="@{Pedidos.addPedido}" method="post"
 				enctype="multipart/form-data" class="m-0-celular shadow p-3 mb-5 mt-2 bg-white rounded" novalidate="">
-				<div class="mb-3">
+				<div class="row mb-3 m-1 ml-0-celular pl-0-celular">
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
 					<div class="float-left m-0">
 						<div class="float-left ">
@@ -31,7 +31,7 @@
 					</div>
 					<!-- accept=".pdf" -->
 					<input type="file" name="item.arquivo" style="display: none;"
-						class="form-control" id="item-arquivo"> <br><br><br>
+						class="form-control" id="item-arquivo">
 				</div>
 				<div class="row p-0-celular mt-1-celular">
 					<div class="col-md-6 p-0-celular m-0-celular">
@@ -39,7 +39,7 @@
 						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
 							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
-					<div class="col-md-6 p-0-celular m-0-celular m-0 p-0">
+					<div class="col-md-6 p-0-celular m-0-celular p-0">
 						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
@@ -284,7 +284,12 @@ $(document).ready(function(e) {
 
 	inputFicheiro.addEventListener('change', function() {
   		var nome = this.files[0].name;
-  		inputNome.innerHTML = nome;
+  		var maxNome = nome.substring(0, 15); //.indexOf(".")
+  		var ext = nome.split('.').pop();
+  		if(nome.length > 15){
+  		maxNome = maxNome+"[...]."+ext;  			
+  		}
+  		inputNome.innerHTML = maxNome;
   		document.getElementById('arquivo').value = nome;
 	})
 });

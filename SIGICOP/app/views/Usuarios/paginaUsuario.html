@@ -60,8 +60,8 @@
 						<h5 class="text-primary m-0">Pedido:</h5>
 					</div>
 					<div class="card-body pt-0 pb-0">
-						<div class="card-text">
-							<b>Nome: </b> ${p.nomeArquivo}
+						<div class="card-tex">
+							<b>Nome: </b> <span id="maxNome">${p.nomeArquivo}</span>
 						</div>
 						<div class="card-text">
 							<b>Cópias: </b> ${p.qtdCopias}
@@ -143,3 +143,14 @@
 #{/if}
 #{/else}
 </div>
+<script type="text/javascript">
+$(document).ready(function(e) {
+/* var nome = document.getElementById('maxNome');
+var maxNome = nome.substring(0, 5); //.indexOf(".")
+	var ext = nome.split('.').pop();
+	if(nome.length > 5){
+	maxNome = maxNome+"[...]."+ext;  			
+	}
+	nome.innerHTML = maxNome; */
+});
+</script> 

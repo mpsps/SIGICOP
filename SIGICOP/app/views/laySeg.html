@@ -25,12 +25,12 @@
 <!-- 		<script src="@{'/public/bootstrap/js/popper.js'}" ></script>		
  -->		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
 <!-- SEMANTIC - CSS -->
-		<!-- <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/semantic.css'}"> -->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.css'}">
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.css'}"><!-- rodape utilizar-->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.css'}"><!-- utilizado em login  -->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.css'}"><!-- rodape utilizar-->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.css'}">
+		<!-- <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/semantic.min.css'}"> -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.min.css'}">
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.min.css'}"><!-- rodape utilizar-->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.min.css'}"><!-- utilizado em login  -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.min.css'}"><!-- rodape utilizar-->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.min.css'}">
 	 	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}">
 	 	<style type="text/css">
 	 	.notificacao {
@@ -44,8 +44,7 @@
 			 	
 	 	</style>
 <!-- SEMANTIC JS -->
-		<!--  <script src="@{'/public/Semantic/js/icons.js'}"/></script>-->
-		<script src="@{'/public/Semantic/js/semantic.js'}"/></script>
+		<script src="@{'/public/Semantic/js/semantic.min.js'}"/></script>
 <!-- UIKIT CSS -->
  		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.css'}" />
 <!-- UIKIT JS -->
@@ -101,8 +100,9 @@
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR E EM CELULAR-->
 <!-- //////////MENU FIXO //////////  -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 m-0 corMenu m-0-celular shadow-sm animated slideInDown faster" 
-style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 m-0 corMenu 
+m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular"
+style="position: fixed !important;">
 
 #{if result?.message}
 
@@ -127,11 +127,13 @@ style="position: fixed;" id="destacar-celular" id="tamanho-corpo-celular">
 	</div>
 #{/if}
 #{else}
+<span id="menuAberto">
 	<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="collapsed">
 		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
 	</button>
+</span>
 #{/else}
 	<a class="ui inverted basic" href="@{Gerenciador.principal}">
 		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" class="" />
@@ -460,7 +462,16 @@ function horaEnome(){
 		 }
 	}
 }
+
+/* $('#container').click(function(){
+	var menuAberto = document.getElementById('menuAberto');
+	menuAberto.innerHTML = '<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"'+
+		'aria-controls="navbarsExample08" aria-expanded="true" aria-label="Toggle navigation" id="collapsed">'+
+	'<img src="../public/images/icones/menuIcone.png" width="30" height="30">'+
+	'</button>';
+}); */
 </script>
+
 <!-- MESSAGEM DE ALERTA -->
 <script type="text/javascript">
 $().ready(function() {
@@ -500,26 +511,30 @@ $().ready(function() {
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
 <script type="text/javascript">
 $(document).ready(function() {
-//DIALOGS COM DADOS DO USUARIO
-	$("#dadosUser").click(function() {
-			Swal.fire({
-			  position: 'top',
-			  icon: '',
-			  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
-			  '<div class="text-left font-size-celular"><img src="/public/images/icones/usuNome.png" width="" title="Nome"> - ${usuarioBanco?.nomeUsu} <br>'+
-			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${usuarioBanco?.email}'+
-			  '<br><img src="/public/images/icones/usuQtd.png" width="" title="Qtd Disponivel"> - ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-			  '<br><img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
-			  showCloseButton: true,
-			  showConfirmButton: false,
-			  showClass: {
-				  popup: 'animated fadeInDown faster'
-			  },
-			  hideClass: {
-				  popup: 'animated fadeOutUp faster'
-			  }
-		})
-	});
+	
+#{if session.contains("usuarioLogado")}
+	//DIALOGS COM DADOS DO USUARIO
+		$("#dadosUser").click(function() {
+				Swal.fire({
+				  position: 'top',
+				  icon: '',
+				  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
+				  '<div class="text-left font-size-celular"><img src="/public/images/icones/usuNome.png" width="" title="Nome"> - ${usuarioBanco?.nomeUsu} <br>'+
+				  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${usuarioBanco?.email}'+
+				  '<br><img src="/public/images/icones/usuQtd.png" width="" title="Qtd Disponivel"> - ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+				  '<br><img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+				  showCloseButton: true,
+				  showConfirmButton: false,
+				  showClass: {
+					  popup: 'animated fadeInDown faster'
+				  },
+				  hideClass: {
+					  popup: 'animated fadeOutUp faster'
+				  }
+			})
+		});
+#{/if}
+#{if session.contains("adminLogado")}
 //DIALOGS COM DADOS DO ADMIN
 	$("#dadosAdmin").click(function () {
 		Swal.fire({
@@ -570,6 +585,7 @@ $(document).ready(function() {
 			}
 		})
 	});
+#{/if}
 });
 </script>
 #{/if}
