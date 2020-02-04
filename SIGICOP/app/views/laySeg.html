@@ -202,7 +202,18 @@ style="position: fixed !important;">
 					</a>
 				</span>
 #{/if}
-	
+#{if listaconcluidos != null && listaconcluidos.size() != 0}
+				<span title="Apagar Entregues" id="ApagarEntregues" style="padding: 0px; float: left;">
+					<img class="itemMenu entregues m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedEntregue.png'}'"
+					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Entregues" />
+				</span>
+#{/if}
+#{if listaRecusados != null && listaRecusados.size() != 0}
+				<span title="Apagar Recusados" id="ApagarRecusados" style="padding: 0px; float: left;">
+					<img class="itemMenu recusados m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedRecusado.png'}'"
+					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Recusados" />
+				</span>
+#{/if}
 			</div>
 			
 #{if telaAdmin}
@@ -346,19 +357,31 @@ style="position: fixed !important;">
 
 <!-- CONTEÚDO DA PÁGINA -->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
-<!--  --><div id="container" class="p-0-celular mt-0-celular">
-<!--  -->#{doLayout /}
-<!--  -->	<a href="#top" class="sticky-top animated slideInUp faster">
-<!--  -->		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
-<!--  -->	</a>
-<!--  --></div>
+<div id="container" class="p-0-celular mt-0-celular">
+					#{doLayout /}
+	<a href="#top" class="sticky-top animated slideInUp faster">
+		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
+	</a>
+</div>
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 
-#{if session.contains("usuarioLogado")}
+#{if session.contains("adminLogado")}
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
 	<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
 </form>
+#{if listaRecusados != null && listaRecusados.size() != 0}
+<!-- APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADO-->
+<form id="formApagarRecusado" action="@{Pedidos.apagarPedidoEntregueOuRecusado}">
+	<input type="hidden" name="status" value="RECUSADO" id="inputRecusado">
+</form>
+#{/if}
+#{if listaconcluidos != null && listaconcluidos.size() != 0}
+<!-- APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUE-->
+<form id="formApagarEntregue" action="@{Pedidos.apagarPedidoEntregueOuRecusado}">
+	<input type="hidden" name="status" value="ENTREGUE" id="inputEntregue">
+</form>
+#{/if}
 #{/if}
 <!-- RODAPÉ DA PAGINA -->
 <div class="position-bottom w-100 m-0-celular text-break" id="rodapeCelular" class="rodapeEmBaixo">
@@ -507,6 +530,64 @@ $().ready(function() {
     $('#dataEnvtrega').mask('00/00/0000');
 /*     $('#campoNome').mask('s');    */
 </script>
+#{if listaRecusados != null && listaRecusados.size() != 0}
+<!-- DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS -->
+<script type="text/javascript">
+	$("#ApagarRecusados").click(function() {
+		Swal.fire({
+			scrollbarPadding: true,
+			html: '<div id="text-justify font-size-celular">Tem certeza que apagar todos os pedido com o status RECUSADO? <br/>'+
+				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: '#21ac0d',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sim',
+			showCloseButton: true,
+			showClass: {
+				    popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				    popup: 'animated fadeOutUp faster'
+			}
+		}).then((result) => {
+			if (result.value) {
+				$('#inputRecusado').value = "RECUSADO";
+				$('#formApagarRecusado').submit(); 
+			}
+		})
+	});
+</script>
+#{/if}
+#{if listaconcluidos != null && listaconcluidos.size() != 0}
+<!-- DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES -->
+<script type="text/javascript">
+$("#ApagarEntregues").click(function() {
+	Swal.fire({
+		scrollbarPadding: true,
+		html: '<div id="font-size-celular text-left">Tem certeza que apagar todos os pedido com o status ENTREGUE? <br/>'+
+			  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+		icon: 'question',
+		showCancelButton: true,
+		confirmButtonColor: '#21ac0d',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Sim',
+		showCloseButton: true,
+		showClass: {
+			    popup: 'animated fadeInDown faster'
+		},
+		hideClass: {
+			    popup: 'animated fadeOutUp faster'
+		}
+	}).then((result) => {
+		if (result.value) {	
+			$('#inputEntregue').value = "ENTREGUE";
+			$('#formApagarEntregue').submit(); 
+		}
+	})
+});
+</script>
+#{/if}
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
 <script type="text/javascript">
@@ -923,6 +1004,7 @@ function validarConfirmarSenha(){			/* campo senha */
 </script>
 #{/if}
 #{if session.contains("usuarioLogado")}
+<!-- FILTRAR PEDIDOS CORRESPONDENTE AO STATUS AO CLICAR NO ICONE -->
 <script type="text/javascript">
 	$('#imagem-concluido').click(function() {
 		$('#form-concluido').submit();

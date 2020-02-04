@@ -48,6 +48,10 @@
 	<div class="text-center">
 		<div class="h1 text-primary font-size-celular shadow p-2 m-2">Nenhum pedido foi encontrado</div>
 	</div>
+	<div class="h1 font-size-celular text-center mt-5 mt-1-celular">
+	<a href="@{pedidos.solicitar}" class="btn btn-primary m-0 mt-1 mb-1
+							btn-sm butaoIconTexto font-size-celular shadow p-3 pl-5 pr-5 m-2 mt-5 rounded">Solicitar</a>
+	</div>
 #{/if} 
 #{else}
 	<div class="container font-size-celular">
@@ -66,6 +70,7 @@
 						<div class="card-text">
 							<b>Cópias: </b> ${p.qtdCopias}
 						</div>
+
 						<b>Status: </b>
 #{if p.status.name() == 'RECUSADO'}
 						<div class="text-center rounded statusRecusado" id="statusPedido">
@@ -128,11 +133,24 @@
 								</div>
 							</div>
 						</div>
+#{if p.status.name() == 'AGUARDANDO'}
+						
+						<div class="card-text text-center">
+							<a href="@{Pedidos.apagarPedidoAguardando(p.id)}" class="btn btn-danger m-0 mt-1 mb-1
+							btn-sm butaoIconTexto font-size-celular">Apagar
+							<i style="margin: 1px;" class="trash alternate outline icon"></i></a>
+							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
+							btn-sm butaoIconTexto font-size-celular">Fazer Download
+							<i style="margin: 1px;" class="download icon"></i></a>
+						</div>
+#{/if}
+#{else}
 						<div class="card-text text-center">
 							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
 							btn-sm btn-block butaoIconTexto font-size-celular">Fazer Download
 							<i style="margin: 1px;" class="download icon"></i></a>
 						</div>
+#{/else}
 					</div>
 				</div>
  			</div>

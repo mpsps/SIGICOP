@@ -275,7 +275,7 @@ public class Administradores extends Controller {
 			System.out.println("Um Administrador comum: '"+admBanco.nomeAdm+"' tentou acessar Administrador.listarTodosAdmins()");
 
 			flash.error("Acesso restrito ao administrador padrao do sistema");
-		Administradores.paginaAdmin();
+		paginaAdmin();
 		}
 	}
 	
@@ -298,7 +298,7 @@ public class Administradores extends Controller {
 			System.out.println("Um Administrador comum: '"+admBanco.nomeAdm+"' tentou acessar Administrador.removerAdmin()");
 
 			flash.error("Acesso restrito ao administrador padrao do sistema");
-		Administradores.paginaAdmin();
+		paginaAdmin();
 		}
 	}
 	

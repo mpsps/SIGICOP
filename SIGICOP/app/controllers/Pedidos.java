@@ -43,11 +43,11 @@ public class Pedidos extends Controller {
 		dadosDeSessao.listaDePedidos = listaDePedidos; 
 		Usuario usuarioBanco = dadosDeSessao.usuario;
 			
-		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>();
+		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>(); // lista todos os pedidos com o status concluido
 		listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>();
+		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>(); // lista todos os pedidos com o status recusado
 		listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
-		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>();
+		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>(); // lista todos os pedidos com o status entregue
 		listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 		
 		String voltar = "voltar";
@@ -73,9 +73,9 @@ public class Pedidos extends Controller {
 			listaDePedidos = new ArrayList<Pedido>();
 		}
 		int valor;
-		if(item.frenteVerso.equals("frenteEverso")) {
+		if(item.frenteVerso.equals("frenteEverso")) { // se for frenteEverso multliplica a qtd de cópias por 2
 			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
-			if(valor < 0) {
+			if(valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
 			flash.error("quatidade de copia indisponivel");
 		solicitar();
 		}
@@ -83,11 +83,11 @@ public class Pedidos extends Controller {
 		Cache.set(session.getId(), dadosDeSessao);
 		}else {
 		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
-		if(valor < 0) {
+		if(valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
 			flash.error("quatidade de copia indisponivel");
 		solicitar();
 		}
-		dadosDeSessao.usuario.qtdDisponivel = valor;
+		dadosDeSessao.usuario.qtdDisponivel = valor; // setar a qtd disponível atualizada no usuário da cache
 		Cache.set(session.getId(), dadosDeSessao);
 		}
 	//		if (validation.hasErrors()) {
@@ -99,21 +99,22 @@ public class Pedidos extends Controller {
 		
 		String nomeArq = params.get("name"); // recebe o nome do arquivo	
 			
-		if(item.arquivo == null || nomeArq == null) {
+		if(item.arquivo == null || nomeArq == null) { // vereficar se o arquivo existe
 			flash.error("O Envio do Arquivo é obrigatorio");
 			solicitar();
-		}else if(item.qtdCopias == 0){
+		}else if(item.qtdCopias == 0){ // vereficar se a qtdCopias é 0
 			flash.error("A Quantidade de Copias é obrigatorio");
 			solicitar();
-		}else if(item.frenteVerso == null){
-			flash.error("Frente ou Verso é obrigatorio");
+		}else if(item.frenteVerso == null){ // vereficar frente ou frenteEverso foi escolhido
+			flash.error("Frente ou FrenteEVerso é obrigatorio");
 			solicitar();
 		}
 		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
 		int idLista = 0;
-		if(listaDePedidos.size() <= 0) {
+		if(listaDePedidos.size() <= 0) { // na primeira vez id lista recebe 1
 			idLista = 1;
 		}else {
+		// serve para quando o usuário apagar um pedido que está no meio da listagem
 			Pedido ultimoPedido = new Pedido();
 			for (int i = 0; i < dadosDeSessao.listaDePedidos.size(); i++) {
 				ultimoPedido = dadosDeSessao.listaDePedidos.get(i);
@@ -121,19 +122,17 @@ public class Pedidos extends Controller {
 		// pegar o idLista do ultimo pedido e soma mais 1 para o proximo
 			idLista = ultimoPedido.idLista + 1;
 		}
-		item.idLista = idLista;
+		item.idLista = idLista; // o idLista do item recebe o idLista do servidor
 		
-		item.nomeArquivo = nomeArq;
-		item.usuario = dadosDeSessao.usuario;
+		item.nomeArquivo = nomeArq; // o item recebe o nome do arquivo
+		item.usuario = dadosDeSessao.usuario; // o item recebe o usuário da cache 
 		
-		listaDePedidos.add(item);
+		listaDePedidos.add(item); // item adicionado na lista
 		
-		dadosDeSessao.listaDePedidos = listaDePedidos;
+		dadosDeSessao.listaDePedidos = listaDePedidos; // lista adicionada na cache
 		Cache.set(session.getId(), dadosDeSessao);
 	solicitar();
 	}
-	
-
 	
 ///// SALVAR PEDIDO(S) /////
 	@User
@@ -145,19 +144,18 @@ public class Pedidos extends Controller {
 		List<Pedido> listaDePedidos;
 		
 		for (int i = 0; i < dadosDeSessao.listaDePedidos.size(); i++) {
-			dadosDeSessao.listaDePedidos.get(i).dataEnvio = new Date();	
+			dadosDeSessao.listaDePedidos.get(i).dataEnvio = new Date();	// seta data de envio em todos os pedidos
 		}
 		listaDePedidos	= dadosDeSessao.listaDePedidos;
 		
 		for (int i = 0; i < listaDePedidos.size(); i++) {
-			// salvar o usuario descrecentando a quantidade disponivel
 			listaDePedidos.get(i).usuario = dadosDeSessao.usuario;
-			listaDePedidos.get(i).save();
+			listaDePedidos.get(i).save(); // salva todos os pedidos da lista
 		}
 			
 		Usuario user = Usuario.findById(dadosDeSessao.usuario.id);
 		user.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel;
-		user.save();
+		user.save(); // salvar o usuario descrecentando a quantidade disponivel no banco
 		dadosDeSessao.listaDePedidos = null;
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido(s) salvo(s)!");
@@ -188,12 +186,51 @@ public class Pedidos extends Controller {
 		}
 		if(dadosDeSessao.listaDePedidos.size() == 0) {
 			dadosDeSessao.listaDePedidos = null;	
-		}
-		
+		}	
 		
 		Cache.set(session.getId(), dadosDeSessao);
 		flash.success("Pedido Cancelado!");
 	solicitar();
+	}
+	
+///// PARA O USUARIO PODER APAGAR O PEDIDO DO BANCO DE DADOS /////
+	@User
+	public static void apagarPedidoAguardando(Long id) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.apagarPedido() ... ["+ new Date()+"]");
+		
+		Pedido ped = Pedido.findById(id);
+		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
+		
+		if(ped != null) { // vereficar se o pedido é nulo
+			if(ped.status.name() == "AGUARDANDO") { // vereficar se o pedido está com status "AGUARDANDO"
+				if(ped.usuario.id == dadosDeSessao.usuario.id) { // vereficar se o usuário do pedido é o mesmo que está apagando ele
+					
+					Long idRemover = dadosDeSessao.usuario.id;
+					Usuario usuarioBanco = Usuario.findById(idRemover);
+					if(usuarioBanco != null) {
+						usuarioBanco.qtdDisponivel = usuarioBanco.qtdDisponivel + ped.qtdCopias;
+						usuarioBanco.save();
+						dadosDeSessao.usuario = usuarioBanco;
+						ped.delete();
+						flash.success("Pedido apagado do Banco de Dados!");
+					Usuarios.paginaUsuario();	
+					}else {
+						flash.error("Erro ao apagar o Pedido, usuário não encontrado!");
+					Usuarios.paginaUsuario();
+					}			
+				}else {
+					flash.error("Este Pedido não foi encontrado ou não lhe pertençe!");
+				Usuarios.paginaUsuario();
+				}
+			}else {
+				flash.error("Este Pedido não está em AGUARDANDO!");
+			Usuarios.paginaUsuario();
+			}
+		}else {
+			flash.error("Pedido não encontrado no Banco de Dados!");
+		Usuarios.paginaUsuario();
+		}
 	}
 	
 ///// ALTERAR O STATUS PARA CONCLUIDO /////
@@ -207,7 +244,7 @@ public class Pedidos extends Controller {
 					
 		Pedido ped = Pedido.findById(idPedCon);
 		ped.atendimento = resposta;
-		ped.status = StatusPedido.CONCLUIDO;
+		ped.status = StatusPedido.CONCLUIDO; // concluir o pedido
 		ped.dataAtendimento = new Date();
 		ped.adm = admin;
 		ped.save();
@@ -227,15 +264,15 @@ public class Pedidos extends Controller {
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
 		if(ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2);
+			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2); // devolver a qtd disponível para o usuário
 		}else {
-			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias;
+			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias; // devolver a qtd disponível para o usuário
 		}
 		ped.atendimento = motivo;
-		ped.status = StatusPedido.RECUSADO;
+		ped.status = StatusPedido.RECUSADO; // recusar o pedido
 		ped.dataAtendimento = new Date();
 		ped.adm = admin;
-		user.save();
+		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
 				
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" Recusado!");
@@ -254,16 +291,17 @@ public class Pedidos extends Controller {
 		Pedido ped = Pedido.findById(idPedCon);
 		Usuario user = ped.usuario;
 		if(ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel - (ped.qtdCopias * 2);
+			user.qtdDisponivel = user.qtdDisponivel - (ped.qtdCopias * 2); // diminuir a qtd disponível do usuário
 		}else {
-			user.qtdDisponivel = user.qtdDisponivel - ped.qtdCopias;
+			user.qtdDisponivel = user.qtdDisponivel - ped.qtdCopias; // diminuir a qtd disponível do usuário
 		}
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.CONCLUIDO;
 		ped.dataAtendimento = new Date();
 		ped.adm = admin;
-		user.save();
+		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
+		
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" concluido!");	
 	listarRecusados();
 	}
@@ -281,16 +319,17 @@ public class Pedidos extends Controller {
 		Usuario user = ped.usuario;
 		
 		if(ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2);
+			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2); // devolver a qtd disponível para o usuário
 		}else {
-			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias;
+			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias; // devolver a qtd disponível para o usuário
 		}
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.RECUSADO;
 		ped.dataAtendimento = new Date();
 		ped.adm = admin;
-		user.save();
+		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
+		
 		flash.success("Pedido do usuario "+ped.usuario.nomeUsu+" concluido!");	
 	listarConcluidos();;
 	}
@@ -383,7 +422,7 @@ public class Pedidos extends Controller {
 	
 ///// REALIZAR BAIXA /////
 	@Admin
-	public static void realizarBaixa(Pedido ped) {
+	public static void realizarBaixa(Pedido ped) throws IOException {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Pedidos.realizarBaixa() ... ["+ new Date()+"]");
 		
@@ -431,6 +470,7 @@ public class Pedidos extends Controller {
 		ped.status = StatusPedido.ENTREGUE;
 		ped.usuario.save();
 		ped.save();
+		gerarRelatorio(ped);
 		flash.success("Pedido de copia do usuário "+ped.usuario.nomeUsu+" realizado com sucesso!");
 	Administradores.realizarPedidoCopia();
 	}
@@ -502,6 +542,34 @@ public class Pedidos extends Controller {
 		listarConcluidos();
 		}
 	listarConcluidos();
+	}
+	
+///// APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUE OU RECUSADO /////
+	@Admin
+	public static void apagarPedidoEntregueOuRecusado(StatusPedido status) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.apagarPedidoEntregueOuRecusado() ... ["+ new Date()+"]");
+
+		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);		
+		Administrador adminSessao = dadosSessaoAdmin.admin;
+		
+		if(adminSessao.admPadrao) {
+			List<Pedido> listaPed = Pedido.find("status = ?1", status).fetch();
+			
+			if(listaPed.isEmpty()) {
+				flash.error("Ainda não possui pedido com o status "+status);
+			Administradores.paginaAdmin();
+			}else {
+				for (int i = 0; i < listaPed.size(); i++) {
+					listaPed.get(i).delete();
+				}				
+			}
+			flash.success("Todos os pedidos com o status "+status+" foram apagados com sucesso");
+		Administradores.paginaAdmin();
+		}else {
+			flash.error("Acesso restrito ao administrador padrao do sistema");
+		Administradores.paginaAdmin();
+		}
 	}
 ///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
 //	@User
