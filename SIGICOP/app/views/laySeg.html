@@ -202,13 +202,13 @@ style="position: fixed !important;">
 					</a>
 				</span>
 #{/if}
-#{if listaconcluidos != null && listaconcluidos.size() != 0}
+#{if listaconcluidos != null && admBanco?.admPadrao}
 				<span title="Apagar Entregues" id="ApagarEntregues" style="padding: 0px; float: left;">
 					<img class="itemMenu entregues m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedEntregue.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Entregues" />
 				</span>
 #{/if}
-#{if listaRecusados != null && listaRecusados.size() != 0}
+#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
 				<span title="Apagar Recusados" id="ApagarRecusados" style="padding: 0px; float: left;">
 					<img class="itemMenu recusados m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedRecusado.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Recusados" />
@@ -376,7 +376,7 @@ style="position: fixed !important;">
 	<input type="hidden" name="status" value="RECUSADO" id="inputRecusado">
 </form>
 #{/if}
-#{if listaconcluidos != null && listaconcluidos.size() != 0}
+#{if listaconcluidos != null && admBanco?.admPadrao}
 <!-- APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUE-->
 <form id="formApagarEntregue" action="@{Pedidos.apagarPedidoEntregueOuRecusado}">
 	<input type="hidden" name="status" value="ENTREGUE" id="inputEntregue">
@@ -559,7 +559,7 @@ $().ready(function() {
 	});
 </script>
 #{/if}
-#{if listaconcluidos != null && listaconcluidos.size() != 0}
+#{if listaconcluidos != null && admBanco?.admPadrao}
 <!-- DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES -->
 <script type="text/javascript">
 $("#ApagarEntregues").click(function() {

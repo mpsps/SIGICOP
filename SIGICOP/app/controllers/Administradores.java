@@ -325,7 +325,7 @@ public class Administradores extends Controller {
 		Pedido ip = Pedido.findById(id);
 		if(!ip.arquivo.exists()) {
 			flash.error("Arquivo não encontrado");
-		Administradores.paginaAdmin();
+		paginaAdmin();
 		}
 	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 	}

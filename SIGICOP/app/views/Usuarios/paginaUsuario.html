@@ -111,11 +111,6 @@
 								<div class="card-text">
 									<b>Data de Envio: </b> ${p.dataEnvio}
 								</div>
-								<div class="card-text">
-#{if p.dataEntrega} 
-									<b>Data de Entrega: </b> ${p.dataEntrega}<br /> 
-#{/if}
-						  		</div>
 						  		<div class="card-text">
 #{if p?.atendimento}
 									<b>Atendimento: </b> ${p.atendimento}<br /> 
@@ -135,20 +130,25 @@
 						</div>
 #{if p.status.name() == 'AGUARDANDO'}
 						
-						<div class="card-text text-center">
+						<div class="card-text text-center ">
 							<a href="@{Pedidos.apagarPedidoAguardando(p.id)}" class="btn btn-danger m-0 mt-1 mb-1
-							btn-sm butaoIconTexto font-size-celular">Apagar
+							btn-sm butaoIconTexto font-size-celular" >Apagar Pedido
 							<i style="margin: 1px;" class="trash alternate outline icon"></i></a>
 							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
-							btn-sm butaoIconTexto font-size-celular">Fazer Download
+							btn-sm butaoIconTexto font-size-celular ">Baixar Arquivo
 							<i style="margin: 1px;" class="download icon"></i></a>
 						</div>
 #{/if}
 #{else}
 						<div class="card-text text-center">
 							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
-							btn-sm btn-block butaoIconTexto font-size-celular">Fazer Download
+							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Arquivo
 							<i style="margin: 1px;" class="download icon"></i></a>
+#{if p.status.name() == 'ENTREGUE'}
+							<a href="@{Pedidos.downloadRelatório(p.id)}" class="btn btn-secondary m-0 mt-1 mb-1
+							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Relatório
+							<i style="margin: 1px;" class="download icon"></i></a>
+#{/if}
 						</div>
 #{/else}
 					</div>
