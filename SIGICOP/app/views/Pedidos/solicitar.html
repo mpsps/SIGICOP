@@ -16,23 +16,24 @@
 			</div>
 <!-- FORMULARIO DE PEDIDOS -->
 			<form id="form-pedido" action="@{Pedidos.addPedido}" method="post"
-				enctype="multipart/form-data" class="m-0-celular shadow p-3 mb-5 mt-2 bg-white rounded" novalidate="">
-				<div class="row mb-3 m-1 ml-0-celular pl-0-celular">
+				enctype="multipart/form-data" class="m-0-celular shadow p-3 mb-5 mt-2 bg-white rounded">
+				<div class="row m-1 mb-3 ml-0-celular pl-0-celular">
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
-					<div class="float-left m-0">
-						<div class="float-left ">
-							<label for="item-arquivo" class="btn btn-block btn-primary butaoIconTexto font-size-celular m-0">Selecione
+					<div class="">
+						<div class="text-center ">
+							<label for="item-arquivo" class="btn btn-block btn-primary butaoIconTexto font-size-celular pr-5 pl-5 position-relative">Selecione
 								o Arquivo <i class="paperclip icon"></i>
 							</label>
 						</div>
 					</div>
-					<div class="float-left ml-2">
-						<span id="nomeArquivo" class="text-primary h6 text-center text-break"></span>
+					<div class="text-center ml-2">
+						<span id="nomeArquivo" class="text-primary h6 text-center text-break"><!-- EXIBE O NOME DO ARQUIVO AQUI --></span>
 					</div>
 					<!-- accept=".pdf" -->
 					<input type="file" name="item.arquivo" style="display: none;"
-						class="form-control" id="item-arquivo">
+						class="form-control text-center" id="item-arquivo">
 				</div>
+				
 				<div class="row p-0-celular mt-1-celular">
 					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 

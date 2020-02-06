@@ -3,15 +3,22 @@
 <div id="corpoCelular" class="heightMin animated slideInDown faster">
 	<div class="h1 text-dark text-center tituloCelular m-0 p-0">Realizar Pedido de Cópia</div><br>
 	<div class="ui middle aligned center aligned grid p-0 m-0-celular p-0-celular">
+	
+	
+	
 <!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA -->
 				<form action="@{Pedidos.realizarBaixa}" class="segment form m-0 p-3 shadow animated slideInDown lower font-size-celular m-1-celular p-2-celular"
 				 method="post">
-						<label for="confirmarSenha" class="border-bottom">Usuário e Qtd Disponível:</label>
-						<select name="ped.usuario.id" class="form-control hei-input-celular font-size-celular">
+						<label for="confirmarSenha" class="border-bottom">Usuário e Qtd Disponível:</label><br>
+				<!-- 		<select name="ped.usuario.id" class="form-control hei-input-celular font-size-celular">
 #{list items:listaDeUsuario, as: 'u'}
 							<option value="${u.id}" class="">(${u.matricula}) qtd: ${u.qtdDisponivel}</option>
 #{/list}
-						</select>
+						</select> -->
+						<!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA  SELECT2-TESTE-->
+					<select id="mySelect2" class="form-control js-example-language-pt" lang="pt" name="ped.usuario.id" tabindex="-1" aria-hidden="true">
+						<option></option>
+					</select>
 						<div class="row m-0-celular p-0-celular">
 							<div class="col-6 m-0-celular p-0-celular">
 								<label for="confirmarSenha" class="mt-2 border-bottom">Cópias:<sup style="color: red;">*</sup></label>
@@ -39,3 +46,19 @@
 				</form>	
 	</div>
 </div>
+
+<!-- SCRIP PARA BUSCAR NO BANCO DE DADOS ATRAVES DO AJAX-->
+	<script type="text/javascript">
+	$('#mySelect2').select2({
+	  ajax: {
+	    url: '@{Administradores.listarUsuarios()}',
+	    processResults: function (data) {
+	      // Transforms the top-level key of the response object from 'items' to 'results'
+	      return {
+	        results: data
+	      };
+	    }
+	  }
+	});
+	 
+</script>

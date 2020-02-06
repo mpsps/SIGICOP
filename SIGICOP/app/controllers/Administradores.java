@@ -16,6 +16,7 @@ import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
 import models.Pedido;
+import models.Select2VO;
 import models.StatusPedido;
 import models.Usuario;
 import models.Administrador;
@@ -345,5 +346,18 @@ public class Administradores extends Controller {
 		
 		flash.success("Voce saiu do sistema");
 	Gerenciador.login();
+	}
+	
+	
+	public static void listarUsuarios(String term) {
+		List<Usuario> usuarios = Usuario.find("lower(matricula) like ?1",  "%"+term.toLowerCase() + "%").fetch(20);
+		
+		List<Select2VO> results = new ArrayList<Select2VO>();
+		for (Usuario u : usuarios) {
+			Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
+			results.add(sVO);
+		}
+		
+		renderJSON(results);
 	}
 }

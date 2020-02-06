@@ -1,6 +1,8 @@
 package models;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,6 +58,21 @@ public class Usuario extends Model{
 	
 	@Transient
 	public String confirmarSenha;
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		 String linha = nomeUsu;
+	      String pattern = "\\S+";
+
+	      Pattern r = Pattern.compile(pattern);
+	      Matcher m = r.matcher(linha);
+	      if (m.find( )) {
+	        System.out.println(m.group(0) );
+	      }
+	    
+		return m.group(0)+" ("+matricula+") qtd:"+qtdDisponivel;
+	}
 		
 //	public Usuario() {
 //		qtdDisponivel = 20;

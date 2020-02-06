@@ -132,7 +132,7 @@
 						
 						<div class="card-text text-center ">
 							<a href="@{Pedidos.apagarPedidoAguardando(p.id)}" class="btn btn-danger m-0 mt-1 mb-1
-							btn-sm butaoIconTexto font-size-celular" >Apagar Pedido
+							btn-sm butaoIconTexto font-size-celular" >Apagar
 							<i style="margin: 1px;" class="trash alternate outline icon"></i></a>
 							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
 							btn-sm butaoIconTexto font-size-celular ">Baixar Arquivo
@@ -141,9 +141,11 @@
 #{/if}
 #{else}
 						<div class="card-text text-center">
+#{if !p.status.name() == 'ENTREGUE'}
 							<a href="@{Usuarios.download(p.id)}" class="btn btn-primary m-0 mt-1 mb-1
 							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Arquivo
 							<i style="margin: 1px;" class="download icon"></i></a>
+#{/if}
 #{if p.status.name() == 'ENTREGUE'}
 							<a href="@{Pedidos.downloadRelatório(p.id)}" class="btn btn-secondary m-0 mt-1 mb-1
 							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Relatório

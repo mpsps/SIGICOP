@@ -13,10 +13,10 @@ Sistema de Gerenciamento de Impressões e Copias
 
 # Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 
-![Caso de Uso Usuario](https://user-images.githubusercontent.com/55263599/71537780-b9f78780-28ff-11ea-9626-8dc391f2091c.jpg)
+![Caso_de_Uso_Usuario](https://user-images.githubusercontent.com/55263599/73952983-7a4c9400-48de-11ea-91ec-7fe424556a6f.jpg)
 
 # Diagrama de Caso de Uso do Administrador ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
-![Caso de uso Administrador](https://user-images.githubusercontent.com/55263599/71537757-98969b80-28ff-11ea-974d-c886ad2fbdd8.jpg)
+![Caso_de_uso_Administrador](https://user-images.githubusercontent.com/55263599/73953103-b122aa00-48de-11ea-90f7-3f694b19540e.jpg)
 
 
 # PASSO A PASSO DO USUÁRIO ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
