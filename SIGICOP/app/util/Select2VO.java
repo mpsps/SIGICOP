@@ -1,4 +1,4 @@
-package models;
+package util;
 
 public class Select2VO {
 	

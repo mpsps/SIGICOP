@@ -51,7 +51,7 @@
 	<script type="text/javascript">
 	$('#mySelect2').select2({
 	  ajax: {
-	    url: '@{Administradores.listarUsuarios()}',
+	    url: '@{Usuarios.listarUsuarios()}',
 	    processResults: function (data) {
 	      // Transforms the top-level key of the response object from 'items' to 'results'
 	      return {

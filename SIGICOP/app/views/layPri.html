@@ -124,14 +124,14 @@
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
 <div class="ui large top fixed hidden menu border-0">
   <div class="ui container">
-		<a class="active item" href="@{Gerenciador.principal}">Principal</a>
-    	<a class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
+		<a title="principal" class="active item" href="@{Gerenciador.principal}">Principal</a>
+    	<a title="sobre nós" class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
     	<div class="right menu">
 			<div class="item">
-	        	<a class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
+	        	<a title="entrar agora" class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
 			</div>
 			<div class="item">
-				<a class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+				<a title="cadastrar-se" class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
 			</div>
 		</div>
 	</div>
@@ -152,18 +152,18 @@
 		        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
 		        </a>
 		        <div class="item pl-1 pr-1">
-		        <a class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
+		        <a title="Principal" class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
 		        href="@{Gerenciador.principal}">Principal</a>
 		        </div>
 		        <div class="item m-0 pl-1 pr-1"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
 		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" -->
-		        <a class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
+		        <a title="sobre nós" class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
 		        onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
 		        </div>
 		        <div class="right item m-0">
-			        <a class="ui inverted button m-0 font-size-celular botao-principal" 
+			        <a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
 			        href="@{Gerenciador.login}">Entrar</a>
-			        <a class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
+			        <a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
 			        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
 				</div>
 			</div>
@@ -177,7 +177,7 @@
 			
 		</div>
 		<div class="mt-5 pt-3 pt-2-celular mt-2-celular m-0">
-		<a href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
+		<a title="entrar agora" href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
 			style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora <i class="right arrow icon m-0 m-0-celular"></i></a>
 		</div>
 	</div>
@@ -187,7 +187,7 @@
 <!--  --><div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
 <!--  -->	<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
 <!--  -->#{doLayout /}
-<!--  -->		<a href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
+<!--  -->		<a title="volta ao topo" href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
 <!--  -->		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
 <!--  -->		</a>
 <!--  -->	</div>
@@ -282,7 +282,7 @@ $(document).ready(function(){
 			' A SIGICOP é um sistema de gerenciamento de cópias e impressões, que facilite e agilize'+
 			' a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade'+
 			'de solicitações disponíveis e o administrador possar gerenciar as solicitações. </div></div>',
-			footer: '<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none m-n3"  style="font-size: 140%;">'+
+			footer: '<a title="GitHub" href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none m-n3"  style="font-size: 140%;">'+
 			'<img src="/public/images/icones/gitHover.png">Projeto no GitHub</a>',
 			showCloseButton: true,
 			showConfirmButton: false,

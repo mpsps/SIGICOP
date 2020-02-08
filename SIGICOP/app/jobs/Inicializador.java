@@ -5,11 +5,11 @@ import java.util.List;
 
 import models.Administrador;
 import models.Pedido;
-import models.StatusPedido;
 import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import seguranca.CriptografiaUtils;
+import util.StatusPedido;
 
 @OnApplicationStart
 public class Inicializador extends Job {

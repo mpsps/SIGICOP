@@ -9,7 +9,7 @@ Sistema de Gerenciamento de Impressões e Copias
  onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrdor possar gerenciar as solicitacões**
 
 # Diagrama de Classes :page_facing_up:
-![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263599/71190212-e6a60200-2262-11ea-9943-93c5a2809e5e.jpg)
+![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263575/74077291-559b0e00-49fd-11ea-8b8e-d56638a05e86.jpg)
 
 # Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 

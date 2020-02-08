@@ -26,6 +26,7 @@ import net.sf.oval.constraint.MaxLength;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
+import util.StatusPedido;
 
 @Entity
 public class Pedido extends Model {		

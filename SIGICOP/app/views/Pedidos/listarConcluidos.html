@@ -87,7 +87,7 @@
 									<span class="desaparecer-celular">Entregar</span>
 									<i style="float: right; margin: 1px;" class="file alternate outline icon"></i>
 								</a>
-								<a href="@{Administradores.download(pc.id)}" class="btn-sm-computador btn-block-computador btn btn-primary m-1 butaoIconTexto font-size-celular">
+								<a href="@{Pedidos.downloadAdmin(pc.id)}" class="btn-sm-computador btn-block-computador btn btn-primary m-1 butaoIconTexto font-size-celular">
 									<span class="desaparecer-celular">Download</span>
 									<i style="margin: 1px;" class="download icon"></i>
 								</a>
@@ -120,14 +120,15 @@ $(document).ready(function () {
 		console.log("o valor do id de entregue :  "+id);
 		$('#idEnt').val(id);
 		Swal.fire({
-			  html: '<div id="tituloCelularModal">Tem certeza que deseja entregar esse pedido?</div>'+
-					  '<br/><form action="@{Pedidos.entregarPedido}" method="post">'
+			  html: '<div class="font-size-celular">Tem certeza que deseja entregar esse pedido?</div>'
+					  +'<div class="bg-info text-white p-1 font-size-celular">Usuário do pedido: ${pc?.usuario?.matricula}</div>'
+					  +'<br/><form action="@{Pedidos.entregarPedido}" method="post">'
 			  		   +'<input type="hidden" id="idEnt" name="id" value="'+id+'"/>'
-				  	   +'<span class="btn btn-primary m-1 p-0 butaoIconTexto font-size-celular"><input type="submit" value="Entregar" class="btn btn-primary m-1 butaoIconTexto font-size-celular" />'
-				  	   +'<i style="margin: 1px;" class="file alternate outline icon ml-0 pl-0"></i></span></form>',
+				  	   +'<input type="submit" value="Entregar" class="btn btn-primary m-1 butaoIconTexto font-size-celular" />'
+				  	   +'</form>',
 			  icon: 'question',
 			  showCloseButton: true,
-			  showCancelButton: true,
+			  showCancelButton: false,
 			  showConfirmButton: false,
 			  showClass: {
 				    popup: 'animated fadeInDown faster'

@@ -16,8 +16,6 @@ import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
 import models.Pedido;
-import models.Select2VO;
-import models.StatusPedido;
 import models.Usuario;
 import models.Administrador;
 import play.cache.Cache;
@@ -25,6 +23,8 @@ import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.CriptografiaUtils;
 import seguranca.Seguranca;
+import util.Select2VO;
+import util.StatusPedido;
 
 @With(Seguranca.class)
 public class Administradores extends Controller {
@@ -32,7 +32,7 @@ public class Administradores extends Controller {
 	@Admin
 	public static void paginaAdmin() {
 		System.out.println("_____________________________________________________________________________________");
-		System.out.println("Administrador.paginaAdmin() ... ["+ new Date()+"]");
+		System.out.println("Administradores.paginaAdmin() ... ["+ new Date()+"]");
 		
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
@@ -317,19 +317,6 @@ public class Administradores extends Controller {
 		listaDeUsuario = Usuario.findAll();
 	render(admBanco, telaAdmin, listaDeUsuario);
 	}
-///// FAZ DOWNLOAD DO ARQUIVO DO USUARIO /////
-	@Admin
-	public static void download(Long id) {
-		System.out.println("_____________________________________________________________________________________");
-		System.out.println("Administradores.download() ... ["+ new Date()+"]");
-		
-		Pedido ip = Pedido.findById(id);
-		if(!ip.arquivo.exists()) {
-			flash.error("Arquivo não encontrado");
-		paginaAdmin();
-		}
-	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
-	}
 	
 ///// PARA O ADMINISTRADOR SAIR DO SISTEMA ///// 
 	@Admin
@@ -348,16 +335,4 @@ public class Administradores extends Controller {
 	Gerenciador.login();
 	}
 	
-	
-	public static void listarUsuarios(String term) {
-		List<Usuario> usuarios = Usuario.find("lower(matricula) like ?1",  "%"+term.toLowerCase() + "%").fetch(20);
-		
-		List<Select2VO> results = new ArrayList<Select2VO>();
-		for (Usuario u : usuarios) {
-			Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
-			results.add(sVO);
-		}
-		
-		renderJSON(results);
-	}
 }

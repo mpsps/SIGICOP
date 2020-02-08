@@ -20,15 +20,15 @@ import play.data.validation.Valid;
 import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
-import models.Historico;
 import models.Pedido;
-import models.StatusPedido;
 import models.Usuario;
 import play.cache.Cache;
 import play.db.jpa.JPABase;
 import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.Seguranca;
+import util.Historico;
+import util.StatusPedido;
 
 @With(Seguranca.class)
 public class Pedidos extends Controller {
@@ -161,9 +161,13 @@ public class Pedidos extends Controller {
 		Usuario user = Usuario.findById(dadosDeSessao.usuario.id);
 		user.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel;
 		user.save(); // salvar o usuario descrecentando a quantidade disponivel no banco
+		if(dadosDeSessao.listaDePedidos.size() < 2) {
+			flash.success("Pedido salvo!");
+		}else {
+			flash.success("Pedidos salvos!");
+		}
 		dadosDeSessao.listaDePedidos = null;
 		Cache.set(session.getId(), dadosDeSessao);
-		flash.success("Pedido(s) salvo(s)!");
 		solicitar();
 	}
 
@@ -440,6 +444,7 @@ public class Pedidos extends Controller {
 	}
 
 ///// REALIZAR BAIXA /////
+	@SuppressWarnings("deprecation")
 	@Admin
 	public static void realizarBaixa(Pedido ped) throws IOException {
 		System.out.println("_____________________________________________________________________________________");
@@ -533,8 +538,6 @@ public class Pedidos extends Controller {
 			System.out.println("|USUÁRIO: " + ped.usuario.nomeUsu);
 			gravarArq.println("|ADMINISTRADOR: " + ped.adm.nomeAdm);
 			System.out.println("|ADMINISTRADOR: " + ped.adm.nomeAdm);
-			gravarArq.println("|ID DO PEDIDO: " + ped.id + "                                        |");
-			System.out.println("|ID DO PEDIDO: " + ped.id + "                                        |");
 			gravarArq.println("|NOME DO ARQUIVO: " + ped.nomeArquivo);
 			System.out.println("|NOME DO ARQUIVO: " + ped.nomeArquivo);
 			gravarArq.println("|QTD DE CÓPIAS: " + ped.qtdCopias + "                                        |");
@@ -612,68 +615,113 @@ public class Pedidos extends Controller {
 			Administradores.paginaAdmin();
 		}
 	}
+	
+///// PARA O USUÁRIO FAZER O DOWNLOAD DO ARQUIVO DO PEDIDO /////
+	@User
+	public static void downloadUser(Long id) {
+	System.out.println("_____________________________________________________________________________________");
+	System.out.println("Pedidos.downloadUser() ... ["+ new Date()+"]");
+		Pedido ip = Pedido.findById(id);
+		
+		if(!ip.arquivo.exists()) {
+			flash.error("Arquivo não encontrado");
+			Usuarios.paginaUsuario();
+		}
+		System.out.println("pedido download: "+ ip.nomeArquivo);
+	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
+	}
+	
+///// PARA O ADMINISTRODOR FAZER O DOWNLOAD DO ARQUIVO DO PEDIDO  /////
+	@Admin
+	public static void downloadAdmin(Long id) {
+	System.out.println("_____________________________________________________________________________________");
+	System.out.println("Pedidos.downloadAdmin() ... ["+ new Date()+"]");
+		Pedido ip = Pedido.findById(id);
+		
+		if(!ip.arquivo.exists()) {
+			flash.error("Este arquivo não foi encontrado");
+			Administradores.paginaAdmin();
+		}
+		System.out.println("pedido download: "+ ip.nomeArquivo);
+	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
+	}
+	
 ///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
-//	@User
-//	public static void addPedidoAjax(@Valid Pedido item) {
-//	System.out.println("_____________________________________________________________________________________");
-//	System.out.println("Pedidos.addPedidoAjax() ...["+ new Date()+"]");
-//			
-//		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
-//		List<Pedido> listaDePedidos = null;
-//		
-//		if(dadosDeSessao == null) {
-//			dadosDeSessao = new DadosSessao();
-//		}else {
-//			listaDePedidos = dadosDeSessao.listaDePedidos;
-//		}
-//		if(listaDePedidos == null) {
-//			listaDePedidos = new ArrayList<Pedido>();
-//		}
-//		int valor;
-//		if(item.frenteVerso.equals("frenteEverso")) {
-//			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
-//			if(valor < 0) {
-//			flash.error("quatidade de copia indisponivel");
-//		solicitar();
-//		}
-//		dadosDeSessao.usuario.qtdDisponivel = valor;
-//		Cache.set(session.getId(), dadosDeSessao);
-//		}else {
-//		valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
-//		if(valor < 0) {
-//			flash.error("quatidade de copia indisponivel");
-//		solicitar();
-//		}
-//		dadosDeSessao.usuario.qtdDisponivel = valor;
-//		Cache.set(session.getId(), dadosDeSessao);
-//		}
-//	//		if (validation.hasErrors()) {
-//	//			params.flash();
-//	//			flash.error("Falha no Cadastro do Pedido!");
-//	//			flash.keep();
-//	//			solicitar();
-//	//		}
-//			
-//		String nomeArq = params.get("name");
-//			
-//		if(item.arquivo == null || nomeArq == null) {
-//			flash.error("O Envio do Arquivo é obrigatorio");
-//			solicitar();
-//		}else if(item.qtdCopias == 0){
-//			flash.error("A Quantidade de Copias é obrigatorio");
-//			solicitar();
-//		}else if(item.frenteVerso == null){
-//			flash.error("Frente ou Verso é obrigatorio");
-//			solicitar();
-//		}
-//		
-//		item.nomeArquivo = nomeArq;
-//		item.usuario = dadosDeSessao.usuario;
-//		
-//		listaDePedidos.add(item);
-//		
-//		dadosDeSessao.listaDePedidos = listaDePedidos;
-//		Cache.set(session.getId(), dadosDeSessao);
-//	renderJSON(listaDePedidos);
-//	}
+	@User
+	public static void addPedidoAjax(@Valid Pedido item) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.addPedido() ...[" + new Date() + "]");
+
+		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
+		List<Pedido> listaDePedidos = null;
+
+		if (dadosDeSessao == null) {
+			dadosDeSessao = new DadosSessao();
+		} else {
+			listaDePedidos = dadosDeSessao.listaDePedidos;
+		}
+		if (listaDePedidos == null) {
+			listaDePedidos = new ArrayList<Pedido>();
+		}
+		int valor;
+		if (item.frenteVerso.equals("frenteEverso")) { // se for frenteEverso multliplica a qtd de cópias por 2
+			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
+			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
+				flash.error("quatidade de copia indisponivel");
+				solicitar();
+			}
+			dadosDeSessao.usuario.qtdDisponivel = valor;
+			Cache.set(session.getId(), dadosDeSessao);
+		} else {
+			valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
+			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
+				flash.error("quatidade de copia indisponivel");
+				solicitar();
+			}
+			dadosDeSessao.usuario.qtdDisponivel = valor; // setar a qtd disponível atualizada no usuário da cache
+			Cache.set(session.getId(), dadosDeSessao);
+		}
+		// if (validation.hasErrors()) {
+		// params.flash();
+		// flash.error("Falha no Cadastro do Pedido!");
+		// flash.keep();
+		// solicitar();
+		// }
+
+		String nomeArq = params.get("name"); // recebe o nome do arquivo
+
+		if (item.arquivo == null || nomeArq == null) { // vereficar se o arquivo existe
+			flash.error("O Envio do Arquivo é obrigatorio");
+			solicitar();
+		} else if (item.qtdCopias == 0) { // vereficar se a qtdCopias é 0
+			flash.error("A Quantidade de Copias é obrigatorio");
+			solicitar();
+		} else if (item.frenteVerso == null) { // vereficar frente ou frenteEverso foi escolhido
+			flash.error("Frente ou FrenteEVerso é obrigatorio");
+			solicitar();
+		}
+		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
+		int idLista = 0;
+		if (listaDePedidos.size() <= 0) { // na primeira vez id lista recebe 1
+			idLista = 1;
+		} else {
+			// serve para quando o usuário apagar um pedido que está no meio da listagem
+			Pedido ultimoPedido = new Pedido();
+			for (int i = 0; i < dadosDeSessao.listaDePedidos.size(); i++) {
+				ultimoPedido = dadosDeSessao.listaDePedidos.get(i);
+			}
+			// pegar o idLista do ultimo pedido e soma mais 1 para o proximo
+			idLista = ultimoPedido.idLista + 1;
+		}
+		item.idLista = idLista; // o idLista do item recebe o idLista do servidor
+
+		item.nomeArquivo = nomeArq; // o item recebe o nome do arquivo
+		item.usuario = dadosDeSessao.usuario; // o item recebe o usuário da cache
+
+		listaDePedidos.add(item); // item adicionado na lista
+
+		dadosDeSessao.listaDePedidos = listaDePedidos; // lista adicionada na cache
+		Cache.set(session.getId(), dadosDeSessao);
+	renderJSON(listaDePedidos);
+	}
 }

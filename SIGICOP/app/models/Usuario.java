@@ -24,6 +24,7 @@ import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
 import seguranca.CriptografiaUtils;
+import util.TipoUsuario;
 
 @Entity
 public class Usuario extends Model{

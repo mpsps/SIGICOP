@@ -138,6 +138,9 @@
 	.desaparecer-celular{
 		display: none !important;
 	}
+	.aparecer-celular{
+		display: initial !important;
+	}
 	.tituloCelular {
 		font-size: 120%;
 		display: block;

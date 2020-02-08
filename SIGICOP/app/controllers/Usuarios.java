@@ -20,7 +20,6 @@ import models.Administrador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
 import models.Pedido;
-import models.StatusPedido;
 import models.Usuario;
 import play.cache.Cache;
 import play.data.validation.Valid;
@@ -30,6 +29,8 @@ import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.CriptografiaUtils;
 import seguranca.Seguranca;
+import util.Select2VO;
+import util.StatusPedido;
 
 @With(Seguranca.class)
 public class Usuarios extends Controller {
@@ -226,37 +227,6 @@ public class Usuarios extends Controller {
 	Gerenciador.login();
 	}
 	
-///// FAZ DOWNLOAD DO ARQUIVO DO USUARIO /////
-	@User
-	public static void download(Long id) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Usuarios.download() ... ["+ new Date()+"]");
-		Pedido ip = Pedido.findById(id);
-		
-		if(!ip.arquivo.exists()) {
-			flash.error("Arquivo não encontrado");
-		paginaUsuario();
-		}
-		System.out.println("pedido download: "+ ip.nomeArquivo);
-	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
-	}
-	
-///// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS /////
-	@Admin
-	public static void restaurarQtd(int qtd) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Usuarios.restaurarQtd() ... ["+ new Date()+"]");
-		
-	//	int restQtd = Integer.parseInt(qtd);
-		List<Usuario> listaResetarQtd = Usuario.findAll();
-		for (int i = 0; i < listaResetarQtd.size(); i++) {
-		Usuario user = listaResetarQtd.get(i);
-		user.qtdDisponivel = qtd;
-		user.save();
-		}
-		flash.success("Quantidade de solicitações restaurados para "+ qtd);
-	Administradores.paginaAdmin();
-	}
 	
 ///// SAIR /////
 	@User
@@ -273,5 +243,39 @@ public class Usuarios extends Controller {
 		
 		flash.success("Voce saiu do sistema");
 		Gerenciador.login();
+	}
+	
+///// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS /////
+	@Admin
+	public static void restaurarQtd(int qtd) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.restaurarQtd() ... ["+ new Date()+"]");
+		
+		//	int restQtd = Integer.parseInt(qtd);
+		List<Usuario> listaResetarQtd = Usuario.findAll();
+		for (int i = 0; i < listaResetarQtd.size(); i++) {
+			Usuario user = listaResetarQtd.get(i);
+			user.qtdDisponivel = qtd;
+			user.save();
+		}
+		flash.success("Quantidade de solicitações restaurados para "+ qtd);
+		Administradores.paginaAdmin();
+	}
+	
+///// ESSE METODO É CHAMADO COM AJAX + SELECT2 NA NA PAGINA DE REALIZAR BAIXA LOCALIZADO EM AMINISTRADORES /////
+	@Admin
+	public static void listarUsuarios(String term) {
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Usuarios.listarUsuarios() ... ["+ new Date()+"]");
+		
+		List<Usuario> usuarios = Usuario.find("lower(matricula) like ?1",  "%"+term.toLowerCase() + "%").fetch(20);
+		
+		List<Select2VO> results = new ArrayList<Select2VO>();
+		for (Usuario u : usuarios) {
+			Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
+			results.add(sVO);
+		}
+		
+		renderJSON(results);
 	}
 }

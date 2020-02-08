@@ -21,7 +21,7 @@
 					<input type="hidden" name="name" id="arquivo"><!-- SALVAR O NOME DO ARQUIVO -->
 					<div class="">
 						<div class="text-center ">
-							<label for="item-arquivo" class="btn btn-block btn-primary butaoIconTexto font-size-celular pr-5 pl-5 position-relative">Selecione
+							<label title="adicionar arquivo" for="item-arquivo" class="btn btn-block btn-primary butaoIconTexto font-size-celular pr-5 pl-5 position-relative">Selecione
 								o Arquivo <i class="paperclip icon"></i>
 							</label>
 						</div>
@@ -62,7 +62,7 @@
 							class="form-control m-0" placeholder="descrição"></textarea>
 					</div>
 				</div>
-				<button class="btn btn-success btn-lg btn-block font-size-celular" type="submit" id="add">
+				<button title="adicionar pedido" class="btn btn-success btn-lg btn-block font-size-celular" type="submit" id="add">
 					Adicionar<i class="paper plane outline icon"></i>
 				</button>
 			</form>
@@ -75,7 +75,7 @@
 			<div class="d-flex justify-content-between align-items-center h5 mb-3 p-0 shadow p-2 mb-1 bg-white rounded">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
-				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
+				<a title="salvar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
 				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
@@ -149,7 +149,7 @@
 			<div class="d-flex justify-content-between align-items-center h5 shadow p-2 mb-1 bg-white rounded mb-3 p-0">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
-				<a href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
+				<a title="salvar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
 				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
@@ -224,10 +224,12 @@
 $(document).ready(function(e) {
 // informa que � obrigat�rio o anexo do arquivo
 	$("#form-pedido").submit(function(e) {
+		
 		var arq = $("#item-arquivo").val();
 		if (arq == "") {
-			/*alert("Você deve anexar um arquivo!");*/
 			e.preventDefault();
+			/*alert("Você deve anexar um arquivo!");*/
+		
 			Swal.fire({
 				icon: 'error',
 				title: 'ERROR...',
@@ -259,7 +261,7 @@ $(document).ready(function(e) {
 				  icon: 'info',
 				  title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
 				})
-				setTimeout(function(){ 
+				setTimeout(function(){
 					e.submit();
 				}, 3000);
 			}else{

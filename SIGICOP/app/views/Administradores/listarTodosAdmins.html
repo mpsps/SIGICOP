@@ -44,7 +44,7 @@
 				<div class="card text-white bg-dark mb-1 shadow-lg" style="max-width: 100%;">
 					<div class="card-body mb-0">
 						<div class="card-text">
-							<b>Nome: </b> ${a.nomeAdm}
+							<b>Nome: </b> <span id="nomeAdmin">${a.nomeAdm}</span>
 						</div>
 						<div class="card-text">
 							<b>Email: </b> ${a.email}
@@ -70,16 +70,16 @@
 <script type="text/javascript">
 $(".remover").click(function() {
 	var id = $(this).data("item");
-	console.log("o valor do id de entregue :  "+id);
 	$('#idRem').val(id);
 	Swal.fire({
-		  html: '<div id="tituloCelularModal">Tem certeza que deseja remover esse administrador?</div>'+
-				  '<br/><form action="@{Administradores.removerAdmin}" method="post">'
-		  		   +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
-			  	   +'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
+		  html: '<div class="font-size-celular">Tem certeza que deseja remover esse administrador?</div>\n'
+				  +'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a.nomeAdm}</div>'
+				  +'<br/><form action="@{Administradores.removerAdmin}" method="post">'
+		  		  +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
+			  	  +'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
 		  icon: 'question',
 		  showCloseButton: true,
-		  showCancelButton: true,
+		  showCancelButton: false,
 		  showConfirmButton: false,
 		  showClass: {
 			    popup: 'animated fadeInDown faster'

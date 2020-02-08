@@ -121,7 +121,6 @@ style="position: fixed !important;">
 		<div id="time" class="text-white m-0 ml-5" id="hora"></div>
 #{/if}
 #{else}
-
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
 	<div class="desaparecer-celular">
 	
@@ -143,13 +142,16 @@ style="position: fixed !important;">
 #{/else}
 	<a class="ui inverted basic" href="@{Gerenciador.principal}">
 		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" class="" />
+#{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
+	<img class="aparecer-celular"  title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
+#{/if}
 	</a>
 	<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
 		<div class="desaparecer-celular">
 		
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
 			<div class="text-center">
-				<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
+				<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
 			</div>
 #{/if}
 		</div>
@@ -303,12 +305,12 @@ style="position: fixed !important;">
 
 #{if solicitar}
 	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
-	  		<a title="filtar pedidos" class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+	  		<a title="filtrar pedidos" class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 	  		aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
 #{/if}
 
 #{if voltar}
-	 		<a href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular mr-2">Voltar</a>
+	 		<a title="página do usuário" href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular mr-2">Página Usuário</a>
 #{/if}
 			<span class="border rounded p-0" style="height: 42px;">
 				<span id="dadosUser" class="m-0">
@@ -338,7 +340,7 @@ style="position: fixed !important;">
 		
 	</div>
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
+	<div title="hora" id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
 #{/if}
 #{else}
 	<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
@@ -365,7 +367,7 @@ style="position: fixed !important;">
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 <div id="container" class="p-0-celular mt-0-celular">
 					#{doLayout /}
-	<a href="#top" class="sticky-top animated slideInUp faster">
+	<a title="volta ao topo" href="#top" class="sticky-top animated slideInUp faster">
 		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
 	</a>
 </div>
@@ -429,9 +431,11 @@ style="position: fixed !important;">
 <script type="text/javascript">
 function horaEnome(){
 	today=new Date();
+	h = 0;
 	h=today.getHours();
 	m=today.getMinutes();
 	s=today.getSeconds();
+	h = h + 1;
 		if(h <10){
 			h = "0"+h;
 		}
@@ -1025,6 +1029,3 @@ function validarConfirmarSenha(){			/* campo senha */
 #{/if}
 </body>
 </html>
-
-		
-

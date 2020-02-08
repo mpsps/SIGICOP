@@ -2,7 +2,7 @@
 #{set title:'Login' /}
 <div id="corpoCelular" class="heightMin text-center animated slideInDown faster" style="max-width: 100%;">
 	<div class="ui teal image header ml-0 mr-0 mb-2 mt-1 m-0-celular p-0-celular pl-0-celular pr-0-celular m-n1-celular">
-		<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 ml-1-celular p-0 imagem-celular" title="Usuario" width="150%">
+		<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 ml-1-celular p-0 imagem-celular" title="Usuário" width="150%">
 		<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular" >Insirar seu login e senha</div>
 	</div>
 	<div class="ui middle aligned center aligned grid p-0 m-0 mt-1 p-2-celular p-0-celular m-0-celular">
@@ -17,12 +17,12 @@
 				<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
 				<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" required="" id="senha">
 				<!-- BOTÃO DE ENVIO -->
-				<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Logar"/>
+				<input title="Entrar" type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Entrar"/>
 			</form>
 			<hr class="mt-3">
 			<div class="m-3 mt-1">
 				<span class="block-celular">NÃ£o sou cadastrado:</span>
-				<a href="@{Usuarios.cadastroDeUsuario}" class="">Fazer cadastro</a>
+				<a title="cadastrar-se" href="@{Usuarios.cadastroDeUsuario}" class="">fazer cadastro</a>
 			</div>
 		</div>
 	</div>
