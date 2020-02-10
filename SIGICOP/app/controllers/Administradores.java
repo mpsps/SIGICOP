@@ -215,9 +215,11 @@ public class Administradores extends Controller {
 			if(senha.length() > 5 && confirmarSenha.length() > 5) {
 				if(senha.equals(confirmarSenha)) {
 					String senhaCript = CriptografiaUtils.criptografarMD5(senha);
-					admBanco.senha = senhaCript;
-					admBanco.save();
-					dadosSessaoAdmin.admin = admBanco;
+					Administrador admin = Administrador.findById(admBanco.id);
+					admin.senha = senhaCript;
+					System.out.println("idddddddddddddddd= "+admin.id);
+					admin.save();
+					dadosSessaoAdmin.admin = admin;
 					Cache.set(session.getId(), dadosSessaoAdmin);
 					flash.success("senha alterada com sucesso!");
 					editar();	

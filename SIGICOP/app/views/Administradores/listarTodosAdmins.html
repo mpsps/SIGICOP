@@ -51,9 +51,18 @@
 						</div>
 #{if a.ultimoAcesso}
 						<div class="card-text">
-							<b>Ultimo Acesso: : </b> ${a.ultimoAcesso}
+							<b>Ultimo Acesso: </b> ${a.ultimoAcesso}
 						</div>
 #{/if}
+						<div class="card-text">
+#{if a.admPadrao == true}
+							<b>Tipo: </b> Padrão
+#{/if}
+#{else}
+							<b>Tipo: </b> Comum
+#{/else}
+						</div>
+						
 						<div class="text-center m-0">
 								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-danger m-0 mt-1 butaoIconTexto remover font-size-celular">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
@@ -73,7 +82,7 @@ $(".remover").click(function() {
 	$('#idRem').val(id);
 	Swal.fire({
 		  html: '<div class="font-size-celular">Tem certeza que deseja remover esse administrador?</div>\n'
-				  +'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a.nomeAdm}</div>'
+				  +'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a?.nomeAdm}</div>'
 				  +'<br/><form action="@{Administradores.removerAdmin}" method="post">'
 		  		  +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
 			  	  +'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',

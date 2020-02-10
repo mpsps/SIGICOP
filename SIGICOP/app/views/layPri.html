@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
 		<title>#{get 'title' /}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -168,7 +168,7 @@
 				</div>
 			</div>
 		<div class="p-0-celular m-0-celular font-size-celular">
-			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="width: 30%;" class="image-sigicop"/>
+			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" style="width: 30%;" class="image-sigicop"/>
 			<br>
 			<div class="h1 m-0 font-size-celular tituloCelular m-0-celular">
 	        IFRN <i>campus </i> João Câmara
@@ -185,13 +185,13 @@
 <!-- CONTEÚDO DA PÁGINA-->
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 <!--  --><div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
-<!--  -->	<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
-<!--  -->#{doLayout /}
-<!--  -->		<a title="volta ao topo" href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
-<!--  -->		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
-<!--  -->		</a>
-<!--  -->	</div>
-<!--  --></div>
+	<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
+#{doLayout /}
+		<a title="volta ao topo" href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
+		<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
+		</a>
+	</div>
+</div>
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
 
 <!-- RODAP� DA PAGINA -->
@@ -204,7 +204,7 @@
 						<div class="ui inverted link list">
 							<span class="sticky-top">
 								<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
-									<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
+									<img src="@{'/public/images/icones/gitHub.png'}" alt="GitHub" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
 									onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" width="30" 
 									style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
 								</a>
@@ -275,7 +275,7 @@ $(document).ready(function(){
 		Swal.fire({
 			position: 'top',
 			icon: '',
-			html: '<div class="text-white p-3 pb-5 font-size-celular mb-n2" style="margin: -18px; background-color: #1b1c1d;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="50%" class="mb-2 w-75"/><br/>'+
+			html: '<div class="text-white p-3 pb-5 font-size-celular mb-n2" style="margin: -18px; background-color: #1b1c1d;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="50%" class="mb-2 w-75"/><br/>'+
 			'<div class="text-justify w-100" style="text-indent: 5%;">A SIGICOP é um projeto de conclusão do curso subsequente em informática,'+
 			' realizado por Magdiel Pereira de Souza <a href="https://github.com/MagdielPS" target="_blank" class="text-decoration-none">(@MagdielPS)</a> '+
 			'e por Manacio Pereira de Souza <a href="https://github.com/Manacio" target="_blank" class="text-decoration-none">(@Manacio)</a>.'+
@@ -283,7 +283,7 @@ $(document).ready(function(){
 			' a demanda de impressões e cópias do IFRN-CAMPUS-JC, onde o usuário possa ter controle sobre a quantidade'+
 			'de solicitações disponíveis e o administrador possar gerenciar as solicitações. </div></div>',
 			footer: '<a title="GitHub" href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none m-n3"  style="font-size: 140%;">'+
-			'<img src="/public/images/icones/gitHover.png">Projeto no GitHub</a>',
+			'<img src="/public/images/icones/gitHover.png" alt="GitHub">Projeto no GitHub</a>',
 			showCloseButton: true,
 			showConfirmButton: false,
 			showClass: {

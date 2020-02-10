@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.sun.mail.imap.protocol.Status;
 
 import annotations.Admin;
@@ -592,8 +594,13 @@ public class Pedidos extends Controller {
 			List<Pedido> listaPed = Pedido.find("status = ?1", status).fetch();
 
 			if (listaPed.isEmpty()) {
-				flash.error("Ainda não possui pedido com o status " + status);
-				Administradores.paginaAdmin();
+				if(status == StatusPedido.ENTREGUE) {
+					flash.error("Ainda não possui pedido com o status " + status);
+				listarConcluidos();
+				}else if(status == StatusPedido.RECUSADO){
+					flash.error("Ainda não possui pedido com o status " + status);
+				listarRecusados();
+				}
 			} else {
 				for (int i = 0; i < listaPed.size(); i++) {
 					if(listaPed.get(i).status == StatusPedido.ENTREGUE) {
@@ -607,7 +614,7 @@ public class Pedidos extends Controller {
 				listarConcluidos();
 				}else if(status == StatusPedido.RECUSADO){
 					flash.success("Todos os pedidos com o status " + status + " foram apagados com sucesso");
-				listarRecusados();;
+				listarRecusados();
 				}
 			}
 		} else {
@@ -666,18 +673,18 @@ public class Pedidos extends Controller {
 		int valor;
 		if (item.frenteVerso.equals("frenteEverso")) { // se for frenteEverso multliplica a qtd de cópias por 2
 			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
-			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
-				flash.error("quatidade de copia indisponivel");
-				solicitar();
-			}
+//			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
+//				flash.error("quatidade de copia indisponivel");
+//				solicitar();
+//			}
 			dadosDeSessao.usuario.qtdDisponivel = valor;
 			Cache.set(session.getId(), dadosDeSessao);
 		} else {
 			valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
-			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
-				flash.error("quatidade de copia indisponivel");
-				solicitar();
-			}
+//			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
+//				flash.error("quatidade de copia indisponivel");
+//				solicitar();
+//			}
 			dadosDeSessao.usuario.qtdDisponivel = valor; // setar a qtd disponível atualizada no usuário da cache
 			Cache.set(session.getId(), dadosDeSessao);
 		}
@@ -690,16 +697,16 @@ public class Pedidos extends Controller {
 
 		String nomeArq = params.get("name"); // recebe o nome do arquivo
 
-		if (item.arquivo == null || nomeArq == null) { // vereficar se o arquivo existe
-			flash.error("O Envio do Arquivo é obrigatorio");
-			solicitar();
-		} else if (item.qtdCopias == 0) { // vereficar se a qtdCopias é 0
-			flash.error("A Quantidade de Copias é obrigatorio");
-			solicitar();
-		} else if (item.frenteVerso == null) { // vereficar frente ou frenteEverso foi escolhido
-			flash.error("Frente ou FrenteEVerso é obrigatorio");
-			solicitar();
-		}
+//		if (item.arquivo == null || nomeArq == null) { // vereficar se o arquivo existe
+//			flash.error("O Envio do Arquivo é obrigatorio");
+//			solicitar();
+//		} else if (item.qtdCopias == 0) { // vereficar se a qtdCopias é 0
+//			flash.error("A Quantidade de Copias é obrigatorio");
+//			solicitar();
+//		} else if (item.frenteVerso == null) { // vereficar frente ou frenteEverso foi escolhido
+//			flash.error("Frente ou FrenteEVerso é obrigatorio");
+//			solicitar();
+//		}
 		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
 		int idLista = 0;
 		if (listaDePedidos.size() <= 0) { // na primeira vez id lista recebe 1
@@ -720,8 +727,14 @@ public class Pedidos extends Controller {
 
 		listaDePedidos.add(item); // item adicionado na lista
 
-		dadosDeSessao.listaDePedidos = listaDePedidos; // lista adicionada na cache
+		dadosDeSessao.listaDePedidos = listaDePedidos;
+		
+		// lista adicionada na cache
 		Cache.set(session.getId(), dadosDeSessao);
-	renderJSON(listaDePedidos);
+		
+		Gson gson = new Gson();
+		String lista = gson.toJson(listaDePedidos);
+	 
+	 renderJSON(lista);
 	}
 }

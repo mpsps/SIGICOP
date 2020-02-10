@@ -33,7 +33,7 @@ public class Usuario extends Model{
 	public Long id;
 	
 	@Required
-	@MaxSize(45)
+	@MaxSize(100)
 	public String nomeUsu;
 	
 	@Required

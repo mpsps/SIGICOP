@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 	<head>
 		<title>#{get 'title' /}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -126,7 +126,7 @@ style="position: fixed !important;">
 	
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="menuAberto">
-			<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
+			<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
 		</button>
 	</div>
@@ -135,15 +135,15 @@ style="position: fixed !important;">
 <span id="menuAberto">
 	<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="collapsed">
-		<img src="@{'/public/images/icones/menuIcone.png'}" width="30" height="30">
+		<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
 		<!-- <span class="navbar-toggler-icon"></span> -->
 	</button>
 </span>
 #{/else}
 	<a class="ui inverted basic" href="@{Gerenciador.principal}">
-		<img src="@{'/public/images/icones/casa.png'}" width="40" height="40" style="float: left;" title="Home" class="" />
+		<img src="@{'/public/images/icones/casa.png'}" width="40" alt="home" height="40" style="float: left;" title="Home" class="" />
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
-	<img class="aparecer-celular"  title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
+	<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
 #{/if}
 	</a>
 	<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
@@ -151,7 +151,7 @@ style="position: fixed !important;">
 		
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
 			<div class="text-center">
-				<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
+				<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
 			</div>
 #{/if}
 		</div>
@@ -164,7 +164,7 @@ style="position: fixed !important;">
 #{if admBanco?.admPadrao}
 		<!-- VEREFICAR SE É O ADMIN PADRAO -->
 				<span> <a title="Adicionar Admin" href="@{Administradores.cadastroDeAdms}" class="addAdm" style="padding: 0px; float: left;">
-					<img class="itemMenu m-0" src="@{'/public/images/icones/adminAdd.png'}" onMouseOver="this.src='@{'/public/images/icones/adminAddHover.png'}'"
+					<img class="itemMenu m-0" src="@{'/public/images/icones/adminAdd.png'}" alt="addAdmin" onMouseOver="this.src='@{'/public/images/icones/adminAddHover.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/adminAdd.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 				</a>
 				</span>
@@ -172,7 +172,7 @@ style="position: fixed !important;">
 #{if listaAdmins != null}
 		  		<span>
 		  			<a title="filtrar Admins" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminFiltro.png'}" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
+						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminFiltro.png'}" alt="filtrar admin" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/adminFiltro.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
 				</span>
@@ -180,24 +180,29 @@ style="position: fixed !important;">
 #{else}
 				<span>
 					<a title="listar Admins" href="@{Administradores.listarTodosAdmins}" class="addAdm" style="padding: 0px; float: left;">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminListar.png'}" onMouseOver="this.src='@{'/public/images/icones/adminListarHover.png'}'"
+						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminListar.png'}" alt="listrar admin"  onMouseOver="this.src='@{'/public/images/icones/adminListarHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/adminListar.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
 				</span>
 #{/else}
 				<span>
 					<a title="Restaurar qtd" href="#" class="addAdm" style="padding: 0px; float: left;" id="restaurar">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/restaurar.png'}" onMouseOver="this.src='@{'/public/images/icones/restaurarHover.png'}'"
+						<img class="itemMenu m-0" src="@{'/public/images/icones/restaurar.png'}" alt="restaurar" onMouseOver="this.src='@{'/public/images/icones/restaurarHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/restaurar.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
 				</span>
 #{/if}
 
 #{if filtroPa && listaPedidosPa || listaPedidosPa != null}
-				<span>
+				<span class="p-0">
+				
 		  			<a title="filtrar Pedidos" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/filtro.png'}" onMouseOver="this.src='@{'/public/images/icones/filtroHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/filtro.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
+					
+						<img class="itemMenu m-0" src="@{'/public/images/icones/filtro.png'}" alt="filtro" onMouseOver="this.src='@{'/public/images/icones/filtroHover.png'}'"
+						onMouseOut="this.src='@{'/public/images/icones/filtro.png'}'" height="45" style="float: left; margin-right: 0px;" alt="addAdmin" />
+					<span class="notificacao statusAguardando text-white m-0 font-size-celular ml-n3" style="font-size: 10px;">
+					${listaPedidosPa.size()}							
+					</span>
 					</a>
 				</span>
 #{/if}
@@ -205,38 +210,56 @@ style="position: fixed !important;">
 #{if !listaDeUsuario}
 				<span>
 		  			<a title="realizar cópia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/baixa.png'}" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
+						<img class="itemMenu m-0" src="@{'/public/images/icones/baixa.png'}" alt="realizar baixa" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
 					</a>
 				</span>
 #{/if}
 #{if listaconcluidos != null && admBanco?.admPadrao}
 				<span title="Apagar Entregues" id="ApagarEntregues" style="padding: 0px; float: left;">
-					<img class="itemMenu entregues m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedEntregue.png'}'"
+					<img class="itemMenu entregues m-0" src="@{'/public/images/icones/deletePed.png'}" alt="apagar entregues" onMouseOver="this.src='@{'/public/images/icones/deletePedEntregue.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Entregues" />
 				</span>
 #{/if}
 #{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
 				<span title="Apagar Recusados" id="ApagarRecusados" style="padding: 0px; float: left;">
-					<img class="itemMenu recusados m-0" src="@{'/public/images/icones/deletePed.png'}" onMouseOver="this.src='@{'/public/images/icones/deletePedRecusado.png'}'"
+					<img class="itemMenu recusados m-0" src="@{'/public/images/icones/deletePed.png'}" alt="apagar recusados" onMouseOver="this.src='@{'/public/images/icones/deletePedRecusado.png'}'"
 					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Recusados" />
 				</span>
 #{/if}
 			</div>
 			
 #{if telaAdmin}
-			<a title="página do administrador" href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
+			<a title="página do administrador" href="@{Administradores.paginaAdmin}" 
+			class="itemMenu m-0 font-size-celular">Página Admin</a>
 #{/if}
 
 #{if listaconcluidos != null}
-	  		<a title="filtar pedidos concluidos" class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+	  		<a title="filtar pedidos concluidos" class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;"
+	  		 data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+	  		 filtrar<i class="filter icon m-0"></i>
+#{if listaconcluidos.size() != 0}
+	  		 <span class="notificacao statusConcluido text-white m-0 font-size-celular ml-n2" style="font-size: 9px;">
+					${listaconcluidos.size()}							
+			</span>
+#{/if}
+	  		</a>
 #{/if}
 #{else}
-			<a title="pedidos concluidos" href="@{Pedidos.listarConcluidos}" class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
+			<a title="pedidos concluidos" href="@{Pedidos.listarConcluidos}" 
+			class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
 #{/else}
 
 #{if listaRecusados != null}
-	  		<a title="filtar pedidos recusados" class="itemMenu font-size-celular" id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
+	  		<a title="filtar pedidos recusados" class="itemMenu font-size-celular" 
+	  		id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" 
+	  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar<i class="filter icon m-0"></i>
+#{if listaRecusados.size() != 0}
+	  		<span class="notificacao statusRecusado text-white m-0 font-size-celular ml-n2" style="font-size: 9px;">
+					${listaRecusados.size()}							
+			</span>
+#{/if}
+	  		</a>
 #{/if}
 #{else}
 			<a title="pedidos recusados" href="@{Pedidos.listarRecusados}" class="itemMenu m-0 font-size-celular" id="recusados">Recusados</a>
@@ -246,7 +269,7 @@ style="position: fixed !important;">
 			<div class="border rounded p-0 m-0" style="height: 42px;">
 				<span id="dadosAdmin"> 
 					<a href="#Meus_Dados" style="padding: 0px;"> <!--  class="rounded-pill"-->
-						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
+						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" alt="admin" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
 						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 0px;" alt="addAdmin" />
 					</a>
 					<span title="nome do administrador" class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
@@ -267,7 +290,7 @@ style="position: fixed !important;">
 	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-concluido" class="m-0 p-0"> 
 	<input type="hidden" name="statusFiltro" value="${listaPedidosConcluidos.last().status.name()}">
 		<div class="itemMenu m-1 mb-0 concluidos" title="concluidos" style="font-size: 10px; float: left;" id="imagem-concluido">
-			<img title="concluidos" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
+			<img title="concluidos" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="concluidos" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
 								onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
 				<span class="notificacao statusConcluido text-white m-0 font-size-celular ml-n2">
 					${listaPedidosConcluidos.size()}	
@@ -280,7 +303,7 @@ style="position: fixed !important;">
 	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-recusado" class="m-0 p-0"> 
 	<input type="hidden" name="statusFiltro" value="${listaPedidosRecusados.last().status.name()}">
 		<div class="itemMenu m-1 mb-0 recusados" title="recusados" style="font-size: 10px; float: left;" id="imagem-recusado">
-		<img title="recusados" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
+		<img title="recusados" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="recusados" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
 							onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
 			<span class="notificacao statusRecusado text-white m-0 font-size-celular ml-n2">
 				${listaPedidosRecusados.size()}
@@ -293,7 +316,7 @@ style="position: fixed !important;">
 	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-entregue" class="m-0 p-0"> 
 	<input type="hidden" name="statusFiltro" value="${listaPedidosEntregues.last().status.name()}">
 		<div class="itemMenu m-1 mb-0 entregues" title="entregues" style="font-size: 10px; float: left;" id="imagem-entregue">
-		<img title="entregues" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
+		<img title="entregues" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="entregues" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
 							onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
 			<span class="notificacao statusEntregue text-white m-0 font-size-celular ml-n2">
 				${listaPedidosEntregues.size()}
@@ -315,7 +338,7 @@ style="position: fixed !important;">
 			<span class="border rounded p-0" style="height: 42px;">
 				<span id="dadosUser" class="m-0">
 					<a href="#Meus_Dados"  style="padding: 0px;">
-							<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
+							<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" alt="user" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
 						onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 0px;" alt="user" />
 					</a>
 #{if usuarioBanco?.qtdDisponivel > 14}
@@ -368,7 +391,7 @@ style="position: fixed !important;">
 <div id="container" class="p-0-celular mt-0-celular">
 					#{doLayout /}
 	<a title="volta ao topo" href="#top" class="sticky-top animated slideInUp faster">
-		<img src="@{'/public/images/icones/voltarTopo.png'}" id="topo" height="30" width="30"/>
+		<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
 	</a>
 </div>
 <!--/////////////////////////////////////////////////////////////////////////////////////-->
@@ -400,7 +423,7 @@ style="position: fixed !important;">
 					<h4 class="ui inverted header">Sobre:</h4>
 					<div class="ui inverted link list">
 						<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none">
-								<img src="@{'/public/images/icones/gitHub.png'}" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
+								<img src="@{'/public/images/icones/gitHub.png'}" alt="GitHub" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
 								onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
 								<div class="text-white h4">SIGICOP</div>
 						</a>

@@ -534,5 +534,9 @@
 	.ml-n5-celular {
 	  margin-left: -3rem !important;
 	} 
+/* h1 celular */
+	.h1-celular{
+		font-size: 120% !important;
+	}
 	
 }

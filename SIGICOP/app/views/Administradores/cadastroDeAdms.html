@@ -21,6 +21,22 @@
 			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2 shadow animated slideInDown lower" method="post">
 				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
+#{if !adm?.id && admBanco?.admPadrao == true}
+					<label class="font-size-celular m-1" for="campoAdmin">Administrador:</label>
+					<div class="col-md-12 p-0-celular m-0-celular p-0 border">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="comum" name="adm.admPadrao"
+								class="custom-control-input m-0" value="false" checked="checked">
+							<label class="custom-control-label text-justify" for="comum">Comum</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="padrao" name="adm.admPadrao"
+								class="custom-control-input m-0" value="true"> <label
+								class="custom-control-label text-left" for="padrao">
+								Padrão</label> 
+						</div>
+					</div>
+#{/if}
 					<label class="font-size-celular m-1" for="campoNome">Nome:</label>	
 					<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'adm.campoNome' /}</span>
 					<span id="validarNomeMsg"></span>

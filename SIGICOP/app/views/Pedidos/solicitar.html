@@ -170,7 +170,7 @@
 #{if listaDePedidos.size() > 1}Meus Pedidos #{/if}
 #{else} Meu	pedido #{/else}		
 								</div>
-								<div class="card-body text-left m-0 pt-0 pb-0">
+								<div class="card-body text-left m-0 pt-0 pb-0" id="listagemPed">
 									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
@@ -221,9 +221,10 @@
 </div>
 <!-- JS DA PAGINA -->
 <script type="text/javascript">
-$(document).ready(function(e) {
+$(document).ready(function() {
 // informa que � obrigat�rio o anexo do arquivo
 	$("#form-pedido").submit(function(e) {
+		
 		
 		var arq = $("#item-arquivo").val();
 		if (arq == "") {
@@ -261,9 +262,7 @@ $(document).ready(function(e) {
 				  icon: 'info',
 				  title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
 				})
-				setTimeout(function(){
-					e.submit();
-				}, 3000);
+
 			}else{
 				e.preventDefault();
 				Swal.fire({
@@ -278,9 +277,12 @@ $(document).ready(function(e) {
 						popup: 'animated fadeOutUp faster'
 					}  
 				})
+				return false;
 			}
-		}			
+		}
+		
 	})
+	
 // pega o nome do arquivo e jogar para o campo hidden nomeArquivo
     var inputNome = document.getElementById('nomeArquivo');
 	var inputFicheiro = document.getElementById('item-arquivo');
@@ -295,7 +297,20 @@ $(document).ready(function(e) {
   		inputNome.innerHTML = maxNome;
   		document.getElementById('arquivo').value = nome;
 	})
+	
+	
+
+
+
+
 });
 </script>
 <script type="text/javascript"> 
+
+
+
+
+
+
+
 </script>
