@@ -1,9 +1,9 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Realizar copia' /}
 <div class="heightMin animated slideInDown faster">
-	<div class="ui middle aligned center aligned grid p-0 m-0-celular p-0-celular">	
+	<div class="ui middle aligned center aligned grid p-0 m-0-celular mt-3 p-0-celular mb-4-celular">	
 <!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA -->
-				<form action="@{Pedidos.realizarBaixa}" class="brancoGelo form m-0 p-3 shadow-sm animated slideInDown lower font-size-celular m-1-celular p-2-celular"
+				<form action="@{Pedidos.realizarBaixa}" class="brancoGelo form m-0 p-4 shadow-sm animated slideInDown lower font-size-celular m-1-celular p-2-celular"
 				 method="post">
 						<label for="confirmarSenha" class="border-bottom">Usuário e Qtd Disponível:</label><br>
 				<!-- 		<select name="ped.usuario.id" class="form-control hei-input-celular font-size-celular">
@@ -38,7 +38,7 @@
 						<label class="mt-1 border-bottom">Descricao</label>
 						<textarea rows="2" cols="7" name="ped.descricao" class="form-control" placeholder="descrição"></textarea>
 						<!-- BOTÃO SALVAR -->
-						<input type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular" value="Salvar"/>
+						<input type="submit" class="btn btn-lg btn-outline-primary btn-block mt-2 font-size-celular" value="Salvar"/>
 				</form>	
 	</div>
 </div>

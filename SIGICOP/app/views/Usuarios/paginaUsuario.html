@@ -47,13 +47,15 @@
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
 	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<div class="h1">Nenhum pedido foi encontrado</div>
+		<span class="desaparecer-celular">
+			<div class="h1">Nenhum pedido foi encontrado</div>
+		</span>
 	<a href="@{pedidos.solicitar}" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow p-3 pl-5 pr-5 rounded">Solicitar
+		btn-sm butaoIconTexto font-size-celular shadow p-3 pl-5 pr-5 p-2-celular rounded">Solicitar
 	</a>
 	<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 rounded">Tentar Filtrar
+		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
 			</a>
 	</div>
 #{/if} 
@@ -69,7 +71,7 @@
 					</div>
 					<div class="card-body brancoGelo pt-0 pb-0">
 						<div class="card-tex">
-							<b>Nome: </b> <span id="maxNome">${p.nomeArquivo}</span>
+							<b>Nome: </b> <span id="${p.id}"><!-- ${p.nomeArquivo} --></span>
 						</div>
 						<div class="card-text">
 							<b>Cópias: </b> ${p.qtdCopias}
@@ -169,12 +171,19 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function(e) {
-/* var nome = document.getElementById('maxNome');
-var maxNome = nome.substring(0, 5); //.indexOf(".")
-	var ext = nome.split('.').pop();
-	if(nome.length > 5){
-	maxNome = maxNome+"[...]."+ext;  			
+#{list items:listaPedidos, as:'p'}
+	if(${p.nomeArquivo.size()} > 20){
+	/* 	var maxNome = ${p.nomeArquivo}.substring(0, 15); */ //.indexOf(".")
+		/* var ext = nome.split('.').pop(); */
+		var nomeCompletoArquivo = '${p.nomeArquivo}';
+		var nomeArquivoComplimido = '';
+		for(var i = 0; i < 20; i++){
+			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+		}
+		document.getElementById('${p.id}').innerHTML = nomeArquivoComplimido+'[...]';
+	}else{
+		document.getElementById('${p.id}').innerHTML = '${p.nomeArquivo}';
 	}
-	nome.innerHTML = maxNome; */
+#{/list}
 });
 </script> 

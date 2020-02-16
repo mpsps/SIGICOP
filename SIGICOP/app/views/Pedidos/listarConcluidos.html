@@ -41,7 +41,7 @@
 					</div>
 					<div class="card-body brancoGelo pt-0 pb-1">
 						<div class="card-text">
-							<b>Arquivo: </b> ${pc.nomeArquivo}
+							<b>Arquivo: </b> <span id="${pc.id}"><!-- ${pc.nomeArquivo} --></span>
 						</div>
 						<div class="card-text">
 							<b>Status: </b>
@@ -185,7 +185,19 @@ $(document).ready(function () {
 	});
 });	
 </script>
-
-
-
-	
+<script type="text/javascript">
+$(document).ready(function(e) {
+#{list items:listaconcluidos, as:'pc'}
+	if(${pc.nomeArquivo.size()} > 20){
+		var nomeCompletoArquivo = '${pc.nomeArquivo}';
+		var nomeArquivoComplimido = '';
+		for(var i = 0; i < 14; i++){
+			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+		}
+		document.getElementById('${pc.id}').innerHTML = nomeArquivoComplimido+'[...]';
+	}else{
+		document.getElementById('${pc.id}').innerHTML = '${pc.nomeArquivo}';
+	}
+#{/list}
+});
+</script> 

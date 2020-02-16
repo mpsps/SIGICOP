@@ -41,7 +41,7 @@
 					</div>
 					<div class="card-body pt-0 pb-1">
 						<div class="card-text">
-							<b>Arquivo: </b> ${pr.nomeArquivo}
+							<b>Arquivo: </b> <span id="${pr.id}"><!-- ${pr.nomeArquivo} --></span>
 						</div>
 						<div class="card-text">
 							<b>Status: </b>
@@ -140,4 +140,19 @@ $(document).ready(function () {
 	});
 });
 </script>
-
+<script type="text/javascript">
+$(document).ready(function(e) {
+#{list items:listaRecusados, as:'pr'}
+	if(${pr.nomeArquivo.size()} > 20){
+		var nomeCompletoArquivo = '${pr.nomeArquivo}';
+		var nomeArquivoComplimido = '';
+		for(var i = 0; i < 14; i++){
+			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+		}
+		document.getElementById('${pr.id}').innerHTML = nomeArquivoComplimido+'[...]';
+	}else{
+		document.getElementById('${pr.id}').innerHTML = '${pr.nomeArquivo}';
+	}
+#{/list}
+});
+</script> 

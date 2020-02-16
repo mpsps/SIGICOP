@@ -72,19 +72,19 @@
 			}
 			/* Fundo da barra de rolagem */
 			::-webkit-scrollbar-track-piece {
-				background-color: #1b1c1d;
-				border-left: 1px solid #1b1c1d
+				background-color: rgba(55, 55, 55, 0.5);
+				border-left: 1px solid rgba(55, 55, 55, 0.8)
 			}
 			/* Cor do indicador de rolagem */
 			::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
-				background-color: #529fed;
+				background-color: rgba(55, 55, 55, 0.9);
 				border-radius: 5px;
 			}
 			/* Cor do indicador de rolagem - ao passar o mouse */
 			::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
-				background-color: #007bff;
+				background-color: #1b1c1d;
 				border-radius: 5px;
 			}
 		</style>
@@ -112,11 +112,13 @@
  #{if session.contains("usuarioLogado")}
 <!-- ////////// MENU DO USUÁRIO /////////// -->
 		<li class="m-0 border rounded meusDados">
+			<span class="w-75 m-0 p-0">
 			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}" class="rounded-circle m-0 p-0 imagem-celular">
 				<span id="dadosUser" class="m-0">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0">
 					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md" id="nomeUsuario"></span>
-					<span class="desaparecer-celular">
+				</span>
+				<span class="w-25 m-0 p-0">
 #{if usuarioBanco?.qtdDisponivel > 14}
 						<span class="notificacao bg-success text-white mt-2 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>						
 #{/if}	
@@ -127,7 +129,9 @@
 	
 						<span class="notificacao bg-danger text-white m-1 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>
 #{/if}
+		<span class="desaparecer-celular">
 					<i title="meus dados" class="info icon text-white"></i>
+		</span>
 		</span>
 </a>
 				</span>
@@ -475,11 +479,9 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 <script type="text/javascript">
 function horaEnome(){
 	today=new Date();
-	h = 0;
 	h=today.getHours();
 	m=today.getMinutes();
 	s=today.getSeconds();
-	h = h + 1;
 		if(h <10){
 			h = "0"+h;
 		}
@@ -500,17 +502,29 @@ function horaEnome(){
 		 
 			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
 			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
-			 if(sobreNome == null || sobreNome == ""){
+		if(sobreNome == null || sobreNome == ""){
 				 console.log(nome+" ");
 				 document.getElementById('nomeUsuario').innerHTML = nome;
+		}else{
+			if(width < 500){
+				var nomeMaisSobreNome = nome+' '+sobreNome;
+				if(nomeMaisSobreNome.length > 21){
+						 /* var primeiraLetra = sobreNome.substr(0, 1) */
+						var nomeCompleto = '';
+						for(var i = 0; i < 20; i++){
+							nomeCompleto = nomeCompleto + nomeMaisSobreNome[i];
+						}
+						console.log(nomeCompleto);
+						document.getElementById('nomeUsuario').innerHTML = nomeCompleto+'.';
+				}else{
+					console.log(nome+" "+sobreNome);
+					document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;
+				}				 
 			 }else{
-			 var primeiraLetra = sobreNome.substr(0, 1)
-		
-			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome
-			 /* console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";	 */			 
-			 }			  
+				 console.log(nome+" "+sobreNome);
+				 document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;		 				 
+			 }
+		}			  
 	}
 	if(${session.contains("adminLogado")}){
 		
@@ -521,10 +535,23 @@ function horaEnome(){
 			 document.getElementById('nomeAdmin').innerHTML = nome;
 		
 		}else{
-			 var primeiraLetra = sobreNome.substr(0, 1)
-		
-			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;				 
+			if(width < 500){
+				var nomeMaisSobreNome = nome+' '+sobreNome;
+				if(nomeMaisSobreNome.length > 21){
+					var nomeCompleto = '';
+					for(var i = 0; i < 20; i++){
+						nomeCompleto = nomeCompleto + nomeMaisSobreNome[i];
+					}
+					console.log(nomeCompleto);
+					document.getElementById('nomeAdmin').innerHTML = nomeCompleto+'.';
+				}else{
+					console.log(nome+" "+sobreNome);
+					document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;
+				}
+			}else{
+				console.log(nome+" "+sobreNome);
+				document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;
+			}				 
 		}
 	}
 }
@@ -653,10 +680,10 @@ $(document).ready(function() {
 				  position: 'top',
 				  icon: '',
 				  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
-				  '<div class="text-left font-size-celular"><img src="/public/images/icones/usuNome.png" width="" title="Nome"> - ${usuarioBanco?.nomeUsu} <br>'+
-				  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${usuarioBanco?.email}'+
-				  '<br><img src="/public/images/icones/usuQtd.png" width="" title="Qtd Disponivel"> - ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-				  '<br><img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+				  '<div class="text-left font-size-celular"><i class="user circle outline icon"></i> ${usuarioBanco?.nomeUsu} <br>'+
+				  '<i class="envelope outline icon"></i> ${usuarioBanco?.email}'+
+				  '<br><i class="chart bar outline icon"></i> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+				  '<br><i class="mouse pointer icon"></i> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
 				  showCloseButton: true,
 				  showConfirmButton: false,
 				  showClass: {
@@ -675,9 +702,9 @@ $(document).ready(function() {
 			  position: 'top',
 			  icon: '',
 			  html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
-			  '<div class="text-left font-size-celular"><img src="/public/images/icones/admNome.png" width="" title="Nome"> - ${admBanco?.nomeAdm} <br>'+
-			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso} <img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
+			  '<div class="text-left font-size-celular"><i class="user circle icon"></i>  ${admBanco?.nomeAdm} <br>'+
+			  '<i class="envelope icon"></i> ${admBanco?.email}'+
+			  ' <br> #{if admBanco?.ultimoAcesso}<i class="mouse pointer icon"></i> ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
 			  '<a href="@{Administradores.editar}" class="btn btn-block btn-outline-primary mt-2">Editar</a>',
 			  showCloseButton: true,
 			  showConfirmButton: false,

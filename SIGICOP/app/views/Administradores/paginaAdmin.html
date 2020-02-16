@@ -31,8 +31,72 @@
 	    </div>
 	<div class="container font-size-celular">
  		<div class="row">
+ <div class="table-responsive m-0">
+ 	 <table class="table table-striped table-bordered table-sm m-0">
+ <tr class="m-0 p-0">
+ 	<th scope="col" class="m-0">Matrícula:</th>
+ 	<th scope="col" class="m-0">Cópias:</th>
+ 	<th scope="col">Face:</th>
+ 	<th scope="col">Nome do Arquivo:</th>
+ 	<th scope="col">Download:</th>
+ 	<th scope="col">Concluir:</th>
+ 	<th scope="col">Recusar:</th>
+ 	<th scope="col">+ Informações</th>
+ </tr>
 #{list items:listaPedidosPa, as:'p'}
- <!-- listar todos os pedidos com o status em "AGUARDANDO"-->
+	<tr>
+		<th scope="row">${p.usuario.matricula}</th	>
+		<td>${p.qtdCopias}</td>
+		<td>${p.frenteVerso}</td>
+		<td id="${p.id}"><!-- ${p.nomeArquivo} --></td>
+		<td>
+		<a class="btn btn-outline-primary butaoIconTexto btn-sm-computador btn-block-computador" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
+			text-decoration: none; font-size: 85%; margin: 0px;">
+			<i class="download icon"></i>
+		</a>
+		</td>
+		<td>
+		<a class="btn btn-block btn-outline-success btn-sm butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
+			font-size: 85%; margin: 0px;" >
+			<i  class="check icon"></i>
+		</a>
+		</td>
+		<td>
+		<a class="btn btn-block btn-outline-danger btn-sm butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
+			font-size: 85%; margin: 0px;">
+			<i class="x icon"></i>
+		</a>
+		</td>
+		<td width="150px">
+		<a class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+						 	role="button" aria-expanded="false" aria-controls="collapseExample">
+		<i class="plus icon"></i>
+		</a>
+		<div class="collapse text-left" id="collapseExample${p.id}">
+			<div class="card">
+				<div class="card-text">
+					<b>Status: </b>
+					<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
+					</div>
+				<div class="card-text">
+					<b>Data de Envio: </b> ${p.dataEnvio}
+				</div>
+#{if p.descricao} 
+				<div class="card-text">
+					<b>Descricao: </b> ${p.descricao} 
+#{if p.descricao = ""}[sem descricao] #{/if}<br />
+				</div>
+#{/if}
+			</div>
+		</div>
+		</td>
+	</tr>
+#{/list}
+</table>
+</div>
+
+<!-- #{list items:listaPedidosPa, as:'p'}
+ listar todos os pedidos com o status em "AGUARDANDO"
 	   		<div class="col-lg-4">
 				<div class="card mb-3 shadow-sm" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
@@ -91,7 +155,7 @@
 					</div>
 				</div>
 			</div>
-#{/list}
+#{/list} -->
 		</div>
 	</div>
 #{/if}
@@ -197,5 +261,19 @@ $(document).ready(function(){
 			}
 		})
 	});
+#{list items:listaPedidosPa, as:'p'}
+	if(${p.nomeArquivo.size()} > 20){
+	/* 	var maxNome = ${p.nomeArquivo}.substring(0, 15); */ //.indexOf(".")
+		/* var ext = nome.split('.').pop(); */
+		var nomeCompletoArquivo = '${p.nomeArquivo}';
+		var nomeArquivoComplimido = '';
+		for(var i = 0; i < 20; i++){
+			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+		}
+		document.getElementById('${p.id}').innerHTML = nomeArquivoComplimido+'[...]';
+	}else{
+		document.getElementById('${p.id}').innerHTML = '${p.nomeArquivo}';
+	}
+#{/list}
 });
 </script>
