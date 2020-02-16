@@ -1,13 +1,9 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Realizar copia' /}
-<div id="corpoCelular" class="heightMin animated slideInDown faster">
-	<div class="h1 text-dark text-center tituloCelular m-0 p-0">Realizar Pedido de Cópia</div><br>
-	<div class="ui middle aligned center aligned grid p-0 m-0-celular p-0-celular">
-	
-	
-	
+<div class="heightMin animated slideInDown faster">
+	<div class="ui middle aligned center aligned grid p-0 m-0-celular p-0-celular">	
 <!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA -->
-				<form action="@{Pedidos.realizarBaixa}" class="segment form m-0 p-3 shadow animated slideInDown lower font-size-celular m-1-celular p-2-celular"
+				<form action="@{Pedidos.realizarBaixa}" class="brancoGelo form m-0 p-3 shadow-sm animated slideInDown lower font-size-celular m-1-celular p-2-celular"
 				 method="post">
 						<label for="confirmarSenha" class="border-bottom">Usuário e Qtd Disponível:</label><br>
 				<!-- 		<select name="ped.usuario.id" class="form-control hei-input-celular font-size-celular">

@@ -63,7 +63,8 @@ public class Gerenciador extends Controller {
 		}
 		session.clear();
 		Cache.clear();
-	render();
+		String titulo = "Insirar seu login e senha";
+	render(titulo);
 	}
 	
 ///// AUTENTIFICAR O USUARIO E ADMIN /////

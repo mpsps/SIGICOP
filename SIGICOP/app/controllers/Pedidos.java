@@ -57,9 +57,9 @@ public class Pedidos extends Controller {
 				.fetch();
 
 		String voltar = "voltar";
-
+		String titulo = "Solicitar";
 		render(listaDePedidos, voltar, usuarioBanco, listaPedidosConcluidos, listaPedidosEntregues,
-				listaPedidosRecusados);
+				listaPedidosRecusados, titulo);
 	}
 
 ///// ADICIONA PEDIDOS NA CACHE /////
@@ -345,7 +345,6 @@ public class Pedidos extends Controller {
 
 		flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " concluido!");
 		listarConcluidos();
-		;
 	}
 
 ///// LISTAR TODOS OS PEDIDO CONCLUIDOS /////
@@ -394,7 +393,8 @@ public class Pedidos extends Controller {
 		}
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem";
-		render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
+		String titulo = "Listagem de Concluídos";
+		render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
 	}
 
 ///// LISTAR TODOS OS PEDIDO RECUSADOS /////
@@ -442,7 +442,8 @@ public class Pedidos extends Controller {
 		}
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem ";
-		render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro);
+		String titulo = "Listagem de Recusados";
+		render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
 	}
 
 ///// REALIZAR BAIXA /////

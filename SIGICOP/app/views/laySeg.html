@@ -53,19 +53,18 @@
 <!-- CSS PERSONALIZADO  -->
 		<style type="text/css">
 /* VOLTAR AO TOPO */
-			a[href="#top"]{
-			    padding:10px;
-			    position:fixed;
-			    top: 85%;
-			    right: 5%;
-			    margin-bottom: 1%;
-			    display:none;
-			    font-size: 5px;
-			}
-
-			a[href="#top"]:hover{
-		    	text-decoration:none;
-			}
+			/* VOLTAR AO TOPO */
+		a[href="#topPrincipal"]{
+		    padding:10px;
+		    position:fixed;
+		    top: 85%;
+		    right: 5%;
+		    display:none;
+		    font-size: 5px;
+		}
+		a[href="#topPrincipal"]:hover{
+			text-decoration:none;
+		}
 /* BARRA DE ROLAGEM PERSONALIZADA */
 			/* Largura da barra de rolagem */
 			::-webkit-scrollbar {
@@ -89,9 +88,7 @@
 				border-radius: 5px;
 			}
 		</style>
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">     
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}">     
 		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">
 		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/select2-bootstrap.css'}">        
 <!-- JS PERSONALIZADO  -->  
@@ -104,23 +101,242 @@
 
 </head>
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
-<!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR E EM CELULAR-->
-<!-- //////////MENU FIXO //////////  -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top fixed-top-celular w-100 m-0 corMenu 
-m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular"
-style="position: fixed !important;">
-
-#{if result?.message}
-
-<div class="" style="margin-left: 10%; margin-right: 10%;">
+<div id="layoutGeral">
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+	<div id="layoutMenu" class="animated fadeInLeft faster animated"><!-- INICIO MENU -->
+	<div class="h-75 m-0 p-0 hmx-75">
+		<a href="@{Gerenciador.principal}">
+			<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
+		</a>
+		<ul class="text-white m-0 p-0" style="list-style: none;">
+ #{if session.contains("usuarioLogado")}
+<!-- ////////// MENU DO USUÁRIO /////////// -->
+		<li class="m-0 border rounded meusDados">
+			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}" class="rounded-circle m-0 p-0 imagem-celular">
+				<span id="dadosUser" class="m-0">
+					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0">
+					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md" id="nomeUsuario"></span>
+					<span class="desaparecer-celular">
+#{if usuarioBanco?.qtdDisponivel > 14}
+						<span class="notificacao bg-success text-white mt-2 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>						
+#{/if}	
+#{if usuarioBanco?.qtdDisponivel > 8 & usuarioBanco?.qtdDisponivel < 15}	
+							<span class="notificacao bg-warning text-white m-1 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>			
+#{/if}
+#{if usuarioBanco?.qtdDisponivel < 9}
+	
+						<span class="notificacao bg-danger text-white m-1 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>
+#{/if}
+					<i title="meus dados" class="info icon text-white"></i>
+		</span>
+</a>
+				</span>
+		</li>
+						<hr class="mt-0 mb-2-celular">
 		
-		<div class="itemMenu float-left"><div class="h5">Not Found</div>${result.message}
-		</div>
-</div>
-		<a href="@{Administradores.paginaAdmin}" class="itemMenu m-0 font-size-celular">Página Admin</a>
-		<div id="time" class="text-white m-0 ml-5" id="hora"></div>
+#{if solicitar}
+	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" class="linkMenu">
+					<li class="m-0 itemMenu rounded">
+						<i class="file alternate outline icon"></i>Solicitar
+					</li>
+			</a>
+#{/if}
+#{if solicitar}
+			<a title="filtrar pedidos" class="linkMenu" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+	  		aria-expanded="false" aria-controls="multiCollapseExample1">
+				<li class="m-0 itemMenu rounded">
+	  				<i class="filter icon"></i>filtrar Pedidos
+	  				<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidos.size()}							
+					</span>
+				</li>
+			</a>
+#{/if}
+#{if voltar}
+			<a title="página do usuário" href="@{Usuarios.paginaUsuario}" class="linkMenu">
+				<li class="m-0 itemMenu rounded">
+		 			<i class="address book outline icon"></i>Página Usuário
+		 		</li>
+	 		</a>
+#{/if}
+<!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->
+#{/if}	
+#{if session.contains("adminLogado")}
+<!-- ////////// MENU DO ADMIN /////////// -->
+	<li class="m-0 border rounded meusDados">
+			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" class="rounded-circle imagem-celular">
+				<span id="dadosAdmin" class="m-0">
+					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none">
+						<span title="nome do administrador" class="text-white mr-0 mt-0 text-md" id="nomeAdmin"></span>
+					</a>
+					<span class="desaparecer-celular">
+						<i title="meus dados" class="info icon text-white"></i>
+					</span>
+				</span>
+	</li>
+	<hr class="mt-0 mb-2-celular"/>
+#{if admBanco?.admPadrao}<!-- admin padrão -->
+	<a title="Adicionar Adminstrador" class="linkMenu" href="@{Administradores.cadastroDeAdms}">
+		<li class="m-0 itemMenu rounded">
+			<i class="plus icon"></i>Adicionar Administrador <i class="gem outline icon"></i>
+		</li>
+	</a>
+#{if listaAdmins != null}
+			<a title="filtrar Adminstradores" class="linkMenu" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" 
+			aria-controls="multiCollapseExample1">
+				<li class="m-0 itemMenu rounded">
+					<i class="search icon"></i>Filtrar Administradores <i class="gem outline icon"></i>
+				</li>
+			</a>
 #{/if}
 #{else}
+			<a title="listar Adminstradores" class="linkMenu" href="@{Administradores.listarTodosAdmins}">
+				<li class="m-0 itemMenu rounded">
+					<i class="users icon"></i>Listar Administradores <i class="gem outline icon"></i>
+				</li>
+			</a>		
+#{/else}
+			<a title="restaurar qtd disponível do usuário" class="linkMenu" href="#Resaturar" id="restaurar">
+				<li class="m-0 itemMenu rounded">
+					<i class="sync icon"></i>Restaurar Qtd Disponível <i class="gem outline icon"></i>
+				</li>
+			</a>
+#{/if}<!-- fim admin padrão -->
+#{if telaAdmin}
+			<a title="página do administrador" class="linkMenu" href="@{Administradores.paginaAdmin}">
+				<li class="m-0 itemMenu rounded">
+					<i class="address book icon"></i>Página do Adminstrador
+				</li>
+			</a>
+#{/if}
+#{if filtroPa && listaPedidosPa || listaPedidosPa != null}
+				<a title="filtrar Pedidos" class="linkMenu" data-toggle="collapse" 
+				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+					<li class="m-0 itemMenu rounded">
+						<i class="filter icon"></i>filtrar Pedidos
+						<span class="notificacao statusAguardando text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidosPa.size()}							
+						</span>
+					</li>
+				</a>
+#{/if}
+#{if !listaDeUsuario}
+				<a title="realizar pedido de cópia" class="linkMenu" href="@{Administradores.realizarPedidoCopia}">
+					<li class="m-0 itemMenu rounded">
+						<i class="copy icon"></i>Realizar Pedido de Cópia
+					</li>
+				</a>
+#{/if}
+#{if listaconcluidos != null && admBanco?.admPadrao}
+			<a title="Apagar Entregues" class="linkMenu" id="ApagarEntregues"">
+				<li class="m-0 itemMenu rounded">
+					<i class="trash icon"></i>Apagar Entregues
+				</li>
+			</a>
+#{/if}
+#{if listaconcluidos != null}
+			<a title="filtar pedidos concluidos" class="linkMenu" id="concluidos" data-toggle="collapse"
+			 href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+				<li class="m-0 itemMenu rounded">
+					<i class="filter icon"></i>filtrar Concluídos
+#{if listaconcluidos.size() != 0}
+	  		 		<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 9px;">
+						${listaconcluidos.size()}							
+					</span>
+#{/if}
+				</li>
+			</a>
+#{/if}
+#{else}
+			<a title="pedidos concluidos" class="linkMenu" href="@{Pedidos.listarConcluidos}">
+				<li class="m-0 itemMenu rounded">
+					<i class="check icon"></i>Listar Concluídos
+				</li>
+			</a>
+#{/else}
+#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
+			<a title="Apagar Recusados" class="linkMenu" id="ApagarRecusados">
+				<li class="m-0 itemMenu rounded">
+					<i class="trash icon"></i>Apagar Recusados
+				</li>
+			</a>
+#{/if}
+#{if listaRecusados != null}
+			<a title="filtar pedidos recusados" class="linkMenu" id="recusados" data-toggle="collapse" href="#multiCollapseExample1" 
+	  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+				<li class="m-0 itemMenu rounded">
+					<i class="filter icon"></i>Filtrar Recusados
+#{if listaRecusados.size() != 0}
+		  		<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 9px;">
+						${listaRecusados.size()}							
+				</span>
+#{/if}
+				</li>
+			</a>
+#{/if}
+#{else}
+			<a title="pedidos recusados" class="linkMenu" href="@{Pedidos.listarRecusados}">
+				<li class="m-0 itemMenu rounded">
+					<i class="times icon"></i>Listar Recusados
+				</li>
+			</a>
+#{/else}
+#{if !adm?.id}
+			<a title="editar meus dados" class="linkMenu" href="@{Administradores.Editar}">
+				<li class="m-0 itemMenu rounded">
+					<i class="edit icon"></i>Editar Meus Dados
+				</li>
+			</a>
+#{/if}
+			<a title="editar senha" class="linkMenu" href="@{Administradores.EditarSenha}">
+				<li class="m-0 itemMenu rounded">
+					<i class="key icon"></i>Editar Senha
+				</li>
+			</a>
+<!-- ////////// FIM MENU DO ADMIN /////////// -->
+#{/if}<!-- fim de admin logado -->		
+	</div>
+	<div class="h-25 hmx-25 m-0 p-0 text-white text-center">
+#{if session.contains("adminLogado")}
+			<a title="sair" href="@{Administradores.sair}" class="linkMenu text-danger butaoIconTexto">
+				<li class="m-0 itemMenuSair" style="list-style: none;">
+					<i class="sign out alternate icon"></i>Sair
+				</li>		
+			</a>
+#{/if}
+#{if session.contains("usuarioLogado")}
+			<a title="sair" href="@{Usuarios.sair}" class="linkMenu text-danger butaoIconTexto">
+				<li class="m-0 itemMenuSair" style="list-style: none;">
+					<i class="sign out alternate icon"></i>Sair
+				</li>		
+			</a>
+#{/if}
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+<!-- HORA -->
+	<li class="m-0" style="list-style: none;">
+		<div title="hora" id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
+	</li>
+<!-- FIM HORA -->
+#{/if}
+#{else}
+	<li class="m-0">
+		<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
+	</li>
+#{/else}
+				<h4 class="h3 font-size-celular">IFRN-JC:</h4>
+						<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
+							<img class="imagem-logo-celular" src="@{'/public/images/sigicop/if.png'}" width="40%" alt="IFRN_JC" title="IFRN-JC" />
+						</a>
+				</div>
+			</ul>
+	</div><!-- FIM MENU -->
+		<div id="fecharMenu" class="animated fadeInLeft lower" style="display: none;"><i class="chevron left icon"></i></div>
+#{/if}<!-- fim de user e admin logado -->
+#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}<!-- user e admin deslogado  -->
+	<div id="layoutDeslogado">
+		<nav class="navbar navbar-expand-md navbar-dark w-100 m-0 corMenu 
+m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular">
+
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
 	<div class="desaparecer-celular">
 	
@@ -142,7 +358,7 @@ style="position: fixed !important;">
 #{/else}
 	<a class="ui inverted basic" href="@{Gerenciador.principal}">
 		<img src="@{'/public/images/icones/casa.png'}" width="40" alt="home" height="40" style="float: left;" title="Home" class="" />
-#{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
+#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
 	<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
 #{/if}
 	</a>
@@ -153,249 +369,89 @@ style="position: fixed !important;">
 			<div class="text-center">
 				<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
 			</div>
-#{/if}
-		</div>
-		<ul class="navbar-nav m-0-celular">
-		
-#{if session.contains("adminLogado")}
-<!-- ///////////// MENU DO ADMINISTRADOR //////////// -->
-			<div class="sticky-top text-center">
 			
-#{if admBanco?.admPadrao}
-		<!-- VEREFICAR SE É O ADMIN PADRAO -->
-				<span> <a title="Adicionar Admin" href="@{Administradores.cadastroDeAdms}" class="addAdm" style="padding: 0px; float: left;">
-					<img class="itemMenu m-0" src="@{'/public/images/icones/adminAdd.png'}" alt="addAdmin" onMouseOver="this.src='@{'/public/images/icones/adminAddHover.png'}'"
-					onMouseOut="this.src='@{'/public/images/icones/adminAdd.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
-				</a>
-				</span>
-				
-#{if listaAdmins != null}
-		  		<span>
-		  			<a title="filtrar Admins" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminFiltro.png'}" alt="filtrar admin" onMouseOver="this.src='@{'/public/images/icones/adminFiltroHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/adminFiltro.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
-					</a>
-				</span>
+		<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
 #{/if}
-#{else}
-				<span>
-					<a title="listar Admins" href="@{Administradores.listarTodosAdmins}" class="addAdm" style="padding: 0px; float: left;">
-						<img class="itemMenu m-0"" src="@{'/public/images/icones/adminListar.png'}" alt="listrar admin"  onMouseOver="this.src='@{'/public/images/icones/adminListarHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/adminListar.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
-					</a>
-				</span>
-#{/else}
-				<span>
-					<a title="Restaurar qtd" href="#" class="addAdm" style="padding: 0px; float: left;" id="restaurar">
-						<img class="itemMenu m-0" src="@{'/public/images/icones/restaurar.png'}" alt="restaurar" onMouseOver="this.src='@{'/public/images/icones/restaurarHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/restaurar.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
-					</a>
-				</span>
-#{/if}
-
-#{if filtroPa && listaPedidosPa || listaPedidosPa != null}
-				<span class="p-0">
-				
-		  			<a title="filtrar Pedidos" style="padding: 0px; float: left;" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-					
-						<img class="itemMenu m-0" src="@{'/public/images/icones/filtro.png'}" alt="filtro" onMouseOver="this.src='@{'/public/images/icones/filtroHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/filtro.png'}'" height="45" style="float: left; margin-right: 0px;" alt="addAdmin" />
-					<span class="notificacao statusAguardando text-white m-0 font-size-celular ml-n3" style="font-size: 10px;">
-					${listaPedidosPa.size()}							
-					</span>
-					</a>
-				</span>
-#{/if}
-
-#{if !listaDeUsuario}
-				<span>
-		  			<a title="realizar cópia" href="@{Administradores.realizarPedidoCopia}" class="addAdm" style="padding: 0px; float: left;">
-						<img class="itemMenu m-0" src="@{'/public/images/icones/baixa.png'}" alt="realizar baixa" onMouseOver="this.src='@{'/public/images/icones/baixaHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/baixa.png'}'" height="45" style="float: left; margin-right: 5px;" alt="addAdmin" />
-					</a>
-				</span>
-#{/if}
-#{if listaconcluidos != null && admBanco?.admPadrao}
-				<span title="Apagar Entregues" id="ApagarEntregues" style="padding: 0px; float: left;">
-					<img class="itemMenu entregues m-0" src="@{'/public/images/icones/deletePed.png'}" alt="apagar entregues" onMouseOver="this.src='@{'/public/images/icones/deletePedEntregue.png'}'"
-					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Entregues" />
-				</span>
-#{/if}
-#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
-				<span title="Apagar Recusados" id="ApagarRecusados" style="padding: 0px; float: left;">
-					<img class="itemMenu recusados m-0" src="@{'/public/images/icones/deletePed.png'}" alt="apagar recusados" onMouseOver="this.src='@{'/public/images/icones/deletePedRecusado.png'}'"
-					onMouseOut="this.src='@{'/public/images/icones/deletePed.png'}'" height="45" style="float: left; margin-right: 5px;" alt="Apagar Recusados" />
-				</span>
-#{/if}
-			</div>
-			
-#{if telaAdmin}
-			<a title="página do administrador" href="@{Administradores.paginaAdmin}" 
-			class="itemMenu m-0 font-size-celular">Página Admin</a>
-#{/if}
-
-#{if listaconcluidos != null}
-	  		<a title="filtar pedidos concluidos" class="itemMenu font-size-celular" id="concluidos" style="margin: 1px; margin-right: 5px;"
-	  		 data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-	  		 filtrar<i class="filter icon m-0"></i>
-#{if listaconcluidos.size() != 0}
-	  		 <span class="notificacao statusConcluido text-white m-0 font-size-celular ml-n2" style="font-size: 9px;">
-					${listaconcluidos.size()}							
-			</span>
-#{/if}
-	  		</a>
-#{/if}
-#{else}
-			<a title="pedidos concluidos" href="@{Pedidos.listarConcluidos}" 
-			class="itemMenu m-0 font-size-celular" id="concluidos">Concluidos</a>
-#{/else}
-
-#{if listaRecusados != null}
-	  		<a title="filtar pedidos recusados" class="itemMenu font-size-celular" 
-	  		id="recusados" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" 
-	  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">filtrar<i class="filter icon m-0"></i>
-#{if listaRecusados.size() != 0}
-	  		<span class="notificacao statusRecusado text-white m-0 font-size-celular ml-n2" style="font-size: 9px;">
-					${listaRecusados.size()}							
-			</span>
-#{/if}
-	  		</a>
-#{/if}
-#{else}
-			<a title="pedidos recusados" href="@{Pedidos.listarRecusados}" class="itemMenu m-0 font-size-celular" id="recusados">Recusados</a>
-#{/else}
-
-#{if session.contains("adminLogado")}
-			<div class="border rounded p-0 m-0" style="height: 42px;">
-				<span id="dadosAdmin"> 
-					<a href="#Meus_Dados" style="padding: 0px;"> <!--  class="rounded-pill"-->
-						<img title="Meus Dados" src="@{'/public/images/icones/admin.png'}" alt="admin" onMouseOver="this.src='@{'/public/images/icones/adminHover.png'}'" 
-						onMouseOut="this.src='@{'/public/images/icones/admin.png'}'" height="40" style="float: left; margin-right: 0px;" alt="addAdmin" />
-					</a>
-					<span title="nome do administrador" class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; max-width: 60%;" id="nomeAdmin"></span>
-				</span>
-				<span class="float-right">
-					<a title="sair" href="@{Administradores.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto ml-1">Sair <i class="sign out alternate icon m-0"></i></a>
-				</span>
-			</div>
-#{/if}
-<!-- ////////// FIM DO MENU DO ADMINISTRADOR //////////// -->
-#{/if}
-
-#{if session.contains("usuarioLogado")}
-<!-- ////////// MENU DO USUÁRIO //////////// -->
-<div class="sticky-top mt-1 p-0" style="margin-bottom: -3px;">  
-	
-#{if listaPedidosConcluidos}
-	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-concluido" class="m-0 p-0"> 
-	<input type="hidden" name="statusFiltro" value="${listaPedidosConcluidos.last().status.name()}">
-		<div class="itemMenu m-1 mb-0 concluidos" title="concluidos" style="font-size: 10px; float: left;" id="imagem-concluido">
-			<img title="concluidos" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="concluidos" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
-								onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
-				<span class="notificacao statusConcluido text-white m-0 font-size-celular ml-n2">
-					${listaPedidosConcluidos.size()}	
-				</span>	
-		</div>				
-	</form>
-#{/if}
-
-#{if listaPedidosRecusados}
-	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-recusado" class="m-0 p-0"> 
-	<input type="hidden" name="statusFiltro" value="${listaPedidosRecusados.last().status.name()}">
-		<div class="itemMenu m-1 mb-0 recusados" title="recusados" style="font-size: 10px; float: left;" id="imagem-recusado">
-		<img title="recusados" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="recusados" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
-							onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
-			<span class="notificacao statusRecusado text-white m-0 font-size-celular ml-n2">
-				${listaPedidosRecusados.size()}
-			</span>	
 		</div>
-	</form>
-#{/if}
-
-#{if listaPedidosEntregues}
-	<form action="@{Usuarios.filtro}" method="post" style="display: inline;" id="form-entregue" class="m-0 p-0"> 
-	<input type="hidden" name="statusFiltro" value="${listaPedidosEntregues.last().status.name()}">
-		<div class="itemMenu m-1 mb-0 entregues" title="entregues" style="font-size: 10px; float: left;" id="imagem-entregue">
-		<img title="entregues" class="float-left" src="@{'/public/images/icones/pedUsu.png'}" alt="entregues" onMouseOver="this.src='@{'/public/images/icones/pedUsuHover.png'}'"
-							onMouseOut="this.src='@{'/public/images/icones/pedUsu.png'}'" height="25" style="margin-right: 0px; padding: 0px;" alt="pedConcluido" />
-			<span class="notificacao statusEntregue text-white m-0 font-size-celular ml-n2">
-				${listaPedidosEntregues.size()}
-			</span>
-		</div>
-	</form>
-#{/if}
-</div>
-
-#{if solicitar}
-	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular">Solicitar</a>
-	  		<a title="filtrar pedidos" class="itemMenu font-size-celular" style="margin: 1px; margin-right: 5px;" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
-	  		aria-expanded="false" aria-controls="multiCollapseExample1">filtrar <i class="filter icon"></i></a>
-#{/if}
-
-#{if voltar}
-	 		<a title="página do usuário" href="@{Usuarios.paginaUsuario}" style="margin: 1px; margin-right: 5px;" class="itemMenu font-size-celular mr-2">Página Usuário</a>
-#{/if}
-			<span class="border rounded p-0" style="height: 42px;">
-				<span id="dadosUser" class="m-0">
-					<a href="#Meus_Dados"  style="padding: 0px;">
-							<img title="Meus Dados" src="@{'/public/images/icones/user.png'}" alt="user" onMouseOver="this.src='@{'/public/images/icones/userHover.png'}'"
-						onMouseOut="this.src='@{'/public/images/icones/user.png'}'" height="40" style="float: left; margin-right: 0px;" alt="user" />
-					</a>
-#{if usuarioBanco?.qtdDisponivel > 14}
-						<span class="notificacao bg-success text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>						
-#{/if}	
-#{if usuarioBanco?.qtdDisponivel > 8 & usuarioBanco?.qtdDisponivel < 15}	
-							<span class="notificacao bg-warning text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>			
-#{/if}
-#{if usuarioBanco?.qtdDisponivel < 9}
-							<span class="notificacao bg-danger text-white m-0 font-size-celular" style="position: relative; left: -18px">${usuarioBanco?.qtdDisponivel}</span>
-#{/if}							
-				<!-- <img src="" height="40" style="float: left; margin-right: 5px;" alt="userLogado" class="mt-1"/> -->	
-					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md font-size-celular" style="position: relative; top: 8px; left: -18px; max-width: 60%;" id="nomeUsuario"></span>
-				</span>
-				<span class="float-right">
-					<a title="sair" href="@{Usuarios.sair}" style="margin: 1px;" class="btn btn-danger butaoIconTexto">Sair <i class="sign out alternate icon m-0"></i></a>
-				</span>
-			</span>
-<!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->			
-#{/if}
-		</ul>
-		
-	</div>
-#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div title="hora" id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
-#{/if}
-#{else}
-	<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
-#{/else}
-#{/else} 		
+	</div>		
 </nav>
-<!-- //////////// FIM DE MENU FIXO ////////////////  -->
-<div class="text-center">
+		<div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
 #{if flash.error}
-	<div class="uk-alert-danger p-2 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
-   		<!-- <a class="uk-alert-close" uk-close></a> -->
-   		<div class="font-size-celular">${flash.error}</div>
-	</div>
+			<div class="uk-alert-danger p-2 m-0 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta" style="width: 100%; margin-top: 5% !important;">
+		   		<div class="font-size-celular m-0">${flash.error}</div>
+			</div>
 #{/if} 
 #{if flash.success}
-	<div class="uk-alert-success p-2 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
-   		<div class="font-size-celular">${flash.success}</div>
-	</div>
+			<div class="uk-alert-success p-2 m-0 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta" style="width: 100%; margin-top: 5% !important;">
+		   		<div class="font-size-celular m-0">${flash.success}</div>
+			</div>
 #{/if}
-</div>
+		</div>
+#{/if}
+#{else}
+	<div id="layoutConteudo" class="w-75">
+			<div class="text-center">
+<!-- FLASH DE ERRO E SUCESSO -->
+#{if flash.error}
+			<div class="uk-alert-danger p-2 m-0 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
+		   		<div class="font-size-celular m-0">${flash.error}</div>
+			</div>
+#{/if} 
+#{if flash.success}
+			<div class="uk-alert-success p-2 m-0 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
+		   		<div class="font-size-celular m-0">${flash.success}</div>
+			</div>
+#{/if}
+		</div>
+#{/else}
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+		<div id="abrirMenu"><i class="chevron right icon"></i></div>
+#{/if}
+		<div class="p-5 p-1-celular conteudoPagina">
+			<div class="text-center">
+				<h1 class="text-secondary tituloCelular">${titulo}</h1>
+			</div>
+				#{doLayout /} 
 
-<!-- CONTEÚDO DA PÁGINA -->
-<!--/////////////////////////////////////////////////////////////////////////////////////-->
-<div id="container" class="p-0-celular mt-0-celular">
-					#{doLayout /}
-	<a title="volta ao topo" href="#top" class="sticky-top animated slideInUp faster">
-		<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
-	</a>
+		</div>
+		<!-- RODAPÉ DA PAGINA -->
+		<div class="position-bottom w-100 m-0-celular text-break m-0" id="rodapeCelular" class="rodapeEmBaixo" style="border-left: 1px solid #2e3136; ">
+		 	<div class="ui inverted vertical footer segment pt-4 pb-4 m-0" class="dark">
+				<div class="ui container pt-0 m-0">
+					<div class="ui stackable inverted divided equal height stackable grid m-0">
+						<!-- <div class="three wide column p-0 mr-n4">
+							<h4 class="ui inverted header">IFRN-JC:</h4>
+							<div class="ui inverted link list">
+								<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
+										<img src="@{'/public/images/sigicop/if.png'}" alt="IFRN_JC" onMouseOver="this.src='@{'/public/images/sigicop/if.png'}'"  
+										onMouseOut="this.src='@{'/public/images/sigicop/if.png'}'" width="70%"  style="float: left; margin-right: 5px;" title="IFRN-JC" />
+								</a>
+							</div>
+						</div> -->
+						<div class="six wide column">
+							<h4 class="ui inverted header">Contatos:</h4>
+							<div class="ui inverted link list">
+								Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
+									<br>
+								Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
+							</div>
+						</div>
+						<div class="five wide column">
+							<h4 class="ui inverted header">E-mails:</h4>
+							IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
+								Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
+								Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!--/////////////////////////////////////////////////////////////////////////////////////-->
-
+		<a title="volta ao topo" href="#topPrincipal" class="animated fadeInUpBig faster" style="z-index: 1000;">
+				<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
+		</a>
 #{if session.contains("adminLogado")}
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
@@ -414,42 +470,7 @@ style="position: fixed !important;">
 </form>
 #{/if}
 #{/if}
-<!-- RODAPÉ DA PAGINA -->
-<div class="position-bottom w-100 m-0-celular text-break" id="rodapeCelular" class="rodapeEmBaixo">
- 	<div class="ui inverted vertical footer segment" class="dark">
-		<div class="ui container">
-			<div class="ui stackable inverted divided equal height stackable grid">
-				<div class="three wide column">
-					<h4 class="ui inverted header">Sobre:</h4>
-					<div class="ui inverted link list">
-						<a href="https://github.com/MagdielPS/SIGICOP" target="_blank" class="text-decoration-none">
-								<img src="@{'/public/images/icones/gitHub.png'}" alt="GitHub" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
-								onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
-								<div class="text-white h4">SIGICOP</div>
-						</a>
-					</div>
-				</div>
-				<div class="three wide column">
-					<h4 class="ui inverted header">Contatos:</h4>
-					<div class="ui inverted link list">
-						Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
-							<br>
-						Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
-					</div>
-				</div>
-				<div class="three wide column">
-					<h4 class="ui inverted header">E-mails:</h4>
-					IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
-						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
-						Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="text-white-50 text-center h-75 d-inline-block w-100" style="background-color: black;">
-	®2020
-	</div>
-</div>
+
 <!-- JS DA PAGINA -->
 <script type="text/javascript">
 function horaEnome(){
@@ -476,7 +497,7 @@ function horaEnome(){
 	var nomeAdminCompleto = '${session['adminLogado']}';
 	
 	if(${session.contains("usuarioLogado")}){
-		 if(width < 400){
+		 
 			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
 			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
 			 if(sobreNome == null || sobreNome == ""){
@@ -486,48 +507,28 @@ function horaEnome(){
 			 var primeiraLetra = sobreNome.substr(0, 1)
 		
 			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";				 
-			 }			 
-		}else{
-			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
-			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
-		
-			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeUsuario').innerHTML = '${session['usuarioLogado']}';
-		 }
+			 document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome
+			 /* console.log(nome+" "+sobreNome);
+			 document.getElementById('nomeUsuario').innerHTML = nome+" "+primeiraLetra+".";	 */			 
+			 }			  
 	}
 	if(${session.contains("adminLogado")}){
-		 if(width < 400){
+		
 			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espa�os
 			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espa�os
-			 if(sobreNome == null || sobreNome == ""){
-				 console.log(nome+" ");
-				 document.getElementById('nomeAdmin').innerHTML = nome;
-			 }else{
+		if(sobreNome == null || sobreNome == ""){
+			console.log(nome+" ");
+			 document.getElementById('nomeAdmin').innerHTML = nome;
+		
+		}else{
 			 var primeiraLetra = sobreNome.substr(0, 1)
 		
 			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeAdmin').innerHTML = nome+" "+primeiraLetra+".";				 
-			 }
-		 }else{
-			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espa�os
-			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espa�os
-		
-			 console.log(nome+" "+sobreNome);
-			 document.getElementById('nomeAdmin').innerHTML = '${session['adminLogado']}';
-		 }
+			 document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;				 
+		}
 	}
 }
-
-/* $('#container').click(function(){
-	var menuAberto = document.getElementById('menuAberto');
-	menuAberto.innerHTML = '<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"'+
-		'aria-controls="navbarsExample08" aria-expanded="true" aria-label="Toggle navigation" id="collapsed">'+
-	'<img src="../public/images/icones/menuIcone.png" width="30" height="30">'+
-	'</button>';
-}); */
 </script>
-
 <!-- MESSAGEM DE ALERTA -->
 <script type="text/javascript">
 $().ready(function() {
@@ -545,13 +546,32 @@ $().ready(function() {
 		setTimeout(function () {
 			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
 		}, 2000); // O valor e representado em milisegundos.
+		
+	var width = window.innerWidth;
+	if(width < 500){
+		$('.linkMenu').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+		$('.meusDados').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+		$('.conteudoPagina').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+	}
+	$('#abrirMenu').click(function(){
+	  	$('#layoutMenu').show();
+	  	$('#fecharMenu').show();
+	});
+	 $('#fecharMenu').click(function(){
+	  	$('#layoutMenu').hide();
+	  	$('#fecharMenu').hide();
+	  	$('#abrirMenu').fadeIn();
+	});
 });
-
-/* $('#container').click(function(){
-  	var menuAberto = $('#collapsed');
-  	console.log(menuAberto);
-  	menuAberto.dataset.toggle = collapsed;
-}); */
 </script>
 <!-- MASCARA DE CAMPOS -->
 <script type="text/javascript">
@@ -658,7 +678,7 @@ $(document).ready(function() {
 			  '<div class="text-left font-size-celular"><img src="/public/images/icones/admNome.png" width="" title="Nome"> - ${admBanco?.nomeAdm} <br>'+
 			  '<img src="/public/images/icones/usuEmail.png" width="" title="Email"> - ${admBanco?.email}'+
 			  ' <br> #{if admBanco?.ultimoAcesso} <img src="/public/images/icones/usuUlt.png" width="" title="Ultimo Acesso"> - ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
-			  '<a href="@{Administradores.editar}" class="btn btn-block btn-primary mt-2">Editar</a>',
+			  '<a href="@{Administradores.editar}" class="btn btn-block btn-outline-primary mt-2">Editar</a>',
 			  showCloseButton: true,
 			  showConfirmButton: false,
 			  showClass: {
@@ -693,6 +713,20 @@ $(document).ready(function() {
 				    popup: 'animated fadeOutUp faster'
 			}
 		}).then((result) => {
+			if(result.value == ""){
+				Swal.fire({
+					  icon: 'error',
+					  title: 'ERROR...',
+					  text: 'preencha a quantidade!',
+					  showCloseButton: true,
+					  showClass: {
+						    popup: 'animated pulse faster'
+						  },
+					  hideClass: {
+						  popup: 'animated fadeOutUp faster'
+					  }
+					})
+				}
 			if (result.value) {	
 				$('#restQtd').val(result.value);
 				$('#formRestaurar').submit(); 
@@ -1036,19 +1070,20 @@ function validarConfirmarSenha(){			/* campo senha */
 } 
 </script>
 #{/if}
-#{if session.contains("usuarioLogado")}
-<!-- FILTRAR PEDIDOS CORRESPONDENTE AO STATUS AO CLICAR NO ICONE -->
 <script type="text/javascript">
-	$('#imagem-concluido').click(function() {
-		$('#form-concluido').submit();
-	});
-	$('#imagem-recusado').click(function() {
-		$('#form-recusado').submit();
-	});
-	$('#imagem-entregue').click(function() {
-		$('#form-entregue').submit();
-	});
+$(document).ready(function(){
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 400) {
+            $('a[href="#topPrincipal"]').fadeIn();
+        } else {
+            $('a[href="#topPrincipal"]').fadeOut();
+        }
+    });
+    $('a[href="#topPrincipal"]').click(function(){
+        $('html, body').animate({scrollTop : 0},700);
+        return false;
+    });
+});
 </script>
-#{/if}
 </body>
 </html>

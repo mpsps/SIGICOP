@@ -46,16 +46,11 @@ public class Usuarios extends Controller {
 		
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
 		listaPedidos = Pedido.find("usuario_id = ?1 ", usuarioBanco.id).fetch();	
-		List<Pedido> listaPedidosConcluidos = new ArrayList<Pedido>();
-		listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-		List<Pedido> listaPedidosRecusados = new ArrayList<Pedido>();
-		listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
-		List<Pedido> listaPedidosEntregues = new ArrayList<Pedido>();
-		listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
-	render(usuarioBanco, listaPedidos, solicitar, temFiltro, listaPedidosConcluidos, listaPedidosRecusados, listaPedidosEntregues);
+		String titulo = "Página do Usuário";
+	render(usuarioBanco, listaPedidos, solicitar, temFiltro, titulo);
 	}
 		
 ///// FILTRO DE PEDIDOS NA PAGINA DO USUARIO /////
@@ -86,26 +81,13 @@ public class Usuarios extends Controller {
 		}
 		
 		if(statusFiltro.equals("ENTREGUE")) {
-			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
 			status = StatusPedido.ENTREGUE;
 		}else if(statusFiltro.equals("CONCLUIDO")) {
-			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
-			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 			status = StatusPedido.CONCLUIDO;
 		}else if(statusFiltro.equals("RECUSADO")) {
-			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 			status = StatusPedido.RECUSADO;
 		}else if(statusFiltro.equals("AGUARDANDO")){
-			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
-			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 			status = StatusPedido.AGUARDANDO;
-		}else {
-			listaPedidosRecusados = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.RECUSADO).fetch();
-			listaPedidosConcluidos = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.CONCLUIDO).fetch();
-			listaPedidosEntregues = Pedido.find("usuario_id = ?1 AND status = ?2", usuarioBanco.id, StatusPedido.ENTREGUE).fetch();
 		}
 		
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
@@ -148,7 +130,8 @@ public class Usuarios extends Controller {
 		}
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
-	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos, solicitar, NomeDoArquivoFiltro, descricaoFiltro, temFiltro, statusFiltro, listaPedidosConcluidos, listaPedidosEntregues, listaPedidosRecusados);
+		String titulo = "Página do Usuário";
+	renderTemplate("Usuarios/paginaUsuario.html", usuarioBanco, listaPedidos, solicitar, NomeDoArquivoFiltro, descricaoFiltro, temFiltro, statusFiltro, listaPedidosConcluidos, listaPedidosEntregues, listaPedidosRecusados, titulo);
 	}
 	
 ///// TELA DE CADASTRO DE USUARIO /////
@@ -176,7 +159,8 @@ public class Usuarios extends Controller {
 		}
 		session.clear();
 		Cache.clear();
-	render();
+		String titulo = "Página do Usuário";
+	render(titulo);
 	}
 	
 ///// SALVAR O USUARIO /////

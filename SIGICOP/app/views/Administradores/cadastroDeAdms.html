@@ -1,12 +1,6 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Cadastro de Administrador(res)' /}
-<div id="corpoCelular" class="heightMin m-0-celular p-2-celular animated slideInDown faster" id="tamanho-corpo-celular">
-#{if !adm?.id}
-	<div class="h1 text-dark text-center tituloCelular mt-2-celular pt-5-celular mb-n2-celular">Cadastro de Adminstradores</div><br>
-#{/if}
-#{else}
-	<div class="h1 text-dark text-center tituloCelular mt-2-celular pt-5-celular">Editar Meus Dados</div>
-#{/else}
+<div class="heightMin m-0-celular p-2-celular animated slideInDown faster" id="tamanho-corpo-celular">
 	<div class="text-center m-0">
 #{ifErrors}
 		<div class="h2 m-0 ops" style="color: red;">Ops...</div>
@@ -18,7 +12,7 @@
 	<div class="ui middle aligned center aligned grid mt-0 m-0-celular p-0-celular">
 		<div class="column mt-0 m-0-celular p-0-celular">
 <!-- FORMULARIO DE CADASTRO E EDIÇÃO DO ADMIN -->
-			<form action="@{Administradores.salvarAdm} " class="ui segment m-0-celular p-0-celular mt-n2 shadow animated slideInDown lower" method="post">
+			<form action="@{Administradores.salvarAdm} " class="ui brancoGelo m-0-celular p-0-celular mt-n2 shadow-sm animated slideInDown lower" method="post">
 				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
 #{if !adm?.id && admBanco?.admPadrao == true}
@@ -68,11 +62,11 @@
 					class="form-control hei-input-celular font-size-celular" id="campoConfirmar" onkeyup="javascript:validarConfirmarSenha()">
 					
 					<!-- BOTÃO DE CADASTRAR -->
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
+					<input type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
 #{/if}
 #{else}				<!-- BOTÃO DE EDITAR -->
-					<a href="@{Administradores.editarSenha}" class="btn btn-dark mt-2 font-size-celular m-0-celular mt-1-celular">Alterar Senha</a>
-					<input type="submit" class="btn btn-lg btn-primary btn-block mt-3 font-size-celular mt-1-celular" value="Editar" />					
+					<a href="@{Administradores.editarSenha}" class="btn btn-outline-dark mt-2 font-size-celular m-0-celular mt-1-celular">Alterar Senha</a>
+					<input type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular mt-1-celular" value="Editar" />					
 #{/else}
 				</div>
 			</form>

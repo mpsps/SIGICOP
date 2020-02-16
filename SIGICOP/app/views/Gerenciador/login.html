@@ -1,12 +1,13 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Login' /}
-<div id="corpoCelular" class="heightMin text-center animated slideInDown faster" style="max-width: 100%;">
-	<div class="ui teal image header ml-0 mr-0 mb-2 mt-1 m-0-celular p-0-celular pl-0-celular pr-0-celular m-n1-celular">
+<div class="heightMin text-center">
+<!-- 	<div class="ui teal image header ml-0 mr-0 mb-2 mt-1 m-0-celular p-0-celular pl-0-celular pr-0-celular m-n1-celular">
 		<img src="@{'/public/images/icones/usuario.png'}" class="image m-0 ml-1-celular p-0 imagem-celular" title="Usuário" width="150%">
-		<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular" >Insirar seu login e senha</div>
-	</div>
+		<div class="content text-secondary m-0 mb-3 mt-3 p-0 font-size-celular">${titulo}</div>
+	</div> -->
 	<div class="ui middle aligned center aligned grid p-0 m-0 mt-1 p-2-celular p-0-celular m-0-celular">
-		<div class="column p-0 ui stacked segment p-3 pt-1 pl-4 pr-4 p-1-celular pl-2-celular pr-2-celular shadow">
+		<div class="column p-0 ui stacked segment p-3 mt-4 pt-1 pl-4 pr-4 p-1-celular 
+		pl-2-celular pr-2-celular shadow-sm animated slideInDown faster">
 			<!-- FORMULARIO DE AUTENTIFICAÇAO -->
 			<form class="ui large form p-1-celular" action="@{Gerenciador.autenticar}" method="post">
 				<label for="login" class="mt-0 mt-1-celular">Login:</label>

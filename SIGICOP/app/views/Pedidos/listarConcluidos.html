@@ -1,12 +1,11 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Pedidos Concluidos' /}
-<div id="corpoCelular" class="heightMin">	
-	<div class="h1 text-success text-center tituloCelular">Lista de Pedidos Concluidos</div><br>
+<div class="heightMin">	
 #{if listaconcluidos != null}
 	    	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
 #{if listaconcluidos.size() > -1}
 <!-- Filtro por nome do usuario e nome do arquivo -->
-					<form action="@{Pedidos.listarConcluidos}" method="post" class="font-size-celular shadow-lg rounded corFiltro m-0-celular pt-1-celular">
+					<form action="@{Pedidos.listarConcluidos}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
 						<fieldset class="mb-0-celular">
 					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
 							<div class="form-row m-0">
@@ -34,17 +33,13 @@
  		<div class="row">
 #{list items:listaconcluidos, as:'pc'}
 <!-- listar todos os pedidos concluidos (se houver) -->
-	   		<div class="col-lg-6">
-				<div class="card text-white bg-dark mb-3 shadow-lg" style="max-width: 100%;">
+	   		<div class="col-lg-4">
+				<div class="card mb-3 shadow-sm" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
-						<h6 class="text-primary m-0">Usuario:</h6>
-				${pc.usuario.nomeUsu}<br />
-						<span class="desaparecer-celular">
-							<h6 class="text-primary m-0">Matricula:</h6>
+						<h6 class="text-primary m-0">Matricula:</h6>
 				${pc.usuario.matricula}
-						</span>
 					</div>
-					<div class="card-body pt-0 pb-1">
+					<div class="card-body brancoGelo pt-0 pb-1">
 						<div class="card-text">
 							<b>Arquivo: </b> ${pc.nomeArquivo}
 						</div>
@@ -58,7 +53,7 @@
 				  			</button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${pc.id}">
-					  		<div class="card bg-dark">
+					  		<div class="card">
 								<div class="card-text">
 									<b>Cópias: </b> ${pc.qtdCopias}
 								</div>
@@ -80,14 +75,14 @@
 						<div class="card-text text-center">
 							<div class="">
 								<a class="recusar font-size-celular" data-item="${pc.id}" href="#Recusar" style="font-size: medium; text-decoration: none; color: white;">
-									<span class="btn btn-danger mt-1 mb-1 butaoIconTexto font-size-celular" ><span class="desaparecer-celular">Recusar</span>
+									<span class="btn btn-outline-danger mt-1 mb-1 butaoIconTexto font-size-celular" ><span class="desaparecer-celular">Recusar</span>
 									<i style="float: right; margin: 1px;" class="x icon"></i></span>
 								</a>
-								<a class="btn btn-secondary m-1 butaoIconTexto entregar font-size-celular" data-item="${pc.id}" id="${pc.id}" href="#Entregar" >
+								<a class="btn btn-outline-secondary m-1 butaoIconTexto entregar font-size-celular" data-item="${pc.id}" id="${pc.id}" href="#Entregar" >
 									<span class="desaparecer-celular">Entregar</span>
 									<i style="float: right; margin: 1px;" class="file alternate outline icon"></i>
 								</a>
-								<a href="@{Pedidos.downloadAdmin(pc.id)}" class="btn-sm-computador btn-block-computador btn btn-primary m-1 butaoIconTexto font-size-celular">
+								<a href="@{Pedidos.downloadAdmin(pc.id)}" class="btn-sm-computador btn-block-computador btn btn-outline-primary m-1 butaoIconTexto font-size-celular">
 									<span class="desaparecer-celular">Download</span>
 									<i style="margin: 1px;" class="download icon"></i>
 								</a>
@@ -102,7 +97,16 @@
 #{/if}
 #{if listaconcluidos.size() == 0}
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
-	<div class="h1 text-primary text-center tituloCelular shadow p-2">Nenhum Pedido Foi Encontrado</div><br>
+	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
+			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
+		<span class="desaparecer-celular">
+			<div class="h1">Nenhum pedido foi encontrado</div>
+		</span>
+			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
+		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
+			</a>
+	</div>
 #{/if} 
 </div>
 <form id="recusa" action="@{Pedidos.concluidoParaRecusar}">

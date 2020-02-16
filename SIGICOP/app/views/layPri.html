@@ -115,9 +115,7 @@
 <!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/computador.css'}">  
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/celular.css'}">     
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/tablet.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"> 
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
     </head>
 <body onload="bemVindo()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">   
@@ -200,16 +198,12 @@
 			<div class="ui container">
 				<div class="ui stackable inverted divided equal height stackable grid">
 					<div class="three wide column">
-						<h4 class="ui inverted header">Sobre:</h4>
+					<h4 class="ui inverted header">IFRN-JC:</h4>
 						<div class="ui inverted link list">
-							<span class="sticky-top">
-								<a href="https://github.com/MagdielPS/SIGICOP" target="_blank">
-									<img src="@{'/public/images/icones/gitHub.png'}" alt="GitHub" onMouseOver="this.src='@{'/public/images/icones/gitHover.png'}'"  
-									onMouseOut="this.src='@{'/public/images/icones/gitHub.png'}'" height="30" width="30" 
-									style="float: left; margin-right: 5px;" alt="GitHub" title="GitHub" />
-								</a>
-								<span class="text-white h4">SIGICOP</span>
-							</span>
+							<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
+									<img src="@{'/public/images/sigicop/if.png'}" alt="IFRN_JC" onMouseOver="this.src='@{'/public/images/sigicop/if.png'}'"  
+									onMouseOut="this.src='@{'/public/images/sigicop/if.png'}'" width="70%" style="float: left; margin-right: 5px;" title="IFRN-JC" />
+							</a>
 						</div>
 					</div>
 					<div class="three wide column">

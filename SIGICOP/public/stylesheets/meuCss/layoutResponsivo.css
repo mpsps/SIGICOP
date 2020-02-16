@@ -1,3 +1,199 @@
+.borderColorCorpo{
+	border: 0.5px solid #fafaff;
+}
+.hmx-75 {
+	max-height: 75% !important;
+}
+.hmx-25 {
+	max-height: 25% !important;
+}
+.brancoGelo {
+	background: #f9f9f9!important;
+}
+.corMenu{
+	background: #1b1c1d !important;
+}
+.butaoIconTexto:hover  {
+	color: #d3d3d3;
+}
+#hora{
+	color: white;
+	font-family: sans-serif;
+	font-weight: bolder;
+	text-align:  right;
+	position: relative;
+	right: 2px;
+}
+.statusAguardando{
+    color: white;
+    font-weight: bold;
+	background: #529fed;	
+}
+.statusConcluido{
+	color: white;
+	font-weight: bold;
+	background: #5eed4e;
+}
+.statusRecusado{
+    color: white;
+	font-weight: bold;
+	background:#ff3535;
+}
+.statusEntregue{
+	color: white;
+	font-weight: bold;
+	background: #aeb7d2;
+}
+/*body>.grid {
+	height: 100%;
+}
+*/
+/**************************/
+/***tela de computador*****/
+/**************************/
+
+@media (min-width: 750px) {
+	#layoutGeral {
+		max-width: 100% !important;
+		min-height: 60% !important;
+		margin: 0px !important;
+		padding: 0px !important;
+		min-height: 580px !important;
+	}
+	#layoutMenu {
+		width: 20% !important;
+		height: 100% !important;
+		min-height: 80% !important;
+		max-width: 21% !important;
+		min-width: 19% !important;
+		margin: 0px !important;
+		padding: 1px !important;
+		background: #1b1c1d !important;
+		position: fixed !important;
+		z-index: 9999;
+	}
+	#abrirMenu {
+		display: none;
+	}
+	#fecharrMenu {
+		display: none;
+	}
+	#layoutConteudo {
+		width: 80% !important;
+		max-width: 81% !important;
+		min-width: 79% !important;
+		margin: 0px !important;
+		padding: 0px !important;
+		margin-left: 20% !important;
+	}
+	#layoutDeslogado {
+		width: 100% !important;
+		margin: 0px !important;
+	}
+	#messagemAlerta{
+		display: block;
+		position: fixed;
+		top: 0px;
+		width: 80%;
+		z-index: 9999;
+		margin: 0px !important;
+		box-shadow: 1px 1px 5px black;
+ 	} 
+	.image {
+		margin-top: -100px;
+	}
+	.column {
+		max-width: 450px;
+	}
+	#container {
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 20px;
+		height: 100%;
+		padding: 10% 20% 10% 20%;
+	}
+	.column {
+		max-width: 450px;
+		float: none;
+	}
+	.heightMin{
+		min-height: 460px;
+	}
+	.itemMenu{
+		padding-top: 2px;
+		border-bottom:  3px solid #2e3136;
+		margin-bottom: 3px !important;
+	}
+	.itemMenu:hover{
+		color: #bfcce3;
+		border-bottom:  3px solid #595f68;
+		margin-bottom: 3px !important;
+		background-color: #32383e !important;
+	}
+	.linkMenu {
+		color: #e6e6e6;
+	}
+	.linkMenu:hover {
+		text-decoration: none;
+		color: #e6e6e6;
+	}
+	.itemMenuSair {
+		padding-top: 2px;
+		border-bottom:  1px solid #2e3136;
+		margin-bottom: 1px !important;
+	}
+	.itemMenuSair:hover {
+		border-bottom:  1px solid #2e3136;
+		margin-bottom: 1px !important;
+		background-color: #382e32!important;
+	}
+	.corFiltro{
+		background: #f2f8ff;
+		padding: 5%;
+		margin-left: 10%;
+		margin-right: 10%;" 
+	}
+	.botaoArquivo{
+		margin-left: 20%;
+		margin-right: 20%;
+		text-align: center;
+	}
+	.btn-sm-computador {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.875rem;
+		line-height: 1.5;
+		border-radius: 0.2rem;
+	}
+	.btn-block-computador {
+		display: block;
+		width: 100%;
+	}
+	.validacaoMsgm{
+		font-family: Times New Romans;
+		font-size: 85%;
+		letter-spacing: 0.5px;
+	}
+	.container-computador{
+		margin-left: 5% !important;
+		margin-right: 5% !important;
+		margin-top: 0 !important;
+	}
+	.botao-computador{
+		margin-top: 50px !important;
+		padding: 20px !important;
+	}
+	.entrarAgora{
+		width: 20% !important;
+		height: 5% !important;
+	}
+	img[id="topo"]{
+		height: 50px;
+		width: 50px;
+	}
+}
 
 /**************************/
 /****tela de celular*******/
@@ -25,6 +221,76 @@
 		max-width: 260px !important;
 		min-width: 260px !important;
 		margin: 0 !important;
+	}
+	#layoutGeral {
+		max-width: 100% !important;
+		min-height: 60% !important;
+		margin: 0px !important;
+		padding: 0px !important;
+		min-height: 580px !important;
+	}
+	#layoutMenu {
+		width: 60% !important;
+		height: 100% !important;
+		min-height: 100% !important;
+		max-width: 61% !important;
+		min-width: 59% !important;
+		margin: 0px !important;
+		padding: 1px !important;
+		background: #1b1c1d !important;
+		position: fixed !important;
+		z-index: 9999;
+		font-size: 10px !important;
+		display: none;
+	}
+	#abrirMenu {
+		display: inline;
+		position: fixed;
+		height: 100%;
+		z-index: 9900;
+		width: 15px;
+		min-height: 100%;
+		margin: 0px;
+		padding-top: 70%;
+		padding-bottom: 50%;
+		border: 1px solid rgba(55, 55, 55, 0.1);
+		background: rgba(55, 55, 55, 0.1);
+	}
+	#abrirMenu:hover {
+		display: inline;
+		position: fixed;
+		height: 100%;
+		z-index: 9900;
+		width: 15px;
+		min-height: 100%;
+		margin: 0px;
+		border: 1px solid rgba(55, 55, 55, 0.7);
+		background: rgba(55, 55, 55, 0.3);
+	}
+	#fecharMenu {
+		display: inline;
+		width: 15px;
+		min-height: 100%;
+		margin: 0px;
+		padding-top: 70%;
+		padding-bottom: 50%;
+		border: 1px solid rgba(55, 55, 55, 0.1);
+		margin-left: 60%;
+		background: rgba(55, 55, 55, 0.1) !important;
+		position: fixed;
+		z-index: 9999;
+	}
+	#layoutConteudo {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 99% !important;
+		margin: 0px !important;
+		padding: 0px !important;
+		margin-left: 0px !important;
+	}
+	#layoutDeslogado {
+		width: 100% !important;
+		margin: 0px !important;
 	}
 	a[href="#top"]{
 	    padding: 0px 0px 0px 0px;
@@ -59,13 +325,43 @@
 	#messagemAlerta{
 		display: block;
 		position: fixed;
-		top: 12%;
+		top: 1%;
 		left: 3%;
 		right: 3%;
 		max-width: 94%;
 		z-index: 9999;
 		margin: auto;
 		box-shadow: 1px 1px 5px black;
+	}
+	.itemMenu{
+		padding-top: 3px;
+		padding-bottom: 2px;
+		border-bottom:  3px solid #2e3136;
+		margin-bottom: 3px !important;
+	}
+	.itemMenu:hover{
+		color: #bfcce3;
+		border-bottom:  3px solid #595f68;
+		margin-bottom: 3px !important;
+		background-color: #32383e !important;
+	}
+	.linkMenu {
+		color: #e6e6e6;
+	}
+	.linkMenu:hover {
+		text-decoration: none;
+		color: #e6e6e6;
+	}
+	.itemMenuSair {
+		font-size: 12px !important;
+		padding-top: 2px;
+		border-bottom:  1px solid #2e3136;
+		margin-bottom: 1px !important;
+	}
+	.itemMenuSair:hover {
+		border-bottom:  1px solid #2e3136;
+		margin-bottom: 1px !important;
+		background-color: #382e32!important;
 	}
 	#container {
 		width: 100%;
@@ -92,14 +388,6 @@
 	}
 	.cabecalhoPrincipal{
 		padding-bottom: -10% !important;
-	}
-	.itemMenu{
-		text-align: center;
-		text-decoration: none;
-		color: #e6e6e6;
-		border-bottom:  3px solid #000000;
-		padding: 4px;
-		margin: 1px 1px 1px 1px;
 	}
 	.image-sigicop {
 		position: relative;
@@ -156,7 +444,9 @@
 	}
 	.imagem-celular{
 		width: 25px;
-		float: left;
+	}
+	.imagem-logo-celular {
+		width: 30% !important;
 	}
 	.menu-celular{
 		max-width: 30px !important;

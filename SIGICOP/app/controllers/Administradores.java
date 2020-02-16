@@ -70,7 +70,8 @@ public class Administradores extends Controller {
 		}
 		String filtroPa = "";
 		String temFiltro = "tem";
-	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa, temFiltro);
+		String titulo = "Página do Administrador";
+	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa, temFiltro, titulo);
 	}
 	
 ///// SÓ O ADMIN PADRAO PODE CADASTRAR MAIS ADMINS /////
@@ -83,7 +84,8 @@ public class Administradores extends Controller {
 			System.out.println("_____________________________________________________________________________________");
 			System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
 			String telaAdmin = "Tela Admin";
-			render(telaAdmin, admBanco);
+			String titulo = "Cadastro de Administrador";
+			render(telaAdmin, admBanco, titulo);
 		}else {// se não for avisa ao admin comum
 			System.out.println("_____________________________________________________________________________________");
 			System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
@@ -131,12 +133,14 @@ public class Administradores extends Controller {
 							}
 							flash.error("comparação de senha inválida!");
 							String comparar = "não está compatível";
-						renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin);
+							String titulo = "Cadastro de Administrador";
+						renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin, titulo);
 						}
 					}else { //se não, então senha e confirmarSenha são inferiores a 6
 						flash.error("no mínimo 6 caracteres!");
 						String comparar = "mínimo 6 caracteres";
-					renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin);
+						String titulo = "Editar Meus Dados";
+					renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, comparar, telaAdmin, titulo);
 					}
 				if (validation.hasErrors()) { // verificar depois de tudo se contém algum erro
 					validation.keep();
@@ -181,7 +185,8 @@ public class Administradores extends Controller {
 		Administrador adm = dadosSessaoAdmin.admin;
 		Administrador admBanco = dadosSessaoAdmin.admin;
 		String telaAdmin = "Tela Admin";
-		renderTemplate("Administradores/cadastroDeAdms.html", adm, telaAdmin, admBanco);
+		String titulo = "Editar Meus Dados";
+		renderTemplate("Administradores/cadastroDeAdms.html", adm, telaAdmin, admBanco, titulo);
 	}
 	
 ///// EDITAR A SENHA SEPARADAMENTE /////
@@ -193,7 +198,8 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
 		String telaAdmin = "Tela Admin";
-		render(telaAdmin, admBanco);
+		String titulo = "Editar senha";
+		render(telaAdmin, admBanco, titulo);
 	}
 	
 ///// SALVAR A SENHA ///// 
@@ -226,17 +232,20 @@ public class Administradores extends Controller {
 				}else {
 					flash.error("as senha não são compatíveis!");
 					String seis = "incompatíveis";
-				renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
+					String titulo = "Editar senha";
+				renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 				}
 			}else {
 				flash.error("No minimo 6 caracteres!");
 				String seis = "no mínimo 6 caracteres";
-			renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
+				String titulo = "Editar senha";
+			renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 			}
 		}else{
 			flash.error("falha na alteração de senha!");
 			String seis = "obrigatório";
-		renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco);
+			String titulo = "Editar senha";
+		renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 		}
 	}
 	
@@ -271,7 +280,8 @@ public class Administradores extends Controller {
 			String listaAdmins = "listaAdmins";
 			String telaAdmin = "telaAdmin";
 			String temFiltro = "tem";
-		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin, temFiltro);
+			String titulo = "Listagem de Administradores";
+		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin, temFiltro, titulo);
 		}else {
 			System.out.println("_____________________________________________________________________________________");
 			System.out.println("Administradores.listarTodosAdmins() ... ["+ new Date()+"]" );
@@ -314,10 +324,12 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
 		
-		String telaAdmin = "Tela Admin";
 		List<Usuario> listaDeUsuario = new ArrayList<Usuario>();
 		listaDeUsuario = Usuario.findAll();
-	render(admBanco, telaAdmin, listaDeUsuario);
+		
+		String telaAdmin = "Tela Admin";
+		String titulo = "Realizar Pedido de Cópia";
+	render(admBanco, telaAdmin, listaDeUsuario, titulo);
 	}
 	
 ///// PARA O ADMINISTRADOR SAIR DO SISTEMA ///// 
