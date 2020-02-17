@@ -501,6 +501,44 @@ public class Pedidos extends Controller {
 		ped.status = StatusPedido.ENTREGUE;
 		ped.usuario.save();
 		ped.save();
+		try {
+			FileWriter arq = new FileWriter(
+					"E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\" + ped.id + "_relatorio.txt");
+			PrintWriter gravarArq = new PrintWriter(arq);
+
+			gravarArq.println("|________________Relatório do pedido " + ped.id + "__________________|");
+			gravarArq.println("|USUÁRIO: " + ped.usuario.nomeUsu);
+			System.out.println("|USUÁRIO: " + ped.usuario.nomeUsu);
+			gravarArq.println("|ADMINISTRADOR: " + ped.adm.nomeAdm);
+			System.out.println("|ADMINISTRADOR: " + ped.adm.nomeAdm);
+			gravarArq.println("|NOME DO ARQUIVO: " + ped.nomeArquivo);
+			System.out.println("|NOME DO ARQUIVO: " + ped.nomeArquivo);
+			gravarArq.println("|QTD DE CÓPIAS: " + ped.qtdCopias + "                                        |");
+			System.out.println("|QTD DE CÓPIAS: " + ped.qtdCopias + "                                        |");
+			gravarArq.println("|FACE: " + ped.frenteVerso);
+			System.out.println("|FACE: " + ped.frenteVerso);
+			gravarArq.println("|DESCRIÇÃO: " + ped.descricao);
+			System.out.println("|DESCRIÇÃO: " + ped.descricao);
+			gravarArq.println("|DATA DE ENVIO: " + ped.dataEnvio + "       |");
+			System.out.println("|DATA DE ENVIO: " + ped.dataEnvio + "       |");
+			gravarArq.println("|DATA DE ATENDIMENTO: " + ped.dataAtendimento + " |");
+			System.out.println("|DATA DE ATENDIMENTO: " + ped.dataAtendimento + " |");
+			gravarArq.println("|DATA DE ENTREGA: " + ped.dataEntrega + "     |");
+			System.out.println("|DATA DE ENTREGA: " + ped.dataEntrega + "     |");
+			gravarArq.println("|STATUS: " + ped.status);
+			System.out.println("|STATUS: " + ped.status);
+			gravarArq.println("|___________________Fim de Relatorio_____________________|");
+
+			arq.close();
+			ped.save();
+			flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " entregue!");
+			System.out.println("|___________________relatório criado_____________________|");
+		} catch (Exception e) {
+			System.out.println("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
+			flash.error("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
+			Administradores.realizarPedidoCopia();
+		}
+
 		flash.success("Pedido de copia do usuário " + ped.usuario.nomeUsu + " realizado com sucesso!");
 		Administradores.realizarPedidoCopia();
 		gerarRelatorio(ped);

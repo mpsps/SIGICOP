@@ -159,7 +159,7 @@ public class Usuarios extends Controller {
 		}
 		session.clear();
 		Cache.clear();
-		String titulo = "Página do Usuário";
+		String titulo = "Cadastro de Usuário";
 	render(titulo);
 	}
 	

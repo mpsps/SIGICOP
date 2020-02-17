@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 	<head>
 		<title>#{get 'title' /}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -109,7 +109,7 @@
 	<div id="layoutMenu" class="animated fadeInLeft faster"><!-- INICIO MENU -->
 	<div class="h-75 m-0 p-0 hmx-75">
 		<a href="@{Gerenciador.principal}">
-			<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
+			<img class="aparecer-celular aparecer-tablet" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
 		</a>
 		<ul class="text-white m-0 p-0" style="list-style: none;">
  #{if session.contains("usuarioLogado")}
@@ -119,7 +119,7 @@
 			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}" class="rounded-circle m-0 p-0 imagem-celular">
 				<span class="m-0">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0">
-					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md" id="nomeUsuario"></span>
+					<span title="${session['usuarioLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet" id="nomeUsuario"></span>
 				</span>
 				<span class="w-25 m-0 p-0">
 #{if usuarioBanco?.qtdDisponivel > 14}
@@ -196,7 +196,7 @@
 			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" class="rounded-circle imagem-celular">
 				<span class="m-0">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none">
-						<span title="nome do administrador" class="text-white mr-0 mt-0 text-md" id="nomeAdmin"></span>
+						<span title="${session['adminLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet" id="nomeAdmin"></span>
 					</a>
 					<span class="desaparecer-celular">
 						<i title="meus dados" class="info icon text-white"></i>
@@ -367,7 +367,7 @@
 m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular">
 
 #{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
-	<div class="desaparecer-celular">
+	<div class="desaparecer-celular desaparecer-tablet">
 	
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
 		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="menuAberto">
@@ -392,7 +392,7 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 #{/if}
 	</a>
 	<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
-		<div class="desaparecer-celular">
+		<div class="desaparecer-celular desaparecer-tablet">
 		
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
 			<div class="text-center">
@@ -458,7 +458,7 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 								</a>
 							</div>
 						</div> -->
-						<div class="six wide column">
+						<div class="four wide column">
 							<h4 class="ui inverted header">Contatos:</h4>
 							<div class="ui inverted link list">
 								Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
@@ -851,8 +851,8 @@ function validarNome(){							/* campo do nome */
 	if (campoNome == '') { // verificar se campoNome está vazio
 		validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
 	 	servidorNomeMsg.style = 'display: none;'
-	 	document.getElementById("campoNome").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoNome vermelho
-	 	validarNomeMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	document.getElementById("campoNome").style = 'border-color: #f4c4c9; background-color: 	background-color: rgba(254, 245, 247, 0.8);' // campoNome vermelho
+	 	validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 	 	'validacaoMsgm">obrigatório</span>';
 	}else { // se não, apagar a mensagem e a cor do campo da  validação anterior
 		validarNomeMsg.style = 'display: none;'
@@ -862,10 +862,10 @@ function validarNome(){							/* campo do nome */
 		if(campoNome.length > 3 & sobreNome == null | sobreNome == ""){ // verificar se o sobreNome está vazio
 			validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
 			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
-			validarNomeMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+			validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 			'validacaoMsgm"> o sobrenome é obrigatório</span>';
 		}else if(campoNome.length > 3){
-			document.getElementById("campoNome").style = 'border-color: #84e19b; background-color: #f0fbf3;'// campoNome verde
+			document.getElementById("campoNome").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'// campoNome verde
 			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
 			validarNomeMsg.style = 'display: none;'// "desativa" a span validarNomeMsg
 			document.getElementById("campoNome").value = campoNome;			
@@ -886,8 +886,8 @@ function validarMatricula(){				/* campo da matricula */
 		
 	if (campoMatricula == '') { // verificar se o campoMatricula está vazio
 		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
-	 	document.getElementById("campoMatricula").style = 'border-color: #e87d88; background-color: #fef5f7;'; // campoMatricula vermelho
-	 	validarMatriculaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);'; // campoMatricula vermelho
+	 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 	 	'validacaoMsgm">obrigatório</span>';
 	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
 #{if mat}
@@ -895,8 +895,8 @@ function validarMatricula(){				/* campo da matricula */
 #{/if}
 	}else if(campoMatricula.length > 0 & campoMatricula.length < 14){ // verificar se campoMatricula é maior que 0 e menor que 14
 		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
-	 	document.getElementById("campoMatricula").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoMatricula vermelho
-	 	validarMatriculaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoMatricula vermelho
+	 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 	 	'validacaoMsgm">no mínimo 14 caracteres</span>';
 	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
 #{if mat}
@@ -904,7 +904,7 @@ function validarMatricula(){				/* campo da matricula */
 #{/if}
 	}
 	if(campoMatricula.length > 13 & campoMatricula.length < 18){
-		document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: #f0fbf3;' // campoMatricula verde
+		document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);' // campoMatricula verde
 		servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
 	 	validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
 #{if mat}
@@ -925,8 +925,8 @@ function validarEmail(){			/* campo do email */
 #{/if}
 
 	if (campoEmail == '') { // verificar se o campoMatricula está vazio
-	 	document.getElementById("campoEmail").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoEmail vermelho
-	 	validarEmailMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+	 	document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
+	 	validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 	 	'validacaoMsgm">obrigatório</span>';
 	 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
 	}else{ // se não, então verificar se é email válido
@@ -942,7 +942,7 @@ function validarEmail(){			/* campo do email */
 		    (dominio.search(".")!=-1) &&      
 		    (dominio.indexOf(".") >=1)&& 
 		    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-		 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: #f0fbf3;';
+		 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);';
 		 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
 #{if email}
 		 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
@@ -950,8 +950,8 @@ function validarEmail(){			/* campo do email */
 		 	validarEmailMsg.style = 'display: none;' // "desativa" a span validarEmailMsg
 		}else{ // se não, então o email não é válido
 			validarEmailMsg.style = 'display: inline;'// "ativa" a span validarEmailMsg
-			document.getElementById("campoEmail").style = 'border-color: #e87d88; background-color: #fef5f7;' // campoEmail vermelho
-			validarEmailMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+			document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
+			validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 			'validacaoMsgm">email inválido</span>';
 			servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
 #{if email}
@@ -978,19 +978,19 @@ function validarSenha(){			/* campo senha */
  	if (campoSenha.length > 1 & campoSenha.length < 6) { // verifica se a campoSenha tem maior que 1 e menor que 6 caracteres
 		servidorSenhaMsg.style = 'display: none;'// "desativa" a span validarSenhaMsg
  		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
-		document.getElementById('campoSenha').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoSenha vermelho
-		validarSenhaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
+		validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm">mínino 6 caracteres</span>';
 	}else if(campoSenha == ''){ // verifica se o campo senha está vazio
 		servidorSenhaMsg.style = 'display: none;'// "desativa" a span servidorSenhaMsg
 		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
-		document.getElementById('campoSenha').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoSenha vermelho
-		validarSenhaMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
+		validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm">obrigatório</span>';
 	} else if(campoSenha.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
  		servidorSenhaMsg.style = 'display: none;'; // "desativa" a span servidorSenhaMsg
  		validarSenhaMsg.style = "display: none;"; // "desativa" a span validarSenhaMsg
- 		document.getElementById('campoSenha').style = 'border-color: #84e19b; background-color: #f0fbf3;'; // campoSenha verde
+ 		document.getElementById('campoSenha').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoSenha verde
 	} 
  	// verifica se o campoSenha é igual ao campoConfirmar e se campoSenha tem mais de 5 caracteres
 	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){ 
@@ -998,7 +998,7 @@ function validarSenha(){			/* campo senha */
 		validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm"><i class="check icon m-0"></i></span>';
 	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
-		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular '+
+		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm"><i class="x icon m-0"></i></span>';
 	}
 	senha = document.getElementById("campoSenha").value;
@@ -1112,22 +1112,22 @@ function validarConfirmarSenha(){			/* campo senha */
 	var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
 			
 	if (campoConfirmar.length > 2 & campoConfirmar.length < 6) { // verifica se a campoConfirmar tem maior que 2 e menor que 6 caracteres
-		document.getElementById('campoConfirmar').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoConfirmar vermelho
-		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
+		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm">mínino 6 caracteres</span>';
 #{if comparar}			
 		servidorConfirmarSenhaMsg.style = 'display: none;'
 #{/if}
 	}else if(campoConfirmar == ''){ // verifica se o campo senha está vazio
-		document.getElementById('campoConfirmar').style = 'border-color: #e87d88; background-color: #fef5f7;' // campoConfirmar vermelho
-		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm rounded p-0 font-size-celular '+
+		document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
+		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm">obrigatório</span>';
 #{if comparar}			
 		servidorConfirmarSenhaMsg.style = 'display: none;' // "desativar" a span servidorConfirmarSenhaMsg
 #{/if}
 	}else if(campoConfirmar.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
 		validarCompararMsg.style = "display: none;"; // "desativar" a span validarCompararMsg 
-		document.getElementById('campoConfirmar').style = 'border-color: #84e19b; background-color: #f0fbf3;'; // campoConfirmar verde
+		document.getElementById('campoConfirmar').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoConfirmar verde
 	}
 	// verifica se o campoSenha é igual ao campoConfirmar e se campoConfirmar tem mais de 5 caracteres
 	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){
@@ -1136,7 +1136,7 @@ function validarConfirmarSenha(){			/* campo senha */
 		'validacaoMsgm"><i class="check icon m-0"></i></span>';
 	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
 		validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
-		validarCompararMsg.innerHTML = '<span class="alert-danger shadow-sm-sm rounded p-0 font-size-celular '+
+		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
 		'validacaoMsgm"><i class="x icon m-0"></i></span>';			
 	}
 } 

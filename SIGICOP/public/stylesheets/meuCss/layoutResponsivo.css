@@ -56,7 +56,9 @@ body{
 	font-weight: bold;
 	background: #aeb7d2;
 }
-
+.validacaoErro {
+	background-color: rgba(248, 215, 218, 0.5);
+}
 /**********************************************************************************************************************************/
 /*******************************************************tela de computador*********************************************************/
 /**********************************************************************************************************************************/
@@ -201,6 +203,9 @@ body{
 		height: 50px;
 		width: 50px;
 	}
+	.imagem-logo {
+		width: 70%!important;
+	}
 }
 
 /**********************************************************************************************************************************/
@@ -244,8 +249,8 @@ body{
 		display: inline;
 		position: fixed;
 		height: 100%;
-		z-index: 9900;
-		width: 15px;
+		z-index: 900;
+		width: 18px;
 		min-height: 100%;
 		margin: 0px;
 		padding-top: 70%;
@@ -258,7 +263,7 @@ body{
 		position: fixed;
 		height: 100%;
 		z-index: 9900;
-		width: 15px;
+		width: 18px;
 		min-height: 100%;
 		margin: 0px;
 		border: 1px solid rgba(55, 55, 55, 0.7);
@@ -859,7 +864,7 @@ body{
 			display: inline;
 			position: fixed;
 			height: 100%;
-			z-index: 9900;
+			z-index: 900;
 			width: 25px;
 			min-height: 100%;
 			margin: 0px;
@@ -957,7 +962,7 @@ body{
 			width: 50px;
 		}
 		.imagem-logo {
-			width: 20% !important;
+			width: 20%!important;
 		}
 		.ifrn-jc {
 			font-size: 15px;
@@ -968,8 +973,24 @@ body{
 		.hmx-25 {
 			max-height: 10% !important;
 		}
+		.validacaoMsgm{
+			font-family: Times New Romans;
+			font-size: 70%;
+			letter-spacing: 0.5px;
+		}
+		.desaparecer-tablet {
+			display: none !important;
+		}
+		.aparecer-tablet{
+			display: initial !important;
+		}
+		.nomeAdminUser-tablet {
+			font-size: 12px;
+			letter-spacing: 1px;
+			margin-bottom: 0px !important;
+		}
 		/* Margins */
-/* Margin-0-celular */
+/* Margin-0-tablet */
 	
 	.m-0-tablet {
   		margin: 0 !important;
