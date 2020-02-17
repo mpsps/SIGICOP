@@ -79,22 +79,22 @@
 
 						<b>Status: </b>
 #{if p.status.name() == 'RECUSADO'}
-						<div class="text-center rounded statusRecusado" id="statusPedido">
+						<div class="text-center rounded statusRecusado">
 							${p.status}
 						</div>	
 #{/if}
 #{if p.status.name() == 'AGUARDANDO'}
-						<div class=" text-center rounded statusAguardando" id="statusPedido">
+						<div class=" text-center rounded statusAguardando">
 							${p.status}
 						</div>	
 #{/if}
 #{if p.status.name() == 'CONCLUIDO'}
-						<div class=" text-center rounded statusConcluido" id="statusPedido">
+						<div class=" text-center rounded statusConcluido">
 							${p.status}
 						</div>	
 #{/if}
 #{if p.status.name() == 'ENTREGUE'}
-						<div class=" text-center rounded statusEntregue" id="statusPedido">
+						<div class=" text-center rounded statusEntregue">
 							${p.status}
 						</div>
 #{/if}
@@ -177,7 +177,7 @@ $(document).ready(function(e) {
 		/* var ext = nome.split('.').pop(); */
 		var nomeCompletoArquivo = '${p.nomeArquivo}';
 		var nomeArquivoComplimido = '';
-		for(var i = 0; i < 20; i++){
+		for(var i = 0; i < 16; i++){
 			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
 		}
 		document.getElementById('${p.id}').innerHTML = nomeArquivoComplimido+'[...]';

@@ -251,15 +251,25 @@ public class Usuarios extends Controller {
 	public static void listarUsuarios(String term) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Usuarios.listarUsuarios() ... ["+ new Date()+"]");
-		
-		List<Usuario> usuarios = Usuario.find("lower(matricula) like ?1",  "%"+term.toLowerCase() + "%").fetch(20);
-		
-		List<Select2VO> results = new ArrayList<Select2VO>();
-		for (Usuario u : usuarios) {
-			Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
-			results.add(sVO);
+		if (term == null) {
+			List<Usuario> usuarios = Usuario.findAll();
+			List<Select2VO> results = new ArrayList<Select2VO>();
+			for (Usuario u : usuarios) {
+				Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
+				results.add(sVO);
+			}
+			
+		}else {
+			List<Usuario> usuarios = Usuario.find("lower(matricula) like ?1 OR lower(nomeUsu) like ?2",  "%"+term.toLowerCase() + "%", "%"+term.toLowerCase() + "%").fetch(20);	
+			List<Select2VO> results = new ArrayList<Select2VO>();
+			for (Usuario u : usuarios) {
+				Select2VO sVO = new Select2VO(u.id.toString(), u.toString());
+				results.add(sVO);
+			}
+			renderJSON(results);
 		}
 		
-		renderJSON(results);
+		
+		
 	}
 }

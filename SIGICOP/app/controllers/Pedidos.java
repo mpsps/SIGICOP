@@ -455,7 +455,10 @@ public class Pedidos extends Controller {
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
-
+		if (ped.usuario == null) {
+			flash.error("Selecione o Usuário do Pedido");
+			Administradores.realizarPedidoCopia();
+		}
 		if (ped.qtdCopias == 0) {
 			flash.error("A Quantidade de Copias é obrigatorio");
 			Administradores.realizarPedidoCopia();
@@ -498,9 +501,10 @@ public class Pedidos extends Controller {
 		ped.status = StatusPedido.ENTREGUE;
 		ped.usuario.save();
 		ped.save();
-		gerarRelatorio(ped);
 		flash.success("Pedido de copia do usuário " + ped.usuario.nomeUsu + " realizado com sucesso!");
 		Administradores.realizarPedidoCopia();
+		gerarRelatorio(ped);
+
 	}
 
 ///// ENTREGAR PEDIDO /////

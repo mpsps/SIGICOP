@@ -12,7 +12,7 @@
 #{/list}
 						</select> -->
 						<!-- FORMUL�RIO DE REALIZAR PEDIDO DE C�PIA  SELECT2-TESTE-->
-					<select id="mySelect2" class="form-control js-example-language-pt" lang="pt" name="ped.usuario.id" tabindex="-1" aria-hidden="true">
+					<select id="mySelect2" class="form-control" lang="pt" required="required" name="ped.usuario.id"  data-allow-clear="1" data-select2-id="1" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
 						<option></option>
 					</select>
 						<div class="row m-0-celular p-0-celular">
@@ -44,9 +44,16 @@
 </div>
 
 <!-- SCRIP PARA BUSCAR NO BANCO DE DADOS ATRAVES DO AJAX-->
+
 	<script type="text/javascript">
+
 	$('#mySelect2').select2({
-	  ajax: {
+		  placeholder: 'Matrícula ou Nome',
+		  minimumInputLength: 3,
+		  language: "pt-BR",
+		  theme: 'bootstrap4',
+		  allowClear : true,
+	  ajax: {	
 	    url: '@{Usuarios.listarUsuarios()}',
 	    processResults: function (data) {
 	      // Transforms the top-level key of the response object from 'items' to 'results'
@@ -55,6 +62,7 @@
 	      };
 	    }
 	  }
+	
 	});
 	 
 </script>

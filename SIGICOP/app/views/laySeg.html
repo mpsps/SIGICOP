@@ -15,7 +15,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- JS JQUERY -->
-		<script src="@{'/public/javascripts/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+		<script src="@{'/public/javascripts/Jquery/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{get 'moreScripts' /}
 <!-- BOOTSTRAP - CSS -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}">
@@ -25,13 +25,13 @@
 <!-- 		<script src="@{'/public/bootstrap/js/popper.js'}" ></script>		
  -->		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
 <!-- SEMANTIC - CSS -->
-		<!-- <link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/semantic.min.css'}"> -->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.min.css'}">
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/grid.min.css'}"><!-- rodape utilizar-->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/header.min.css'}"><!-- utilizado em login  -->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.min.css'}"><!-- rodape utilizar-->
-		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.min.css'}">
-	 	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}">
+		<!-- <link href="@{'/public/Semantic/css/semantic.min.css'}"  rel="stylesheet" type="text/css" /> -->
+		<link href="@{'/public/Semantic/css/icon.min.css'}" rel="stylesheet" type="text/css" />
+		<link href="@{'/public/Semantic/css/grid.min.css'}" rel="stylesheet" type="text/css" /><!-- rodape utilizar-->
+		<link href="@{'/public/Semantic/css/header.min.css'}" rel="stylesheet" type="text/css" /><!-- utilizado em login  -->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.min.css'}" rel="stylesheet" type="text/css" /><!-- rodape utilizar-->
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.min.css'}" rel="stylesheet" type="text/css" />
+	 	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}" rel="stylesheet" type="text/css" />
 	 	<style type="text/css">
 	 	.notificacao {
 		  width: 4px;
@@ -46,7 +46,7 @@
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/semantic.min.js'}"/></script>
 <!-- UIKIT CSS -->
- 		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.css'}" />
+ 		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.css'}"  rel="stylesheet" type="text/css" />
 <!-- UIKIT JS -->
         <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
         <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
@@ -88,22 +88,25 @@
 				border-radius: 5px;
 			}
 		</style>
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}">     
-		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">
-		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/select2-bootstrap.css'}">        
+        <link href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"  rel="stylesheet" type="text/css" />     
+		<link href="@{'/public/stylesheets/animate.css'}"  rel="stylesheet" type="text/css" />
 <!-- JS PERSONALIZADO  -->  
 <!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
+
 <!-- SELECT2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-
-
+	<!-- CSS DO SELECT2-->
+	<link href="@{'/public/stylesheets/Select2/select2-bootstrap.css'}" rel="stylesheet" type="text/css" />        
+	<link href="@{'/public/stylesheets/Select2/select2-bootstrap4.css'}" rel="stylesheet" type="text/css" />
+	<link href="@{'/public/stylesheets/Select2/select2.min.css'}" rel="stylesheet" type="text/css" /> 
+	<!-- JAVASCRIPT DO SELECT2 -->
+	<script src="@{'/public/javascripts/Select2/select2.js'}"/></script>
+	<script src="@{'/public/javascripts/Select2/pt-BR.js'}"/></script>
 </head>
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <div id="layoutGeral">
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div id="layoutMenu" class="animated fadeInLeft faster animated"><!-- INICIO MENU -->
+	<div id="layoutMenu" class="animated fadeInLeft faster"><!-- INICIO MENU -->
 	<div class="h-75 m-0 p-0 hmx-75">
 		<a href="@{Gerenciador.principal}">
 			<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
@@ -111,10 +114,10 @@
 		<ul class="text-white m-0 p-0" style="list-style: none;">
  #{if session.contains("usuarioLogado")}
 <!-- ////////// MENU DO USUÁRIO /////////// -->
-		<li class="m-0 border rounded meusDados">
+		<li class="m-0 border rounded meusDados p-0-tablet" id="dadosUser" >
 			<span class="w-75 m-0 p-0">
 			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}" class="rounded-circle m-0 p-0 imagem-celular">
-				<span id="dadosUser" class="m-0">
+				<span class="m-0">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0">
 					<span title="nome do usuário" class="text-white mr-0 mt-0 text-md" id="nomeUsuario"></span>
 				</span>
@@ -136,7 +139,7 @@
 </a>
 				</span>
 		</li>
-						<hr class="mt-0 mb-2-celular">
+						<hr class="mt-0 mb-2-celular mb-1-tablet">
 		
 #{if solicitar}
 	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" class="linkMenu">
@@ -150,9 +153,31 @@
 	  		aria-expanded="false" aria-controls="multiCollapseExample1">
 				<li class="m-0 itemMenu rounded">
 	  				<i class="filter icon"></i>filtrar Pedidos
-	  				<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
+#{if statusFiltro.equals("TODOS") || statusFiltro == null}
+					<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
 							${listaPedidos.size()}							
 					</span>
+#{/if}
+#{if statusFiltro.equals("AGUARDANDO")}
+					<span class="notificacao statusAguardando text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidos.size()}							
+					</span>
+#{/if}
+#{if statusFiltro.equals("RECUSADO")}
+					<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidos.size()}							
+					</span>
+#{/if}
+#{if statusFiltro.equals("CONCLUIDO")}
+					<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidos.size()}							
+					</span>
+#{/if}
+#{if statusFiltro.equals("ENTREGUE")}
+					<span class="notificacao statusEntregue text-white font-size-celular" style="font-size: 10px;">
+							${listaPedidos.size()}							
+					</span>
+#{/if}
 				</li>
 			</a>
 #{/if}
@@ -167,9 +192,9 @@
 #{/if}	
 #{if session.contains("adminLogado")}
 <!-- ////////// MENU DO ADMIN /////////// -->
-	<li class="m-0 border rounded meusDados">
+	<li class="m-0 border rounded meusDados" id="dadosAdmin">
 			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" class="rounded-circle imagem-celular">
-				<span id="dadosAdmin" class="m-0">
+				<span class="m-0">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none">
 						<span title="nome do administrador" class="text-white mr-0 mt-0 text-md" id="nomeAdmin"></span>
 					</a>
@@ -178,7 +203,7 @@
 					</span>
 				</span>
 	</li>
-	<hr class="mt-0 mb-2-celular"/>
+	<hr class="mt-0 mb-2-celular mb-1-tablet"/>
 #{if admBanco?.admPadrao}<!-- admin padrão -->
 	<a title="Adicionar Adminstrador" class="linkMenu" href="@{Administradores.cadastroDeAdms}">
 		<li class="m-0 itemMenu rounded">
@@ -327,9 +352,9 @@
 		<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
 	</li>
 #{/else}
-				<h4 class="h3 font-size-celular">IFRN-JC:</h4>
+				<h4 class="h3 font-size-celular ifrn-jc">IFRN-JC</h4>
 						<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
-							<img class="imagem-logo-celular" src="@{'/public/images/sigicop/if.png'}" width="40%" alt="IFRN_JC" title="IFRN-JC" />
+							<img class="imagem-logo" src="@{'/public/images/sigicop/if.png'}" width="40%" alt="IFRN_JC" title="IFRN-JC" />
 						</a>
 				</div>
 			</ul>
@@ -410,11 +435,11 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 		</div>
 #{/else}
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-		<div id="abrirMenu"><i class="chevron right icon"></i></div>
+		<div id="abrirMenu" title="Abrir Menu"><i class="chevron right icon"></i></div>
 #{/if}
 		<div class="p-5 p-1-celular conteudoPagina">
 			<div class="text-center">
-				<h1 class="text-secondary tituloCelular">${titulo}</h1>
+				<h1 class="text-secondary tituloCelular mb-1-tablet mt-1-tablet">${titulo}</h1>
 			</div>
 				#{doLayout /} 
 
@@ -444,8 +469,13 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 						<div class="five wide column">
 							<h4 class="ui inverted header">E-mails:</h4>
 							IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
-								Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
-								Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br>
+							Bolsista: <br><a href="#" class="text-decoration-none" id="font-size-celular">bolsistapoio2@gmail.com</a><br> 
+							Comult: <br><a href="#" class="text-decoration-none" id="font-size-celular">comult.jc@ifrn.edu.br</a>
+						</div>
+						<div class="five wide column">
+						<h4 class="ui inverted header">Desenvolvido Por:</h4>
+						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
+								Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br> 
 						</div>
 					</div>
 				</div>
@@ -575,6 +605,20 @@ $().ready(function() {
 		}, 2000); // O valor e representado em milisegundos.
 		
 	var width = window.innerWidth;
+	if(width > 500 && width < 750){
+		$('.linkMenu').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+		$('.meusDados').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+		$('.conteudoPagina').click(function(){
+			$('#layoutMenu').hide();
+			$('#fecharMenu').hide();
+		});
+	}
 	if(width < 500){
 		$('.linkMenu').click(function(){
 			$('#layoutMenu').hide();
@@ -680,10 +724,11 @@ $(document).ready(function() {
 				  position: 'top',
 				  icon: '',
 				  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
-				  '<div class="text-left font-size-celular"><i class="user circle outline icon"></i> ${usuarioBanco?.nomeUsu} <br>'+
-				  '<i class="envelope outline icon"></i> ${usuarioBanco?.email}'+
-				  '<br><i class="chart bar outline icon"></i> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-				  '<br><i class="mouse pointer icon"></i> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+				  '<div class="text-left font-size-celular"><i class="user circle outline icon"></i>'+
+				  '<span class="desaparecer-celular font-weight-bold">Nome:</span> ${usuarioBanco?.nomeUsu} <br>'+
+				  '<i class="envelope outline icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${usuarioBanco?.email}'+
+				  '<br><i class="chart bar outline icon"></i><span class="desaparecer-celular font-weight-bold">Qtd Disponível:</span> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+				  '<br><i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
 				  showCloseButton: true,
 				  showConfirmButton: false,
 				  showClass: {
@@ -702,9 +747,9 @@ $(document).ready(function() {
 			  position: 'top',
 			  icon: '',
 			  html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
-			  '<div class="text-left font-size-celular"><i class="user circle icon"></i>  ${admBanco?.nomeAdm} <br>'+
-			  '<i class="envelope icon"></i> ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso}<i class="mouse pointer icon"></i> ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
+			  '<div class="text-left font-size-celular"><i class="user circle icon"></i><span class="desaparecer-celular font-weight-bold">Nome:</span> ${admBanco?.nomeAdm} <br>'+
+			  '<i class="envelope icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${admBanco?.email}'+
+			  ' <br> #{if admBanco?.ultimoAcesso}<i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
 			  '<a href="@{Administradores.editar}" class="btn btn-block btn-outline-primary mt-2">Editar</a>',
 			  showCloseButton: true,
 			  showConfirmButton: false,
