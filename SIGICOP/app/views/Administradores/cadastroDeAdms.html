@@ -9,10 +9,10 @@
 		#{/errors}-->
 #{/ifErrors}
 	</div>			 
-	<div class="ui middle aligned center aligned grid mt-0 m-0-celular p-0-celular">
+	<div class="ui middle aligned center aligned grid mt-0 m-0-celular p-0-celular m-0-tablet p-2-tablet">
 		<div class="column mt-0 m-0-celular p-0-celular">
 <!-- FORMULARIO DE CADASTRO E EDIÇÃO DO ADMIN -->
-			<form action="@{Administradores.salvarAdm} " class="ui brancoGelo m-0-celular p-0-celular mt-n2 shadow-sm animated slideInDown lower" method="post">
+			<form action="@{Administradores.salvarAdm} " class="ui brancoGelo m-0-celular p-0-celular mt-n2 shadow-sm m-2-tablet mt-0-tablet animated slideInDown lower" method="post">
 				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
 #{if !adm?.id && admBanco?.admPadrao == true}

@@ -75,8 +75,9 @@
 		</td>
 	</tr>
 	<tr  class="collapse text-left animated fadeInDown faster m-0" id="collapseExample${p.id}">
-		<td colspan="8">
-				<div class="card">
+				
+		<td colspan="4">
+		<div class="card">
 					<div class="card-text">
 						<b>Status: </b>
 						<span class=" text-center rounded statusAguardando pl-1 pr-1"> ${p.status}</span>
@@ -84,6 +85,10 @@
 					<div class="card-text">
 						<b>Usuário:</b> ${p.usuario.nomeUsu}
 					</div>
+				</div>
+		</td>
+		<td colspan="4">
+		<div class="card">
 					<div class="card-text">
 						<b>Data de Envio: </b> ${p.dataEnvio}
 					</div>
@@ -94,9 +99,10 @@
 #{else}
 					<b>Descricao:</b>[sem descricao]
 #{/else}
-					</div>
-				</div>
+					</div>	
+				</div>	
 		</td>
+				
 	</tr>
 #{/list}
 </table>
@@ -168,11 +174,9 @@
 #{/if}
 #{if listaPedidosPa.size() == 0}
 <!-- informa se não houver ou não encontrar nenhum pedido-->
-	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
+	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<span class="desaparecer-celular">
-			<div class="h1">Nenhum pedido foi encontrado</div>
-		</span>
+			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
 			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
@@ -193,7 +197,7 @@
 	$(document).ready(function () {
 		setInterval(function () {
 	      window.location.reload(1);
-	    }, 120000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
+	    }, 120000); //tempo em milisegundos. Neste caso, o refresh vai acontecer .
 	});
 </script>
 <script type="text/javascript">
@@ -202,6 +206,7 @@ $(document).ready(function(){
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
+			position: 'top',
 			  title: 'Motivo da recusa:',
 			  input: 'text',
 			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
@@ -243,6 +248,7 @@ $(document).ready(function(){
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
+			position: 'top',
 			  title: 'Mensagem de conclusão:',
 			  input: 'text',
 			  inputPlaceholder: 'digite alguma mensagem complementar',

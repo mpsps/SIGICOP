@@ -35,13 +35,13 @@
 						class="form-control text-center" id="item-arquivo">
 				</div>
 				
-				<div class="row p-0-celular mt-1-celular">
+				<div class="row pl-3-celular mt-1-celular">
 					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 
 						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
 							min="1" class="qtdCopias" value="1" id="qtdCopias">
 					</div>
-					<div class="col-md-6 p-0-celular m-0-celular p-0">
+					<div class="col-md-6 p-0-celular m-1-celular pl-3">
 						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
@@ -86,7 +86,7 @@
 <!-- informa se n�o houver nenhum pedido adicionado-->
 <div class="text-center text-primary font-size-celular border pt-5 pb-5 m-0">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<div class="h1">Vazio</div>
+		<div class="h1 nenhumEncontrado">Vazio</div>
 </div>
 #{/if} 
 #{else}
@@ -163,7 +163,7 @@
 <!-- informa se n�o houver nenhum pedido adicionado-->
 <div class="text-center text-primary font-size-celular border pt-5 pb-5 m-0">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<div class="h1">Nenhum Pedido Adicionado</div>
+		<div class="h1 nenhumEncontrado">Nenhum Pedido Adicionado</div>
 </div>
 #{/if} 
 #{else}

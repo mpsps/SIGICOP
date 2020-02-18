@@ -97,11 +97,9 @@
 #{/if}
 #{if listaconcluidos.size() == 0}
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
-	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
+	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<span class="desaparecer-celular">
-			<div class="h1">Nenhum pedido foi encontrado</div>
-		</span>
+			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
 			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
@@ -124,6 +122,7 @@ $(document).ready(function () {
 		console.log("o valor do id de entregue :  "+id);
 		$('#idEnt').val(id);
 		Swal.fire({
+			position: 'top',
 			  html: '<div class="font-size-celular">Tem certeza que deseja entregar esse pedido?</div>'
 					  +'<div class="bg-info text-white p-1 font-size-celular">Usuário do pedido: ${pc?.usuario?.matricula}</div>'
 					  +'<br/><form action="@{Pedidos.entregarPedido}" method="post">'
@@ -147,6 +146,7 @@ $(document).ready(function () {
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
+			position: 'top',
 			  title: 'Motivo da recusa:',
 			  input: 'text',
 			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',

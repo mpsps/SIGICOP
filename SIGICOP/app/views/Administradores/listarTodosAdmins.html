@@ -5,7 +5,7 @@
 	    	<div class="collapse multi-collapse m-0 p-0 animated zoomIn faster" id="multiCollapseExample1">
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->
-					<form action="@{Administradores.listarTodosAdmins}" method="post" class="font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
+					<form action="@{Administradores.listarTodosAdmins}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
 						<fieldset class="mb-0-celular">
 					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
 							<div class="form-row m-0">
@@ -31,11 +31,9 @@
   	</div>
 #{if listarDeAdmins.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum admin-->
-	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 5%;">
+	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<span class="desaparecer-celular">
-			<div class="h1">Nenhum pedido foi encontrado</div>
-		</span>
+			<div class="h1 nenhumEncontrado">Nenhum administrador foi encontrado</div>
 			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
@@ -87,6 +85,7 @@ $(".remover").click(function() {
 	var id = $(this).data("item");
 	$('#idRem').val(id);
 	Swal.fire({
+		position: 'top',
 		  html: '<div class="font-size-celular">Tem certeza que deseja remover esse administrador?</div>\n'
 				  +'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a?.nomeAdm}</div>'
 				  +'<br/><form action="@{Administradores.removerAdmin}" method="post">'
@@ -104,7 +103,4 @@ $(".remover").click(function() {
 			  }
 	})
 }); 
-
-
-
 </script>

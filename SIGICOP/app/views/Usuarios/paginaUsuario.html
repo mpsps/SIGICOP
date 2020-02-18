@@ -45,11 +45,11 @@
 
 #{if listaPedidos.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
-	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
+	<div class="text-center text-primary font-size-celular border listagemVazia">
+		<div>
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<span class="desaparecer-celular">
-			<div class="h1">Nenhum pedido foi encontrado</div>
-		</span>
+		</div>
+			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
 	<a href="@{pedidos.solicitar}" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow p-3 pl-5 pr-5 p-2-celular rounded">Solicitar
 	</a>

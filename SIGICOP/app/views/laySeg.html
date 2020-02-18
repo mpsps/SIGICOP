@@ -106,7 +106,7 @@
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <div id="layoutGeral">
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div id="layoutMenu" class="animated fadeInLeft faster"><!-- INICIO MENU -->
+	<div id="layoutMenu" class="animacao mov-animada rapido "><!-- INICIO MENU -->
 	<div class="h-75 m-0 p-0 hmx-75">
 		<a href="@{Gerenciador.principal}">
 			<img class="aparecer-celular aparecer-tablet" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
@@ -439,7 +439,7 @@ m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tam
 #{/if}
 		<div class="p-5 p-1-celular conteudoPagina">
 			<div class="text-center">
-				<h1 class="text-secondary tituloCelular mb-1-tablet mt-1-tablet">${titulo}</h1>
+				<h1 class="text-secondary tituloCelular mb-1-tablet mt-n3-tablet">${titulo}</h1>
 			</div>
 				#{doLayout /} 
 
@@ -765,7 +765,8 @@ $(document).ready(function() {
 	$("#restaurar").click(function() {
 		Swal.fire({
 			scrollbarPadding: true,
-			html: '<div id="tituloCelularModal">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
+			position: 'top',
+			html: '<div class="text-center">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
 				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
 			icon: 'question',
 			input: 'number',

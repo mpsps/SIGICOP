@@ -9,6 +9,24 @@ body{
 	max-width: 100% !important;
 	min-width: 100% !important;
 	margin: 0 !important;
+}	
+.animacao{
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animacao.rapido {
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+}
+.animacao.maisDevagar{
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+.animacao.devagar {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
 }
 .borderColorCorpo{
 	border: 0.5px solid #fafaff;
@@ -109,28 +127,41 @@ body{
 		margin: 0px !important;
 		box-shadow: 1px 1px 5px black;
  	} 
+ 	@-webkit-keyframes mov-animada{
+	  from {
+	    opacity: 0;
+	  }
+	
+	  to {
+	    opacity: 1;
+	  }
+	}
+	
+	@keyframes mov-animada{
+	  from {
+	    opacity: 0;
+	  }
+	
+	  to {
+	    opacity: 1;
+	  }
+	}
+	.mov-animada{
+	  -webkit-animation-name: fadeIn;
+	  animation-name: fadeIn;
+	}
 	.image {
 		margin-top: -100px;
 	}
 	.column {
 		max-width: 450px;
 	}
-	#container {
-		width: 100%;
-		padding-right: 20px;
-		padding-left: 20px;
-		margin-right: auto;
-		margin-left: auto;
-		margin-top: 20px;
-		height: 100%;
-		padding: 10% 20% 10% 20%;
-	}
 	.column {
 		max-width: 450px;
 		float: none;
 	}
 	.heightMin{
-		min-height: 460px;
+		min-height: 455px;
 	}
 	.itemMenu{
 		padding-top: 2px;
@@ -160,23 +191,6 @@ body{
 		margin-bottom: 1px !important;
 		background-color: #382e32!important;
 	}
-	.corFiltro{
-		background: #f2f8ff;
-		padding: 5%;
-		margin-left: 10%;
-		margin-right: 10%;" 
-	}
-	.botaoArquivo{
-		margin-left: 20%;
-		margin-right: 20%;
-		text-align: center;
-	}
-	.btn-sm-computador {
-		padding: 0.25rem 0.5rem;
-		font-size: 0.875rem;
-		line-height: 1.5;
-		border-radius: 0.2rem;
-	}
 	.btn-block-computador {
 		display: block;
 		width: 100%;
@@ -185,11 +199,6 @@ body{
 		font-family: Times New Romans;
 		font-size: 85%;
 		letter-spacing: 0.5px;
-	}
-	.container-computador{
-		margin-left: 5% !important;
-		margin-right: 5% !important;
-		margin-top: 0 !important;
 	}
 	.botao-computador{
 		margin-top: 50px !important;
@@ -204,7 +213,14 @@ body{
 		width: 50px;
 	}
 	.imagem-logo {
+		width: 30%!important;
+	}
+	.imagem-logo-principal {
 		width: 70%!important;
+	}
+	.listagemVazia {
+		margin: 5% 20% 5% 20% !important;
+		padding: 10% !important;
 	}
 }
 
@@ -212,18 +228,9 @@ body{
 /********************************************************tela de celular***********************************************************/
 /**********************************************************************************************************************************/
 @media (max-width: 500px){ 
-	/*
-	#tamanho-corpo-celular{
-		max-width: 260px!important;
-		min-width: 260px !important;
-		margin: 0 !important;
-		width: 100% !important;	
+	html {
+		min-width: 250px!important;
 	}
-	.tamanho-celular{
-		max-width: 260px !important;
-		min-width: 260px !important;
-		margin: 0 !important;
-	} */
 	#layoutGeral {
 		max-width: 100% !important;
 		min-height: 60% !important;
@@ -322,10 +329,38 @@ body{
 	a[href="#topPrincipal"]:hover{
 		text-decoration: none;
 	}
-	#rodapeCelular{
-		width: 100% !important;
-		min-width: 260px !important;
+	@-webkit-keyframes mov-animada {
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(-100%, 0, 0);
+	    transform: translate3d(-100%, 0, 0);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
 	}
+	
+	@keyframes mov-animada {
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(-100%, 0, 0);
+	    transform: translate3d(-100%, 0, 0);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+	.mov-animada {
+	  -webkit-animation-name: fadeInLeft;
+	  animation-name: fadeInLeft;
+	}
+
 	#messagemAlerta{
 		display: block;
 		position: fixed;
@@ -421,12 +456,6 @@ body{
 	.butaoIconTexto:hover  {
 		color: rgba(10, 10, 10, 1);
 	}
-	.corFiltro{
-		background: #f2f8ff;
-		padding: 5%;
-		margin-left: 5%;
-		margin-right: 5%;" 
-	}
 	.desaparecer-celular{
 		display: none !important;
 	}
@@ -477,7 +506,17 @@ body{
 	.botao-principal{
 		font-size: 10px !important;
 	}
-/* Margins */
+	.listagemVazia {
+		margin: 5% 10% 5% 10% !important;
+		padding: 10% 5% 10% 5%!important;
+	}
+	.nenhumEncontrado {
+		font-size: 120%;
+	}
+	.heightMin{
+		min-height: 250px;
+	}
+		/* Margins */
 /* Margin-0-celular */
 	
 	.m-0-celular {
@@ -921,8 +960,40 @@ body{
 			z-index: 9999;
 			box-shadow: 1px 1px 5px black;
 	 	} 
+	 	@-webkit-keyframes mov-animada {
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(-100%, 0, 0);
+	    transform: translate3d(-100%, 0, 0);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+	
+	@keyframes mov-animada {
+	  from {
+	    opacity: 0;
+	    -webkit-transform: translate3d(-100%, 0, 0);
+	    transform: translate3d(-100%, 0, 0);
+	  }
+	
+	  to {
+	    opacity: 1;
+	    -webkit-transform: translate3d(0, 0, 0);
+	    transform: translate3d(0, 0, 0);
+	  }
+	}
+	
+	.mov-animada {
+	  -webkit-animation-name: fadeInLeft;
+	  animation-name: fadeInLeft;
+	}
 		.heightMin{
-			min-height: 460px;
+			min-height: 300px;
 		}
 		.itemMenu{
 			padding-top: 3px;
@@ -988,6 +1059,13 @@ body{
 			font-size: 12px;
 			letter-spacing: 1px;
 			margin-bottom: 0px !important;
+		}
+		.listagemVazia {
+			margin: 5% 10% 5% 10% !important;
+			padding: 10% 5% 10% 5%!important;
+		}
+		.nenhumEncontrado {
+			font-size: 150%;
 		}
 		/* Margins */
 /* Margin-0-tablet */

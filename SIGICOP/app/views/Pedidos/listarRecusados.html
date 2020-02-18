@@ -92,11 +92,9 @@
 #{/if}
 #{if listaRecusados.size() == 0}
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
-	<div class="text-center text-primary font-size-celular border" style="margin: 5% 20% 5% 20%; padding: 10%;">
+	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-		<span class="desaparecer-celular">
-			<div class="h1">Nenhum pedido foi encontrado</div>
-		</span>
+			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
 			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
@@ -113,6 +111,7 @@ $(document).ready(function () {
 	$(".concluir").click(function() {
 		var idPedido = $(this).data("item");
 		Swal.fire({
+			position: 'top',
 			title: 'Mensagem de conclusão:',
 			input: 'text',
 			inputPlaceholder: 'digite alguma mensagem complementar',
