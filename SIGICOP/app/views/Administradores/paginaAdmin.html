@@ -2,7 +2,8 @@
 #{set title:'Pagina Do Administrador' /}
 <div class="heightMin">
 #{if listaPedidosPa != null}
-	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
+	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+	<div id="fecharFiltro" class="pl-2 pb-2"><i class="window close outline icon mt-3 mr-2"></i></div>
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
 					<form action="@{Administradores.paginaAdmin}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">

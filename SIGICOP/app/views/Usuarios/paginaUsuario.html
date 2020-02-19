@@ -1,7 +1,8 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Pagina do Usuario' /}
 <div class="heightMin">
-    <div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
+    <div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+    <div id="fecharFiltro" class="pl-2 pb-2"><i class="window close outline icon mt-3 mr-2"></i></div>
 #{if listaPedidos.size() > -1}
 <!-- Filtro por nome do arquivo e descrição -->
 			<form action="@{Usuarios.filtro}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">

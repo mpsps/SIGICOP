@@ -2,8 +2,8 @@
 #{set title:'Solicitacao de Pedido(s)' /}
 <div class="heightMin">
 #{if usuarioBanco?.qtdDisponivel == 0}
-	<div class="py-5 text-center mb-3 alert alert-warning m-1-celular p-1-celular shadow-sm" >
-		<h2 style="color: #ff4a4a;">Atenção!</h2>
+	<div class="py-5 text-center mb-3 alert m-1-celular p-1-celular shadow-sm" style="background: #fff9e6; border-color: #fff3cd">
+		<h2 style="color: #721c24;">Atenção!</h2>
 		<p class="lead font-size-celular">Você atingiu seu limite máximo de solicitacões
 			nesse mês, mas para isso, lembresse de salvar os pedidos.</p>
 	</div>
@@ -72,8 +72,8 @@
 #{/else}
 #{if usuarioBanco?.qtdDisponivel == 0}
 <!-- LISTAGEM EM BAIXO DO AVISO, COM 4 ITENS EM CADA LINHA-->
-		<div class="col-md-12 order-md-2 font-size-celular mt-2-celular p-1-celular">
-			<div class="d-flex justify-content-between brancoGelo align-items-center h5 mb-3 p-0 shadow-sm p-2 mb-1 bg-white rounded">
+		<div class="col-md-12 font-size-celular mt-2-celular ml-0-celular mr-0-celular p-0-celular">
+			<div class="d-flex justify-content-between brancoGelo align-items-center h5 shadow-sm p-2 mb-1 bg-white rounded mb-3 p-0">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
 				<a title="salvar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 

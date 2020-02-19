@@ -149,7 +149,7 @@
 			</a>
 #{/if}
 #{if solicitar}
-			<a title="filtrar pedidos" class="linkMenu" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+			<a title="filtrar pedidos" class="linkMenu itemFiltro" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 	  		aria-expanded="false" aria-controls="multiCollapseExample1">
 				<li class="m-0 itemMenu rounded">
 	  				<i class="filter icon"></i>filtrar Pedidos
@@ -211,7 +211,7 @@
 		</li>
 	</a>
 #{if listaAdmins != null}
-			<a title="filtrar Adminstradores" class="linkMenu" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" 
+			<a title="filtrar Adminstradores" class="linkMenu itemFiltro" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" 
 			aria-controls="multiCollapseExample1">
 				<li class="m-0 itemMenu rounded">
 					<i class="search icon"></i>Filtrar Administradores <i class="gem outline icon"></i>
@@ -239,7 +239,7 @@
 			</a>
 #{/if}
 #{if filtroPa && listaPedidosPa || listaPedidosPa != null}
-				<a title="filtrar Pedidos" class="linkMenu" data-toggle="collapse" 
+				<a title="filtrar Pedidos" class="linkMenu itemFiltro" data-toggle="collapse" 
 				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 					<li class="m-0 itemMenu rounded">
 						<i class="filter icon"></i>filtrar Pedidos
@@ -264,7 +264,7 @@
 			</a>
 #{/if}
 #{if listaconcluidos != null}
-			<a title="filtar pedidos concluidos" class="linkMenu" id="concluidos" data-toggle="collapse"
+			<a title="filtar pedidos concluidos" class="linkMenu itemFiltro" id="concluidos" data-toggle="collapse"
 			 href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 				<li class="m-0 itemMenu rounded">
 					<i class="filter icon"></i>filtrar Concluídos
@@ -291,7 +291,7 @@
 			</a>
 #{/if}
 #{if listaRecusados != null}
-			<a title="filtar pedidos recusados" class="linkMenu" id="recusados" data-toggle="collapse" href="#multiCollapseExample1" 
+			<a title="filtar pedidos recusados" class="linkMenu itemFiltro" id="recusados" data-toggle="collapse" href="#multiCollapseExample1" 
 	  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 				<li class="m-0 itemMenu rounded">
 					<i class="filter icon"></i>Filtrar Recusados
@@ -603,8 +603,9 @@ $().ready(function() {
 		setTimeout(function () {
 			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
 		}, 2000); // O valor e representado em milisegundos.
-		
 	var width = window.innerWidth;
+	if(width > 750){
+	}
 	if(width > 500 && width < 750){
 		$('.linkMenu').click(function(){
 			$('#layoutMenu').hide();
@@ -636,6 +637,7 @@ $().ready(function() {
 	$('#abrirMenu').click(function(){
 	  	$('#layoutMenu').show();
 	  	$('#fecharMenu').show();
+	  	$('.t-filtro').hide();
 	});
 	 $('#fecharMenu').click(function(){
 	  	$('#layoutMenu').hide();
@@ -716,7 +718,12 @@ $("#ApagarEntregues").click(function() {
 <!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
 <script type="text/javascript">
 $(document).ready(function() {
-	
+	$("#fecharFiltro").click(function() {
+		document.getElementById("multiCollapseExample1").style = 'display: none;';
+	});
+	$(".itemFiltro").click(function() {
+		document.getElementById("multiCollapseExample1").style = 'display: inline;';
+	});
 #{if session.contains("usuarioLogado")}
 	//DIALOGS COM DADOS DO USUARIO
 		$("#dadosUser").click(function() {

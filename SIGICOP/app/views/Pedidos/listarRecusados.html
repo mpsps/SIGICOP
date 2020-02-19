@@ -2,7 +2,8 @@
 #{set title:'Pedidos Recusados' /}
 <div class="heightMin">		
 #{if listaRecusados != null}
-		    <div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated zoomIn faster" id="multiCollapseExample1">
+		    <div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+		    <div id="fecharFiltro" class="pl-2 pb-2"><i class="window close outline icon mt-3 mr-2"></i></div>
 #{if listaRecusados.size() > -1 }
 <!-- Filtro por nome do usuario e nome do arquivo -->
 					<form action="@{Pedidos.listarRecusados}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
@@ -73,11 +74,11 @@
 						</div>
 						<div class="card-text text-center">
 							<div class="">
-								<a class="concluir font-size-celular" data-item="${pr.id}" href="#Concluir" style="font-size: medium; text-decoration: none; color: white;">
-									<span class="btn btn-outline-success mt-1 mb-1 butaoIconTexto font-size-celular" ><span class="desaparecer-celular">Concluir</span>
-									<i style="float: right; margin: 1px;" class="check icon"></i></span>
+								<a class="btn-sm-computador btn-block-computador btn btn-outline-success concluir butaoIconTexto mb-1 pb-0-celular" data-item="${pr.id}" href="#Concluir">
+									<span class="desaparecer-celular">Concluir</span>
+									<i style="margin: 1px;" class="check icon"></i>
 								</a>
-								<a href="@{Pedidos.downloadAdmin(pr.id)}" class="btn-sm-computador btn-block-computador btn btn-outline-primary m-1 butaoIconTexto font-size-celular">
+								<a class="btn-sm-computador btn-block-computador btn btn-outline-primary mb-1 butaoIconTexto pb-0-celular" href="@{Pedidos.downloadAdmin(pr.id)}">
 									<span class="desaparecer-celular">Download</span>
 									<i style=" margin: 1px;" class="download icon"></i>
 								</a>
