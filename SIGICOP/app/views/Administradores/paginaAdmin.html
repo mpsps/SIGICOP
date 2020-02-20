@@ -3,7 +3,7 @@
 <div class="heightMin">
 #{if listaPedidosPa != null}
 	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	<div id="fecharFiltro" class="pl-2 pb-2"><i class="window close outline icon mt-3 mr-2"></i></div>
+	<i id="fecharFiltro" class="window close outline icon mt-3 mr-2"></i>
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
 					<form action="@{Administradores.paginaAdmin}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
@@ -39,10 +39,7 @@
  	<th scope="col" class="m-0">Cópias</th>
  	<th scope="col">Face</th>
  	<th scope="col">Nome do Arquivo</th>
- 	<th scope="col">Download</th>
- 	<th scope="col">Concluir</th>
- 	<th scope="col">Recusar</th>
- 	<th scope="col">+ Informações</th>
+ 	<th scope="col" colspan="4">Ações</th>
  </tr>
 #{list items:listaPedidosPa, as:'p'}
 	<tr class="m-0 ">
@@ -51,25 +48,25 @@
 		<td>${p.frenteVerso}</td>
 		<td id="${p.id}"><!-- ${p.nomeArquivo} --></td>
 		<td>
-		<a class="btn btn-outline-primary butaoIconTexto btn-sm btn-block" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
+		<a title="Download" class="btn btn-outline-primary butaoIconTexto btn-sm btn-block" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
 			text-decoration: none; font-size: 85%; margin: 0px;">
 			<i class="download icon"></i>
 		</a>
 		</td>
 		<td>
-		<a class="btn btn-block btn-outline-success btn-sm butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
+		<a title="Concluir" class="btn btn-block btn-outline-success btn-sm butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
 			font-size: 85%; margin: 0px;" >
 			<i  class="check icon"></i>
 		</a>
 		</td>
 		<td>
-		<a class="btn btn-block btn-outline-danger btn-sm butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
+		<a title="Recusar" class="btn btn-block btn-outline-danger btn-sm butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
 			font-size: 85%; margin: 0px;">
 			<i class="x icon"></i>
 		</a>
 		</td>
 		<td>
-		<a class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+		<a title="+ Informações" class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
 						 	role="button" aria-expanded="false" aria-controls="collapseExample">
 		<i class="plus icon"></i>
 		</a>
@@ -77,7 +74,7 @@
 	</tr>
 	<tr  class="collapse text-left animated fadeInDown faster m-0" id="collapseExample${p.id}">
 				
-		<td colspan="4">
+		<td colspan="3">
 		<div class="card">
 					<div class="card-text">
 						<b>Status: </b>
@@ -88,7 +85,7 @@
 					</div>
 				</div>
 		</td>
-		<td colspan="4">
+		<td colspan="5">
 		<div class="card">
 					<div class="card-text">
 						<b>Data de Envio: </b> ${p.dataEnvio}
@@ -193,21 +190,24 @@
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
 </form> 
-<script type="text/javascript">
 
-	$(document).ready(function () {
-		setInterval(function () {
-	      window.location.reload(1);
-	    }, 120000); //tempo em milisegundos. Neste caso, o refresh vai acontecer .
-	});
-</script>
 <script type="text/javascript">
 $(document).ready(function(){
+
+	var doReload = true;
+	
+	setInterval(function () {
+		if (doReload) {
+			window.location.reload(1);
+		}
+	}, 120000); //tempo em milisegundos. Neste caso, o refresh vai acontecer .
+	
 	$(".recusar").click(function() {
+		doReload = false;
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
-			position: 'top',
+			  position: 'top',
 			  title: 'Motivo da recusa:',
 			  input: 'text',
 			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
@@ -221,7 +221,10 @@ $(document).ready(function(){
 				  },
 			  hideClass: {
 				    popup: 'animated fadeOutUp faster'
-				  }
+				  },
+			  onClose: () => {
+					doReload = true;
+				}
 		}).then((result) => {
 			if(result.value == ""){
 				Swal.fire({
@@ -244,8 +247,10 @@ $(document).ready(function(){
 			}
 		})
 	});
-
+	
 	$(".concluir").click(function() {
+		doReload = false;
+		
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
@@ -263,7 +268,10 @@ $(document).ready(function(){
 				  },
 			  hideClass: {
 				    popup: 'animated fadeOutUp faster'
-				  }
+				  },
+				onClose: () => {
+					doReload = true;
+				}
 		}).then((result) => {
 			if(result.value == ""){
 				result.value = ".";
@@ -275,6 +283,7 @@ $(document).ready(function(){
 			}
 		})
 	});
+	
 #{list items:listaPedidosPa, as:'p'}
 	if(${p.nomeArquivo.size()} > 20){
 	/* 	var maxNome = ${p.nomeArquivo}.substring(0, 15); */ //.indexOf(".")

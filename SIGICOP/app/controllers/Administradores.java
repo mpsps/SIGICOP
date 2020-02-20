@@ -269,13 +269,29 @@ public class Administradores extends Controller {
 			List<Administrador> listarDeAdmins = new ArrayList<Administrador>();
 			
 			if(nomeDoAdminFiltro.isEmpty() && emailDoAdminFiltro.isEmpty()) {
-				listarDeAdmins = Administrador.find("admPadrao = ?1", false).fetch();
+				if (admBanco.id == 1) {
+					listarDeAdmins = Administrador.find("id != 1").fetch();
+				}else {
+					listarDeAdmins = Administrador.find("admPadrao = ?1", false).fetch();				
+				}
 			}else if(!nomeDoAdminFiltro.isEmpty() && emailDoAdminFiltro.isEmpty()){
-				listarDeAdmins = Administrador.find("admPadrao = ?1 And nomeAdm LIKE ?2", false, "%"+nomeDoAdminFiltro+"%").fetch();
+				if (admBanco.id == 1) {
+					listarDeAdmins = Administrador.find("id != 1 AND nomeAdm LIKE ?1", "%"+nomeDoAdminFiltro+"%").fetch();
+				}else {
+					listarDeAdmins = Administrador.find("admPadrao = ?1 AND nomeAdm LIKE ?2", false, "%"+nomeDoAdminFiltro+"%").fetch();
+				}
 			}else if(nomeDoAdminFiltro.isEmpty() && !emailDoAdminFiltro.isEmpty()){
-				listarDeAdmins = Administrador.find("admPadrao = ?1 And email LIKE ?2", false, "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				if (admBanco.id == 1) {
+					listarDeAdmins = Administrador.find("id != 1 AND email LIKE ?1", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				}else {
+					listarDeAdmins = Administrador.find("admPadrao = ?1 AND email LIKE ?2", false, "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				}
 			}else if(!nomeDoAdminFiltro.isEmpty() && !emailDoAdminFiltro.isEmpty()){
-				listarDeAdmins = Administrador.find("admPadrao = ?1 And nomeAdm LIKE ?2 AND email LIKE ?3 ", false,"%"+ nomeDoAdminFiltro+"%", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				if (admBanco.id == 1) {
+					listarDeAdmins = Administrador.find("id != 1 AND nomeAdm LIKE ?1 AND email LIKE ?2 ", "%"+ nomeDoAdminFiltro+"%", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				}else {
+					listarDeAdmins = Administrador.find("admPadrao = ?1 And nomeAdm LIKE ?2 AND email LIKE ?3 ", false,"%"+ nomeDoAdminFiltro+"%", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
+				}
 			}
 			String listaAdmins = "listaAdmins";
 			String telaAdmin = "telaAdmin";

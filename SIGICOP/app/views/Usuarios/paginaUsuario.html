@@ -2,10 +2,10 @@
 #{set title:'Pagina do Usuario' /}
 <div class="heightMin">
     <div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-    <div id="fecharFiltro" class="pl-2 pb-2"><i class="window close outline icon mt-3 mr-2"></i></div>
+    <i id="fecharFiltro" class="window close outline icon mt-3 mr-2"></i>
 #{if listaPedidos.size() > -1}
 <!-- Filtro por nome do arquivo e descrição -->
-			<form action="@{Usuarios.filtro}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
+			<form action="@{Usuarios.filtro}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border mt-0 m-0-celular pt-1-celular">
 				<fieldset class="mb-0-celular">
 			        <legend class="mb-0">Filtrar Por:</legend>
 					<div class="form-row m-0">
