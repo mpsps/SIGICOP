@@ -21,7 +21,7 @@ public class Inicializador extends Job {
 
 			Administrador admPadrao = new Administrador();
 			admPadrao.admPadrao = true;
-			admPadrao.nomeAdm = "Admin Padrao";
+			admPadrao.nomeAdm = "Admin Absoluto";
 			admPadrao.email = "padrao@email.com";
 			String senhaCript = CriptografiaUtils.criptografarMD5("123456");
 			admPadrao.senha = senhaCript;

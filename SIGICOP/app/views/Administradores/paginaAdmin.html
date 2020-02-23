@@ -3,7 +3,7 @@
 <div class="heightMin">
 #{if listaPedidosPa != null}
 	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	<i id="fecharFiltro" class="window close outline icon mt-3 mr-2"></i>
+	<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
 					<form action="@{Administradores.paginaAdmin}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
@@ -22,8 +22,8 @@
 						    	</div>
 						  		</div>
 						 		<div class="text-center mt-1-celular">
-							  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-									<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
+							  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+									<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
 								</div>
 						 	</fieldset>
 						</form><br>
@@ -103,74 +103,9 @@
 				
 	</tr>
 #{/list}
-</table>
-</div>
-
-<!-- #{list items:listaPedidosPa, as:'p'}
- listar todos os pedidos com o status em "AGUARDANDO"
-	   		<div class="col-lg-4">
-				<div class="card mb-3 shadow-sm" style="max-width: 100%;">
-					<div class="card-header text-center pt-1 pb-1">
-						<div class="text-primary m-0 h6">Matricula:</div>
-				${p.usuario.matricula}
-					</div>
-					<div class="card-body brancoGelo pt-0 pb-1">
-						<div class="card-text">
-							<b>Cópias: </b> ${p.qtdCopias}
-						</div>
-						<div class="card-text">
-							<b>Face: </b> ${p.frenteVerso}
-						</div>
-						<div class="card-text">
-							<b>Status: </b>
-							<div class=" text-center roundedc statusAguardando"> ${p.status}</div>
-						</div>
-						<button class="btn btn-outline-info mt-1 m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
-						 	role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="desaparecer-celular">Informações</span>
-					  	</button>
-						<div class="collapse text-left" id="collapseExample${p.id}">
-						  	<div class="card">
-								<div class="card-text">
-									<b>Data de Envio: </b> ${p.dataEnvio}
-								</div>
-								<div class="card-text">
-									<b>Arquivo: </b> <span class="maxNome">${p.nomeArquivo}</span>
-								</div>
-#{if p.descricao} 
-								<div class="card-text">
-									<b>Descricao: </b> ${p.descricao} 
-#{if p.descricao = ""}[sem descricao] #{/if}<br />
-								</div>
-#{/if}
-							</div>
-						</div>
-						<div class="card-text text-center">
-							<div class="">
-								<a class="btn btn-outline-success m-1 butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
-								font-size: 85%; margin: 0px;" >
-								<span class="desaparecer-celular">Concluir</span>
-								<i style="float: right; margin: 1px;" class="check icon"></i>
-								</a>
-								<a class="btn btn-outline-danger m-1 butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
-								font-size: 85%; margin: 0px;">
-								<span class="desaparecer-celular">Recusar</span>
-								<i style="float: right; margin: 1px;" class="x icon"></i>
-								</a>
-								<a class="btn btn-outline-primary m-1 butaoIconTexto btn-sm-computador btn-block-computador" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
-								text-decoration: none; font-size: 85%; margin: 0px;">
-								<span class="desaparecer-celular">Download</span>
-								<i style="margin: 1px;" class="download icon"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-#{/list} -->
-		</div>
-	</div>
-#{/if}
 #{if listaPedidosPa.size() == 0}
+<tr>
+<th colspan="5">
 <!-- informa se não houver ou não encontrar nenhum pedido-->
 	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
@@ -180,7 +115,14 @@
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
 			</a>
 	</div>
+	</th>
+	</tr>
 #{/if} 
+</table>
+</div>
+		</div>
+	</div>
+#{/if}
 </div>
 <form id="con" action="@{Pedidos.concluido}">
 	<input type="hidden" id="idPedCon" name="idPedCon" />

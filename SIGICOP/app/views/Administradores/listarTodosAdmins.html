@@ -3,7 +3,7 @@
 <div class="heightMin">	
 #{if listarDeAdmins != null}
 	    	<div class="collapse multi-collapse m-0 p-0 animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	    	<i id="fecharFiltro" class="window close outline icon mt-3 mr-2"></i>
+	    	<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->
 					<form action="@{Administradores.listarTodosAdmins}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
@@ -22,8 +22,8 @@
 						    	</div>   		
 					  		</div>
 					 		<div class="text-center mt-1-celular">
-						  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-						  		<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+						  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						  		<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 						 	</div>
 						</fieldset>
 					</form><br>
@@ -37,7 +37,7 @@
 			<div class="h1 nenhumEncontrado">Nenhum administrador foi encontrado</div>
 			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
+		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
 			</a>
 	</div>
 #{/if} 

@@ -17,11 +17,6 @@
 #{get 'moreScripts' /}
 <!-- BOOTSTRAP - CSS -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}">
-<!-- BOOTSTRAP JS -->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
 <!--SEAMNTIC CSS -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/reset.min.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/site.min.css'}">
@@ -117,14 +112,14 @@
 <!-- CSS PERSONALIZADO  -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"> 
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
-    </head>
+	</head>
 <body onload="bemVindo()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
 <div class="ui large top fixed hidden menu border-0">
-  <div class="ui container">
+	<div class="ui container">
 		<a title="principal" class="active item" href="@{Gerenciador.principal}">Principal</a>
-    	<a title="sobre nós" class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
-    	<div class="right menu">
+	    <a title="sobre nós" class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
+	    <div class="right menu">
 			<div class="item">
 	        	<a title="entrar agora" class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
 			</div>
@@ -145,26 +140,26 @@
 <div class="pusher m-0 font-size-celular p-0-celular m-0-celular">
   	<div class="ui inverted vertical masthead segment center aligned m-0 p-0-celular
   	 m-0-celular pb-1-celular p-0-celular shadow" style="">
-			<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
-		        <a class="toc item">
-		        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
-		        </a>
-		        <div class="item pl-1 pr-1">
+		<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
+	        <a class="toc item">
+	        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
+	        </a>
+	        <div class="item pl-1 pr-1">
 		        <a title="Principal" class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
 		        href="@{Gerenciador.principal}">Principal</a>
-		        </div>
-		        <div class="item m-0 pl-1 pr-1"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
+	        </div>
+	        <div class="item m-0 pl-1 pr-1"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
 		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" -->
 		        <a title="sobre nós" class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
 		        onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
-		        </div>
-		        <div class="right item m-0">
-			        <a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
-			        href="@{Gerenciador.login}">Entrar</a>
-			        <a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
-			        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
-				</div>
+	        </div>
+	        <div class="right item m-0">
+		        <a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
+		        href="@{Gerenciador.login}">Entrar</a>
+		        <a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
+		        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
 			</div>
+		</div>
 		<div class="p-0-celular m-0-celular font-size-celular">
 			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" style="width: 30%;" class="image-sigicop"/>
 			<br>
@@ -172,17 +167,14 @@
 	        IFRN <i>campus </i> João Câmara
 			</div>
 			<br/>
-			
 		</div>
 		<div class="mt-5 pt-3 pt-2-celular mt-2-celular m-0">
-		<a title="entrar agora" href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
-			style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora <i class="right arrow icon m-0 m-0-celular"></i></a>
+			<a title="entrar agora" href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
+				style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora <i class="right arrow icon m-0 m-0-celular"></i></a>
 		</div>
 	</div>
-	
 <!-- CONTEÚDO DA PÁGINA-->
-<!--/////////////////////////////////////////////////////////////////////////////////////-->
-<!--  --><div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
+<div class="ui vertical stripe segment mt-5 mt-3-celular pt-0 pt-5-celular">
 	<div class="ui text container text-break p-0 mt-4 mt-0-celular" style="max-height: 100%;">
 #{doLayout /}
 		<a title="volta ao topo" href="#topPrincipal" class="sticky-top animated fadeInUpBig faster">
@@ -190,8 +182,7 @@
 		</a>
 	</div>
 </div>
-<!--/////////////////////////////////////////////////////////////////////////////////////-->
-
+<!-- FIM DE CONTEÚDO DA PÁGINA-->
 <!-- RODAP� DA PAGINA -->
 	<div class="position-bottom text-break" id="rodapeCelular" class="rodapeEmBaixo">
  		<div class="ui inverted vertical footer segment" class="dark">
@@ -251,7 +242,7 @@ function bemVindo(){
 <script type="text/javascript">
 $(document).ready(function(){
     $(window).scroll(function(){
-        if ($(this).scrollTop() > 500) {
+        if ($(this).scrollTop() > 300) {
             $('a[href="#topPrincipal"]').fadeIn();
         } else {
             $('a[href="#topPrincipal"]').fadeOut();

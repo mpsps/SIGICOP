@@ -10,11 +10,8 @@
 <!-- CSS PADRãO -->
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 #{get 'moreStyles' /}
-<!-- JAVASCRIPT PADRÃO -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- JS JQUERY -->
+		<script src="@{'/public/javascripts/Jquery/jquery-3.4.1.js'}" type="text/javascript" charset="${_response_encoding}"></script>		
 		<script src="@{'/public/javascripts/Jquery/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{get 'moreScripts' /}
 <!-- BOOTSTRAP - CSS -->
@@ -106,139 +103,146 @@
 <body onload="horaEnome()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">
 <div id="layoutGeral">
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-	<div id="layoutMenu" class="animacao mov-animada rapido "><!-- INICIO MENU -->
-	<div class="h-75 m-0 p-0 hmx-75">
-		<a href="@{Gerenciador.principal}">
-			<img class="aparecer-celular aparecer-tablet" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
-		</a>
-		<ul class="text-white m-0 p-0" style="list-style: none;">
- #{if session.contains("usuarioLogado")}
+<!-- INICIO MENU -->
+	<div id="layoutMenu" class="animacao mov-animada rapido ">
+		<div class="h-75 m-0 p-0 hmx-75">
+			<a href="@{Gerenciador.principal}">
+				<img class="aparecer-celular aparecer-tablet" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" style="max-width: 60%; margin-left: 20%; margin-right: 20%;"/>
+			</a>
+			<ul class="text-white m-0 p-0 list-unstyled">
+ 	#{if session.contains("usuarioLogado")}
 <!-- ////////// MENU DO USUÁRIO /////////// -->
-		<li class="m-0 border rounded meusDados p-0-tablet" id="dadosUser" >
-			<span class="w-75 m-0 p-0">
-			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}" class="rounded-circle m-0 p-0 imagem-celular">
-				<span class="m-0">
-					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0">
-					<span title="${session['usuarioLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet" id="nomeUsuario"></span>
-				</span>
-				<span class="w-25 m-0 p-0">
-#{if usuarioBanco?.qtdDisponivel > 14}
-						<span class="notificacao bg-success text-white mt-2 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>						
-#{/if}	
-#{if usuarioBanco?.qtdDisponivel > 8 & usuarioBanco?.qtdDisponivel < 15}	
-							<span class="notificacao bg-warning text-white m-1 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>			
-#{/if}
-#{if usuarioBanco?.qtdDisponivel < 9}
-	
-						<span class="notificacao bg-danger text-white m-1 font-size-celular">${usuarioBanco?.qtdDisponivel}</span>
-#{/if}
-		<span class="desaparecer-celular">
-					<i title="meus dados" class="info icon text-white"></i>
-		</span>
-		</span>
-</a>
-				</span>
-		</li>
-						<hr class="mt-0 mb-2-celular mb-1-tablet">
-		
-#{if solicitar}
-	 		<a title="solicitar pedido" href="@{Pedidos.solicitar}" class="linkMenu">
+				<li class="m-0 border rounded meusDados p-0-tablet" id="dadosUser">
+					<span class="w-75 m-0 p-0"> 
+						<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconUser.png'}"
+						class="rounded-circle m-0 p-0 imagem-celular"> 
+						<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0"> 
+							<span title="${session['usuarioLogado']}" id="nomeUsuario" 
+								class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet">
+							</span>
+							<span class="w-25 m-0 p-0">
+		#{if usuarioBanco?.qtdDisponivel > 14} 
+								<span class="notificacao bg-success text-white mt-2 font-size-celular">
+									${usuarioBanco?.qtdDisponivel}
+								</span>
+		#{/if} 
+		#{if usuarioBanco?.qtdDisponivel > 8 &&	usuarioBanco?.qtdDisponivel < 15} 
+								<span class="notificacao bg-warning text-white m-1 font-size-celular">
+									${usuarioBanco?.qtdDisponivel}
+								</span>
+		#{/if} 
+		#{if usuarioBanco?.qtdDisponivel < 9} 
+								<span class="notificacao bg-danger text-white m-1 font-size-celular">
+									${usuarioBanco?.qtdDisponivel}
+								</span>
+		#{/if} 
+								<span class="desaparecer-celular"> <i
+									title="meus dados" class="info icon text-white"></i>
+								</span>
+							</span> 
+						</a>
+					</span>
+				</li>
+				<hr class="mt-0 mb-2-celular mb-1-tablet">
+		#{if solicitar}
+				<a title="solicitar pedido" href="@{Pedidos.solicitar}" class="linkMenu">
 					<li class="m-0 itemMenu rounded">
 						<i class="file alternate outline icon"></i>Solicitar
 					</li>
-			</a>
-#{/if}
-#{if solicitar}
-			<a title="filtrar pedidos" class="linkMenu itemFiltro" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
-	  		aria-expanded="false" aria-controls="multiCollapseExample1">
-				<li class="m-0 itemMenu rounded">
-	  				<i class="filter icon"></i>filtrar Pedidos
-#{if statusFiltro.equals("TODOS") || statusFiltro == null}
-					<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
-							${listaPedidos.size()}							
-					</span>
-#{/if}
-#{if statusFiltro.equals("AGUARDANDO")}
-					<span class="notificacao statusAguardando text-white font-size-celular" style="font-size: 10px;">
-							${listaPedidos.size()}							
-					</span>
-#{/if}
-#{if statusFiltro.equals("RECUSADO")}
-					<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 10px;">
-							${listaPedidos.size()}							
-					</span>
-#{/if}
-#{if statusFiltro.equals("CONCLUIDO")}
-					<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 10px;">
-							${listaPedidos.size()}							
-					</span>
-#{/if}
-#{if statusFiltro.equals("ENTREGUE")}
-					<span class="notificacao statusEntregue text-white font-size-celular" style="font-size: 10px;">
-							${listaPedidos.size()}							
-					</span>
-#{/if}
-				</li>
-			</a>
-#{/if}
-#{if voltar}
-			<a title="página do usuário" href="@{Usuarios.paginaUsuario}" class="linkMenu">
-				<li class="m-0 itemMenu rounded">
-		 			<i class="address book outline icon"></i>Página Usuário
-		 		</li>
-	 		</a>
-#{/if}
+				</a>
+		#{/if}
+		#{if solicitar}
+				<a title="filtrar pedidos" class="linkMenu itemFiltro" data-toggle="collapse" 
+				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+					<li class="m-0 itemMenu rounded">
+		  				<i class="filter icon"></i>filtrar Pedidos
+			#{if statusFiltro.equals("TODOS") || statusFiltro == null}
+						<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
+								${listaPedidos.size()}							
+						</span>
+			#{/if}
+			#{if statusFiltro.equals("AGUARDANDO")}
+						<span class="notificacao statusAguardando text-white font-size-celular" style="font-size: 10px;">
+								${listaPedidos.size()}							
+						</span>
+			#{/if}
+			#{if statusFiltro.equals("RECUSADO")}
+						<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 10px;">
+								${listaPedidos.size()}							
+						</span>
+			#{/if}
+			#{if statusFiltro.equals("CONCLUIDO")}
+						<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 10px;">
+								${listaPedidos.size()}							
+						</span>
+			#{/if}
+			#{if statusFiltro.equals("ENTREGUE")}
+						<span class="notificacao statusEntregue text-white font-size-celular" style="font-size: 10px;">
+								${listaPedidos.size()}							
+						</span>
+			#{/if}
+					</li>
+				</a>
+		#{/if}
+		#{if voltar}
+				<a title="página do usuário" href="@{Usuarios.paginaUsuario}" class="linkMenu">
+					<li class="m-0 itemMenu rounded">
+			 			<i class="address book outline icon"></i>Página do Usuário
+			 		</li>
+		 		</a>
+		#{/if}
 <!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->
-#{/if}	
-#{if session.contains("adminLogado")}
+	#{/if}	
+	#{if session.contains("adminLogado")}
 <!-- ////////// MENU DO ADMIN /////////// -->
-	<li class="m-0 border rounded meusDados" id="dadosAdmin">
-			<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" class="rounded-circle imagem-celular">
-				<span class="m-0">
+				<li class="m-0 border rounded meusDados" id="dadosAdmin">
+					<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" 
+					class="rounded-circle imagem-celular">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none">
 						<span title="${session['adminLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet" id="nomeAdmin"></span>
 					</a>
 					<span class="desaparecer-celular">
 						<i title="meus dados" class="info icon text-white"></i>
 					</span>
-				</span>
-	</li>
-	<hr class="mt-0 mb-2-celular mb-1-tablet"/>
-#{if admBanco?.admPadrao}<!-- admin padrão -->
-	<a title="Adicionar Adminstrador" class="linkMenu" href="@{Administradores.cadastroDeAdms}">
-		<li class="m-0 itemMenu rounded">
-			<i class="plus icon"></i>Adicionar Administrador <i class="gem outline icon"></i>
-		</li>
-	</a>
-#{if listaAdmins != null}
-			<a title="filtrar Adminstradores" class="linkMenu itemFiltro" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" 
-			aria-controls="multiCollapseExample1">
-				<li class="m-0 itemMenu rounded">
-					<i class="search icon"></i>Filtrar Administradores <i class="gem outline icon"></i>
 				</li>
-			</a>
-#{/if}
-#{else}
-			<a title="listar Adminstradores" class="linkMenu" href="@{Administradores.listarTodosAdmins}">
-				<li class="m-0 itemMenu rounded">
-					<i class="users icon"></i>Listar Administradores <i class="gem outline icon"></i>
-				</li>
-			</a>		
-#{/else}
-			<a title="restaurar qtd disponível do usuário" class="linkMenu" href="#Resaturar" id="restaurar">
-				<li class="m-0 itemMenu rounded">
-					<i class="sync icon"></i>Restaurar Qtd Disponível <i class="gem outline icon"></i>
-				</li>
-			</a>
-#{/if}<!-- fim admin padrão -->
-#{if telaAdmin}
-			<a title="página do administrador" class="linkMenu" href="@{Administradores.paginaAdmin}">
-				<li class="m-0 itemMenu rounded">
-					<i class="address book icon"></i>Página do Adminstrador
-				</li>
-			</a>
-#{/if}
-#{if filtroPa && listaPedidosPa || listaPedidosPa != null}
+				<hr class="mt-0 mb-2-celular mb-1-tablet"/>
+		#{if admBanco?.admPadrao}<!-- admin padrão -->
+			#{if admBanco?.admPadrao && admBanco.id == 1}<!-- admin-absoluto padrão -->
+				<a title="Adicionar Adminstrador" class="linkMenu" href="@{Administradores.cadastroDeAdms}">
+					<li class="m-0 itemMenu rounded">
+						<i class="plus icon"></i>Adicionar Administrador <i class="gem outline icon"></i>
+					</li>
+				</a>
+			#{/if}
+			#{if listaAdmins != null}
+				<a title="filtrar Adminstradores" class="linkMenu itemFiltro" data-toggle="collapse" 
+				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+					<li class="m-0 itemMenu rounded">
+						<i class="search icon"></i>Filtrar Administradores <i class="gem outline icon"></i>
+					</li>
+				</a>
+			#{/if}
+			#{else}
+				<a title="listar Adminstradores" class="linkMenu" href="@{Administradores.listarTodosAdmins}">
+					<li class="m-0 itemMenu rounded">
+						<i class="users icon"></i>Listar Administradores <i class="gem outline icon"></i>
+					</li>
+				</a>		
+			#{/else}
+				<a title="restaurar qtd disponível do usuário" class="linkMenu" href="#Resaturar" id="restaurar">
+					<li class="m-0 itemMenu rounded">
+						<i class="sync icon"></i>Restaurar Qtd Disponível <i class="gem outline icon"></i>
+					</li>
+				</a>
+			#{/if}<!-- fim admin padrão -->
+			#{if telaAdmin}
+				<a title="página do administrador" class="linkMenu" href="@{Administradores.paginaAdmin}">
+					<li class="m-0 itemMenu rounded">
+						<i class="address book icon"></i>Página do Adminstrador
+					</li>
+				</a>
+			#{/if}
+			#{if filtroPa && listaPedidosPa || listaPedidosPa != null}
 				<a title="filtrar Pedidos" class="linkMenu itemFiltro" data-toggle="collapse" 
 				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 					<li class="m-0 itemMenu rounded">
@@ -248,264 +252,272 @@
 						</span>
 					</li>
 				</a>
-#{/if}
-#{if !listaDeUsuario}
+			#{/if}
+			#{if !listaDeUsuario}
 				<a title="realizar pedido de cópia" class="linkMenu" href="@{Administradores.realizarPedidoCopia}">
 					<li class="m-0 itemMenu rounded">
 						<i class="copy icon"></i>Realizar Pedido de Cópia
 					</li>
 				</a>
-#{/if}
-#{if listaconcluidos != null && admBanco?.admPadrao}
-			<a title="Apagar Entregues" class="linkMenu" id="ApagarEntregues"">
-				<li class="m-0 itemMenu rounded">
-					<i class="trash icon"></i>Apagar Entregues
-				</li>
-			</a>
-#{/if}
-#{if listaconcluidos != null}
-			<a title="filtar pedidos concluidos" class="linkMenu itemFiltro" id="concluidos" data-toggle="collapse"
-			 href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-				<li class="m-0 itemMenu rounded">
-					<i class="filter icon"></i>filtrar Concluídos
-#{if listaconcluidos.size() != 0}
-	  		 		<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 9px;">
-						${listaconcluidos.size()}							
-					</span>
-#{/if}
-				</li>
-			</a>
-#{/if}
-#{else}
-			<a title="pedidos concluidos" class="linkMenu" href="@{Pedidos.listarConcluidos}">
-				<li class="m-0 itemMenu rounded">
-					<i class="check icon"></i>Listar Concluídos
-				</li>
-			</a>
-#{/else}
-#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
-			<a title="Apagar Recusados" class="linkMenu" id="ApagarRecusados">
-				<li class="m-0 itemMenu rounded">
-					<i class="trash icon"></i>Apagar Recusados
-				</li>
-			</a>
-#{/if}
-#{if listaRecusados != null}
-			<a title="filtar pedidos recusados" class="linkMenu itemFiltro" id="recusados" data-toggle="collapse" href="#multiCollapseExample1" 
-	  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-				<li class="m-0 itemMenu rounded">
-					<i class="filter icon"></i>Filtrar Recusados
-#{if listaRecusados.size() != 0}
-		  		<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 9px;">
-						${listaRecusados.size()}							
-				</span>
-#{/if}
-				</li>
-			</a>
-#{/if}
-#{else}
-			<a title="pedidos recusados" class="linkMenu" href="@{Pedidos.listarRecusados}">
-				<li class="m-0 itemMenu rounded">
-					<i class="times icon"></i>Listar Recusados
-				</li>
-			</a>
-#{/else}
-#{if !adm?.id}
-			<a title="editar meus dados" class="linkMenu" href="@{Administradores.Editar}">
-				<li class="m-0 itemMenu rounded">
-					<i class="edit icon"></i>Editar Meus Dados
-				</li>
-			</a>
-#{/if}
-			<a title="editar senha" class="linkMenu" href="@{Administradores.EditarSenha}">
-				<li class="m-0 itemMenu rounded">
-					<i class="key icon"></i>Editar Senha
-				</li>
-			</a>
+			#{/if}
+			#{if listaconcluidos != null && admBanco?.admPadrao}
+				<a title="Apagar Entregues" class="linkMenu" id="ApagarEntregues"">
+					<li class="m-0 itemMenu rounded">
+						<i class="trash icon"></i>Apagar Entregues
+					</li>
+				</a>
+			#{/if}
+			#{if listaconcluidos != null}
+				<a title="filtar pedidos concluidos" class="linkMenu itemFiltro" id="concluidos" data-toggle="collapse"
+				 href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+					<li class="m-0 itemMenu rounded">
+						<i class="filter icon"></i>filtrar Concluídos
+				#{if listaconcluidos.size() != 0}
+		  		 		<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 9px;">
+							${listaconcluidos.size()}							
+						</span>
+				#{/if}
+					</li>
+				</a>
+			#{/if}
+			#{else}
+				<a title="pedidos concluidos" class="linkMenu" href="@{Pedidos.listarConcluidos}">
+					<li class="m-0 itemMenu rounded">
+						<i class="check icon"></i>Listar Concluídos
+					</li>
+				</a>
+			#{/else}
+			#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
+				<a title="Apagar Recusados" class="linkMenu" id="ApagarRecusados">
+					<li class="m-0 itemMenu rounded">
+						<i class="trash icon"></i>Apagar Recusados
+					</li>
+				</a>
+			#{/if}
+			#{if listaRecusados != null}
+				<a title="filtar pedidos recusados" class="linkMenu itemFiltro" id="recusados" data-toggle="collapse" href="#multiCollapseExample1" 
+		  		role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+					<li class="m-0 itemMenu rounded">
+						<i class="filter icon"></i>Filtrar Recusados
+				#{if listaRecusados.size() != 0}
+				  		<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 9px;">
+							${listaRecusados.size()}							
+						</span>
+				#{/if}	
+					</li>
+				</a>
+			#{/if}
+			#{else}
+				<a title="pedidos recusados" class="linkMenu" href="@{Pedidos.listarRecusados}">
+					<li class="m-0 itemMenu rounded">
+						<i class="times icon"></i>Listar Recusados
+					</li>
+				</a>
+			#{/else}
+			#{if !adm?.id}
+				<a title="editar meus dados" class="linkMenu" href="@{Administradores.Editar}">
+					<li class="m-0 itemMenu rounded">
+						<i class="edit icon"></i>Editar Meus Dados
+					</li>
+				</a>
+			#{/if}
+				<a title="editar senha" class="linkMenu" href="@{Administradores.EditarSenha}">
+					<li class="m-0 itemMenu rounded">
+						<i class="key icon"></i>Editar Senha
+					</li>
+				</a>
 <!-- ////////// FIM MENU DO ADMIN /////////// -->
-#{/if}<!-- fim de admin logado -->		
-	</div>
-	<div class="h-25 hmx-25 m-0 p-0 text-white text-center">
-#{if session.contains("adminLogado")}
-			<a title="sair" href="@{Administradores.sair}" class="linkMenu text-danger butaoIconTexto">
-				<li class="m-0 itemMenuSair" style="list-style: none;">
-					<i class="sign out alternate icon"></i>Sair
-				</li>		
-			</a>
-#{/if}
-#{if session.contains("usuarioLogado")}
-			<a title="sair" href="@{Usuarios.sair}" class="linkMenu text-danger butaoIconTexto">
-				<li class="m-0 itemMenuSair" style="list-style: none;">
-					<i class="sign out alternate icon"></i>Sair
-				</li>		
-			</a>
-#{/if}
-#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+<!-- fim de admin logado -->
+	#{/if}		
+		</div><!-- fim height 75% -->
+		<div class="h-25 hmx-25 m-0 p-0 text-white text-center">
+	#{if session.contains("adminLogado")}
+				<a title="sair" href="@{Administradores.sair}" class="linkMenu text-danger butaoIconTexto">
+					<li class="m-0 itemMenuSair list-unstyled">
+						<i class="sign out alternate icon"></i>Sair
+					</li>		
+				</a>
+	#{/if}
+	#{if session.contains("usuarioLogado")}
+				<a title="sair" href="@{Usuarios.sair}" class="linkMenu text-danger butaoIconTexto">
+					<li class="m-0 itemMenuSair list-unstyled">
+						<i class="sign out alternate icon"></i>Sair
+					</li>		
+				</a>
+	#{/if}
+	#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 <!-- HORA -->
-	<li class="m-0" style="list-style: none;">
-		<div title="hora" id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
-	</li>
+				<li class="m-0 list-unstyled">
+					<div title="hora" id="time" class="text-white m-0 mr-0-celular p-0-celular" id="hora" ></div>
+				</li>
 <!-- FIM HORA -->
-#{/if}
-#{else}
-	<li class="m-0">
-		<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
-	</li>
-#{/else}
+	#{/if}
+	#{else}
+				<li class="m-0">
+					<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
+				</li>
+	#{/else}
 				<h4 class="h3 font-size-celular ifrn-jc">IFRN-JC</h4>
-						<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
-							<img class="imagem-logo" src="@{'/public/images/sigicop/if.png'}" width="40%" alt="IFRN_JC" title="IFRN-JC" />
-						</a>
-				</div>
+				<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
+					<img class="imagem-logo" src="@{'/public/images/sigicop/if.png'}" width="40%" alt="IFRN_JC" title="IFRN-JC" />
+				</a>
 			</ul>
-	</div><!-- FIM MENU -->
-		<div id="fecharMenu" class="animated fadeInLeft lower" style="display: none;"><i class="chevron left icon"></i></div>
-#{/if}<!-- fim de user e admin logado -->
+		</div><!-- fim height 25% -->
+	</div>
+<!-- FIM MENU -->
+	<div id="fecharMenu" class="animated fadeInLeft lower" style="display: none;">
+		<i class="chevron left icon"></i>
+	</div>
+<!-- fim de user ou admin logado -->
+#{/if}
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}<!-- user e admin deslogado  -->
 	<div id="layoutDeslogado">
 		<nav class="navbar navbar-expand-md navbar-dark w-100 m-0 corMenu 
-m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular">
-
-#{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
-	<div class="desaparecer-celular desaparecer-tablet">
+		m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular">
 	
-		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
-		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="menuAberto">
-			<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
-		<!-- <span class="navbar-toggler-icon"></span> -->
-		</button>
-	</div>
-#{/if}
-#{else}
-<span id="menuAberto">
-	<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"
-		aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="collapsed">
-		<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
-		<!-- <span class="navbar-toggler-icon"></span> -->
-	</button>
-</span>
-#{/else}
-	<a class="ui inverted basic" href="@{Gerenciador.principal}">
-		<img src="@{'/public/images/icones/casa.png'}" width="40" alt="home" height="40" style="float: left;" title="Home" class="" />
-#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
-	<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
-#{/if}
-	</a>
-	<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
-		<div class="desaparecer-celular desaparecer-tablet">
-		
-#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
-			<div class="text-center">
-				<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
+	#{if !session.contains("adminLogado") & !session.contains("usuarioLogado")}
+			<div class="desaparecer-celular desaparecer-tablet">
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08"
+				aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="menuAberto">
+					<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
+				</button>
 			</div>
-			
-		<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
-#{/if}
-		</div>
-	</div>		
-</nav>
+	#{/if}
+	#{else}
+			<span id="menuAberto">
+				<button class="navbar-toggler collapsed m-0" type="button" data-toggle="collapse" data-target="#navbarsExample08"
+					aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation" id="collapsed">
+					<img src="@{'/public/images/icones/menuIcone.png'}" alt="menu" width="30" height="30">
+					<!-- <span class="navbar-toggler-icon"></span> -->
+				</button>
+			</span>
+	#{/else}
+			<a class="ui inverted basic" href="@{Gerenciador.principal}">
+				<img src="@{'/public/images/icones/casa.png'}" width="40" alt="home" height="40" style="float: left;" title="Home" class="" />
+	#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
+			<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
+	#{/if}
+			</a>
+			<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
+				<div class="desaparecer-celular desaparecer-tablet">
+				
+	#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
+					<div class="text-center">
+						<img title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="100" height="45" style="margin: 0% 0% 0% 0%; max-width: 100%;"/>
+					</div>
+					
+				<div id="time" class="text-white m-0 p-0" id="hora" style="display: none;"></div>
+	#{/if}
+				</div>
+			</div>		
+		</nav>
 		<div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
-#{if flash.error}
+	#{if flash.error}
 			<div class="uk-alert-danger p-2 m-0 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta" style="width: 100%; margin-top: 5% !important;">
-		   		<div class="font-size-celular m-0">${flash.error}</div>
+			  		<div class="font-size-celular m-0">${flash.error}</div>
 			</div>
-#{/if} 
-#{if flash.success}
+	#{/if} 
+	#{if flash.success}
 			<div class="uk-alert-success p-2 m-0 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta" style="width: 100%; margin-top: 5% !important;">
-		   		<div class="font-size-celular m-0">${flash.success}</div>
+				<div class="font-size-celular m-0">${flash.success}</div>
 			</div>
-#{/if}
+	#{/if}
 		</div>
 #{/if}
 #{else}
 	<div id="layoutConteudo" class="w-75">
-			<div class="text-center">
+		<div class="text-center">
 <!-- FLASH DE ERRO E SUCESSO -->
-#{if flash.error}
+	#{if flash.error}
 			<div class="uk-alert-danger p-2 m-0 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
 		   		<div class="font-size-celular m-0">${flash.error}</div>
 			</div>
-#{/if} 
-#{if flash.success}
+	#{/if} 
+	#{if flash.success}
 			<div class="uk-alert-success p-2 m-0 animated zoomInUp faster" uk-alert class="messagemDeAlerta" id="messagemAlerta">
 		   		<div class="font-size-celular m-0">${flash.success}</div>
 			</div>
-#{/if}
+	#{/if}
 		</div>
 #{/else}
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-		<div id="abrirMenu" title="Abrir Menu"><i class="chevron right icon"></i></div>
+		<div id="abrirMenu" title="Abrir Menu">
+			<i class="chevron right icon"></i>
+		</div>
 #{/if}
 		<div class="p-5 p-1-celular conteudoPagina">
 			<div class="text-center">
 				<h1 class="text-secondary tituloCelular mb-1-tablet mt-n3-tablet">${titulo}</h1>
 			</div>
-				#{doLayout /} 
-
+<!-- CONTEÚDO -->
+#{doLayout /} 
+<!-- FIM DE CONTEÚDO -->
 		</div>
-		<!-- RODAPÉ DA PAGINA -->
+<!-- RODAPÉ DA PAGINA -->
 		<div class="position-bottom w-100 m-0-celular text-break m-0" id="rodapeCelular" class="rodapeEmBaixo" style="border-left: 1px solid #2e3136; ">
-		 	<div class="ui inverted vertical footer segment pt-4 pb-4 m-0" class="dark">
+			 <div class="ui inverted vertical footer segment pt-4 pb-4 m-0" class="dark">
 				<div class="ui container pt-0 m-0">
 					<div class="ui stackable inverted divided equal height stackable grid m-0">
-						<!-- <div class="three wide column p-0 mr-n4">
+#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
+						<div class="three wide column">
 							<h4 class="ui inverted header">IFRN-JC:</h4>
-							<div class="ui inverted link list">
+							<div class="ui inverted link list ml-0">
 								<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
-										<img src="@{'/public/images/sigicop/if.png'}" alt="IFRN_JC" onMouseOver="this.src='@{'/public/images/sigicop/if.png'}'"  
-										onMouseOut="this.src='@{'/public/images/sigicop/if.png'}'" width="70%"  style="float: left; margin-right: 5px;" title="IFRN-JC" />
+										<img src="@{'/public/images/sigicop/if.png'}" width="70%" class="imagem-logo-principal" alt="IFRN_JC" title="IFRN-JC" />
 								</a>
 							</div>
-						</div> -->
+						</div>
+#{/if}
 						<div class="four wide column">
 							<h4 class="ui inverted header">Contatos:</h4>
 							<div class="ui inverted link list">
 								Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
-									<br>
+								<br>
 								Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
 							</div>
 						</div>
-						<div class="five wide column">
+						<div class="four wide column">
 							<h4 class="ui inverted header">E-mails:</h4>
 							IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
 							Bolsista: <br><a href="#" class="text-decoration-none" id="font-size-celular">bolsistapoio2@gmail.com</a><br> 
 							Comult: <br><a href="#" class="text-decoration-none" id="font-size-celular">comult.jc@ifrn.edu.br</a>
 						</div>
 						<div class="five wide column">
-						<h4 class="ui inverted header">Desenvolvido Por:</h4>
-						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
-								Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br> 
+							<h4 class="ui inverted header">Desenvolvido Por:</h4>
+							Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
+									Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br> 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+<!-- FIM RODAPÉ DA PAGINA -->
+	</div>
 	</div>
 </div>
-		<a title="volta ao topo" href="#topPrincipal" class="animated fadeInUpBig faster" style="z-index: 1000;">
-				<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
-		</a>
+<a title="volta ao topo" href="#topPrincipal" class="animated fadeInUpBig faster" style="z-index: 1000;">
+	<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
+</a>
 #{if session.contains("adminLogado")}
 <!-- RESTAURA EM QUALQUER PAGINA DO ADMIN-->
 <form id="formRestaurar" action="@{Usuarios.restaurarQtd}">
 	<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
 </form>
-#{if listaRecusados != null && listaRecusados.size() != 0}
+	#{if listaRecusados != null && listaRecusados.size() != 0}
 <!-- APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADO-->
 <form id="formApagarRecusado" action="@{Pedidos.apagarPedidoEntregueOuRecusado}">
 	<input type="hidden" name="status" value="RECUSADO" id="inputRecusado">
 </form>
-#{/if}
-#{if listaconcluidos != null && admBanco?.admPadrao}
+	#{/if}
+	#{if listaconcluidos != null && admBanco?.admPadrao}
 <!-- APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUE-->
 <form id="formApagarEntregue" action="@{Pedidos.apagarPedidoEntregueOuRecusado}">
 	<input type="hidden" name="status" value="ENTREGUE" id="inputEntregue">
 </form>
+	#{/if}
 #{/if}
-#{/if}
-
-<!-- JS DA PAGINA -->
+<!-- HORA E NOME -->
 <script type="text/javascript">
 function horaEnome(){
 	today=new Date();
@@ -523,72 +535,77 @@ function horaEnome(){
 		}
 		document.getElementById('time').innerHTML=h+":"+m+":"+s;
 		setTimeout('horaEnome()',500);
-	
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 	var width = window.innerWidth;
-	var nomeUsuarioCompleto = '${session['usuarioLogado']}';
-	var nomeAdminCompleto = '${session['adminLogado']}';
-	
-	if(${session.contains("usuarioLogado")}){
-		 
-			 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
-			 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
-		if(sobreNome == null || sobreNome == ""){
-				 console.log(nome+" ");
-				 document.getElementById('nomeUsuario').innerHTML = nome;
-		}else{
-			if(width < 500){
-				var nomeMaisSobreNome = nome+' '+sobreNome;
-				if(nomeMaisSobreNome.length > 21){
-						 /* var primeiraLetra = sobreNome.substr(0, 1) */
+	#{if session.contains("usuarioLogado")}
+		var nomeUsuarioCompleto = '${session['usuarioLogado']}';
+		if(${session.contains("usuarioLogado")}){
+			 
+				 var nome = nomeUsuarioCompleto.split(' ')[0];// separar str por espa�os
+				 var sobreNome = nomeUsuarioCompleto.split(' ')[1];// separar str por espa�os
+			if(sobreNome == null || sobreNome == ""){
+					 console.log(nome+" ");
+					 document.getElementById('nomeUsuario').innerHTML = nome;
+			}else{
+				if(width < 500){
+					var nomeMaisSobreNome = nome+' '+sobreNome;
+					if(nomeMaisSobreNome.length > 21){
+							 /* var primeiraLetra = sobreNome.substr(0, 1) */
+							var nomeCompleto = '';
+							for(var i = 0; i < 20; i++){
+								nomeCompleto = nomeCompleto + nomeMaisSobreNome[i];
+							}
+							console.log(nomeCompleto);
+							document.getElementById('nomeUsuario').innerHTML = nomeCompleto+'.';
+					}else{
+						console.log(nome+" "+sobreNome);
+						document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;
+					}				 
+				 }else{
+					 console.log(nome+" "+sobreNome);
+					 document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;		 				 
+				 }
+			}			  
+		}
+	#{/if}
+	#{if session.contains("adminLogado")}
+		var nomeAdminCompleto = '${session['adminLogado']}';
+		if(${session.contains("adminLogado")}){
+			
+				 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espa�os
+				 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espa�os
+			if(sobreNome == null || sobreNome == ""){
+				console.log(nome+" ");
+				 document.getElementById('nomeAdmin').innerHTML = nome;
+			
+			}else{
+				if(width < 500){
+					var nomeMaisSobreNome = nome+' '+sobreNome;
+					if(nomeMaisSobreNome.length > 21){
 						var nomeCompleto = '';
 						for(var i = 0; i < 20; i++){
 							nomeCompleto = nomeCompleto + nomeMaisSobreNome[i];
 						}
 						console.log(nomeCompleto);
-						document.getElementById('nomeUsuario').innerHTML = nomeCompleto+'.';
-				}else{
-					console.log(nome+" "+sobreNome);
-					document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;
-				}				 
-			 }else{
-				 console.log(nome+" "+sobreNome);
-				 document.getElementById('nomeUsuario').innerHTML = nome+' '+sobreNome;		 				 
-			 }
-		}			  
-	}
-	if(${session.contains("adminLogado")}){
-		
-			 var nome = nomeAdminCompleto.split(' ')[0];// separar str por espa�os
-			 var sobreNome = nomeAdminCompleto.split(' ')[1];// separar str por espa�os
-		if(sobreNome == null || sobreNome == ""){
-			console.log(nome+" ");
-			 document.getElementById('nomeAdmin').innerHTML = nome;
-		
-		}else{
-			if(width < 500){
-				var nomeMaisSobreNome = nome+' '+sobreNome;
-				if(nomeMaisSobreNome.length > 21){
-					var nomeCompleto = '';
-					for(var i = 0; i < 20; i++){
-						nomeCompleto = nomeCompleto + nomeMaisSobreNome[i];
+						document.getElementById('nomeAdmin').innerHTML = nomeCompleto+'.';
+					}else{
+						console.log(nome+" "+sobreNome);
+						document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;
 					}
-					console.log(nomeCompleto);
-					document.getElementById('nomeAdmin').innerHTML = nomeCompleto+'.';
 				}else{
 					console.log(nome+" "+sobreNome);
 					document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;
-				}
-			}else{
-				console.log(nome+" "+sobreNome);
-				document.getElementById('nomeAdmin').innerHTML = nome+" "+sobreNome;
-			}				 
+				}				 
+			}
 		}
-	}
+	#{/if}
+#{/if}
 }
 </script>
-<!-- VOLTAR AO TOPO E MANIPULAÇÃO DE MENU-->
+<!-- JS MUTÁVEL -->
 <script type="text/javascript">
-$().ready(function() {
+$(document).ready(function() {
+	/* Função de scroll para voltar ao top */
     $(window).scroll(function(){
         if ($(this).scrollTop() > 300) {
             $('a[href="#top"]').fadeIn();
@@ -600,13 +617,55 @@ $().ready(function() {
         $('html, body').animate({scrollTop : 0},800);
         return false;
     });
-		setTimeout(function () {
-			$('#messagemAlerta').hide(); // "messagemAlerta" � o id do elemento que seja manipular.
-		}, 2000); // O valor e representado em milisegundos.
+/* Animação no scroll para voltar ao top */
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 400) {
+            $('a[href="#topPrincipal"]').fadeIn();
+        } else {
+            $('a[href="#topPrincipal"]').fadeOut();
+        }
+    });
+    $('a[href="#topPrincipal"]').click(function(){
+        $('html, body').animate({scrollTop : 0},700);
+        return false;
+    });
+    
+/* Tempo de exibição da mensagem flash */
+	setTimeout(function () {
+		$('#messagemAlerta').hide(); // "messagemAlerta"
+	}, 2000); // O valor e representado em milisegundos.
+
+/* Mascara de campo */
+    $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
+    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
+    $('#campoMatricula').mask('00000000000000');
+    $('#qtdCopiasFiltro').mask('00');
+    $('#dataEnvio').mask('00/00/0000');
+    $('#dataEnvtrega').mask('00/00/0000');
+#{if temFiltro}
+
+/* Função de limpar filtro */
+	document.getElementById("limpar").addEventListener("click", function() {
+	  clearInputUrlNumberText("NomeDoArquivoFiltro");
+	  clearInputUrlNumberText("descricaoFiltro");
+	  clearInputUrlNumberText("matriculaDoUsuarioFiltro");
+	  clearInputUrlNumberText("nomeDoArquivoFiltro");
+	  clearInputUrlNumberText("emailDoAdminFiltro");
+	  clearInputUrlNumberText("nomeDoAdminFiltro");
+	});
+	function clearInputUrlNumberText(name) {
+		var entradas = document.querySelectorAll("input[id='"+name+"']");
+		[].map.call(entradas, entrada => entrada.value = '');
+	}
+#{/if}
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
+
+/* Manipulação do Menu */
 	var width = window.innerWidth;
 	if(width > 750){
-	}
-	if(width > 500 && width < 750){
+		/* Computador */
+	}else if(width > 500 && width < 750){
+		/* Tablet */
 		$('.linkMenu').click(function(){
 			$('#layoutMenu').hide();
 			$('#fecharMenu').hide();
@@ -619,8 +678,8 @@ $().ready(function() {
 			$('#layoutMenu').hide();
 			$('#fecharMenu').hide();
 		});
-	}
-	if(width < 500){
+	}else if(width < 500){
+		/* Celular */
 		$('.linkMenu').click(function(){
 			$('#layoutMenu').hide();
 			$('#fecharMenu').hide();
@@ -644,526 +703,462 @@ $().ready(function() {
 	  	$('#fecharMenu').hide();
 	  	$('#abrirMenu').fadeIn();
 	});
-});
-</script>
-<!-- MASCARA DE CAMPOS -->
-<script type="text/javascript">
-    $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
-    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
-    $('#campoMatricula').mask('00000000000000');
-    $('#qtdCopiasFiltro').mask('00');
-    $('#dataEnvio').mask('00/00/0000');
-    $('#dataEnvtrega').mask('00/00/0000');
-/*     $('#campoNome').mask('s');    */
-</script>
-#{if listaRecusados != null && listaRecusados.size() != 0}
-<!-- DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS -->
-<script type="text/javascript">
-	$("#ApagarRecusados").click(function() {
-		Swal.fire({
-			scrollbarPadding: true,
-			html: '<div id="text-justify font-size-celular">Tem certeza que apagar todos os pedido com o status RECUSADO? <br/>'+
-				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
-			icon: 'question',
-			showCancelButton: true,
-			confirmButtonColor: '#21ac0d',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sim',
-			showCloseButton: true,
-			showClass: {
-				    popup: 'animated fadeInDown faster'
-			},
-			hideClass: {
-				    popup: 'animated fadeOutUp faster'
-			}
-		}).then((result) => {
-			if (result.value) {
-				$('#inputRecusado').value = "RECUSADO";
-				$('#formApagarRecusado').submit(); 
-			}
-		})
-	});
-</script>
-#{/if}
-#{if listaconcluidos != null && admBanco?.admPadrao}
-<!-- DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES -->
-<script type="text/javascript">
-$("#ApagarEntregues").click(function() {
-	Swal.fire({
-		scrollbarPadding: true,
-		html: '<div id="font-size-celular text-left">Tem certeza que apagar todos os pedido com o status ENTREGUE? <br/>'+
-			  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
-		icon: 'question',
-		showCancelButton: true,
-		confirmButtonColor: '#21ac0d',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Sim',
-		showCloseButton: true,
-		showClass: {
-			    popup: 'animated fadeInDown faster'
-		},
-		hideClass: {
-			    popup: 'animated fadeOutUp faster'
-		}
-	}).then((result) => {
-		if (result.value) {	
-			$('#inputEntregue').value = "ENTREGUE";
-			$('#formApagarEntregue').submit(); 
-		}
-	})
-});
-</script>
-#{/if}
-#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-<!-- DIALOGS COM AVISOS E/OU COM PREENCHIMENTO DE MENSAGENS -->
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#fecharFiltro").click(function() {
+	 
+/* Manipulação de Filtro */
+	/* oculta (fecha) filtro por aperta no icone */
+		$("#fecharFiltro").click(function() {
 		document.getElementById("multiCollapseExample1").style = 'display: none;';
 	});
+		/* habilita o filtro */
 	$(".itemFiltro").click(function() {
 		document.getElementById("multiCollapseExample1").style = 'display: inline;';
 	});
-#{if session.contains("usuarioLogado")}
-	//DIALOGS COM DADOS DO USUARIO
+	$(".tentarFiltrar").click(function() {
+		document.getElementById("multiCollapseExample1").style = 'display: inline;';
+	});
+		
+	#{if session.contains("usuarioLogado")}
+/* DIALOGS COM DADOS DO USUARIO */
 		$("#dadosUser").click(function() {
-				Swal.fire({
-				  position: 'top',
-				  icon: '',
-				  html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
+			Swal.fire({
+				position: 'top',
+				icon: '',
+				html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
 				  '<div class="text-left font-size-celular"><i class="user circle outline icon"></i>'+
 				  '<span class="desaparecer-celular font-weight-bold">Nome:</span> ${usuarioBanco?.nomeUsu} <br>'+
 				  '<i class="envelope outline icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${usuarioBanco?.email}'+
 				  '<br><i class="chart bar outline icon"></i><span class="desaparecer-celular font-weight-bold">Qtd Disponível:</span> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
 				  '<br><i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
-				  showCloseButton: true,
-				  showConfirmButton: false,
-				  showClass: {
-					  popup: 'animated fadeInDown faster'
-				  },
-				  hideClass: {
-					  popup: 'animated fadeOutUp faster'
-				  }
+				showCloseButton: true,
+				showConfirmButton: false,
+				showClass: {
+					popup: 'animated fadeInDown faster'
+				},
+				hideClass: {
+					popup: 'animated fadeOutUp faster'
+				}
 			})
 		});
-#{/if}
-#{if session.contains("adminLogado")}
-//DIALOGS COM DADOS DO ADMIN
-	$("#dadosAdmin").click(function () {
-		Swal.fire({
-			  position: 'top',
-			  icon: '',
-			  html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
-			  '<div class="text-left font-size-celular"><i class="user circle icon"></i><span class="desaparecer-celular font-weight-bold">Nome:</span> ${admBanco?.nomeAdm} <br>'+
-			  '<i class="envelope icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${admBanco?.email}'+
-			  ' <br> #{if admBanco?.ultimoAcesso}<i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
-			  '<a href="@{Administradores.editar}" class="btn btn-block btn-outline-primary mt-2">Editar</a>',
-			  showCloseButton: true,
-			  showConfirmButton: false,
-			  showClass: {
-				  popup: 'animated fadeInDown faster'
-			  },
-			  hideClass: {
-				  popup: 'animated fadeOutUp faster'
-			  }
-		})
-	});
-//DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS 		
-	$("#restaurar").click(function() {
-		Swal.fire({
-			scrollbarPadding: true,
-			position: 'top',
-			html: '<div class="text-center">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
-				  'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
-			icon: 'question',
-			input: 'number',
-			inputAttributes: {
-				    min: '0',
-				    max: '50'
-			},
-			showCancelButton: true,
-			confirmButtonColor: '#21ac0d',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Ok',
-			showCloseButton: true,
-			showClass: {
-				    popup: 'animated fadeInDown faster'
-			},
-			hideClass: {
-				    popup: 'animated fadeOutUp faster'
-			}
-		}).then((result) => {
-			if(result.value == ""){
-				Swal.fire({
-					  icon: 'error',
-					  title: 'ERROR...',
-					  text: 'preencha a quantidade!',
-					  showCloseButton: true,
-					  showClass: {
-						    popup: 'animated pulse faster'
-						  },
-					  hideClass: {
-						  popup: 'animated fadeOutUp faster'
-					  }
-					})
+	#{/if}
+	#{if session.contains("adminLogado")}
+	
+/* DIALOGS COM DADOS DO ADMIN */
+		$("#dadosAdmin").click(function () {
+			Swal.fire({
+		  		position: 'top',
+				icon: '',
+				html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
+					'<div class="text-left font-size-celular"><i class="user circle icon"></i><span class="desaparecer-celular font-weight-bold">Nome:</span> ${admBanco?.nomeAdm} <br>'+
+					'<i class="envelope icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${admBanco?.email}'+
+					' <br> #{if admBanco?.ultimoAcesso}<i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${admBanco?.ultimoAcesso?.format("dd/MM/yyyy HH:mm:ss")} #{/if}<br>'+
+					'<a href="@{Administradores.editar}" class="btn btn-block btn-outline-primary mt-2">Editar</a>',
+				showCloseButton: true,
+				showConfirmButton: false,
+				showClass: {
+					popup: 'animated fadeInDown faster'
+				},
+				hideClass: {
+					popup: 'animated fadeOutUp faster'
 				}
-			if (result.value) {	
-				$('#restQtd').val(result.value);
-				$('#formRestaurar').submit(); 
-			}
-		})
-	});
-#{/if}
-});
-</script>
-#{/if}
-#{if temFiltro}
-<!-- FUNÇÃO QUE LIMPAR FILTRO -->
-<script type="text/javascript">
-// FUNÇÃO QUE LIMPAR FILTRO
-document.getElementById("limpar").addEventListener("click", function() {
-	  clearInputUrlNumberText("NomeDoArquivoFiltro");
-	  clearInputUrlNumberText("descricaoFiltro");
-	  clearInputUrlNumberText("matriculaDoUsuarioFiltro");
-	  clearInputUrlNumberText("nomeDoArquivoFiltro");
-	  clearInputUrlNumberText("emailDoAdminFiltro");
-	  clearInputUrlNumberText("nomeDoAdminFiltro");
-	});
+			})
+		});
+		#{if admBanco?.admPadrao}
 
-	function clearInputUrlNumberText(name) {
-	  var entradas = document.querySelectorAll("input[id='"+name+"']");
-	  [].map.call(entradas, entrada => entrada.value = '');
-}
-</script>
-#{/if}
-#{if session.contains("adminLogado") || !session.contains("usuarioLogado")}
-<!-- VALIDAÇÃO AO ALTERAR ALGUM DADO DO FORMULÁRIO -->
-<script type="text/javascript">
-// VALIDAÇÃO DE NOME
-function validarNome(){							/* campo do nome */
-	var campoNome = document.getElementById('campoNome').value;
-												/* span de mensagem do campo nome  */
-	var validarNomeMsg = document.getElementById('validarNomeMsg');
-												/* span de mensagem de servidor do campo nome */
-	var servidorNomeMsg = document.getElementById('servidorNomeMsg');
-	/* console.log(campoNome); */
-	var nome = campoNome.split(' ')[0]; // separar o primeiro nome
-	var sobreNome = campoNome.split(' ')[1]; // separar o sobrenome
-	
-	jQuery('#campoNome').keyup(function () { 
-	    this.value = this.value.replace(/[^a-zA-Z àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕ]/g,'');// só permite letras e espaços
-	});
-
-	campoNome = campoNome.toLowerCase().replace(/(?:^|\s)\S/g, function(capitalize) { return capitalize.toUpperCase(); });
-
-	if (campoNome == '') { // verificar se campoNome está vazio
-		validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
-	 	servidorNomeMsg.style = 'display: none;'
-	 	document.getElementById("campoNome").style = 'border-color: #f4c4c9; background-color: 	background-color: rgba(254, 245, 247, 0.8);' // campoNome vermelho
-	 	validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-	 	'validacaoMsgm">obrigatório</span>';
-	}else { // se não, apagar a mensagem e a cor do campo da  validação anterior
-		validarNomeMsg.style = 'display: none;'
-		servidorNomeMsg.style = 'display: none;'
-		document.getElementById("campoNome").style = 'border-color: none; background-color: none;'
-
-		if(campoNome.length > 3 & sobreNome == null | sobreNome == ""){ // verificar se o sobreNome está vazio
-			validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
-			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
-			validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-			'validacaoMsgm"> o sobrenome é obrigatório</span>';
-		}else if(campoNome.length > 3){
-			document.getElementById("campoNome").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'// campoNome verde
-			servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
-			validarNomeMsg.style = 'display: none;'// "desativa" a span validarNomeMsg
-			document.getElementById("campoNome").value = campoNome;			
-		}
-	}
-}
-	
-// VALIDAÇÃO DE MATRICULA
-function validarMatricula(){				/* campo da matricula */
-	var campoMatricula = document.getElementById("campoMatricula").value;
-											/* span de validação do campo da matricula */
-	var validarMatriculaMsg = document.getElementById("validarMatriculaMsg");
-											/* span de validação do servidor campo da matricula */
-	var servidorMatriculaMsg = document.getElementById("servidorMatriculaMsg");										
-#{if mat}									/* span de validação do servidor campo da matricula existente */
-	var servidorMatriculaExiste = document.getElementById("servidorMatriculaExiste");											
-#{/if}
-		
-	if (campoMatricula == '') { // verificar se o campoMatricula está vazio
-		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
-	 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);'; // campoMatricula vermelho
-	 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-	 	'validacaoMsgm">obrigatório</span>';
-	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
-#{if mat}
-	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExiste
-#{/if}
-	}else if(campoMatricula.length > 0 & campoMatricula.length < 14){ // verificar se campoMatricula é maior que 0 e menor que 14
-		validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
-	 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoMatricula vermelho
-	 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-	 	'validacaoMsgm">no mínimo 14 caracteres</span>';
-	 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
-#{if mat}
-	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
-#{/if}
-	}
-	if(campoMatricula.length > 13 & campoMatricula.length < 18){
-		document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);' // campoMatricula verde
-		servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
-	 	validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
-#{if mat}
-	 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
-#{/if}	
-	} 
-}
-	
-// VALIDAÇÃO DE EMAIL
-function validarEmail(){			/* campo do email */
-	var campoEmail = document.getElementById("campoEmail").value;
-									/* span de validação do campo do email */
-	var validarEmailMsg = document.getElementById("validarEmailMsg");
-									/* span de validação do servidor campo do email */
-	var servidorEmailMsg = document.getElementById("servidorEmailMsg");										
-#{if email}							/* span de validação do servidor campo do email existente */
-	var servidorEmailExiste = document.getElementById("servidorEmailExiste");											
-#{/if}
-
-	if (campoEmail == '') { // verificar se o campoMatricula está vazio
-	 	document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
-	 	validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-	 	'validacaoMsgm">obrigatório</span>';
-	 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
-	}else{ // se não, então verificar se é email válido
-		usuario = campoEmail.substring(0, campoEmail.indexOf("@"));
-		dominio = campoEmail.substring(campoEmail.indexOf("@")+ 1, campoEmail.length);
-		 
-		if ((usuario.length >=1) &&
-		    (dominio.length >=3) && 
-		    (usuario.search("@")==-1) && 
-		    (dominio.search("@")==-1) &&
-		    (usuario.search(" ")==-1) && 
-		    (dominio.search(" ")==-1) &&
-		    (dominio.search(".")!=-1) &&      
-		    (dominio.indexOf(".") >=1)&& 
-		    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-		 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);';
-		 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
-#{if email}
-		 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
-#{/if}
-		 	validarEmailMsg.style = 'display: none;' // "desativa" a span validarEmailMsg
-		}else{ // se não, então o email não é válido
-			validarEmailMsg.style = 'display: inline;'// "ativa" a span validarEmailMsg
-			document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
-			validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-			'validacaoMsgm">email inválido</span>';
-			servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
-#{if email}
-		 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
-#{/if}
-		}
-	}
-}
-
-// VALIDAÇÃO DE SENHA
-function validarSenha(){			/* campo senha */
-	var campoSenha = document.getElementById('campoSenha').value;
-									/* campo de confirmar senha */
-	var campoConfirmar = document.getElementById('campoConfirmar').value;
-									/* span de mensagem do campo de senha */
-	var validarSenhaMsg = document.getElementById('validarSenhaMsg');
-									/* span de mensagem do campo de comparar */
-	var validarCompararMsg = document.getElementById('validarCompararMsg');
-									/* span de mensagem do servidor do campo de senha */
-	var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
-									/* span de mensagem do servidor do campo de comparar */
-	var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
-									
- 	if (campoSenha.length > 1 & campoSenha.length < 6) { // verifica se a campoSenha tem maior que 1 e menor que 6 caracteres
-		servidorSenhaMsg.style = 'display: none;'// "desativa" a span validarSenhaMsg
- 		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
-		document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
-		validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm">mínino 6 caracteres</span>';
-	}else if(campoSenha == ''){ // verifica se o campo senha está vazio
-		servidorSenhaMsg.style = 'display: none;'// "desativa" a span servidorSenhaMsg
-		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
-		document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
-		validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm">obrigatório</span>';
-	} else if(campoSenha.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
- 		servidorSenhaMsg.style = 'display: none;'; // "desativa" a span servidorSenhaMsg
- 		validarSenhaMsg.style = "display: none;"; // "desativa" a span validarSenhaMsg
- 		document.getElementById('campoSenha').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoSenha verde
-	} 
- 	// verifica se o campoSenha é igual ao campoConfirmar e se campoSenha tem mais de 5 caracteres
-	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){ 
-		validarCompararMsg.style = 'display: inline;'; // "desativa" a span validarComparaMsg
-		validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm"><i class="check icon m-0"></i></span>';
-	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
-		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm"><i class="x icon m-0"></i></span>';
-	}
-	senha = document.getElementById("campoSenha").value;
-	forca = 0;
-	mostra = document.getElementById("mostrar");
-	if((senha.length >= 5) && (senha.length < 10)){
-		if(!isNaN(senha)){
-			forca += 0;
-		}else{			
-			forca += 5;
-		}
-	}else if((senha.length>=10) && (senha.length <= 14)){
-		if(!isNaN(senha)){
-			forca += 5;
-		}else{			
-			forca += 25;
-		}
-	}else if(senha.length>14){
-		if(!isNaN(senha)){
-			forca += 25;
-		}else{			
-			forca += 30;
-		}
-	}
-	if(senha.match(/[a-z]+/)){
-		forca += 5;
-	}
-	if(senha.match(/[0-9]+/)){
-		forca += 5;
-	}
-	if(senha.match(/[A-Z]+/)){
-		forca += 5;
-	}
-	if(senha.match(/[çÇ]+/)){
-		forca += 5;
-	}
-	if(senha.match(/#+/)){
-		forca += 5;
-	}
-	if(senha.match(/!+/)){
-		forca += 5;
-	}
-	if(senha.match(/@+/)){
-		forca += 5;
-	}
-	if(senha.match(/[$]+/)){
-		forca += 5;
-	}
-	if(senha.match(/%+/)){
-		forca += 5;
-	}
-	if(senha.match(/[&]+/)){
-		forca += 5;
-	}
-	if(senha.match(/[+]+/)){
-		forca += 5;
-	}
-	if(senha.match(/_+/)){
-		forca += 5;
-	}
-	if(senha.match(/[-]+/)){
-		forca += 5;
-	}
-	if(senha.match(/[?]+/)){
-		forca += 5;
-	}
-	if(senha.match(/.+/)){
-		forca += 5;
-	}
-	if(senha.match(/,+/)){
-		forca += 5;
-	}
-	if(senha.match(/[*]+/)){
-		forca += 5;
-	}
-	if(senha.match(/.+/)){
-		forca += 5;
-	}
-	if(senha.match(/[ ]+/)){
-		forca += 10;
-	}
-	if(senha.match(/[àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕ]+/)){
-		forca += 10;
-	}
-	if(forca >= 100){
-		forca = 100;
-	}
-	if(forca < 30){
-		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: red; font-size: 8px;" class="">fraca</div>';
-	}else if((forca >= 30) && (forca < 60)){
-		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: yellow; font-size: 8px; color: black !important;" class="">justa</div>';
-	}else if((forca >= 60) && (forca < 85)){
-		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: blue; font-size: 8px;" class="">forte</div>';
-	}else{
-		mostra.innerHTML = '<div style="width:'+forca+'%; background-color: green; font-size: 8px;" class="">exelente</div>';
-	}
-}
-	
-// VALIDAÇÃO DE CONFIRMAR SENHA
-function validarConfirmarSenha(){			/* campo senha */
-	var campoSenha = document.getElementById('campoSenha').value;
-											/* campo de confirmar senha */
-	var campoConfirmar = document.getElementById('campoConfirmar').value;
-											/* span de mensagem do campo de senha */
-	var validarSenhaMsg = document.getElementById('validarSenhaMsg');
-											/* span de mensagem do campo de comparar */
-	var validarCompararMsg = document.getElementById('validarCompararMsg');
-											/* span de mensagem do servidor do campo de senha */
-	var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
-											/* span de mensagem do servidor do campo de comparar */
-	var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
+/* DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS */		
+			$("#restaurar").click(function() {
+				Swal.fire({
+					scrollbarPadding: true,
+					position: 'top',
+					html: '<div class="text-center">Tem certeza que deseja restaurar a disponibilidade de solicitações de todos os usuários? <br/>'+
+						'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+					icon: 'question',
+					input: 'number',
+					inputAttributes: {
+						min: '0',
+						max: '50'
+					},
+					showCancelButton: true,
+					confirmButtonColor: '#21ac0d',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Ok',
+					showCloseButton: true,
+					showClass: {
+						popup: 'animated fadeInDown faster'
+					},
+					hideClass: {
+						popup: 'animated fadeOutUp faster'
+					}
+				}).then((result) => {
+					if(result.value == ""){
+						Swal.fire({
+							icon: 'error',
+							title: 'ERROR...',
+							text: 'preencha a quantidade!',
+							showCloseButton: true,
+							showClass: {
+								popup: 'animated pulse faster'
+							},
+							hideClass: {
+								popup: 'animated fadeOutUp faster'
+							}
+						})
+					}
+					if (result.value) {	
+						$('#restQtd').val(result.value);
+						$('#formRestaurar').submit(); 
+					}
+				})
+			});
+			#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
 			
-	if (campoConfirmar.length > 2 & campoConfirmar.length < 6) { // verifica se a campoConfirmar tem maior que 2 e menor que 6 caracteres
-		document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
-		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm">mínino 6 caracteres</span>';
-#{if comparar}			
-		servidorConfirmarSenhaMsg.style = 'display: none;'
+/* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS */
+				$("#ApagarRecusados").click(function() {
+					Swal.fire({
+						scrollbarPadding: true,
+						html: '<div id="text-justify font-size-celular">Tem certeza que apagar todos os pedido com o status RECUSADO? <br/>'+
+							'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+						icon: 'question',
+						showCancelButton: true,
+						confirmButtonColor: '#21ac0d',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Sim',
+						showCloseButton: true,
+						showClass: {
+							popup: 'animated fadeInDown faster'
+						},
+						hideClass: {
+							popup: 'animated fadeOutUp faster'
+						}
+					}).then((result) => {
+						if (result.value) {
+							$('#inputRecusado').value = "RECUSADO";
+							$('#formApagarRecusado').submit(); 
+						}
+					})
+				});
+			#{/if}
+			#{if listaconcluidos != null && admBanco?.admPadrao}
+			
+/* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES */		
+				$("#ApagarEntregues").click(function() {
+					Swal.fire({
+						scrollbarPadding: true,
+						html: '<div id="font-size-celular text-left">Tem certeza que apagar todos os pedido com o status ENTREGUE? <br/>'+
+							'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
+						icon: 'question',
+						showCancelButton: true,
+						confirmButtonColor: '#21ac0d',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Sim',
+						showCloseButton: true,
+						showClass: {
+							popup: 'animated fadeInDown faster'
+						},
+						hideClass: {
+							 popup: 'animated fadeOutUp faster'
+						}
+					}).then((result) => {
+						if (result.value) {	
+							$('#inputEntregue').value = "ENTREGUE";
+							$('#formApagarEntregue').submit(); 
+						}
+					})
+				});
+			#{/if}
+		#{/if}
+	#{/if}
 #{/if}
-	}else if(campoConfirmar == ''){ // verifica se o campo senha está vazio
-		document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
-		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm">obrigatório</span>';
-#{if comparar}			
-		servidorConfirmarSenhaMsg.style = 'display: none;' // "desativar" a span servidorConfirmarSenhaMsg
-#{/if}
-	}else if(campoConfirmar.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
-		validarCompararMsg.style = "display: none;"; // "desativar" a span validarCompararMsg 
-		document.getElementById('campoConfirmar').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoConfirmar verde
-	}
-	// verifica se o campoSenha é igual ao campoConfirmar e se campoConfirmar tem mais de 5 caracteres
-	if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){
-		validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
-		validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm"><i class="check icon m-0"></i></span>';
-	}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
-		validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
-		validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
-		'validacaoMsgm"><i class="x icon m-0"></i></span>';			
-	}
-} 
-</script>
-#{/if}
-<script type="text/javascript">
-$(document).ready(function(){
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 400) {
-            $('a[href="#topPrincipal"]').fadeIn();
-        } else {
-            $('a[href="#topPrincipal"]').fadeOut();
-        }
-    });
-    $('a[href="#topPrincipal"]').click(function(){
-        $('html, body').animate({scrollTop : 0},700);
-        return false;
-    });
 });
+#{if session.contains("adminLogado") || !session.contains("usuarioLogado")}
+/* VALIDAÇÃO AO ALTERAR ALGUM DADO DO FORMULÁRIO */
+	// VALIDAÇÃO DE NOME
+	function validarNome(){							/* campo do nome */
+		var campoNome = document.getElementById('campoNome').value;
+													/* span de mensagem do campo nome  */
+		var validarNomeMsg = document.getElementById('validarNomeMsg');
+													/* span de mensagem de servidor do campo nome */
+		var servidorNomeMsg = document.getElementById('servidorNomeMsg');
+		/* console.log(campoNome); */
+		var nome = campoNome.split(' ')[0]; // separar o primeiro nome
+		var sobreNome = campoNome.split(' ')[1]; // separar o sobrenome
+		
+		jQuery('#campoNome').keyup(function () { 
+		    this.value = this.value.replace(/[^a-zA-Z àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕçÇ]/g,'');// só permite letras e espaços
+		});
+
+		campoNome = campoNome.toLowerCase().replace(/(?:^|\s)\S/g, function(capitalize) { return capitalize.toUpperCase(); });
+
+		if (campoNome == '') { // verificar se campoNome está vazio
+			validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
+		 	servidorNomeMsg.style = 'display: none;'
+		 	document.getElementById("campoNome").style = 'border-color: #f4c4c9; background-color: 	background-color: rgba(254, 245, 247, 0.8);' // campoNome vermelho
+		 	validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+		 	'validacaoMsgm">obrigatório</span>';
+		}else { // se não, apagar a mensagem e a cor do campo da  validação anterior
+			validarNomeMsg.style = 'display: none;'
+			servidorNomeMsg.style = 'display: none;'
+			document.getElementById("campoNome").style = 'border-color: none; background-color: none;'
+
+			if(campoNome.length > 3 & sobreNome == null | sobreNome == ""){ // verificar se o sobreNome está vazio
+				validarNomeMsg.style = 'display: inline;' // "ativa" a span validarNomeMsg
+				servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
+				validarNomeMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+				'validacaoMsgm"> o sobrenome é obrigatório</span>';
+			}else if(campoNome.length > 3){
+				document.getElementById("campoNome").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'// campoNome verde
+				servidorNomeMsg.style = 'display: none;' // "desativa" a span servidorNomeMsg
+				validarNomeMsg.style = 'display: none;'// "desativa" a span validarNomeMsg
+				document.getElementById("campoNome").value = campoNome;			
+			}
+		}
+	}
+		
+	// VALIDAÇÃO DE MATRICULA
+	function validarMatricula(){				/* campo da matricula */
+		var campoMatricula = document.getElementById("campoMatricula").value;
+												/* span de validação do campo da matricula */
+		var validarMatriculaMsg = document.getElementById("validarMatriculaMsg");
+												/* span de validação do servidor campo da matricula */
+		var servidorMatriculaMsg = document.getElementById("servidorMatriculaMsg");										
+	#{if mat}									/* span de validação do servidor campo da matricula existente */
+		var servidorMatriculaExiste = document.getElementById("servidorMatriculaExiste");											
+	#{/if}
+			
+		if (campoMatricula == '') { // verificar se o campoMatricula está vazio
+			validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
+		 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);'; // campoMatricula vermelho
+		 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+		 	'validacaoMsgm">obrigatório</span>';
+		 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+	#{if mat}
+		 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExiste
+	#{/if}
+		}else if(campoMatricula.length > 0 & campoMatricula.length < 14){ // verificar se campoMatricula é maior que 0 e menor que 14
+			validarMatriculaMsg.style = 'display: inline;' // "ativa" a span validarMatriculaMsg
+		 	document.getElementById("campoMatricula").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoMatricula vermelho
+		 	validarMatriculaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+		 	'validacaoMsgm">no mínimo 14 caracteres</span>';
+		 	servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+	#{if mat}
+		 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
+	#{/if}
+		}
+		if(campoMatricula.length > 13 & campoMatricula.length < 18){
+			document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);' // campoMatricula verde
+			servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
+		 	validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
+	#{if mat}
+		 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
+	#{/if}	
+		} 
+	}
+		
+	// VALIDAÇÃO DE EMAIL
+	function validarEmail(){			/* campo do email */
+		var campoEmail = document.getElementById("campoEmail").value;
+										/* span de validação do campo do email */
+		var validarEmailMsg = document.getElementById("validarEmailMsg");
+										/* span de validação do servidor campo do email */
+		var servidorEmailMsg = document.getElementById("servidorEmailMsg");										
+	#{if email}							/* span de validação do servidor campo do email existente */
+		var servidorEmailExiste = document.getElementById("servidorEmailExiste");											
+	#{/if}
+
+		if (campoEmail == '') { // verificar se o campoMatricula está vazio
+		 	document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
+		 	validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+		 	'validacaoMsgm">obrigatório</span>';
+		 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+		}else{ // se não, então verificar se é email válido
+			usuario = campoEmail.substring(0, campoEmail.indexOf("@"));
+			dominio = campoEmail.substring(campoEmail.indexOf("@")+ 1, campoEmail.length);
+			 
+			if ((usuario.length >=1) &&
+			    (dominio.length >=3) && 
+			    (usuario.search("@")==-1) && 
+			    (dominio.search("@")==-1) &&
+			    (usuario.search(" ")==-1) && 
+			    (dominio.search(" ")==-1) &&
+			    (dominio.search(".")!=-1) &&      
+			    (dominio.indexOf(".") >=1)&& 
+			    (dominio.lastIndexOf(".") < dominio.length - 1)) {
+			 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);';
+			 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+	#{if email}
+			 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
+	#{/if}
+			 	validarEmailMsg.style = 'display: none;' // "desativa" a span validarEmailMsg
+			}else{ // se não, então o email não é válido
+				validarEmailMsg.style = 'display: inline;'// "ativa" a span validarEmailMsg
+				document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
+				validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+				'validacaoMsgm">email inválido</span>';
+				servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+	#{if email}
+			 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
+	#{/if}
+			}
+		}
+	}
+
+	// VALIDAÇÃO DE SENHA
+	function validarSenha(){			/* campo senha */
+		var campoSenha = document.getElementById('campoSenha').value;
+										/* campo de confirmar senha */
+		var campoConfirmar = document.getElementById('campoConfirmar').value;
+										/* span de mensagem do campo de senha */
+		var validarSenhaMsg = document.getElementById('validarSenhaMsg');
+										/* span de mensagem do campo de comparar */
+		var validarCompararMsg = document.getElementById('validarCompararMsg');
+										/* span de mensagem do servidor do campo de senha */
+		var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
+										/* span de mensagem do servidor do campo de comparar */
+		var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
+										
+	 	if (campoSenha.length > 1 & campoSenha.length < 6) { // verifica se a campoSenha tem maior que 1 e menor que 6 caracteres
+			servidorSenhaMsg.style = 'display: none;'// "desativa" a span validarSenhaMsg
+	 		validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
+			document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
+			validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">mínino 6 caracteres</span>';
+		}else if(campoSenha == ''){ // verifica se o campo senha está vazio
+			servidorSenhaMsg.style = 'display: none;'// "desativa" a span servidorSenhaMsg
+			validarSenhaMsg.style = 'display: inline;'; // "ativa" a span validarSenhaMsg
+			document.getElementById('campoSenha').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoSenha vermelho
+			validarSenhaMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">obrigatório</span>';
+		} else if(campoSenha.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
+	 		servidorSenhaMsg.style = 'display: none;'; // "desativa" a span servidorSenhaMsg
+	 		validarSenhaMsg.style = "display: none;"; // "desativa" a span validarSenhaMsg
+	 		document.getElementById('campoSenha').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoSenha verde
+		} 
+	 	// verifica se o campoSenha é igual ao campoConfirmar e se campoSenha tem mais de 5 caracteres
+		if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){ 
+			validarCompararMsg.style = 'display: inline;'; // "desativa" a span validarComparaMsg
+			validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm"><i class="check icon m-0"></i></span>';
+		}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
+			validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm"><i class="x icon m-0"></i></span>';
+		}
+		senha = document.getElementById("campoSenha").value;
+		forca = 0;
+		mostra = document.getElementById("mostrar");
+		if((senha.length >= 5) && (senha.length < 10)){
+			if(!isNaN(senha)){
+				forca += 0;
+			}else{			
+				forca += 5;
+			}
+		}else if((senha.length>=10) && (senha.length <= 14)){
+			if(!isNaN(senha)){
+				forca += 5;
+			}else{			
+				forca += 25;
+			}
+		}else if(senha.length>14){
+			if(!isNaN(senha)){
+				forca += 25;
+			}else{			
+				forca += 30;
+			}
+		}if(senha.match(/[a-z]+/)){
+			forca += 5;
+		}if(senha.match(/[0-9]+/)){
+			forca += 5;
+		}if(senha.match(/[A-Z]+/)){
+			forca += 5;
+		}if(senha.match(/[çÇ]+/)){
+			forca += 5;
+		}if(senha.match(/#+/)){
+			forca += 5;
+		}if(senha.match(/!+/)){
+			forca += 5;
+		}if(senha.match(/@+/)){
+			forca += 5;
+		}if(senha.match(/[$]+/)){
+			forca += 5;
+		}if(senha.match(/%+/)){
+			forca += 5;
+		}if(senha.match(/[&]+/)){
+			forca += 5;
+		}if(senha.match(/[+]+/)){
+			forca += 5;
+		}if(senha.match(/_+/)){
+			forca += 5;
+		}if(senha.match(/[-]+/)){
+			forca += 5;
+		}if(senha.match(/[?]+/)){
+			forca += 5;
+		}if(senha.match(/.+/)){
+			forca += 5;
+		}if(senha.match(/,+/)){
+			forca += 5;
+		}if(senha.match(/[*]+/)){
+			forca += 5;
+		}if(senha.match(/.+/)){
+			forca += 5;
+		}if(senha.match(/[ ]+/)){
+			forca += 10;
+		}if(senha.match(/[àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕ]+/)){
+			forca += 10;
+		}if(forca >= 100){
+			forca = 100;
+		}if(forca < 30){
+			mostra.innerHTML = '<div style="width:'+forca+'%; background-color: red; font-size: 8px;" class="">fraca</div>';
+		}else if((forca >= 30) && (forca < 60)){
+			mostra.innerHTML = '<div style="width:'+forca+'%; background-color: yellow; font-size: 8px; color: black !important;" class="">justa</div>';
+		}else if((forca >= 60) && (forca < 85)){
+			mostra.innerHTML = '<div style="width:'+forca+'%; background-color: blue; font-size: 8px;" class="">forte</div>';
+		}else{
+			mostra.innerHTML = '<div style="width:'+forca+'%; background-color: green; font-size: 8px;" class="">exelente</div>';
+		}
+	}
+		
+	// VALIDAÇÃO DE CONFIRMAR SENHA
+	function validarConfirmarSenha(){			/* campo senha */
+		var campoSenha = document.getElementById('campoSenha').value;
+												/* campo de confirmar senha */
+		var campoConfirmar = document.getElementById('campoConfirmar').value;
+												/* span de mensagem do campo de senha */
+		var validarSenhaMsg = document.getElementById('validarSenhaMsg');
+												/* span de mensagem do campo de comparar */
+		var validarCompararMsg = document.getElementById('validarCompararMsg');
+												/* span de mensagem do servidor do campo de senha */
+		var servidorSenhaMsg = document.getElementById('servidorSenhaMsg');
+												/* span de mensagem do servidor do campo de comparar */
+		var servidorConfirmarSenhaMsg = document.getElementById('servidorConfirmarSenhaMsg');	
+				
+		if (campoConfirmar.length > 2 & campoConfirmar.length < 6) { // verifica se a campoConfirmar tem maior que 2 e menor que 6 caracteres
+			document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
+			validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">mínino 6 caracteres</span>';
+	#{if comparar}			
+			servidorConfirmarSenhaMsg.style = 'display: none;'
+	#{/if}
+		}else if(campoConfirmar == ''){ // verifica se o campo senha está vazio
+			document.getElementById('campoConfirmar').style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoConfirmar vermelho
+			validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">obrigatório</span>';
+	#{if comparar}			
+			servidorConfirmarSenhaMsg.style = 'display: none;' // "desativar" a span servidorConfirmarSenhaMsg
+	#{/if}
+		}else if(campoConfirmar.length > 5){ // verifica se o campo senha tem mais de 5 caracteres
+			validarCompararMsg.style = "display: none;"; // "desativar" a span validarCompararMsg 
+			document.getElementById('campoConfirmar').style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);'; // campoConfirmar verde
+		}
+		// verifica se o campoSenha é igual ao campoConfirmar e se campoConfirmar tem mais de 5 caracteres
+		if(campoSenha == campoConfirmar & campoSenha.length > 5 & campoConfirmar.length > 5){
+			validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
+			validarCompararMsg.innerHTML = '<span class="alert-success shadow-sm-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm"><i class="check icon m-0"></i></span>';
+		}else if(campoSenha.length > 5 & campoConfirmar.length > 5){ // verificar se campoSenha e campoConfirmar tem mais de 5 caracteres
+			validarCompararMsg.style = "display: inline;"; // "ativa" a span validarCompararMsg
+			validarCompararMsg.innerHTML = '<span class="validacaoErro shadow-sm-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm"><i class="x icon m-0"></i></span>';			
+		}
+	} 
+#{/if}
 </script>
 </body>
 </html>

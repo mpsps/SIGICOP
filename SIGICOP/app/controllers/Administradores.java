@@ -80,7 +80,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Administrador admBanco = dadosSessaoAdmin.admin;
 
-		if(admBanco.admPadrao) {// verificar se é o admin padrão
+		if(admBanco.admPadrao && admBanco.id == 1) {// verificar se é o admin padrão
 			System.out.println("_____________________________________________________________________________________");
 			System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
 			String telaAdmin = "Tela Admin";
@@ -91,7 +91,7 @@ public class Administradores extends Controller {
 			System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
 			System.out.println("Um Administrador comum: '"+admBanco.nomeAdm+"' tentou acessar Administrador.cadastroDeAdms()");
 			
-			flash.error("Acesso restrito ao administrador padrao do sistema");
+			flash.error("Acesso restrito ao administrador padrão-absoluto do sistema");
 	     paginaAdmin();
 		}
 	}

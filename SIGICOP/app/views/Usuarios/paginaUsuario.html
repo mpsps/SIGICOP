@@ -2,7 +2,7 @@
 #{set title:'Pagina do Usuario' /}
 <div class="heightMin">
     <div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-    <i id="fecharFiltro" class="window close outline icon mt-3 mr-2"></i>
+    <i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
 #{if listaPedidos.size() > -1}
 <!-- Filtro por nome do arquivo e descrição -->
 			<form action="@{Usuarios.filtro}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border mt-0 m-0-celular pt-1-celular">
@@ -33,8 +33,8 @@
 				      	</div>
 			  		</div>
 			 		<div class="text-center mt-1-celular">
-				  		<button type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-						<span class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+				  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
 				  		<a href="@{Pedidos.solicitar}" class="btn btn-success mb-1-celular mt-1-celular butaoIconTexto font-size-celular block-celular">Solicitar
 				  		<i class="file alternate outline icon"></i></a>
 				 	</div>
@@ -56,7 +56,7 @@
 	</a>
 	<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
+		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
 			</a>
 	</div>
 #{/if} 
