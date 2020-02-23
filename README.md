@@ -32,10 +32,10 @@ Sistema de Gerenciamento de Impressões e Copias
 * Após logar, o usuário poderá sair a qualquer momento;
 
 ## Páginas da SIGICOP para Usuário :computer:
-![Webp net-gifmaker](https://user-images.githubusercontent.com/55263599/71113258-f7e00780-21ab-11ea-8106-f04db75df755.gif)
+![SIGICOP_USUARIO_COMPUTADOR](https://user-images.githubusercontent.com/55263599/74994975-4faa2180-542e-11ea-9496-7cd99505dd2b.gif)
 
 ## Páginas da SIGICOP para Usuário - Versão Mobile :iphone: (260 x 450)
-![passoApassoUsuario](https://user-images.githubusercontent.com/55263599/71545632-55264680-296c-11ea-8b5d-1b49adb92406.gif)
+![CELULAR_USUARIO](https://user-images.githubusercontent.com/55263599/75049646-57f37280-54a9-11ea-9598-c4dd39cd6dbc.gif)
 
 # PASSO A PASSO DO ADMINISTRADOR ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
 
