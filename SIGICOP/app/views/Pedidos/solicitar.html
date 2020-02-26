@@ -239,12 +239,13 @@ $(document).ready(function() {
 			/*alert("Você deve anexar um arquivo!");*/
 		
 			Swal.fire({
+				position: 'top',
 				icon: 'error',
 				title: 'ERROR...',
 				text: 'é obrigatório o anexo do arquivo!',
 				showCloseButton: true,
 				showClass: {
-				    popup: 'animated fadeInDown faster'
+					popup: 'animated fadeInDown faster'
 				},
 				hideClass: {
 					popup: 'animated fadeOutUp faster'
@@ -256,20 +257,19 @@ $(document).ready(function() {
 			if(podeAdd > 0){
 				const Toast = Swal.mixin({
 					toast: true,
-				  	position: 'top-right',
-				  	showConfirmButton: false,
-				  	timer: 3000,
-			  		timerProgressBar: true,
-				  	onOpen: (toast) => {
-				    	toast.addEventListener('mouseenter', Swal.stopTimer)
-				    	toast.addEventListener('mouseleave', Swal.resumeTimer)
-				  	}
+					position: 'top-right',
+					showConfirmButton: false,
+					timer: 3000,
+					timerProgressBar: true,
+					onOpen: (toast) => {
+						toast.addEventListener('mouseenter', Swal.stopTimer)
+						toast.addEventListener('mouseleave', Swal.resumeTimer)
+					}
 				})
 				Toast.fire({
-				  icon: 'info',
-				  title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
+					icon: 'info',
+					title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
 				})
-
 			}else{
 				e.preventDefault();
 				Swal.fire({
@@ -278,7 +278,7 @@ $(document).ready(function() {
 					text: 'quantidade indísponivel!',
 					showCloseButton: true,
 					showClass: {
-					    popup: 'animated fadeInDown faster'
+						popup: 'animated fadeInDown faster'
 					},
 					hideClass: {
 						popup: 'animated fadeOutUp faster'
@@ -289,20 +289,19 @@ $(document).ready(function() {
 		}
 		
 	})
-	
 // pega o nome do arquivo e jogar para o campo hidden nomeArquivo
-    var inputNome = document.getElementById('nomeArquivo');
+	var inputNome = document.getElementById('nomeArquivo');
 	var inputFicheiro = document.getElementById('item-arquivo');
 
 	inputFicheiro.addEventListener('change', function() {
-  		var nome = this.files[0].name;
-  		var maxNome = nome.substring(0, 15); //.indexOf(".")
-  		var ext = nome.split('.').pop();
-  		if(nome.length > 15){
-  		maxNome = maxNome+"[...]."+ext;  			
-  		}
-  		inputNome.innerHTML = maxNome;
-  		document.getElementById('arquivo').value = nome;
+		var nome = this.files[0].name;
+		var maxNome = nome.substring(0, 15); //.indexOf(".")
+		var ext = nome.split('.').pop();
+		if(nome.length > 15){
+		maxNome = maxNome+"[...]."+ext;  			
+		}
+		inputNome.innerHTML = maxNome;
+		document.getElementById('arquivo').value = nome;
 	})
 });
 </script>

@@ -28,64 +28,63 @@
 		<link href="@{'/public/Semantic/css/header.min.css'}" rel="stylesheet" type="text/css" /><!-- utilizado em login  -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.min.css'}" rel="stylesheet" type="text/css" /><!-- rodape utilizar-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.min.css'}" rel="stylesheet" type="text/css" />
-	 	<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}" rel="stylesheet" type="text/css" />
-	 	<style type="text/css">
-	 	.notificacao {
-		  width: 4px;
-		  height: 4px;
-		  padding: 3px!important;
-		  line-height: 3px;
-		  text-align: center;
-		  border-radius: 10em;
-		}
-			 	
+		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+		.notificacao {
+		width: 4px;
+			height: 4px;
+			padding: 3px!important;
+			line-height: 3px;
+			text-align: center;
+			border-radius: 10em;
+		}	
 	 	</style>
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/semantic.min.js'}"/></script>
 <!-- UIKIT CSS -->
  		<link rel="stylesheet" href="@{'/public/uikit/css/uikit.css'}"  rel="stylesheet" type="text/css" />
 <!-- UIKIT JS -->
-        <script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
-        <script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
+		<script src="@{'/public/uikit/js/uikit.min.js'}"/></script>
+		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
 		<style type="text/css">
 /* VOLTAR AO TOPO */
-			/* VOLTAR AO TOPO */
 		a[href="#topPrincipal"]{
-		    padding:10px;
-		    position:fixed;
-		    top: 85%;
-		    right: 5%;
-		    display:none;
-		    font-size: 5px;
+			padding:10px;
+			position:fixed;
+			top: 85%;
+			right: 5%;
+			display:none;
+			font-size: 5px;
 		}
 		a[href="#topPrincipal"]:hover{
 			text-decoration:none;
 		}
 /* BARRA DE ROLAGEM PERSONALIZADA */
-			/* Largura da barra de rolagem */
-			::-webkit-scrollbar {
-				width: 10px;
-			}
-			/* Fundo da barra de rolagem */
-			::-webkit-scrollbar-track-piece {
-				background-color: rgba(55, 55, 55, 0.5);
-				border-left: 1px solid rgba(55, 55, 55, 0.8)
-			}
-			/* Cor do indicador de rolagem */
-			::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
-			{
-				background-color: rgba(55, 55, 55, 0.9);
-				border-radius: 5px;
-			}
-			/* Cor do indicador de rolagem - ao passar o mouse */
-			::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
-			{
-				background-color: #1b1c1d;
-				border-radius: 5px;
-			}
+		/* Largura e altura da barra de rolagem */
+		::-webkit-scrollbar {
+			width: 10px;
+			height: 10px;
+		}
+		/* Fundo da barra de rolagem */
+		::-webkit-scrollbar-track-piece {
+			background-color: rgba(55, 55, 55, 0.5);
+			border-left: 1px solid rgba(55, 55, 55, 0.8)
+		}
+		/* Cor do indicador de rolagem */
+		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
+		{
+			background-color: rgba(55, 55, 55, 0.9);
+			border-radius: 5px;
+		}
+		/* Cor do indicador de rolagem - ao passar o mouse */
+		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
+		{
+			background-color: #1b1c1d;
+			border-radius: 5px;
+		}
 		</style>
-        <link href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"  rel="stylesheet" type="text/css" />     
+		<link href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"  rel="stylesheet" type="text/css" />     
 		<link href="@{'/public/stylesheets/animate.css'}"  rel="stylesheet" type="text/css" />
 <!-- JS PERSONALIZADO  -->  
 <!-- SWEETALERT2 -->
@@ -187,9 +186,9 @@
 		#{if voltar}
 				<a title="página do usuário" href="@{Usuarios.paginaUsuario}" class="linkMenu">
 					<li class="m-0 itemMenu rounded">
-			 			<i class="address book outline icon"></i>Página do Usuário
-			 		</li>
-		 		</a>
+						<i class="address book outline icon"></i>Página do Usuário
+					</li>
+				</a>
 		#{/if}
 <!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->
 	#{/if}	
@@ -238,7 +237,7 @@
 			#{if telaAdmin}
 				<a title="página do administrador" class="linkMenu" href="@{Administradores.paginaAdmin}">
 					<li class="m-0 itemMenu rounded">
-						<i class="address book icon"></i>Página do Adminstrador
+						<i class="address book icon"></i>Página do Administrador
 					</li>
 				</a>
 			#{/if}
@@ -606,52 +605,49 @@ function horaEnome(){
 <script type="text/javascript">
 $(document).ready(function() {
 	/* Função de scroll para voltar ao top */
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 300) {
-            $('a[href="#top"]').fadeIn();
-        } else{
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 300) {
+			$('a[href="#top"]').fadeIn();
+		} else{
 			$('a[href="#top"]').fadeOut();
-        }
-    });   
-    $('a[href="#top"]').click(function(){
-        $('html, body').animate({scrollTop : 0},800);
-        return false;
-    });
+		}
+	});   
+	$('a[href="#top"]').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;
+	});
 /* Animação no scroll para voltar ao top */
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 400) {
-            $('a[href="#topPrincipal"]').fadeIn();
-        } else {
-            $('a[href="#topPrincipal"]').fadeOut();
-        }
-    });
-    $('a[href="#topPrincipal"]').click(function(){
-        $('html, body').animate({scrollTop : 0},700);
-        return false;
-    });
-    
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 400) {
+		$('a[href="#topPrincipal"]').fadeIn();
+		} else {
+			$('a[href="#topPrincipal"]').fadeOut();
+		}
+	});
+	$('a[href="#topPrincipal"]').click(function(){
+		$('html, body').animate({scrollTop : 0},700);
+		return false;
+	});  
 /* Tempo de exibição da mensagem flash */
 	setTimeout(function () {
 		$('#messagemAlerta').hide(); // "messagemAlerta"
 	}, 2000); // O valor e representado em milisegundos.
-
 /* Mascara de campo */
-    $('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
-    $('#matriculaDoUsuarioFiltro').mask('00000000000000');
-    $('#campoMatricula').mask('00000000000000');
-    $('#qtdCopiasFiltro').mask('00');
-    $('#dataEnvio').mask('00/00/0000');
-    $('#dataEnvtrega').mask('00/00/0000');
+	$('#telefone, #matriculaDoUsuarioFiltro').mask('(00) 0000-0000');
+	$('#matriculaDoUsuarioFiltro').mask('00000000000000');
+	$('#campoMatricula').mask('00000000000000');
+	$('#qtdCopiasFiltro').mask('00');
+	$('#dataEnvio').mask('00/00/0000');
+	$('#dataEnvtrega').mask('00/00/0000');
 #{if temFiltro}
-
 /* Função de limpar filtro */
 	document.getElementById("limpar").addEventListener("click", function() {
-	  clearInputUrlNumberText("NomeDoArquivoFiltro");
-	  clearInputUrlNumberText("descricaoFiltro");
-	  clearInputUrlNumberText("matriculaDoUsuarioFiltro");
-	  clearInputUrlNumberText("nomeDoArquivoFiltro");
-	  clearInputUrlNumberText("emailDoAdminFiltro");
-	  clearInputUrlNumberText("nomeDoAdminFiltro");
+		clearInputUrlNumberText("NomeDoArquivoFiltro");
+		clearInputUrlNumberText("descricaoFiltro");
+		clearInputUrlNumberText("matriculaDoUsuarioFiltro");
+		clearInputUrlNumberText("nomeDoArquivoFiltro");
+		clearInputUrlNumberText("emailDoAdminFiltro");
+		clearInputUrlNumberText("nomeDoAdminFiltro");
 	});
 	function clearInputUrlNumberText(name) {
 		var entradas = document.querySelectorAll("input[id='"+name+"']");
@@ -659,7 +655,6 @@ $(document).ready(function() {
 	}
 #{/if}
 #{if session.contains("adminLogado") || session.contains("usuarioLogado")}
-
 /* Manipulação do Menu */
 	var width = window.innerWidth;
 	if(width > 750){
@@ -694,16 +689,15 @@ $(document).ready(function() {
 		});
 	}
 	$('#abrirMenu').click(function(){
-	  	$('#layoutMenu').show();
-	  	$('#fecharMenu').show();
-	    $('.t-filtro').hide();
+		$('#layoutMenu').show();
+		$('#fecharMenu').show();
+		$('.t-filtro').hide();
 	});
-	 $('#fecharMenu').click(function(){
-	  	$('#layoutMenu').hide();
-	  	$('#fecharMenu').hide();
-	  	$('#abrirMenu').fadeIn();
-	});
-	 
+	$('#fecharMenu').click(function(){
+		$('#layoutMenu').hide();
+		$('#fecharMenu').hide();
+		$('#abrirMenu').fadeIn();
+	}); 
 /* Manipulação de Filtro */
 	/* oculta (fecha) filtro por aperta no icone */
 		$("#fecharFiltro").click(function() {
@@ -724,11 +718,11 @@ $(document).ready(function() {
 				position: 'top',
 				icon: '',
 				html: '<div class="text-center h4"><i class="address card outline butaoIconTexto m-0 p-0 border-0"></i> Meus Dados </div>'+
-				  '<div class="text-left font-size-celular"><i class="user circle outline icon"></i>'+
-				  '<span class="desaparecer-celular font-weight-bold">Nome:</span> ${usuarioBanco?.nomeUsu} <br>'+
-				  '<i class="envelope outline icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${usuarioBanco?.email}'+
-				  '<br><i class="chart bar outline icon"></i><span class="desaparecer-celular font-weight-bold">Qtd Disponível:</span> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
-				  '<br><i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
+					'<div class="text-left font-size-celular"><i class="user circle outline icon"></i>'+
+					'<span class="desaparecer-celular font-weight-bold">Nome:</span> ${usuarioBanco?.nomeUsu} <br>'+
+					'<i class="envelope outline icon"></i><span class="desaparecer-celular font-weight-bold">Email:</span> ${usuarioBanco?.email}'+
+					'<br><i class="chart bar outline icon"></i><span class="desaparecer-celular font-weight-bold">Qtd Disponível:</span> ${usuarioBanco?.qtdDisponivel} #{if usuarioBanco?.ultimoAcessoUsu}'+
+					'<br><i class="mouse pointer icon"></i><span class="desaparecer-celular font-weight-bold">Ultimo Acesso:</span> ${usuarioBanco?.ultimoAcessoUsu?.format("dd/MM/yyyy HH:mm:ss")}#{/if}</div>',
 				showCloseButton: true,
 				showConfirmButton: false,
 				showClass: {
@@ -741,11 +735,10 @@ $(document).ready(function() {
 		});
 	#{/if}
 	#{if session.contains("adminLogado")}
-	
 /* DIALOGS COM DADOS DO ADMIN */
 		$("#dadosAdmin").click(function () {
 			Swal.fire({
-		  		position: 'top',
+				position: 'top',
 				icon: '',
 				html: '<div class="text-center sticky-top h4 m-0">Meus Dados</div>'+
 					'<div class="text-left font-size-celular"><i class="user circle icon"></i><span class="desaparecer-celular font-weight-bold">Nome:</span> ${admBanco?.nomeAdm} <br>'+
@@ -763,7 +756,6 @@ $(document).ready(function() {
 			})
 		});
 		#{if admBanco?.admPadrao}
-
 /* DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS */		
 			$("#restaurar").click(function() {
 				Swal.fire({
@@ -810,7 +802,6 @@ $(document).ready(function() {
 				})
 			});
 			#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
-			
 /* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS */
 				$("#ApagarRecusados").click(function() {
 					Swal.fire({
@@ -838,7 +829,6 @@ $(document).ready(function() {
 				});
 			#{/if}
 			#{if listaconcluidos != null && admBanco?.admPadrao}
-			
 /* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES */		
 				$("#ApagarEntregues").click(function() {
 					Swal.fire({
@@ -883,7 +873,7 @@ $(document).ready(function() {
 		var sobreNome = campoNome.split(' ')[1]; // separar o sobrenome
 		
 		jQuery('#campoNome').keyup(function () { 
-		    this.value = this.value.replace(/[^a-zA-Z àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕçÇ]/g,'');// só permite letras e espaços
+			this.value = this.value.replace(/[^a-zA-Z àèìòùâêîôûäëïöüáéíóúãõÀÈÌÒÙÂÊÎÔÛÄËÏÖÜÁÉÍÓÚÃÕçÇ]/g,'');// só permite letras e espaços
 		});
 
 		campoNome = campoNome.toLowerCase().replace(/(?:^|\s)\S/g, function(capitalize) { return capitalize.toUpperCase(); });

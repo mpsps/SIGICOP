@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
+<head>
 		<title>#{get 'title' /}</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -33,8 +33,8 @@
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/icon.min.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/sidebar.min.css'}">
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/transition.min.css'}">
-	  	<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/SIGICOP.css'}">
-	  	
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/SIGICOP.css'}">
+		
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/jquery.min.js'}"></script>
 		<script src="@{'/public/Semantic/js/visibility.min.js'}"></script>
@@ -48,16 +48,16 @@
 		<script  src="@{'/public/uikit/js/uikit-icons.min.js'}"></script>    
 	<style type="text/css">
 		.notificacao {
-		  width: 4px;
-		  height: 4px;
-		  padding: 3px !important;
-		  line-height: 3px;
-		  text-align: center;
-		  border-radius: 10em;
-		  font-size: 10px !important;
-		  position: relative;
-		  bottom: 12px;
-		  right: 5px;
+			width: 4px;
+			height: 4px;
+			padding: 3px !important;
+			line-height: 3px;
+			text-align: center;
+			border-radius: 10em;
+			font-size: 10px !important;
+			position: relative;
+			bottom: 12px;
+			right: 5px;
 		}
 		.cabecalhoPrinciopal{
 			margin-bottom: -10% !important;
@@ -67,12 +67,12 @@
 	<style type="text/css">
 /* VOLTAR AO TOPO */
 		a[href="#topPrincipal"]{
-		    padding:10px;
-		    position:fixed;
-		    top: 85%;
-		    right: 5%;
-		    display:none;
-		    font-size: 5px;
+			padding:10px;
+			position:fixed;
+			top: 85%;
+			right: 5%;
+			display:none;
+			font-size: 5px;
 		}
 		a[href="#topPrincipal"]:hover{
 			text-decoration:none;
@@ -82,20 +82,17 @@
 		::-webkit-scrollbar {
 			width: 10px;
 		}
-
 		/* Fundo da barra de rolagem */
 		::-webkit-scrollbar-track-piece {
 			background-color: #2e2f30;
 			border-left: 1px solid #1b1c1d
 		}
-		
 		/* Cor do indicador de rolagem */
 		::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal
 			{
 			background-color: rgba(82, 159, 237, 0.8);
 			border-radius: 5px;
 		}
-		
 		/* Cor do indicador de rolagem - ao passar o mouse */
 		::-webkit-scrollbar-thumb:vertical:hover, ::-webkit-scrollbar-thumb:horizontal:hover
 			{
@@ -110,18 +107,18 @@
 <!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
 <!-- CSS PERSONALIZADO  -->
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"> 
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/meuCss/layoutResponsivo.css'}"> 
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/animate.css'}">       
 	</head>
 <body onload="bemVindo()" id="tamanho-corpo-celular" class="p-0-celular m-0-celular">   
 <!-- MENU QUE AO DESLIZAR PARA BAIXO APARECE--> 
 <div class="ui large top fixed hidden menu border-0">
 	<div class="ui container">
 		<a title="principal" class="active item" href="@{Gerenciador.principal}">Principal</a>
-	    <a title="sobre nós" class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
-	    <div class="right menu">
+		<a title="sobre nós" class="item sobreNos" href="#SOBRE_NOS" >Sobre Nós</a>
+		<div class="right menu">
 			<div class="item">
-	        	<a title="entrar agora" class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
+			<a title="entrar agora" class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
 			</div>
 			<div class="item">
 				<a title="cadastrar-se" class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
@@ -130,7 +127,7 @@
 	</div>
 </div>
 <!-- MENU ICONE A ESQUERDA-->
-<div class="ui vertical inverted sidebar menu" style="max-width: 60%;">
+<div class="ui vertical inverted sidebar menu w-75">
 	<a class="active item" href="@{Gerenciador.principal}">Principal</a>
 	<a class="item toc sobreNos" href="#SOBRE_NOS">Sobre Nós</a>
 	<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
@@ -138,39 +135,44 @@
 </div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
 <div class="pusher m-0 font-size-celular p-0-celular m-0-celular">
-  	<div class="ui inverted vertical masthead segment center aligned m-0 p-0-celular
-  	 m-0-celular pb-1-celular p-0-celular shadow" style="">
+	<div class="ui inverted vertical masthead segment center aligned m-0 p-0-celular
+	 m-0-celular pb-1-celular p-0-celular shadow">
 		<div class="ui large secondary inverted pointing menu m-0 font-size-celular container-computador">
-	        <a class="toc item">
-	        	<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
-	        </a>
-	        <div class="item pl-1 pr-1">
-		        <a title="Principal" class="active item" style="border-bottom:  3px solid #529fed; margin-left: 1px; margin-right: 1px" 
-		        href="@{Gerenciador.principal}">Principal</a>
-	        </div>
-	        <div class="item m-0 pl-1 pr-1"><!-- onmouseover="this.style='border-bottom: 3px solid #529fed; padding-bottom: 12px; padding-left: 18px;'"
-		        onMouseOut="this.style=' margin-left: 1px; margin-right: 1px;'" -->
-		        <a title="sobre nós" class="active item sobreNos" href="#SOBRE_NOS" onmouseover="this.style='border-bottom: 2px solid #529fed;'"
-		        onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
-	        </div>
-	        <div class="right item m-0">
-		        <a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
-		        href="@{Gerenciador.login}">Entrar</a>
-		        <a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary button border border-white-2 text-white botao-principal"  
-		        href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
+		<a class="toc item">
+			<img src="@{'/public/images/icones/menuIcone.png'}" class="menu-celular" alt="menu">
+		</a>
+		<div class="item pl-1 pr-1">
+			<a title="Principal" class="active item" style="border-bottom:  3px solid #529fed; 
+			margin-left: 1px; margin-right: 1px" 
+			href="@{Gerenciador.principal}">Principal</a>
+		</div>
+		<div class="item m-0 pl-1 pr-1">
+			<a title="sobre nós" class="active item sobreNos" href="#SOBRE_NOS" 
+			onmouseover="this.style='border-bottom: 2px solid #529fed;'"
+			onMouseOut="this.style='border-bottom: 2px solid white'">Sobre Nós</a>
+		</div>
+		<div class="right item m-0">
+			<a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
+			href="@{Gerenciador.login}">Entrar</a>
+			<a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary 
+			button border border-white-2 text-white botao-principal"  
+			href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
 			</div>
 		</div>
 		<div class="p-0-celular m-0-celular font-size-celular">
 			<img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" style="width: 30%;" class="image-sigicop"/>
 			<br>
 			<div class="h1 m-0 font-size-celular tituloCelular m-0-celular">
-	        IFRN <i>campus </i> João Câmara
+		IFRN <i>campus </i> João Câmara
 			</div>
 			<br/>
 		</div>
 		<div class="mt-5 pt-3 pt-2-celular mt-2-celular m-0">
-			<a title="entrar agora" href="@{Gerenciador.login}" class="font-size-celular btn-lg btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
-				style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora <i class="right arrow icon m-0 m-0-celular"></i></a>
+			<a title="entrar agora" href="@{Gerenciador.login}" class="font-size-celular btn-lg 
+			btn-primary text-decoration-none entrarAgora p-4 p-2-celular" 
+				style="letter-spacing: 0.5px; width: 100px; height: 20px; ">Entrar Agora 
+				<i class="right arrow icon m-0 m-0-celular"></i>
+			</a>
 		</div>
 	</div>
 <!-- CONTEÚDO DA PÁGINA-->
@@ -191,29 +193,38 @@
 					<div class="three wide column">
 					<h4 class="ui inverted header">IFRN-JC:</h4>
 						<div class="ui inverted link list ml-0">
-							<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
-									<img src="@{'/public/images/sigicop/if.png'}" class="imagem-logo-principal" alt="IFRN_JC" title="IFRN-JC" />
+							<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" 
+							class="text-decoration-none">
+									<img src="@{'/public/images/sigicop/if.png'}" class="imagem-logo-principal" 
+									alt="IFRN_JC" title="IFRN-JC" />
 							</a>
 						</div>
 					</div>
 				<div class="four wide column">
-							<h4 class="ui inverted header">Contatos:</h4>
-							<div class="ui inverted link list">
-								Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
-									<br>
-								Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
-							</div>
+					<h4 class="ui inverted header">Contatos:</h4>
+						<div class="ui inverted link list">
+							Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">
+							(84) 4005-4105</a> 
+								<br>
+							Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">
+							(84) 4005-5605</a>
 						</div>
-						<div class="four wide column">
-							<h4 class="ui inverted header">E-mails:</h4>
-							IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
-							Bolsista: <br><a href="#" class="text-decoration-none" id="font-size-celular">bolsistapoio2@gmail.com</a><br> 
-							Comult: <br><a href="#" class="text-decoration-none" id="font-size-celular">comult.jc@ifrn.edu.br</a>
-						</div>
-						<div class="five wide column">
+					</div>
+					<div class="four wide column">
+						<h4 class="ui inverted header">E-mails:</h4>
+						IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">
+						gabin.jc@ifrn.edu.br</a><br>
+						Bolsista: <br><a href="#" class="text-decoration-none" id="font-size-celular">
+						bolsistapoio2@gmail.com</a><br> 
+						Comult: <br><a href="#" class="text-decoration-none" id="font-size-celular">
+						comult.jc@ifrn.edu.br</a>
+					</div>
+					<div class="five wide column">
 						<h4 class="ui inverted header">Desenvolvido Por:</h4>
-						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
-								Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br> 
+						Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">
+						magdiel.pereira@escolar.ifrn.edu.br</a><br> 
+						Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">
+						manacio.p@escolar.ifrn.edu.br</a><br> 
 						</div>
 					</div>
 				</div>
@@ -224,7 +235,7 @@
 <!-- VOLTAR AO TOPO -->
 <script type="text/javascript">
 function bemVindo(){
-/* 	Swal.fire({
+/* Swal.fire({
 		position: 'top',
 		icon: '',
 		html: '<div style="background-color: #1b1c1d; margin: -20px;"></div>',
@@ -238,21 +249,18 @@ function bemVindo(){
 		}
 	}); */
 }
-</script>
-<script type="text/javascript">
 $(document).ready(function(){
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 300) {
-            $('a[href="#topPrincipal"]').fadeIn();
-        } else {
-            $('a[href="#topPrincipal"]').fadeOut();
-        }
-    });
-    $('a[href="#topPrincipal"]').click(function(){
-        $('html, body').animate({scrollTop : 0},800);
-        return false;
-    });
-    
+ 	$(window).scroll(function(){
+		if ($(this).scrollTop() > 300) {
+			$('a[href="#topPrincipal"]').fadeIn();
+		} else {
+		$('a[href="#topPrincipal"]').fadeOut();
+		}
+	});
+	$('a[href="#topPrincipal"]').click(function(){
+		$('html, body').animate({scrollTop : 0},800);
+		return false;
+	});
 	$(".sobreNos").click(function () {
 		setTimeout('apresentacao()',400);
 	});
@@ -273,10 +281,10 @@ $(document).ready(function(){
 			showCloseButton: true,
 			showConfirmButton: false,
 			showClass: {
-			    popup: 'animated fadeInDown faster'
+				popup: 'animated fadeInDown faster'
 			},
 			hideClass: {
-			    popup: 'animated fadeOutUp faster'
+				popup: 'animated fadeOutUp faster'
 			}
 		});	
 	}

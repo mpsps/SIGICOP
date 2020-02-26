@@ -2,34 +2,41 @@
 #{set title:'Pedidos Concluidos' /}
 <div class="heightMin">	
 #{if listarDeAdmins != null}
-	    	<div class="collapse multi-collapse m-0 p-0 animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	    	<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
+	<div class="collapse multi-collapse m-0 p-0 animated fadeInDown faster fixed-top t-filtro" 
+	id="multiCollapseExample1">
+		<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" 
+		style="font-size: 150%;"></i>
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->
-					<form action="@{Administradores.listarTodosAdmins}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
-						<fieldset class="mb-0-celular">
-					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
-							<div class="form-row m-0">
-						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="NomeUser">Nome do Administrador:</label>
-									<input type="text" name="nomeDoAdminFiltro" class="form-control hei-input-celular font-size-celular" placeholder="Nome do Admin" 
-									id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
-						    	</div>
-						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="email">Email:</label>
-									<input type="text" name="emailDoAdminFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
-						    	</div>   		
-					  		</div>
-					 		<div class="text-center mt-1-celular">
-						  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-						  		<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-						 	</div>
-						</fieldset>
-					</form><br>
+		<form action="@{Administradores.listarTodosAdmins}" method="post" class="brancoGelo font-size-celular 
+		shadow-sm rounded border m-0-celular pt-1-celular">
+			<fieldset class="mb-0-celular">
+				<legend class="m-0-celular mb-0">Filtrar Por:</legend>
+				<div class="form-row m-0">
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="NomeUser">Nome do Administrador:</label>
+						<input type="text" name="nomeDoAdminFiltro" class="form-control hei-input-celular 
+						font-size-celular" placeholder="Nome do Admin" 
+						id="nomeDoAdminFiltro" maxlength="100" value="${nomeDoAdminFiltro}" >
+					</div>
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="email">Email:</label>
+						<input type="text" name="emailDoAdminFiltro" class="form-control hei-input-celular 
+						font-size-celular" 
+						placeholder="Email do Admin" id="emailDoAdminFiltro" value="${emailDoAdminFiltro}">
+					</div>   		
+				</div>
+				<div class="text-center mt-1-celular">
+					<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto 
+					font-size-celular">Filtrar <i class="filter icon"></i></button>
+					<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" 
+					id="limpar">Limpar <i class="eraser icon"></i></span>
+				</div>
+			</fieldset>
+		</form><br>
 <!-- fim filtro -->
 #{/if}
-  	</div>
+	</div>
 #{if listarDeAdmins.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum admin-->
 	<div class="text-center text-primary font-size-celular border listagemVazia">
@@ -69,7 +76,8 @@
 						</div>
 						
 						<div class="text-center m-0">
-								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-outline-danger m-0 mt-1 butaoIconTexto remover font-size-celular">
+								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-outline-danger 
+								m-0 mt-1 butaoIconTexto remover font-size-celular">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
 								</a>	
 						</div>
@@ -82,26 +90,27 @@
 #{/if}		
 </div>
 <script type="text/javascript">
+/* MODAL DE REMOVER ADMIN */
 $(".remover").click(function() {
 	var id = $(this).data("item");
 	$('#idRem').val(id);
 	Swal.fire({
 		position: 'top',
-		  html: '<div class="font-size-celular">Tem certeza que deseja remover esse administrador?</div>\n'
-				  +'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a?.nomeAdm}</div>'
-				  +'<br/><form action="@{Administradores.removerAdmin}" method="post">'
-		  		  +'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
-			  	  +'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
-		  icon: 'question',
-		  showCloseButton: true,
-		  showCancelButton: false,
-		  showConfirmButton: false,
-		  showClass: {
-			    popup: 'animated fadeInDown faster'
-			  },
-		  hideClass: {
-			    popup: 'animated fadeOutUp faster'
-			  }
+		html: '<div class="font-size-celular">Tem certeza que deseja remover esse administrador?</div>\n'
+			+'<div class="bg-info text-white p-1 font-size-celular">Nome: ${a?.nomeAdm}</div>'
+			+'<br/><form action="@{Administradores.removerAdmin}" method="post">'
+			+'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
+			+'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
+		icon: 'question',
+		showCloseButton: true,
+		showCancelButton: false,
+		showConfirmButton: false,
+		showClass: {
+			popup: 'animated fadeInDown faster'
+		},
+		hideClass: {
+			popup: 'animated fadeOutUp faster'
+		}
 	})
 }); 
 </script>

@@ -2,124 +2,135 @@
 #{set title:'Pagina Do Administrador' /}
 <div class="heightMin">
 #{if listaPedidosPa != null}
-	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
+	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated 
+	fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+		<i title="fechar filtro" id="fecharFiltro" class="window close outline 
+		icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
 #{if listaPedidosPa.size() > -1}
 <!-- filtro por matricula do usuario e nome do arquivo-->
-					<form action="@{Administradores.paginaAdmin}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
-						<fieldset class="mb-0-celular">
-					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
-							<div class="form-row m-0">
-						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="matriculaDoUsuarioFiltro" class="">Matricula do Usuário:</label>
-									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
-						    	</div>
-						    	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="nomeDoArquivoFiltro" class="">Nome do Arquivo:</label>
-									<input type="text" name="nomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
-						    	</div>
-						  		</div>
-						 		<div class="text-center mt-1-celular">
-							  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-									<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>	 	
-								</div>
-						 	</fieldset>
-						</form><br>
+		<form action="@{Administradores.paginaAdmin}" method="post" class="brancoGelo 
+		font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
+			<fieldset class="mb-0-celular">
+				<legend class="m-0-celular mb-0">Filtrar Por:</legend>
+				<div class="form-row m-0">
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="matriculaDoUsuarioFiltro" class="">Matricula do Usuário:</label>
+						<input type="text" name="matriculaDoUsuarioFiltro" class="form-control 
+						hei-input-celular font-size-celular" 
+						placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" 
+						maxlength="100" value="${matriculaDoUsuarioFiltro}">
+					</div>
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="nomeDoArquivoFiltro" class="">Nome do Arquivo:</label>
+						<input type="text" name="nomeDoArquivoFiltro" class="form-control 
+						hei-input-celular font-size-celular" 
+						placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" 
+						value="${nomeDoArquivoFiltro}">
+					</div>
+					</div>
+					<div class="text-center mt-1-celular">
+						<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto 
+						font-size-celular">Filtrar <i class="filter icon"></i></button>
+						<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" 
+						id="limpar">Limpar <i class="eraser icon"></i></span>	 	
+					</div>
+			</fieldset>
+		</form><br>
 <!-- fim filtro -->
 #{/if}
-	    </div>
+	</div>
 	<div class="container font-size-celular">
- 		<div class="row">
- <div class="table-responsive m-0 p-0">
- 	 <table class="table table-striped table-bordered table-sm text-center">
- <tr class="m-0 p-0">
- 	<th scope="col" class="m-0">Matrícula</th>
- 	<th scope="col" class="m-0">Cópias</th>
- 	<th scope="col">Face</th>
- 	<th scope="col">Nome do Arquivo</th>
- 	<th scope="col" colspan="4">Ações</th>
- </tr>
-#{list items:listaPedidosPa, as:'p'}
-	<tr class="m-0 ">
-		<th scope="row">${p.usuario.matricula}</th	>
-		<td>${p.qtdCopias}</td>
-		<td>${p.frenteVerso}</td>
-		<td id="${p.id}"><!-- ${p.nomeArquivo} --></td>
-		<td>
-		<a title="Download" class="btn btn-outline-primary butaoIconTexto btn-sm btn-block" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
-			text-decoration: none; font-size: 85%; margin: 0px;">
-			<i class="download icon"></i>
-		</a>
-		</td>
-		<td>
-		<a title="Concluir" class="btn btn-block btn-outline-success btn-sm butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
-			font-size: 85%; margin: 0px;" >
-			<i  class="check icon"></i>
-		</a>
-		</td>
-		<td>
-		<a title="Recusar" class="btn btn-block btn-outline-danger btn-sm butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
-			font-size: 85%; margin: 0px;">
-			<i class="x icon"></i>
-		</a>
-		</td>
-		<td>
-		<a title="+ Informações" class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
-						 	role="button" aria-expanded="false" aria-controls="collapseExample">
-		<i class="plus icon"></i>
-		</a>
-		</td>
-	</tr>
-	<tr  class="collapse text-left animated fadeInDown faster m-0" id="collapseExample${p.id}">
-				
-		<td colspan="3">
-		<div class="card">
-					<div class="card-text">
-						<b>Status: </b>
-						<span class=" text-center rounded statusAguardando pl-1 pr-1"> ${p.status}</span>
-					</div>
-					<div class="card-text">
-						<b>Usuário:</b> ${p.usuario.nomeUsu}
-					</div>
-				</div>
-		</td>
-		<td colspan="5">
-		<div class="card">
-					<div class="card-text">
-						<b>Data de Envio: </b> ${p.dataEnvio}
-					</div>
-					<div class="card-text">
+		<div class="row">
+			<div class="table-responsive m-0 p-0">
+				<table class="table table-striped table-bordered table-sm text-center">
+					<tr class="m-0 p-0">
+						<th scope="col" class="m-0">Matrícula</th>
+						<th scope="col" class="m-0">Cópias</th>
+						<th scope="col">Face</th>
+						<th scope="col">Nome do Arquivo</th>
+						<th scope="col" colspan="4">Ações</th>
+					</tr>
+		#{list items:listaPedidosPa, as:'p'}
+					<tr class="m-0 ">
+						<th scope="row">${p.usuario.matricula}</th	>
+						<td>${p.qtdCopias}</td>
+						<td>${p.frenteVerso}</td>
+						<td id="${p.id}"><!-- nome sendo manipulado JS --></td>
+						<td>
+							<a title="Download" class="btn btn-outline-primary butaoIconTexto 
+							btn-sm btn-block" href="@{Pedidos.downloadAdmin(p.id)}" style="font-size: auto; 
+							text-decoration: none; font-size: 85%; margin: 0px;">
+								<i class="download icon"></i>
+							</a>
+						</td>
+						<td>
+							<a title="Concluir" class="btn btn-block btn-outline-success btn-sm 
+							butaoIconTexto concluir" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none; 
+							font-size: 85%; margin: 0px;" >
+								<i  class="check icon"></i>
+							</a>
+						</td>
+						<td>
+							<a title="Recusar" class="btn btn-block btn-outline-danger btn-sm 
+							butaoIconTexto recusar" data-item="${p.id}" href="#" style="font-size: auto; text-decoration: none;
+							font-size: 85%; margin: 0px;">
+								<i class="x icon"></i>
+							</a>
+						</td>
+						<td>
+							<a title="+ Informações" class="btn btn-outline-info btn-sm btn-block 
+							font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+							role="button" aria-expanded="false" aria-controls="collapseExample">
+								<i class="plus icon"></i>
+							</a>
+						</td>
+					</tr>
+					<tr class="collapse text-left animated fadeInDown faster m-0" id="collapseExample${p.id}">
+						<td colspan="3">
+							<div class="card">
+								<div class="card-text">
+									<b>Status: </b>
+									<span class=" text-center rounded statusAguardando pl-1 pr-1"> ${p.status}</span>
+								</div>
+								<div class="card-text">
+									<b>Usuário:</b> ${p.usuario.nomeUsu}
+								</div>
+							</div>
+						</td>
+						<td colspan="5">
+							<div class="card">
+								<div class="card-text">
+									<b>Data de Envio: </b> ${p.dataEnvio}
+								</div>
+								<div class="card-text">
 #{if p.descricao} 
-						<b>Descricao:</b> ${p.descricao} 
+									<b>Descricao:</b> ${p.descricao} 
 #{/if}
 #{else}
-					<b>Descricao:</b>[sem descricao]
+									<b>Descricao:</b>[sem descricao]
 #{/else}
-					</div>	
-				</div>	
-		</td>
-				
-	</tr>
+								</div>	
+							</div>	
+						</td>
+					</tr>
 #{/list}
 #{if listaPedidosPa.size() == 0}
-<tr>
-<th colspan="5">
-<!-- informa se não houver ou não encontrar nenhum pedido-->
-	<div class="text-center text-primary font-size-celular border listagemVazia">
-			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
-			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
-			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
-			</a>
-	</div>
-	</th>
-	</tr>
+					<tr>
+						<th colspan="5">
+		<!-- informa se não houver ou não encontrar nenhum pedido-->
+							<div class="text-center text-primary font-size-celular border listagemVazia">
+									<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
+									<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
+									<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+									aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
+								btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
+									</a>
+							</div>
+						</th>
+					</tr>
 #{/if} 
-</table>
-</div>
+				</table>
+			</div>
 		</div>
 	</div>
 #{/if}
@@ -132,10 +143,8 @@
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="motivo" name="motivo" />
 </form> 
-
 <script type="text/javascript">
 $(document).ready(function(){
-
 	var doReload = true;
 	
 	setInterval(function () {
@@ -143,45 +152,46 @@ $(document).ready(function(){
 			window.location.reload(1);
 		}
 	}, 120000); //tempo em milisegundos. Neste caso, o refresh vai acontecer .
-	
+/* MODAL DO MOTIVO DA RECUSA */
 	$(".recusar").click(function() {
-		doReload = false;
+		doReload = false;/* parar o reload da página */
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
-			  position: 'top',
-			  title: 'Motivo da recusa:',
-			  input: 'text',
-			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
-			  inputAttributes: {
-			    'aria-label': 'Type your message here'
-			  },
-			  showCloseButton: true,
-			  showCancelButton: true,
-			  showClass: {
-				    popup: 'animated fadeInDown faster'
-				  },
-			  hideClass: {
-				    popup: 'animated fadeOutUp faster'
-				  },
-			  onClose: () => {
-					doReload = true;
-				}
+			position: 'top',
+			title: 'Motivo da recusa:',
+			input: 'text',
+			inputPlaceholder: 'descreva o motivo do pedido ser recusado',
+			inputAttributes: {
+				'aria-label': 'Type your message here'
+			},
+			showCloseButton: true,
+			showCancelButton: true,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			},
+			onClose: () => {
+				doReload = true;/* retorna o reload da página */
+			}
 		}).then((result) => {
 			if(result.value == ""){
 				Swal.fire({
-					  icon: 'error',
-					  title: 'ERROR...',
-					  text: 'preencha o motivo!',
-					  showCloseButton: true,
-					  showClass: {
-						    popup: 'animated pulse faster'
-						  },
-					  hideClass: {
-						  popup: 'animated fadeOutUp faster'
-					  }
-					})
-				}
+					position: 'top',
+					icon: 'error',
+					title: 'ERROR...',
+					text: 'preencha o motivo!',
+					showCloseButton: true,
+					showClass: {
+						popup: 'animated pulse faster'
+					},
+					hideClass: {
+						popup: 'animated fadeOutUp faster'
+					}
+				})
+			}
 			if (result.value) {
 				$('#idPed').val(idPedido);
 				$('#motivo').val(result.value);
@@ -189,35 +199,34 @@ $(document).ready(function(){
 			}
 		})
 	});
-	
+/* MODAL DO MOTIVO DA CONCLUSÃO */
 	$(".concluir").click(function() {
-		doReload = false;
-		
+		doReload = false;/* parar o reload da página */
 		var idPedido = $(this).data("item");
 		
 		Swal.fire({
 			position: 'top',
-			  title: 'Mensagem de conclusão:',
-			  input: 'text',
-			  inputPlaceholder: 'digite alguma mensagem complementar',
-			  inputAttributes: {
-			    'aria-label': 'Type your message here'
-			  },
-			  showCloseButton: true,
-			  showCancelButton: true,
-			  showClass: {
-				    popup: 'animated fadeInDown faster'
-				  },
-			  hideClass: {
-				    popup: 'animated fadeOutUp faster'
-				  },
-				onClose: () => {
-					doReload = true;
-				}
+			title: 'Mensagem de conclusão:',
+			input: 'text',
+			inputPlaceholder: 'digite alguma mensagem complementar',
+			inputAttributes: {
+				'aria-label': 'Type your message here'
+			},
+			showCloseButton: true,
+			showCancelButton: true,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			},
+			onClose: () => {
+				doReload = true;/* retorna o reload da página */
+			}
 		}).then((result) => {
 			if(result.value == ""){
 				result.value = ".";
-				}
+			}
 			if (result.value) {
 				$('#idPedCon').val(idPedido);
 				$('#resposta').val(result.value);
@@ -225,19 +234,16 @@ $(document).ready(function(){
 			}
 		})
 	});
-	
 #{list items:listaPedidosPa, as:'p'}
 	if(${p.nomeArquivo.size()} > 20){
-	/* 	var maxNome = ${p.nomeArquivo}.substring(0, 15); */ //.indexOf(".")
-		/* var ext = nome.split('.').pop(); */
-		var nomeCompletoArquivo = '${p.nomeArquivo}';
+		var nomeCompletoArquivo = '${p.nomeArquivo}';/* pegar o nome do arquivo do pedido */
 		var nomeArquivoComplimido = '';
 		for(var i = 0; i < 20; i++){
 			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
 		}
-		document.getElementById('${p.id}').innerHTML = nomeArquivoComplimido+'[...]';
+		document.getElementById('${p.id}').innerHTML = nomeArquivoComplimido+'[...]';/* "jogar o nome no ID do pedido na tabela" */
 	}else{
-		document.getElementById('${p.id}').innerHTML = '${p.nomeArquivo}';
+		document.getElementById('${p.id}').innerHTML = '${p.nomeArquivo}';/* "jogar o nome no ID do pedido na tabela" */
 	}
 #{/list}
 });

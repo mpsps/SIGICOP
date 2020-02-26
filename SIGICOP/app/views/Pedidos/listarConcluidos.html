@@ -2,39 +2,39 @@
 #{set title:'Pedidos Concluidos' /}
 <div class="heightMin">	
 #{if listaconcluidos != null}
-	    	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-	    	 <i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
+	<div class="collapse multi-collapse m-0 mr-1-celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+		<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
 #{if listaconcluidos.size() > -1}
 <!-- Filtro por nome do usuario e nome do arquivo -->
-					<form action="@{Pedidos.listarConcluidos}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
-						<fieldset class="mb-0-celular">
-					        <legend class="m-0-celular mb-0">Filtrar Por:</legend>
-							<div class="form-row m-0">
-						       	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
-									<input type="text" name="matriculaDoUsuarioFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
-						    	</div>
-						   		<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-							    	<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
-									<input type="text" name="nomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
-									placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
-						    	</div>
-					  		</div>
-					 		<div class="text-center mt-1-celular">
-						  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
-						  		<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-						 	</div>
-					 	</fieldset>
-					</form><br>
+		<form action="@{Pedidos.listarConcluidos}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
+			<fieldset class="mb-0-celular">
+				<legend class="m-0-celular mb-0">Filtrar Por:</legend>
+				<div class="form-row m-0">
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="matriculaDoUsuarioFiltro">Matricula do Usuário:</label>
+						<input type="text" name="matriculaDoUsuarioFiltro" class="form-control hei-input-celular font-size-celular" 
+						placeholder="Matricula do usuario" id="matriculaDoUsuarioFiltro" maxlength="100" value="${matriculaDoUsuarioFiltro}">
+					</div>
+						<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="nomeDoArquivoFiltro">Nome do Arquivo:</label>
+						<input type="text" name="nomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
+						placeholder="Nome do Arquivo" id="nomeDoArquivoFiltro" maxlength="100" value="${nomeDoArquivoFiltro}">
+					</div>
+					</div>
+				<div class="text-center mt-1-celular">
+					<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+					<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
+				</div>
+			</fieldset>
+		</form><br>
 <!-- Fim Filtro -->
 #{/if}
-  	</div>
+	</div>
 	<div class="container font-size-celular">
- 		<div class="row">
+		<div class="row">
 #{list items:listaconcluidos, as:'pc'}
 <!-- listar todos os pedidos concluidos (se houver) -->
-	   		<div class="col-lg-4">
+			<div class="col-lg-4">
 				<div class="card mb-3 shadow-sm" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
 						<h6 class="text-primary m-0">Matricula:</h6>
@@ -49,12 +49,12 @@
 							<div class="statusConcluido text-white text-center rounded">${pc.status}</div> 
 						</div>
 						<div class="mt-1">
-					  		<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${pc.id}" 
-					  		role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="desaparecer-celular">Informações</span>
-				  			</button>
+							<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${pc.id}" 
+							role="button" aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="desaparecer-celular">Informações</span>
+							</button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${pc.id}">
-					  		<div class="card">
+							<div class="card">
 								<div class="card-text">
 									<b>Cópias: </b> ${pc.qtdCopias}
 								</div>
@@ -102,24 +102,26 @@
 #{if listaconcluidos.size() == 0}
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
 	<div class="text-center text-primary font-size-celular border listagemVazia">
-			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
-			<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
-			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
-			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
+		<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
+		<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
+		<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+		aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
-			</a>
+		</a>
 	</div>
 #{/if} 
 </div>
+#{if listaconcluidos != null}
 <form id="recusa" action="@{Pedidos.concluidoParaRecusar}">
 	<input type="hidden" id="idPed" name="idPed" />
 	<input type="hidden" id="resposta" name="resposta" />
 </form>
+#{/if}
 <script type="text/javascript">
 $(document).ready(function () {
-	    setTimeout(function () {
-	        window.location.reload(1);
-	    }, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
+	setTimeout(function () {
+		window.location.reload(1);
+	}, 180000); //tempo em milisegundos. Neste caso, o refresh vai acontecer de 5 em 5 segundos.
 // DIALOG QUE ENTREGA PEDIDO	    
 	$(".entregar").click(function() {
 		var id = $(this).data("item");
@@ -127,22 +129,22 @@ $(document).ready(function () {
 		$('#idEnt').val(id);
 		Swal.fire({
 			position: 'top',
-			  html: '<div class="font-size-celular">Tem certeza que deseja entregar esse pedido?</div>'
-					  +'<div class="bg-info text-white p-1 font-size-celular">Usuário do pedido: ${pc?.usuario?.matricula}</div>'
-					  +'<br/><form action="@{Pedidos.entregarPedido}" method="post">'
-			  		   +'<input type="hidden" id="idEnt" name="id" value="'+id+'"/>'
-				  	   +'<input type="submit" value="Entregar" class="btn btn-primary m-1 butaoIconTexto font-size-celular" />'
-				  	   +'</form>',
-			  icon: 'question',
-			  showCloseButton: true,
-			  showCancelButton: false,
-			  showConfirmButton: false,
-			  showClass: {
-				    popup: 'animated fadeInDown faster'
-				  },
-			  hideClass: {
-				    popup: 'animated fadeOutUp faster'
-				  }
+			html: '<div class="font-size-celular">Tem certeza que deseja entregar esse pedido?</div>'
+					+'<div class="bg-info text-white p-1 font-size-celular">Usuário do pedido: ${pc?.usuario?.matricula}</div>'
+					+'<br/><form action="@{Pedidos.entregarPedido}" method="post">'
+					+'<input type="hidden" id="idEnt" name="id" value="'+id+'"/>'
+					+'<input type="submit" value="Entregar" class="btn btn-primary m-1 butaoIconTexto font-size-celular" />'
+					+'</form>',
+			icon: 'question',
+			showCloseButton: true,
+			showCancelButton: false,
+			showConfirmButton: false,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			}
 		})
 	}); 
 // DIALOG QUE RECUSA PEDIDO
@@ -151,35 +153,36 @@ $(document).ready(function () {
 		
 		Swal.fire({
 			position: 'top',
-			  title: 'Motivo da recusa:',
-			  input: 'text',
-			  inputPlaceholder: 'descreva o motivo do pedido ser recusado',
-			  inputAttributes: {
-			    'aria-label': 'Type your message here'
-			  },
-			  showCloseButton: true,
-			  showCancelButton: true,
-			  showClass: {
-				    popup: 'animated fadeInDown faster'
-				  },
-			  hideClass: {
-				    popup: 'animated fadeOutUp faster'
-				  }
+			title: 'Motivo da recusa:',
+			input: 'text',
+			inputPlaceholder: 'descreva o motivo do pedido ser recusado',
+			inputAttributes: {
+				'aria-label': 'Type your message here'
+			},
+			showCloseButton: true,
+			showCancelButton: true,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			}
 		}).then((result) => {
 			if(result.value == ""){
 				Swal.fire({
-					  icon: 'error',
-					  title: 'ERROR...',
-					  text: 'preencha o motivo!',
-					  showCloseButton: true,
-					  showClass: {
-						    popup: 'animated pulse faster'
-						  },
-					  hideClass: {
-						    popup: 'animated fadeOutUp faster'
-						  }
-					})
-								}
+					position: 'top',
+					icon: 'error',
+					title: 'ERROR...',
+					text: 'preencha o motivo!',
+					showCloseButton: true,
+					showClass: {
+						popup: 'animated pulse faster'
+					},
+					hideClass: {
+						popup: 'animated fadeOutUp faster'
+					}
+				})
+			}
 			if (result.value) {
 				$('#idPed').val(idPedido);
 				$('#resposta').val(result.value);
@@ -187,21 +190,17 @@ $(document).ready(function () {
 			}
 		})
 	});
-});	
-</script>
-<script type="text/javascript">
-$(document).ready(function(e) {
-#{list items:listaconcluidos, as:'pc'}
-	if(${pc.nomeArquivo.size()} > 20){
-		var nomeCompletoArquivo = '${pc.nomeArquivo}';
-		var nomeArquivoComplimido = '';
-		for(var i = 0; i < 14; i++){
-			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+	#{list items:listaconcluidos, as:'pc'}
+		if(${pc.nomeArquivo.size()} > 20){
+			var nomeCompletoArquivo = '${pc.nomeArquivo}';
+			var nomeArquivoComplimido = '';
+			for(var i = 0; i < 14; i++){
+				nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+			}
+			document.getElementById('${pc.id}').innerHTML = nomeArquivoComplimido+'[...]';
+		}else{
+			document.getElementById('${pc.id}').innerHTML = '${pc.nomeArquivo}';
 		}
-		document.getElementById('${pc.id}').innerHTML = nomeArquivoComplimido+'[...]';
-	}else{
-		document.getElementById('${pc.id}').innerHTML = '${pc.nomeArquivo}';
-	}
-#{/list}
+	#{/list}
 });
 </script> 
