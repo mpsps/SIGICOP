@@ -45,16 +45,16 @@
 				<table class="table table-striped table-bordered table-sm text-center">
 					<tr class="m-0 p-0">
 						<th scope="col" class="m-0">Matrícula</th>
+						<th scope="col">Páginas</th>
 						<th scope="col" class="m-0">Cópias</th>
-						<th scope="col">Face</th>
 						<th scope="col">Nome do Arquivo</th>
 						<th scope="col" colspan="4">Ações</th>
 					</tr>
 		#{list items:listaPedidosPa, as:'p'}
 					<tr class="m-0 ">
 						<th scope="row">${p.usuario.matricula}</th	>
+						<td>${p.paginas}</td>
 						<td>${p.qtdCopias}</td>
-						<td>${p.frenteVerso}</td>
 						<td id="${p.id}"><!-- nome sendo manipulado JS --></td>
 						<td>
 							<a title="Download" class="btn btn-outline-primary butaoIconTexto 

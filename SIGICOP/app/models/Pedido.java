@@ -41,6 +41,9 @@ public class Pedido extends Model {
 	public Blob arquivo;
 	
 	@Required
+	public int paginas;
+	
+	@Required
 	public String nomeArquivo;
 	
 	@Required

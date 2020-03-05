@@ -267,9 +267,6 @@ public class Usuarios extends Controller {
 				results.add(sVO);
 			}
 			renderJSON(results);
-		}
-		
-		
-		
+		}		
 	}
 }

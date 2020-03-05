@@ -34,15 +34,20 @@
 					<input type="file" name="item.arquivo" style="display: none;"
 						class="form-control text-center" id="item-arquivo">
 				</div>
-				
+				<span id="msgErro"></span>
 				<div class="row pl-3-celular mt-1-celular">
+					<div class="col-md-6 p-0-celular m-0-celular">
+						<label class="border-bottom m-0 mb-1">Páginas:<sup style="color: red;">*</sup></label> 
+						<input type="number" name="item.paginas" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
+							min="1" class="paginas" value="1" id="paginas" onchange="verificarQtdDisponivel()" ><!-- onkeyup="javascript:verificarQtdDisponivel()" -->
+					</div>
 					<div class="col-md-6 p-0-celular m-0-celular">
 						<label class="border-bottom m-0 mb-1">Cópias:<sup style="color: red;">*</sup></label> 
 						<input type="number" name="item.qtdCopias" class="form-control hei-input-celular m-0" max="${usuarioBanco?.qtdDisponivel}" 
-							min="1" class="qtdCopias" value="1" id="qtdCopias">
+							min="1" class="qtdCopias" value="1" id="qtdCopias" onchange="verificarQtdDisponivel()">
 					</div>
-					<div class="col-md-6 p-0-celular m-1-celular pl-3">
-						<label class="border-bottom m-0">Face: <sup style="color: red;">*</sup></label><br>
+					<!-- <div class="col-md-6 p-0-celular m-1-celular pl-3">
+						<label class="border-bottom m-0">Páginas: <sup style="color: red;">*</sup></label><br>
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="frente" name="item.frenteVerso"
 								class="custom-control-input m-0" value="frente" checked="checked">
@@ -54,13 +59,13 @@
 								class="custom-control-label text-left" for="frenteEverso">
 								Frente e Verso<sub style="color: red; padding: 0; margin: 0; word-spacing: 1px;">2x</sup></label> 
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="mb-3">
 					<label class="border-bottom m-0 mb-1">Descricao:</label>
 					<div class="input-group">
 						<textarea rows="2" cols="7" name="item.descricao"
-							class="form-control m-0" placeholder="descrição"></textarea>
+							class="form-control m-0" placeholder="descrição" maxlength="250"></textarea>
 					</div>
 				</div>
 				<button title="adicionar pedido" class="btn btn-outline-success btn-lg btn-block font-size-celular" type="submit" id="add">
@@ -101,11 +106,11 @@
 #{else} Meu	pedido #{/else}		
 								</div>
 								<div class="card-body brancoGelo text-left m-0 pt-0 pb-0">
+									<div class="card-text">
+										<b>Páginas: </b> ${p.paginas}
+									</div>
 									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
-									</div>
-									<div class="card-text">
-										<b>Face: </b> ${p.frenteVerso}
 									</div>
 									<div class="mt-1">
 										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
@@ -178,11 +183,11 @@
 #{else} Meu	pedido #{/else}		
 								</div>
 								<div class="card-body text-left m-0 pt-0 pb-0" id="listagemPed">
+									<div class="card-text">
+										<b>Páginas: </b> ${p.paginas}
+									</div>
 									<div class="card-text mt-0">
 										<b>Cópias: </b> ${p.qtdCopias}
-									</div>
-									<div class="card-text">
-										<b>Face: </b> ${p.frenteVerso}
 									</div>
 									<div class="mt-1">
 										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
@@ -304,4 +309,25 @@ $(document).ready(function() {
 		document.getElementById('arquivo').value = nome;
 	})
 });
+var qtdDisponivel = ${usuarioBanco?.qtdDisponivel};// quantidade disponivel de impressoes		
+function verificarQtdDisponivel(){
+	var inputPaginas = document.getElementById('paginas').value;
+	var inputQtdCopias = document.getElementById('qtdCopias').value;
+	
+	var valorTotal = qtdDisponivel - (inputPaginas * inputQtdCopias);
+/* 	if(valorTotal > -1	){
+		document.getElementById("paginas").max = valorTotal;
+		document.getElementById("qtdCopias").max = valorTotal;
+	} */
+
+	if(valorTotal < 0){
+		var msgErro = document.getElementById('msgErro');
+		document.getElementById('msgErro').style = 'display: inline;';
+		msgErro.innerHTML = '<div class="validacaoErro shadow-sm rounded p-0 font-size-celular'+
+		'validacaoMsgm text-center animated fadeIn lower">quantidade de impressão indisponível</div>';
+		
+	}else{
+		document.getElementById('msgErro').style = 'display: none;';
+	}
+} 
 </script>

@@ -11,23 +11,15 @@
 				<option></option>
 			</select>
 			<div class="row m-0-celular p-0-celular">
+				<div class="col-6 p-0-celular m-0-celular">
+					<label class="mt-2 border-bottom">Páginas:<sup style="color: red;">*</sup></label> 
+					<input type="number" name="ped.paginas" class="form-control hei-input-celular m-0" max="" 
+						min="1" value="1"><!-- onkeyup="javascript:verificarQtdDisponivel()" -->
+				</div>
 				<div class="col-6 m-0-celular p-0-celular">
 					<label for="confirmarSenha" class="mt-2 border-bottom">Cópias:<sup style="color: red;">*</sup></label>
 					<input type="number" name="ped.qtdCopias" class="form-control hei-input-celular" max="" min="1" class="qtdCopias" 
-					value="1"  >
-				</div>
-				<div class="col-6 m-0-celular p-1-celular pt-0-celular">
-					<label class=" mt-2 mb-0-celular border-bottom">Face:<sup style="color: red;">*</sup></label><br>
-					<div class="custom-control custom-radio custom-control-inline">
-				  		<input type="radio" id="frente" name="ped.frenteVerso" class="custom-control-input" 
-				  		value="frente" checked="checked">
-				 		<label class="custom-control-label font-size-celular" for="frente">Frente</label>
-					</div>
-						<div class="custom-control custom-radio custom-control-inline">
-				 		<input type="radio" id="frenteEverso" name="ped.frenteVerso" class="custom-control-input" 
-				 		value="frenteEverso">
-				  		<label class="custom-control-label font-size-celular" for="frenteEverso">Frente e Verso</label><sub style="color: red; padding: 0; margin: 0;">2x</sup>
-					</div>
+					value="1">
 				</div>
 			</div>
 			<label class="mt-1 border-bottom">Descricao</label>
@@ -46,12 +38,13 @@ $('#mySelect2').select2({
 	theme: 'bootstrap4',
 	allowClear : true,
 	ajax: {	
-	url: '@{Usuarios.listarUsuarios()}',
-	processResults: function (data) {
-// Transforms the top-level key of the response object from 'items' to 'results'
-		return {
-			results: data;
+		url: '@{Usuarios.listarUsuarios()}',
+		processResults: function (data) {
+	// Transforms the top-level key of the response object from 'items' to 'results'
+			return {
+				results: data
+			}
 		}
-	}	
+	}
 });	 
 </script>

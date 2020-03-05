@@ -79,24 +79,14 @@ public class Pedidos extends Controller {
 		if (listaDePedidos == null) {
 			listaDePedidos = new ArrayList<Pedido>();
 		}
-		int valor;
-		if (item.frenteVerso.equals("frenteEverso")) { // se for frenteEverso multliplica a qtd de cópias por 2
-			valor = dadosDeSessao.usuario.qtdDisponivel - (item.qtdCopias * 2);
-			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
-				flash.error("quatidade de copia indisponivel");
-				solicitar();
-			}
-			dadosDeSessao.usuario.qtdDisponivel = valor;
-			Cache.set(session.getId(), dadosDeSessao);
-		} else {
-			valor = dadosDeSessao.usuario.qtdDisponivel - item.qtdCopias;
-			if (valor < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
-				flash.error("quatidade de copia indisponivel");
-				solicitar();
-			}
-			dadosDeSessao.usuario.qtdDisponivel = valor; // setar a qtd disponível atualizada no usuário da cache
-			Cache.set(session.getId(), dadosDeSessao);
+		int valorTotal = dadosDeSessao.usuario.qtdDisponivel - (item.paginas * item.qtdCopias);
+		if (valorTotal < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
+			flash.error("quatidade de impressão indisponível");
+			solicitar();
 		}
+	
+		dadosDeSessao.usuario.qtdDisponivel = valorTotal; // setar a qtd disponível atualizada no usuário da cache
+		Cache.set(session.getId(), dadosDeSessao);
 		// if (validation.hasErrors()) {
 		// params.flash();
 		// flash.error("Falha no Cadastro do Pedido!");
@@ -112,8 +102,8 @@ public class Pedidos extends Controller {
 		} else if (item.qtdCopias == 0) { // vereficar se a qtdCopias é 0
 			flash.error("A Quantidade de Copias é obrigatorio");
 			solicitar();
-		} else if (item.frenteVerso == null) { // vereficar frente ou frenteEverso foi escolhido
-			flash.error("Frente ou FrenteEVerso é obrigatorio");
+		} else if (item.paginas == 0) { // vereficar frente ou frenteEverso foi escolhido
+			flash.error("a quantidade de páginas é obrigatorio");
 			solicitar();
 		}
 		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
@@ -186,13 +176,8 @@ public class Pedidos extends Controller {
 			System.out.println(dadosDeSessao.listaDePedidos.get(i).idLista);
 			if (dadosDeSessao.listaDePedidos.get(i).idLista == idPedido) {
 				// devolver a quantidade disponivel
-				if (dadosDeSessao.listaDePedidos.get(i).frenteVerso.equals("frenteEverso")) {
 					dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel
-							+ (dadosDeSessao.listaDePedidos.get(i).qtdCopias * 2);
-				} else {
-					dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel
-							+ dadosDeSessao.listaDePedidos.get(i).qtdCopias;
-				}
+							+ (dadosDeSessao.listaDePedidos.get(i).qtdCopias * dadosDeSessao.listaDePedidos.get(i).paginas) ;
 				dadosDeSessao.listaDePedidos.remove(i);
 			}
 		}
@@ -276,11 +261,9 @@ public class Pedidos extends Controller {
 
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
-		if (ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2); // devolver a qtd disponível para o usuário
-		} else {
-			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias; // devolver a qtd disponível para o usuário
-		}
+		
+		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o usuário
+
 		ped.atendimento = motivo;
 		ped.status = StatusPedido.RECUSADO; // recusar o pedido
 		ped.dataAtendimento = new Date();
@@ -303,11 +286,9 @@ public class Pedidos extends Controller {
 
 		Pedido ped = Pedido.findById(idPedCon);
 		Usuario user = ped.usuario;
-		if (ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel - (ped.qtdCopias * 2); // diminuir a qtd disponível do usuário
-		} else {
-			user.qtdDisponivel = user.qtdDisponivel - ped.qtdCopias; // diminuir a qtd disponível do usuário
-		}
+		
+		user.qtdDisponivel = user.qtdDisponivel - (ped.qtdCopias * ped.paginas); // diminuir a qtd disponível do usuário
+		
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.CONCLUIDO;
 		ped.dataAtendimento = new Date();
@@ -331,11 +312,8 @@ public class Pedidos extends Controller {
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
 
-		if (ped.frenteVerso.equals("frenteEverso")) {
-			user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * 2); // devolver a qtd disponível para o usuário
-		} else {
-			user.qtdDisponivel = user.qtdDisponivel + ped.qtdCopias; // devolver a qtd disponível para o usuário
-		}
+		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o usuário
+		
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.RECUSADO;
 		ped.dataAtendimento = new Date();
@@ -462,33 +440,21 @@ public class Pedidos extends Controller {
 		if (ped.qtdCopias == 0) {
 			flash.error("A Quantidade de Copias é obrigatorio");
 			Administradores.realizarPedidoCopia();
-		} else if (ped.frenteVerso == null) {
-			flash.error("Frente ou Verso é obrigatorio");
+		} else if (ped.paginas == 0) {
+			flash.error("a quantidade de páginas é obrigatorio");
 			Administradores.realizarPedidoCopia();
 		}
-		int valor;
-		if (ped.frenteVerso.equals("frenteEverso")) {
-			valor = ped.usuario.qtdDisponivel - (ped.qtdCopias * 2);
-			if (valor < 0) {
-				flash.error("quatidade de copia indisponivel");
-				Administradores.realizarPedidoCopia();
-			}
-			ped.usuario.qtdDisponivel = valor;
-			if (valor < 0) {
-				flash.error("quatidade de copia indisponivel");
-				Administradores.realizarPedidoCopia();
-			}
-		} else {
-			valor = ped.usuario.qtdDisponivel - ped.qtdCopias;
-			if (valor < 0) {
-				flash.error("quatidade de copia indisponivel");
-				Administradores.realizarPedidoCopia();
-			}
-			ped.usuario.qtdDisponivel = valor;
-			if (valor < 0) {
-				flash.error("quatidade de copia indisponivel");
-				Administradores.realizarPedidoCopia();
-			}
+		
+		int valor = ped.usuario.qtdDisponivel - (ped.qtdCopias * ped.paginas);
+		if (valor < 0) {
+			flash.error("quatidade de copia indisponivel");
+			Administradores.realizarPedidoCopia();
+		}
+		
+		ped.usuario.qtdDisponivel = valor;
+		if (valor < 0) {
+			flash.error("quatidade de copia indisponivel");
+			Administradores.realizarPedidoCopia();
 		}
 
 		ped.nomeArquivo = "Copia do Usuário: " + ped.usuario.matricula + " " + new Date().getDate() + " "

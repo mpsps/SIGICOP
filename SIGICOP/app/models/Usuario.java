@@ -44,7 +44,7 @@ public class Usuario extends Model{
 	public String email;
 
 	@Min(0)
-	public int qtdDisponivel = 20;
+	public int qtdDisponivel = 15;
 
 	@Required
 	@Enumerated(EnumType.STRING)
