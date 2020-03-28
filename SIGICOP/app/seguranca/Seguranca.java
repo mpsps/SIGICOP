@@ -27,14 +27,14 @@ public class Seguranca extends Controller {
 		}else if(session.contains("usuarioLogado")) {
 			System.out.println("Usuario possui sessao ativa... ["+ new Date()+"]");
 			
-	      	   String perfil = session.get("adminLogado");
-	      	 Admin adminAnnotation = getActionAnnotation(Admin.class);
-	      	   if (adminAnnotation != null && perfil == null) {
-	              flash.error("Acesso restrito aos administradores do sistema");
-	              Gerenciador.login();
-	      	    }
-	      	   DadosSessao dadosSessao = (DadosSessao) Cache.get(session.getId());
-	      		
+			String perfil = session.get("adminLogado");
+			Admin adminAnnotation = getActionAnnotation(Admin.class);
+			if (adminAnnotation != null && perfil == null) {
+				flash.error("Acesso restrito aos administradores do sistema");
+				Gerenciador.login();
+			}
+			DadosSessao dadosSessao = (DadosSessao) Cache.get(session.getId());
+			
 			if (dadosSessao == null) {
 				System.out.println("_____________________________________________________________________________________");
 				System.out.println("Usuario NÃO possui mais sessao ativa... ["+ new Date()+"]");
@@ -44,12 +44,12 @@ public class Seguranca extends Controller {
 		}else if(session.contains("adminLogado")){
 			System.out.println("Administrador possui sessao ativa... ["+ new Date()+"]");
 			
-	      		String perfil = session.get("usuarioLogado");
-	      	   User adminAnnotation = getActionAnnotation(User.class);
-	      	   if (adminAnnotation != null && perfil == null) {
-	              flash.error("Acesso restrito aos usuarios do sistema");
-	              Gerenciador.login();
-	      	    }
+			String perfil = session.get("usuarioLogado");
+			User adminAnnotation = getActionAnnotation(User.class);
+			if (adminAnnotation != null && perfil == null) {
+				flash.error("Acesso restrito aos usuarios do sistema");
+				Gerenciador.login();
+			}
 			DadosSessaoAdmin dadosSessaoAdmin = (DadosSessaoAdmin) Cache.get(session.getId());
 			
 			if (dadosSessaoAdmin == null) {

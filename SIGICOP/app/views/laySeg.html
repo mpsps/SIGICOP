@@ -120,17 +120,17 @@
 								class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet">
 							</span>
 							<span class="w-25 m-0 p-0">
-		#{if usuarioBanco?.qtdDisponivel > 14} 
+		#{if usuarioBanco?.qtdDisponivel > 9} 
 								<span class="notificacao bg-success text-white mt-2 font-size-celular">
 									${usuarioBanco?.qtdDisponivel}
 								</span>
 		#{/if} 
-		#{if usuarioBanco?.qtdDisponivel > 8 &&	usuarioBanco?.qtdDisponivel < 15} 
+		#{if usuarioBanco?.qtdDisponivel > 4 &&	usuarioBanco?.qtdDisponivel < 10} 
 								<span class="notificacao bg-warning text-white m-1 font-size-celular">
 									${usuarioBanco?.qtdDisponivel}
 								</span>
 		#{/if} 
-		#{if usuarioBanco?.qtdDisponivel < 9} 
+		#{if usuarioBanco?.qtdDisponivel < 5} 
 								<span class="notificacao bg-danger text-white m-1 font-size-celular">
 									${usuarioBanco?.qtdDisponivel}
 								</span>
@@ -209,7 +209,7 @@
 			#{if admBanco?.admPadrao && admBanco.id == 1}<!-- admin-absoluto padrão -->
 				<a title="Adicionar Adminstrador" class="linkMenu" href="@{Administradores.cadastroDeAdms}">
 					<li class="m-0 itemMenu rounded">
-						<i class="plus icon"></i>Adicionar Administrador <i class="gem outline icon"></i>
+						<i class="plus icon"></i>Adicionar Administrador <!-- <i class="gem outline icon"></i> -->
 					</li>
 				</a>
 			#{/if}
@@ -217,20 +217,20 @@
 				<a title="filtrar Adminstradores" class="linkMenu itemFiltro" data-toggle="collapse" 
 				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 					<li class="m-0 itemMenu rounded">
-						<i class="search icon"></i>Filtrar Administradores <i class="gem outline icon"></i>
+						<i class="search icon"></i>Filtrar Administradores <!-- <i class="gem outline icon"></i> -->
 					</li>
 				</a>
 			#{/if}
 			#{else}
 				<a title="listar Adminstradores" class="linkMenu" href="@{Administradores.listarTodosAdmins}">
 					<li class="m-0 itemMenu rounded">
-						<i class="users icon"></i>Listar Administradores <i class="gem outline icon"></i>
+						<i class="users icon"></i>Listar Administradores <!-- <i class="gem outline icon"></i> -->
 					</li>
 				</a>		
 			#{/else}
-				<a title="restaurar qtd disponível do usuário" class="linkMenu" href="#Resaturar" id="restaurar">
+				<a title="restaurar qtd disponível dos usuários" class="linkMenu" href="#Resaturar" id="restaurar">
 					<li class="m-0 itemMenu rounded">
-						<i class="sync icon"></i>Restaurar Qtd Disponível <i class="gem outline icon"></i>
+						<i class="sync icon"></i>Restaurar Qtd Disponível <!-- <i class="gem outline icon"></i> -->
 					</li>
 				</a>
 			#{/if}<!-- fim admin padrão -->
@@ -471,21 +471,21 @@
 						<div class="four wide column">
 							<h4 class="ui inverted header">Contatos:</h4>
 							<div class="ui inverted link list">
-								Principal: <br> <a href="#"  class="text-decoration-none" class="font-size-celular">(84) 4005-4105</a> 
+								Principal: <br> <span class="text-decoration-none link-contato" class="font-size-celular">(84) 4005-4105</span> 
 								<br>
-								Apoio Acadêmico:<br><a href="#" class="text-decoration-none" class="font-size-celular">(84) 4005-5605</a>
+								Apoio Acadêmico:<br><span class="text-decoration-none link-contato" class="font-size-celular">(84) 4005-5605</span>
 							</div>
 						</div>
 						<div class="four wide column">
 							<h4 class="ui inverted header">E-mails:</h4>
-							IFRN-JC: <br><a href="#" class="text-decoration-none" id="font-size-celular">gabin.jc@ifrn.edu.br</a><br>
-							Bolsista: <br><a href="#" class="text-decoration-none" id="font-size-celular">bolsistapoio2@gmail.com</a><br> 
-							Comult: <br><a href="#" class="text-decoration-none" id="font-size-celular">comult.jc@ifrn.edu.br</a>
+							IFRN-JC: <br><span class="text-decoration-none link-contato" id="font-size-celular">gabin.jc@ifrn.edu.br</span><br>
+							Bolsista: <br><span class="text-decoration-none link-contato" id="font-size-celular">bolsistapoio2@gmail.com</span><br> 
+							Comult: <br><span class="text-decoration-none link-contato" id="font-size-celular">comult.jc@ifrn.edu.br</span>
 						</div>
 						<div class="five wide column">
 							<h4 class="ui inverted header">Desenvolvido Por:</h4>
-							Magdiel: <br><a href="#" class="text-decoration-none" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</a><br> 
-									Manacio: <br><a href="#" class="text-decoration-none" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</a><br> 
+							Magdiel: <br><span class="text-decoration-none link-contato" id="font-size-celular">magdiel.pereira@escolar.ifrn.edu.br</span><br> 
+							Manacio: <br><span class="text-decoration-none link-contato" id="font-size-celular">manacio.p@escolar.ifrn.edu.br</span><br> 
 						</div>
 					</div>
 				</div>
@@ -805,6 +805,7 @@ $(document).ready(function() {
 /* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS */
 				$("#ApagarRecusados").click(function() {
 					Swal.fire({
+						position: 'top',
 						scrollbarPadding: true,
 						html: '<div id="text-justify font-size-celular">Tem certeza que apagar todos os pedido com o status RECUSADO? <br/>'+
 							'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
@@ -832,6 +833,7 @@ $(document).ready(function() {
 /* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES */		
 				$("#ApagarEntregues").click(function() {
 					Swal.fire({
+						position: 'top',
 						scrollbarPadding: true,
 						html: '<div id="font-size-celular text-left">Tem certeza que apagar todos os pedido com o status ENTREGUE? <br/>'+
 							'lembre-se que essa função só é recomendada em inicio de cada mês</div>',
