@@ -6,10 +6,10 @@ Sistema de Gerenciamento de Impressões e Copias
  realizado por Manacio Pereira de Souza ([@Manacio :octocat:](https://github.com/Manacio)) e por Magdiel Pereira de Souza ([@MagdielPS :octocat:](https://github.com/MagdielPS)).
  A SIGICOP é um sistema de gerenciamento de cópias e impressões,
  que facilite e agilize a demanda de impressões e cópias do IFRN-CAMPUS-JC,
- onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrdor possar gerenciar as solicitacões**
+ onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrador possar gerenciar as solicitações**
 
 # Diagrama de Classes :page_facing_up:
-![DiagramaUMLClasses](https://user-images.githubusercontent.com/55263575/74077291-559b0e00-49fd-11ea-8b8e-d56638a05e86.jpg)
+![Diagrama_Classes](https://user-images.githubusercontent.com/55263599/77835859-bd352600-712f-11ea-99a0-85e1a84e524c.jpg)
 
 # Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 
