@@ -10,6 +10,7 @@ import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import seguranca.CriptografiaUtils;
 import util.StatusPedido;
+import util.TipoUsuario;
 
 @OnApplicationStart
 public class Inicializador extends Job {
@@ -73,6 +74,16 @@ public class Inicializador extends Job {
 			pedUsuario.qtdCopias = 5;
 			pedUsuario.usuario = usuario;
 			pedUsuario.save();
+			
+			Usuario prof = new Usuario();
+			prof.nomeUsu = "Professor";
+			prof.matricula = "201810";
+			String senhaCriptProf = CriptografiaUtils.criptografarMD5("123456");
+			prof.senha = senhaCriptProf;
+			prof.email = "prof@email.com";
+			prof.tipo = TipoUsuario.SERVIDOR;
+			prof.qtdDisponivel = 100;
+			prof.save();
 //			
 //			Pedido pedMagdiel2 = new Pedido();
 //			pedMagdiel2.nomeArquivo = "Arquivo de teste do nome 2";
