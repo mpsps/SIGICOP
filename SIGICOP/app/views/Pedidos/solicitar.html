@@ -5,7 +5,7 @@
 	<div class="py-5 text-center mb-3 alert m-1-celular p-1-celular shadow-sm" style="background: #fff9e6; border-color: #fff3cd">
 		<h2 style="color: #721c24;">Atenção!</h2>
 		<p class="lead font-size-celular">Você atingiu seu limite máximo de solicitacões
-			nesse mês, mas para isso, lembresse de salvar os pedidos.</p>
+			nesse mês, mas para isso, lembresse de enviar os pedidos.</p>
 	</div>
 #{/if} 
 #{else}
@@ -81,7 +81,7 @@
 			<div class="d-flex justify-content-between brancoGelo align-items-center h5 shadow-sm p-2 mb-1 bg-white rounded mb-3 p-0">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
-				<a title="salvar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
+				<a title="enviar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Enviar 
 				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
@@ -113,7 +113,7 @@
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
 									<div class="mt-1">
-										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
+										<button title="+ informações" class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
 											role="button" aria-expanded="false" aria-controls="collapseExample">
 											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular">Informações</span>
 										</button>
@@ -136,7 +136,7 @@
 										</div>
 									</div>
 									<div class="card-text text-center">
-										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-outline-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
+										<a title="cancelar" href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-outline-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
 											class="trash alternate outline icon"></i>
 										</a>
 									</div>
@@ -158,7 +158,7 @@
 			<div class="d-flex justify-content-between brancoGelo align-items-center h5 shadow-sm p-2 mb-1 bg-white rounded mb-3 p-0">
 				<span class="text-muted m-0 p-0 font-size-celular p-0-celular m-0-celular">Listagem de Pedidos</span> 
 #{if listaDePedidos != null} 
-				<a title="salvar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Salvar 
+				<a title="enviar pedido(s)" href="@{Pedidos.salvar}"	class="btn btn-primary p-1 m-0">Enviar  
 				<span class="badge badge-secondary badge-pill float-right m-0 text-white bg-dark">${listaDePedidos?.size()}</span>
 				</a> 
 #{/if}
@@ -190,7 +190,7 @@
 										<b>Cópias: </b> ${p.qtdCopias}
 									</div>
 									<div class="mt-1">
-										<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
+										<button title="+ informações" class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.idLista}"
 											role="button" aria-expanded="false" aria-controls="collapseExample">
 											<i class="plus icon m-0 p-0"></i><span class="desaparecer-celular font-size-celular">Informações</span>
 										</button>
@@ -213,7 +213,7 @@
 										</div>
 									</div>
 									<div class="card-text text-center">
-										<a href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-outline-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
+										<a title="cancelar" href="@{Pedidos.cancelarPedido(p.idLista)}" class="btn btn-outline-danger btn-sm btn-block butaoIconTexto mt-1 font-size-celular">Cancelar <i
 											class="trash alternate outline icon"></i>
 										</a>
 									</div>

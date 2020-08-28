@@ -42,7 +42,7 @@
 	<div class="text-center text-primary font-size-celular border listagemVazia">
 			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
 			<div class="h1 nenhumEncontrado">Nenhum administrador foi encontrado</div>
-			<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+			<a title="filtrar" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
 		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
 			</a>
@@ -76,7 +76,7 @@
 						</div>
 						
 						<div class="text-center m-0">
-								<a href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-outline-danger 
+								<a title="remover" href="#RemoverAdmin" data-item="${a.id}" id="${a.id}" class="btn btn-outline-danger 
 								m-0 mt-1 butaoIconTexto remover font-size-celular">
 								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
 								</a>	

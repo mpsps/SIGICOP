@@ -23,11 +23,11 @@
 								class="custom-control-input m-0" value="false" checked="checked">
 							<label class="custom-control-label text-justify" for="comum">Comum</label>
 						</div>
-						<div class="custom-control custom-radio custom-control-inline">
+						<div title="+ funções" class="custom-control custom-radio custom-control-inline">
 							<input type="radio" id="padrao" name="adm.admPadrao"
 								class="custom-control-input m-0" value="true"> <label
 								class="custom-control-label text-left" for="padrao">
-								Padrão</label> 
+								Operador</label> 
 						</div>
 					</div>
 #{/if}
@@ -62,11 +62,11 @@
 					class="form-control hei-input-celular font-size-celular" id="campoConfirmar" onkeyup="javascript:validarConfirmarSenha()">
 					
 					<!-- BOTÃO DE CADASTRAR -->
-					<input type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
+					<input title="cadastrar" type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular" value="Cadastrar" />					
 #{/if}
 #{else}				<!-- BOTÃO DE EDITAR -->
-					<a href="@{Administradores.editarSenha}" class="btn btn-outline-dark mt-2 font-size-celular m-0-celular mt-1-celular">Alterar Senha</a>
-					<input type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular mt-1-celular" value="Editar" />					
+					<a title="alterar senha" href="@{Administradores.editarSenha}" class="btn btn-outline-dark mt-2 font-size-celular m-0-celular mt-1-celular">Alterar Senha</a>
+					<input title="editar" type="submit" class="btn btn-lg btn-outline-primary btn-block mt-3 font-size-celular mt-1-celular" value="Editar" />					
 #{/else}
 				</div>
 			</form>

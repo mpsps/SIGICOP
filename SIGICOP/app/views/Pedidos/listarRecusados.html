@@ -49,7 +49,7 @@
 							<div class="listaRecusado text-white text-center rounded statusRecusado">${pr.status}</div> 
 						</div>
 						<div class="mt-1">
-							<button class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${pr.id}" role="button" 
+							<button title="+ informações" class="btn btn-outline-info m-0 mb-1 btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${pr.id}" role="button" 
 							aria-expanded="false" aria-controls="collapseExample"><i class="plus icon"></i><span class="desaparecer-celular">Informações</span></button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${pr.id}">
@@ -77,11 +77,11 @@
 						</div>
 						<div class="card-text text-center">
 							<div class="">
-								<a class="btn-sm-computador btn-block-computador btn btn-outline-success concluir butaoIconTexto mb-1 pb-0-celular" data-item="${pr.id}" href="#Concluir">
+								<a title="concluir" class="btn-sm-computador btn-block-computador btn btn-outline-success concluir butaoIconTexto mb-1 pb-0-celular" data-item="${pr.id}" href="#Concluir">
 									<span class="desaparecer-celular">Concluir</span>
 									<i style="margin: 1px;" class="check icon"></i>
 								</a>
-								<a class="btn-sm-computador btn-block-computador btn btn-outline-primary mb-1 butaoIconTexto pb-0-celular" href="@{Pedidos.downloadAdmin(pr.id)}">
+								<a title="download" class="btn-sm-computador btn-block-computador btn btn-outline-primary mb-1 butaoIconTexto pb-0-celular" href="@{Pedidos.downloadAdmin(pr.id)}">
 									<span class="desaparecer-celular">Download</span>
 									<i style=" margin: 1px;" class="download icon"></i>
 								</a>
