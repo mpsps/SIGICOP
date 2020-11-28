@@ -63,21 +63,17 @@ public class Usuario extends Model{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		 String linha = nomeUsu;
-	      String pattern = "\\S+";
+		String linha = nomeUsu;
+		String pattern = "\\S+";
 
-	      Pattern r = Pattern.compile(pattern);
-	      Matcher m = r.matcher(linha);
-	      if (m.find( )) {
-	        System.out.println(m.group(0) );
-	      }
-	    
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(linha);
+		if (m.find( )) {
+			System.out.println(m.group(0) );
+		}
 		return m.group(0)+" ("+matricula+") qtd:"+qtdDisponivel;
 	}
-		
-//	public Usuario() {
-//		qtdDisponivel = 20;
-//	}
+	
 	public boolean compararSenha(){
 		
 		if(senha.equals(confirmarSenha)) {
@@ -86,5 +82,4 @@ public class Usuario extends Model{
 			return false;
 		}
 	}
-
 }

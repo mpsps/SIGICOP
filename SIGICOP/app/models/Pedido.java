@@ -26,6 +26,7 @@ import net.sf.oval.constraint.MaxLength;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
+import util.SituacaoPedido;
 import util.StatusPedido;
 
 @Entity
@@ -41,14 +42,14 @@ public class Pedido extends Model {
 	public Blob arquivo;
 	
 	@Required
-	public int paginas;
-	
-	@Required
 	public String nomeArquivo;
 	
 	@Required
 	@Min(1)
 	public int qtdCopias;
+	
+	@Required
+	public int paginas;
 	
 	@Required
 	public String frenteVerso;
@@ -66,11 +67,15 @@ public class Pedido extends Model {
 	@Enumerated(EnumType.STRING)
 	public StatusPedido status = StatusPedido.AGUARDANDO;
 
+	@Required
+	@Enumerated(EnumType.STRING)
+	public SituacaoPedido situacao;
+
 	@ManyToOne
 	public Usuario usuario;
 	
 	@ManyToOne
-	public Administrador adm;
+	public Operador adm;
 	
 	@Lob
 	public String atendimento;

@@ -1,7 +1,7 @@
 package controllers;
 import java.util.Date;
 
-import models.Administrador;
+import models.Operador;
 import models.DadosSessao;
 import models.DadosSessaoAdmin;
 import models.Usuario;
@@ -28,7 +28,7 @@ public class Gerenciador extends Controller {
 		if(admin != null) {
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 				if(dadosSessaoAdmin != null) {
-					Administrador adm = Administrador.findById(dadosSessaoAdmin.admin.id);
+					Operador adm = Operador.findById(dadosSessaoAdmin.admin.id);
 					adm.ultimoAcesso = new Date();
 					adm.save();
 			}
@@ -37,7 +37,6 @@ public class Gerenciador extends Controller {
 		Cache.clear();
 	render();
 	}
-	
 ///// PAGINA DE LOGAR O USUARIO OU ADMIN /////
 	public static void login() {
 	System.out.println("_____________________________________________________________________________________");
@@ -56,7 +55,7 @@ public class Gerenciador extends Controller {
 		if(admin != null) {
 			DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 				if(dadosSessaoAdmin != null) {
-					Administrador adm = Administrador.findById(dadosSessaoAdmin.admin.id);
+					Operador adm = Operador.findById(dadosSessaoAdmin.admin.id);
 					adm.ultimoAcesso = new Date();
 					adm.save();
 			}
@@ -66,14 +65,13 @@ public class Gerenciador extends Controller {
 		String titulo = "Insirar seu login e senha";
 	render(titulo);
 	}
-	
 ///// AUTENTIFICAR O USUARIO E ADMIN /////
 	public static void autenticar(String login, String senha) throws InterruptedException {
 	System.out.println("_____________________________________________________________________________________");
 	System.out.println("Gerenciador.autenticar() ...["+ new Date()+"]");
 		
 		String senhaCript = CriptografiaUtils.criptografarMD5(senha);
-		Administrador admin = Administrador.find(" email = ?1 AND senha = ?2", login, senhaCript).first();
+		Operador admin = Operador.find(" email = ?1 AND senha = ?2", login, senhaCript).first();
 		Usuario user = Usuario.find(" matricula = ?1 AND senha = ?2", login, senhaCript).first();
 		System.out.println("");
 		System.out.println();
@@ -112,6 +110,3 @@ public class Gerenciador extends Controller {
 		}
 	}
 }
-
-
-

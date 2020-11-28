@@ -1,30 +1,64 @@
-#{extends 'laySeg.html' /} 
-#{set title:'Login' /}
+#{extends 'laySeg.html' /} #{set title:'Login' /}
 <div class="heightMin text-center">
-	<div class="ui middle aligned center aligned grid p-0 m-0 mt-1 p-2-celular p-0-celular 
+	<div
+		class="ui middle aligned center aligned grid p-0 m-0 mt-1 p-2-celular p-0-celular 
 	m-0-celular ml-5-tablet mr-5-tablet">
-		<div class="column p-0 ui stacked segment p-3 mt-4 pt-1 pl-4 pr-4 p-1-celular 
+		<div
+			class="column p-0 ui stacked segment p-3 mt-4 pt-1 pl-4 pr-4 p-1-celular 
 		pl-2-celular pr-2-celular shadow-sm animated slideInDown faster">
-			<!-- FORMULARIO DE AUTENTIFICA�AO -->
-			<form class="ui large form p-1-celular" action="@{Gerenciador.autenticar}" method="post">
-				<label for="login" class="mt-0 mt-1-celular">Login:</label>
-				<span class="uk-form-icon" uk-icon="icon: user"></span>
-				<input type="text" name="login" value="${login}" placeholder="login" class="form-control 
-				hei-input-celular font-size-celular" autofocus=""
-				required="" id="login" maxlength="100"><!-- autocomplete="off"  --> 
-				<label for="senha" class="mt-2">Senha:</label>
-				<img alt="" src="@{'/public/images/icones/key.png'}" width="22">
-				<input type="password" name="senha" placeholder="Senha" class="form-control hei-input-celular 
-				font-size-celular" required="" id="senha">
-				<!-- BOT�O DE ENVIO -->
-				<input title="Entrar" type="submit" class="btn btn-lg btn-primary btn-block mt-3 
-				font-size-celular" value="Entrar"/>
+			<!-- FORMULARIO DE AUTENTIFICA�AO -->
+			<form class="ui large form p-1-celular"
+				action="@{Gerenciador.autenticar}" method="post">
+				<label for="login" class="mt-0 mt-1-celular">Login:</label> <span
+					class="uk-form-icon" uk-icon="icon: user"></span> <input
+					type="text" name="login" value="${login}" placeholder="login"
+					class="form-control 
+				hei-input-celular font-size-celular"
+					autofocus="" required="" id="login" maxlength="100">
+				<!-- autocomplete="off"  -->
+				<label for="senha" class="mt-2">Senha:</label> <img alt=""
+					src="@{'/public/images/icones/key.png'}" width="22"> <input
+					type="password" name="senha" placeholder="Senha"
+					class="form-control hei-input-celular 
+				font-size-celular"
+					required="" id="senha">
+				<!-- BOT�O DE ENVIO -->
+				<input title="Entrar" type="submit"
+					class="btn btn-lg btn-primary btn-block mt-3 
+				font-size-celular"
+					value="Entrar" />
 			</form>
 			<hr class="mt-3">
 			<div class="m-3 mt-1">
-				<span class="block-celular">Não sou cadastrado:</span>
-				<a title="cadastrar-se" href="@{Usuarios.cadastroDeUsuario}">fazer cadastro</a>
+				<span class="block-celular">Não sou cadastrado:</span> <a
+					title="cadastrar-se" class="comoCad" href="#Como Cadastrar-se">Como
+					me cadastro?</a>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(".comoCad").click(function () {
+		setTimeout('explicarCadastro()',300);
+	});
+
+	function explicarCadastro(){
+		Swal.fire({
+			position: 'top',
+			icon: '',
+			html: '<div class="text-white p-3 pb-5 font-size-celular m-n4" style="margin: -18px; background-color: #1b1c1d;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="50%" class="mb-2 w-75"/><br/>'+
+			'<div class="text-justify w-100" style="text-indent: 5%;">Para poder solicitar impressões ou mesmo cópias é nescessário'+
+			' que o usuário esteja previamente cadastrado no sistema SIGICOP. O cadastramento é realizado na sala da Coordenação de '+
+			'Apoio Acadêmico (COAPAC). Dados a ser fornecido, são:<br>'+
+			'<br><ul><li>Nome completo;</li><li>Matrícula;</li><li>Email;</li><li>Senha(pode ser alterada ap�s cadastramento);</li></ul></div></div>',
+			showCloseButton: true,
+			showConfirmButton: false,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			}
+		});
+	}
+</script>

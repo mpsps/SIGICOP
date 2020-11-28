@@ -17,7 +17,7 @@
 						<label class="m-1 font-size-celular" for="campoNome">Nome:</label>
 						<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>
 						<span id="validarNomeMsg"></span>
-						<input type="text" name="user.nomeUsu" placeholder="nome" class="form-control hei-input-celular font-size-celular"
+						<input type="text" name="user.nomeUsu" placeholder="Nome" class="form-control hei-input-celular font-size-celular"
 						value="${user?.nomeUsu}" id="campoNome" autocomplete="off" onkeyup="javascript:validarNome()">
 						 
 						<label for="campoMatricula" class="m-1 font-size-celular">Matricula:</label>
@@ -54,11 +54,7 @@
 						class="form-control hei-input-celular font-size-celular" id="campoConfirmar" value="" onkeyup="javascript:validarConfirmarSenha()">
 						<!-- BOTÃO DE CADASTRO -->
 						<input title="cadastrar" type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular butaoIconTexto" value="Cadastrar" />
-				</form>
-				<hr class="mt-3">
-				<div class="pb-3">
-					<a title="login" href="@{Gerenciador.login}" class="mt-1 mb-1">Ir para a página de login</a>
-				</div>
+				</form>				
 			</div>
 		</div>
 	</div>

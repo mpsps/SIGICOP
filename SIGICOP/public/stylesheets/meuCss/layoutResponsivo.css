@@ -85,6 +85,52 @@ body{
 	color: #39ac49!important;
 }
 /**********************************************************************************************************************************/
+/*******************************************************MENU COM SUBITENS*********************************************************/
+/**********************************************************************************************************************************/
+
+
+.navigation {
+  width: 100%;
+}
+
+.mainmenu, .submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mainmenu a {
+  display: block;
+  background-color: #1b1c1d;
+  text-decoration: none;
+  padding: 7px;
+  color: white;
+}
+
+.mainmenu a:hover {
+    background-color: #1b1c1d;
+}
+
+.mainmenu li:hover .submenu {
+  margin-left: 3px;
+  display: block;
+  max-height: 200px;
+}
+
+.submenu a {
+  background-color: #212325;
+}
+
+.submenu a:hover {
+  background-color: #464646;
+}
+
+.submenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s sease-out;
+}
+/**********************************************************************************************************************************/
 /*******************************************************tela de computador*********************************************************/
 /**********************************************************************************************************************************/
 
@@ -203,11 +249,12 @@ body{
  	.itemMenu{
 		padding-top: 2px;
 		border-bottom:  3px solid #2e3136;
+		border-top:  1px solid #2e3136;
 		margin-bottom: 3px !important;
 	}
 	.itemMenu:hover{
 		color: #bfcce3;
-		border-bottom:  3px solid #595f68;
+		border-bottom:  3px solid #373c42;
 		margin-bottom: 3px !important;
 		background-color: #32383e !important;
 	}
@@ -287,11 +334,12 @@ body{
 	 	.itemMenu{
 			padding-top: 2px;
 			border-bottom:  3px solid #2e3136;
+			border-top:  1px solid #2e3136;
 			margin-bottom: 3px !important;
 		}
 		.itemMenu:hover{
 			color: #bfcce3;
-			border-bottom:  3px solid #595f68;
+			border-bottom:  3px solid #373c42;
 			margin-bottom: 3px !important;
 			background-color: #32383e !important;
 		}
@@ -374,11 +422,12 @@ body{
 			.itemMenu{
 				padding-top: 2px;
 				border-bottom:  3px solid #2e3136;
+				border-top:  1px solid #2e3136;
 				margin-bottom: 3px !important;
 			}
 			.itemMenu:hover{
 				color: #bfcce3;
-				border-bottom:  3px solid #595f68;
+				border-bottom:  3px solid #373c42;
 				margin-bottom: 3px !important;
 				background-color: #32383e !important;
 			}
@@ -576,11 +625,12 @@ body{
 		padding-top: 3px;
 		padding-bottom: 2px;
 		border-bottom:  3px solid #2e3136;
+		border-top:  1px solid #2e3136;
 		margin-bottom: 3px !important;
 	}
 	.itemMenu:hover{
 		color: #bfcce3;
-		border-bottom:  3px solid #595f68;
+		border-bottom:  3px solid #373c42;
 		margin-bottom: 3px !important;
 		background-color: #32383e !important;
 	}
@@ -1171,13 +1221,14 @@ body{
 	.itemMenu{
 		padding-top: 3px;
 		border-bottom:  3px solid #2e3136;
+		border-top:  1px solid #2e3136;
 		margin-bottom: 3px !important;
 		letter-spacing: 1px!important;
 		word-spacing: 5px!important;
 	}
 	.itemMenu:hover{
 		color: #bfcce3;
-		border-bottom:  3px solid #595f68;
+		border-bottom:  3px solid #373c42;
 		margin-bottom: 3px !important;
 		background-color: #32383e !important;
 	}

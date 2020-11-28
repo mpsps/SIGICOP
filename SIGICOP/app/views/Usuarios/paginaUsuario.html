@@ -1,49 +1,49 @@
 #{extends 'laySeg.html' /} 
 #{set title:'Pagina do Usuario' /}
 <div class="heightMin">
-    <div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
-    <i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" style="font-size: 150%;"></i>
-#{if listaPedidos.size() > -1}
+	<div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+		<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger animated zoomIn" style="font-size: 150%;"></i>
+	#{if listaPedidos.size() > -1}
 <!-- Filtro por nome do arquivo e descrição -->
 			<form action="@{Usuarios.filtro}" method="post" class="brancoGelo font-size-celular shadow-sm rounded border mt-0 m-0-celular pt-1-celular">
 				<fieldset class="mb-0-celular">
-			        <legend class="mb-0">Filtrar Por:</legend>
+					<legend class="mb-0">Filtrar Por:</legend>
 					<div class="form-row m-0">
-				   		<div class="form-group col-md-12 mt-1-celular mb-0-celular">
-					    	<label for="NomeDoArquivoFiltro" class="m-0-celular">Nome do Arquivo:</label>
+						<div class="form-group col-md-12 mt-1-celular mb-0-celular">
+							<label for="NomeDoArquivoFiltro" class="m-0-celular">Nome do Arquivo:</label>
 							<input type="text" name="NomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
 							placeholder="Nome do Arquivo"
 							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
-				    	</div>
-				      	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-					      	<label for="descricaoFiltro" class="m-0-celular">Descrição:</label>
-					      	<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
-					      	id="descricaoFiltro"  placeholder="Descricao" 
-					      	value="${descricaoFiltro}" />
-				      	</div>
-				      	<div class="form-group col-md-6 mt-1-celular mb-0-celular">
-					      	<label for="statusFiltro" class="m-0-celular">Status:</label>
-					      	<select name="statusFiltro" id="statusFiltro" class="form-control hei-input-celular font-size-celular">
-					      		<option value="TODOS" #{if statusFiltro.equals("TODOS")}selected #{/if} class="m-0-celular p-0-celular">--TODOS--</option>
-					      		<option value="AGUARDANDO" #{if statusFiltro.equals("AGUARDANDO")}selected #{/if} class="m-0-celular p-0-celular">AGUARDANDO</option>
-					      		<option value="ENTREGUE" #{if statusFiltro.equals("ENTREGUE")}selected #{/if} class="m-0-celular p-0-celular">ENTREGUE</option>
-					      		<option value="CONCLUIDO" #{if statusFiltro.equals("CONCLUIDO")}selected #{/if} class="m-0-celular p-0-celular">CONCLUIDO</option>
-					      		<option value="RECUSADO" #{if statusFiltro.equals("RECUSADO")}selected #{/if} class="m-0-celular p-0-celular">RECUSADO</option>
-					      	</select>
-				      	</div>
-			  		</div>
-			 		<div class="text-center mt-1-celular">
-				  		<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
+						</div>
+						<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							<label for="descricaoFiltro" class="m-0-celular">Descrição:</label>
+							<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
+							id="descricaoFiltro"  placeholder="Descricao" 
+							value="${descricaoFiltro}" />
+						</div>
+						<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							<label for="statusFiltro" class="m-0-celular">Status:</label>
+							<select name="statusFiltro" id="statusFiltro" class="form-control hei-input-celular font-size-celular">
+								<option value="TODOS" #{if statusFiltro.equals("TODOS")}selected #{/if} class="m-0-celular p-0-celular">--TODOS--</option>
+								<option value="AGUARDANDO" #{if statusFiltro.equals("AGUARDANDO")}selected #{/if} class="m-0-celular p-0-celular">AGUARDANDO</option>
+								<option value="ENTREGUE" #{if statusFiltro.equals("ENTREGUE")}selected #{/if} class="m-0-celular p-0-celular">ENTREGUE</option>
+								<option value="CONCLUIDO" #{if statusFiltro.equals("CONCLUIDO")}selected #{/if} class="m-0-celular p-0-celular">CONCLUIDO</option>
+								<option value="RECUSADO" #{if statusFiltro.equals("RECUSADO")}selected #{/if} class="m-0-celular p-0-celular">RECUSADO</option>
+							</select>
+						</div>
+					</div>
+					<div class="text-center mt-1-celular">
+						<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto font-size-celular">Filtrar <i class="filter icon"></i></button>
 						<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" id="limpar">Limpar <i class="eraser icon"></i></span>
-				  		<a title="solicitar" href="@{Pedidos.solicitar}" class="btn btn-success mb-1-celular mt-1-celular butaoIconTexto font-size-celular block-celular">Solicitar
-				  		<i class="file alternate outline icon"></i></a>
-				 	</div>
+							<a title="solicitar" href="@{Pedidos.solicitar}" class="btn btn-success mb-1-celular mt-1-celular butaoIconTexto font-size-celular block-celular">Solicitar
+							<i class="file alternate outline icon"></i></a>
+					</div>
 				</fieldset>
 			</form><br>
 <!-- fim Filtro -->
-#{/if}
+	#{/if}
 	</div>
-#{if listaPedidos.size() == 0 }
+	#{if listaPedidos.size() == 0 }
 <!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
 	<div class="text-center text-primary font-size-celular border listagemVazia">
 		<div>
@@ -55,16 +55,16 @@
 		</a>
 		<a title="tentar filtrar" data-toggle="collapse" href="#multiCollapseExample1" role="button" 
 			aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
-		btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
+			btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded tentarFiltrar">Tentar Filtrar
 		</a>
 	</div>
-#{/if} 
-#{else}
+	#{/if} 
+	#{else}
 	<div class="container font-size-celular">
- 		<div class="row">
-#{list items:listaPedidos, as:'p'}
+		<div class="row">
+		#{list items:listaPedidos, as:'p'}
 <!-- listar todos os pedidos anteriores (se houver) -->
-	   		<div class="col-lg-4">
+			<div class="col-lg-4">
 				<div class="card mb-3 m-0" style="max-width: 100%;">
 					<div class="card-header text-center pt-1 pb-1">
 						<h5 class="text-primary m-0">Pedido:</h5>
@@ -78,31 +78,31 @@
 						</div>
 
 						<b>Status: </b>
-#{if p.status.name() == 'RECUSADO'}
+			#{if p.status.name() == 'RECUSADO'}
 						<div class="text-center rounded statusRecusado">
-							${p.status}
+				${p.status}
 						</div>	
-#{/if}
-#{if p.status.name() == 'AGUARDANDO'}
+			#{/if}
+			#{if p.status.name() == 'AGUARDANDO'}
 						<div class=" text-center rounded statusAguardando">
-							${p.status}
+				${p.status}
 						</div>	
-#{/if}
-#{if p.status.name() == 'CONCLUIDO'}
+			#{/if}
+			#{if p.status.name() == 'CONCLUIDO'}
 						<div class=" text-center rounded statusConcluido">
-							${p.status}
+				${p.status}
 						</div>	
-#{/if}
-#{if p.status.name() == 'ENTREGUE'}
+			#{/if}
+			#{if p.status.name() == 'ENTREGUE'}
 						<div class=" text-center rounded statusEntregue">
-							${p.status}
+				${p.status}
 						</div>
-#{/if}
+			#{/if}
 						<div class="text-center mt-1">
-					  		<button title="+ informações" class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
-					  		role="button" aria-expanded="false" aria-controls="collapseExample">
-					    	+ Informações
-					  		</button>
+							<button title="+ informações" class="btn btn-outline-info btn-sm btn-block font-size-celular" data-toggle="collapse" href="#collapseExample${p.id}" 
+							role="button" aria-expanded="false" aria-controls="collapseExample">
+							+ Informações
+							</button>
 						</div>
 						<div class="collapse text-left" id="collapseExample${p.id}">
 							<div class="card m-0">
@@ -110,31 +110,31 @@
 									<b>Cópias: </b> ${p.qtdCopias}
 								</div>
 								<div class="card-text">
-#{if p.descricao}
+			#{if p.descricao}
 									<b>Descrição: </b> ${p.descricao}<br />
-#{/if}
+			#{/if}
 								</div>
 								<div class="card-text">
 									<b>Data de Envio: </b> ${p.dataEnvio}
 								</div>
-						  		<div class="card-text">
-#{if p?.atendimento}
+								<div class="card-text">
+			#{if p?.atendimento}
 									<b>Atendimento: </b> ${p.atendimento}<br /> 
-#{/if}
+			#{/if}
 								</div>
 								<div class="card-text">
-#{if p?.dataAtendimento}
+			#{if p?.dataAtendimento}
 									<b>Data de atendimento: </b> ${p.dataAtendimento}<br /> 
-#{/if}
+			#{/if}
 								</div>
 								<div class="card-text">
-#{if p?.dataEntrega}
+			#{if p?.dataEntrega}
 								<b>Data de Entrega: </b> ${p.dataEntrega}<br /> 
-#{/if}
+			#{/if}
 								</div>
 							</div>
 						</div>
-#{if p.status.name() == 'AGUARDANDO'}
+			#{if p.status.name() == 'AGUARDANDO'}
 						
 						<div title="apagar" class="card-text text-center ">
 							<a href="@{Pedidos.apagarPedidoAguardando(p.id)}" class="btn btn-outline-danger m-0 mt-1 mb-1
@@ -144,30 +144,28 @@
 							btn-sm butaoIconTexto font-size-celular ">Baixar Arquivo
 							<i style="margin: 1px;" class="download icon"></i></a>
 						</div>
-#{/if}
-#{else}
+			#{/if}
+			#{else}
 						<div class="card-text text-center">
-#{if p.status.name() != 'ENTREGUE'}
+				#{if p.status.name() != 'ENTREGUE'}
 							<a title="baixar arquivo" href="@{Pedidos.downloadUser(p.id)}" class="btn btn-outline-primary m-0 mt-1 mb-1
 							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Arquivo
 							<i style="margin: 1px;" class="download icon"></i></a>
-#{/if}
-#{if p.status.name() == 'ENTREGUE'}
+				#{/if}
+				#{if p.status.name() == 'ENTREGUE'}
 							<a title="baixar relatório" href="@{Pedidos.downloadRelatório(p.id)}" class="btn btn-outline-secondary m-0 mt-1 mb-1
 							btn-sm btn-block butaoIconTexto font-size-celular">Baixar Relatório
 							<i style="margin: 1px;" class="download icon"></i></a>
-#{/if}
+				#{/if}
 						</div>
-#{/else}
+			#{/else}
 					</div>
 				</div>
  			</div>
-#{/list}
+		#{/list}
 		</div>
 	</div>
-#{if }
-#{/if}
-#{/else}
+	#{/else}
 </div>
 <script type="text/javascript">
 $(document).ready(function(e) {

@@ -3,12 +3,13 @@ package jobs;
 import java.util.Date;
 import java.util.List;
 
-import models.Administrador;
+import models.Operador;
 import models.Pedido;
 import models.Usuario;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import seguranca.CriptografiaUtils;
+import util.SituacaoPedido;
 import util.StatusPedido;
 import util.TipoUsuario;
 
@@ -18,20 +19,20 @@ public class Inicializador extends Job {
 	@Override
 	public void doJob() throws Exception {
 		// 	GERANDO UM ADMINISTRADOR PADRAO
-		if (Administrador.count() == 0) {
+		if (Operador.count() == 0) {
 
-			Administrador admPadrao = new Administrador();
+			Operador admPadrao = new Operador();
 			admPadrao.admPadrao = true;
-			admPadrao.nomeAdm = "Admin Absoluto";
-			admPadrao.email = "padrao@email.com";
+			admPadrao.nomeAdm = "Administrador";
+			admPadrao.email = "admin@email.com";
 			String senhaCript = CriptografiaUtils.criptografarMD5("123456");
 			admPadrao.senha = senhaCript;
 			admPadrao.save();
 			
-			Administrador adm = new Administrador();
+			Operador adm = new Operador();
 			adm.admPadrao = false;
-			adm.nomeAdm = "Admin Comum";
-			adm.email = "comum@email.com";
+			adm.nomeAdm = "Operador";
+			adm.email = "operador@email.com";
 			String senhaCriptAdm = CriptografiaUtils.criptografarMD5("123456");
 			adm.senha = senhaCriptAdm;
 			adm.save();
@@ -72,6 +73,7 @@ public class Inicializador extends Job {
 			pedUsuario.descricao = "Pedido do usuario de testes";
 			pedUsuario.frenteVerso = "frente";
 			pedUsuario.qtdCopias = 5;
+			pedUsuario.situacao = SituacaoPedido.DESARQUIVADO;
 			pedUsuario.usuario = usuario;
 			pedUsuario.save();
 			

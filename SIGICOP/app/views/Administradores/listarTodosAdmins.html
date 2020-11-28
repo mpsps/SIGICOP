@@ -1,10 +1,10 @@
 #{extends 'laySeg.html' /} 
-#{set title:'Pedidos Concluidos' /}
+#{set title:'Listar Administradores' /}
 <div class="heightMin">	
 #{if listarDeAdmins != null}
 	<div class="collapse multi-collapse m-0 p-0 animated fadeInDown faster fixed-top t-filtro" 
 	id="multiCollapseExample1">
-		<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger" 
+		<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger animated zoomIn" 
 		style="font-size: 150%;"></i>
 #{if listarDeAdmins.size() > -1}
 <!-- filtro por nome do admin e email do admin -->

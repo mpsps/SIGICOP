@@ -113,7 +113,7 @@
 			<a title="entrar agora" class="ui primary button" href="@{Gerenciador.login}" >Entrar Agora </a>
 			</div>
 			<div class="item">
-				<a title="cadastrar-se" class="ui button" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+				<a title="cadastrar-se" class="ui button comoCad" href="#INFO">Informações</a>
 			</div>
 		</div>
 	</div>
@@ -122,7 +122,7 @@
 <div class="ui vertical inverted sidebar menu w-75">
 	<a class="active item" href="@{Gerenciador.principal}">Principal</a>
 	<a class="item toc sobreNos" href="#SOBRE_NOS">Sobre Nós</a>
-	<a class="item" href="@{Usuarios.cadastroDeUsuario}">Cadastrar-se</a>
+	<a class="item toc comoCad" href="#INFO">Informações</a>
 	<a class="item bg-primary" href="@{Gerenciador.login}">Entrar Agora </a>
 </div>
 <!-- MENU E CABEÇALHO EM TELA DE COMPUTADOR-->
@@ -147,8 +147,8 @@
 			<a title="entrar" class="ui inverted button m-0 font-size-celular botao-principal" 
 			href="@{Gerenciador.login}">Entrar</a>
 			<a title="cadastrar-se" title="cadastrar-se" class="ui inverted m-0 ml-1 secondary 
-			button border border-white-2 text-white botao-principal"  
-			href="@{Usuarios.cadastroDeUsuario}" style="font-size: 100%;">Cadastrar-se</a>
+			button border border-white-2 text-white botao-principal comoCad"  
+			href="#INFO" style="font-size: 100%;">Informações</a>
 			</div>
 		</div>
 		<div class="p-0-celular m-0-celular font-size-celular">
@@ -256,6 +256,9 @@ $(document).ready(function(){
 	$(".sobreNos").click(function () {
 		setTimeout('apresentacao()',400);
 	});
+ 	$(".comoCad").click(function () {
+		setTimeout('explicarCadastro()',400);
+	}) 
 });
 	function apresentacao(){
 		Swal.fire({
@@ -278,7 +281,26 @@ $(document).ready(function(){
 			hideClass: {
 				popup: 'animated fadeOutUp faster'
 			}
-		});	
+		});	 
+	}
+	function explicarCadastro(){
+		Swal.fire({
+			position: 'top',
+			icon: '',
+			html: '<div class="text-white p-3 pb-5 font-size-celular mb-n4" style="margin: -18px; background-color: #1b1c1d;"><img src="@{'/public/images/sigicop/SIGICOPs.jpg'}" alt="SIGICOP" width="50%" class="mb-2 w-75"/><br/>'+
+			'<div class="text-justify w-100" style="text-indent: 5%;">Para poder solicitar impressões ou mesmo cópias é nescessário'+
+			' que o usuário esteja previamente cadastrado no sistema SIGICOP. O cadastramento é realizado na sala da Coordenação de '+
+			'Apoio Acadêmico (COAPAC). Dados a ser fornecido, são:<br>'+
+			'<br><ul><li>Nome completo;</li><li>Matrícula;</li><li>Email;</li><li>Senha(pode ser alterada após cadastramento, ao logar);</li></ul></div></div>',
+			showCloseButton: true,
+			showConfirmButton: false,
+			showClass: {
+				popup: 'animated fadeInDown faster'
+			},
+			hideClass: {
+				popup: 'animated fadeOutUp faster'
+			}
+		});
 	}
 </script>
 </body>

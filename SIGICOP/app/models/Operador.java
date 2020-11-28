@@ -29,7 +29,7 @@ import play.db.jpa.Model;
 import seguranca.CriptografiaUtils;
 
 @Entity
-public class Administrador extends Model {
+public class Operador extends Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Long id;
