@@ -3,7 +3,7 @@ Sistema de Gerenciamento de Impressões e Copias
 
 ## Descrição:
 **A SIGICOP é um projeto de conclusão do curso subsequente em informática,
- realizado por Manacio Pereira de Souza ([@Manacio :octocat:](https://github.com/Manacio)) e por Magdiel Pereira de Souza ([@MagdielPS :octocat:](https://github.com/MagdielPS)).
+ realizado por Magdiel Pereira de Souza ([@MagdielPS :octocat:](https://github.com/MagdielPS)) e Manacio Pereira de Souza ([@Manacio :octocat:](https://github.com/Manacio)).
  A SIGICOP é um sistema de gerenciamento de cópias e impressões,
  que facilite e agilize a demanda de impressões e cópias do IFRN-CAMPUS-JC,
  onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrador possar gerenciar as solicitações**
@@ -11,12 +11,12 @@ Sistema de Gerenciamento de Impressões e Copias
 # Diagrama de Classes :page_facing_up:
 ![Diagrama_Classes_UML](https://user-images.githubusercontent.com/55263599/87580483-faf19680-c6ad-11ea-9e9f-1e07bcd80361.jpg)
 
-# Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
+# Diagrama de Caso de Uso do Usuário ![User Caso de Uso](https://user-images.githubusercontent.com/55263599/100518868-24015800-3173-11eb-9086-260e89b975af.jpg)
 
 ![User Caso de Uso](https://user-images.githubusercontent.com/55263599/87580700-45731300-c6ae-11ea-8fb1-b9e4fc4dda0a.jpg)
 
 
-# Diagrama de Caso de Uso do Administrador ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
+# Diagrama de Caso de Uso do Administrador ![Operador-Adm Caso de Uso](https://user-images.githubusercontent.com/55263599/100518905-472c0780-3173-11eb-8fbf-e8607da76fa4.jpg)
 ![Admin Caso de Uso](https://user-images.githubusercontent.com/55263599/87580715-4c9a2100-c6ae-11ea-9e90-d57f1d125e0c.jpg)
 
 
@@ -111,8 +111,9 @@ Sistema de Gerenciamento de Impressões e Copias
 ## Tabela de Referências de Sites :link::
 Referências    | Categoria   | Links
 -------------- | :---------: | ----
-Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home) 
-Bootstrap      | CSS         | [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home)
+MySQL          | BD          |  [MySQL] (https://www.mysql.com/products/workbench/) 
+Bootstrap      | CSS         |  [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 Semantic UI    | CSS         |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
 Sweeetalert2   | JS          |  [Sweeetalert2](https://sweetalert2.github.io/)
 Animate        |CSS-ANIMAÇÃO |  [Animate](https://daneden.github.io/animate.css/)
