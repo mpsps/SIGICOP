@@ -1,0 +1,61 @@
+#{extends 'laySeg.html' /} 
+#{set title:'Editar Usuarios' /}
+<div class="heightMin">
+	<div class="text-center m-0">
+#{ifErrors}
+		<div style="color: red;" class="h2 m-0-celular p-0-celular mt-n3-celular" >Ops...</div>
+		<!--#{errors}
+		<li>${error.key} - ${error} - ${error.message}</li>
+		#{/errors}-->
+#{/ifErrors}
+	</div>
+	<div class="ui middle aligned center aligned grid p-0 mt-1 mt-2-celular p-0-celular m-0-celular ml-4-tablet mr-4-tablet">
+		<div class="column p-0 m-0 p-0-celular m-0-celular">
+<!-- formulario de cadastro de usu�rio -->
+			<div class="ui stacked segment mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 shadow-sm pl-4-tablet pr-4-tablet animated slideInDown faster">
+				<form id="form-usuario" action="@{Administradores.salvarUsuario} " class="form m-0 pt-0 p-2-tablet" method="post">
+						<label class="m-1 font-size-celular" for="campoNome">Nome:</label>
+						<span id="servidorNomeMsg" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.nomeUsu' /}</span>
+						<span id="validarNomeMsg"></span>
+						<input type="text" name="user.nomeUsu" placeholder="Nome" class="form-control hei-input-celular font-size-celular"
+						value="${user?.nomeUsu}" id="campoNome" autocomplete="off" onkeyup="javascript:validarNome()">
+						 
+						<label for="campoMatricula" class="m-1 font-size-celular">Matricula:</label>
+						<span id="servidorMatriculaMsg"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.matricula' /}</span>
+#{if mat}		
+						<span id="servidorMatriculaExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${mat}</span>
+#{/if}
+						<span id="validarMatriculaMsg"></span>
+						<input type="text" name="user.matricula" placeholder="Matricula" class="form-control mat hei-input-celular font-size-celular" 
+						value="${user?.matricula}"  id="campoMatricula" maxlength="14" autocomplete="off" onkeyup="javascript:validarMatricula()">
+						
+						<label for="campoEmail" class="m-1 font-size-celular">Email:</label>
+						<span id="servidorEmailMsg"  class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">#{error 'user.email' /}</span>
+#{if email}		
+						<span id="servidorEmailExiste" class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm">${email}</span>
+#{/if}
+						<span id="validarEmailMsg"></span>
+						<input type="text" name="user.email" placeholder="Email" class="form-control hei-input-celular font-size-celular" 
+						id="campoEmail" value="${user?.email}" autocomplete="off" onkeyup="javascript:validarEmail()">
+						<label for="campoSenha" class="m-1 font-size-celular">Senha:</label>
+						<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" 
+						id="servidorSenhaMsg">#{error 'user.senha' /}</span>
+						<span id="validarSenhaMsg"></span>
+						<input type="password" name="user.senha" placeholder="Senha" class="form-control hei-input-celular font-size-celular" 
+						id="campoSenha" value="" onkeyup="javascript:validarSenha()">
+						
+						<div id="mostrar" class="p-0 m-0 mb-n1 mt-1" style=" height: 12px; border: 1px solid white;  width: ; color: white;"></div>
+						<label for="campoConfirmar" class="m-1 mt-0 p-0 font-size-celular  mt-n1-celular">Confirmar Senha:</label>
+#{if comparar}		
+						<span class="alert-danger shadow-sm rounded p-0 font-size-celular validacaoMsgm" id="servidorConfirmarSenhaMsg">${comparar}</span>
+#{/if}				
+						<span id="validarCompararMsg"></span>
+						<input type="password" name="user.confirmarSenha" placeholder="Confirmar Senha" 
+						class="form-control hei-input-celular font-size-celular" id="campoConfirmar" value="" onkeyup="javascript:validarConfirmarSenha()">
+						<!-- BOTÃO DE CADASTRO -->
+						<input title="cadastrar" type="submit" class="btn btn-lg btn-primary btn-block mt-2 font-size-celular butaoIconTexto" value="Editar" />
+				</form>				
+			</div>
+		</div>
+	</div>
+</div>

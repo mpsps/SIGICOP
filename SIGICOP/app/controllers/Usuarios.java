@@ -90,7 +90,7 @@ public class Usuarios extends Controller {
 		}
 		
 		List<Pedido> listaPedidos = new ArrayList<Pedido>();
-			
+		// INICIO FILTRO
 		if (NomeDoArquivoFiltro.isEmpty() && descricaoFiltro.isEmpty()) {
 			if(statusFiltro.equals("TODOS")) {
 				listaPedidos = Pedido.find("usuario_id = ?1 AND situacao = ?2", usuarioBanco, SituacaoPedido.DESARQUIVADO).fetch();
@@ -127,6 +127,7 @@ public class Usuarios extends Controller {
 			}
 			System.out.println("Tentou filtrar com conteudo!(só descricao)");		
 		}
+		// FIM FILTRO
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
 		String titulo = "Página do Usuário";
@@ -149,7 +150,7 @@ public class Usuarios extends Controller {
 			NomeDoArquivoFiltro = "";
 		}
 		List<Pedido> listaPedidosHistorico = new ArrayList<Pedido>();
-		
+		// INICIO FILTRO
 		if(descricaoFiltro.isEmpty() && NomeDoArquivoFiltro.isEmpty()) {
 			listaPedidosHistorico = Pedido.find("situacao = ?1 AND usuario_id = ?2", SituacaoPedido.ARQUIVADO, usuarioBanco).fetch();
 		}else if(!descricaoFiltro.isEmpty() && !NomeDoArquivoFiltro.isEmpty()) {
@@ -162,7 +163,7 @@ public class Usuarios extends Controller {
 			listaPedidosHistorico = Pedido.find("lower(nomeArquivo) like ?1 AND situacao = ?2 AND usuario_id = ?3", 
 					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO, usuarioBanco).fetch();
 		}
-		
+		// FIM FILTRO
 		String voltar = "voltar";
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
@@ -230,7 +231,7 @@ public class Usuarios extends Controller {
 		Operador admBanco = dadosSessaoAdmin.admin;
 		Usuario user = Usuario.findById(id);
 			
-		if(admBanco.admPadrao) {
+		if(admBanco.administrador) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Usuarios.deletarUsuario() ... ["+ new Date()+"]");
 		
@@ -276,7 +277,7 @@ public class Usuarios extends Controller {
 			senha = "";
 			confirmarSenha = "";
 		}
-		
+
 		if( !senha.isEmpty() && !confirmarSenha.isEmpty()) {
 			if(senha.length() > 5 && confirmarSenha.length() > 5) {
 				if(senha.equals(confirmarSenha)) {

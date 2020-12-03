@@ -9,28 +9,26 @@ Sistema de Gerenciamento de Impressões e Copias
  onde o usuário possa ter controle sobre a quantidade de solicitação disponíveis e o administrador possar gerenciar as solicitações**
 
 # Diagrama de Classes :page_facing_up:
-![Diagrama_Classes_UML](https://user-images.githubusercontent.com/55263599/87580483-faf19680-c6ad-11ea-9e9f-1e07bcd80361.jpg)
+![Diagrama_Classes_UML](https://user-images.githubusercontent.com/55263599/100757807-92d9ed80-33cd-11eb-8adb-2c5b53882394.jpg)
 
-# Diagrama de Caso de Uso do Usuário ![User Caso de Uso](https://user-images.githubusercontent.com/55263599/100518868-24015800-3173-11eb-9086-260e89b975af.jpg)
+# Diagrama de Caso de Uso do Usuário ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
+![User Caso de Uso](https://user-images.githubusercontent.com/55263599/100518868-24015800-3173-11eb-9086-260e89b975af.jpg)
 
-![User Caso de Uso](https://user-images.githubusercontent.com/55263599/87580700-45731300-c6ae-11ea-8fb1-b9e4fc4dda0a.jpg)
-
-
-# Diagrama de Caso de Uso do Administrador ![Operador-Adm Caso de Uso](https://user-images.githubusercontent.com/55263599/100518905-472c0780-3173-11eb-8fbf-e8607da76fa4.jpg)
-![Admin Caso de Uso](https://user-images.githubusercontent.com/55263599/87580715-4c9a2100-c6ae-11ea-9e90-d57f1d125e0c.jpg)
-
+# Diagrama de Caso de Uso do Administrador ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
+![Operador-Adm Caso de Uso](https://user-images.githubusercontent.com/55263599/100758345-2b706d80-33ce-11eb-8e1b-1522cedf80ca.jpg)
 
 # PASSO A PASSO DO USUÁRIO ![usu](https://user-images.githubusercontent.com/55263599/71699011-6f14be80-2d9c-11ea-9657-b5e8f9ab43d9.png)
 
-* O usuário deverá acessar o site da SIGICOP;
+* O Usuário deverá acessar o site da SIGICOP;
 * Quando visitar a página principal clicar em "Entrar" ou em "Entrar agora";
-* Se caso o usuário ainda não for cadastrado, deverá se cadastrar clicando em "Cadastra-se", preencher o formulário e salvar os dados;
+* Se caso o Usuário ainda não seja cadastrado, O cadasto será realizado na sala da Coordenação de Apoio Acadêmico (COAPAC). Dados a ser fornecido, são: Nome completo, matrícula, email e senha (pode ser alterada após cadastramento);
 * Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
-* O usuário ao logar, poderá visualizar seus pedidos anteriores (se houver), e poderá filtra-los e efetuar download;
+* O Usuário ao logar, poderá visualizar seus pedidos anteriores (se houver), e poderá filtra-los e efetuar download;
 * Em "Meus Dados" (icone de usuário) poderá visualizar a quantidade disponível de solicitações, clicando poderá vizualizar seu nome, email e ultimo acesso;
-* Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitacão disponivel, aparecerá o formulário, se não, aparecerá mensagem em vermelho informando que não é possivel efetuar nenhuma solicitacão;
-* Ao solicitar, os pedido serão listado ao lado do formulário, onde o usuário poderá cancelar e salvar quando quiser;
-* Após logar, o usuário poderá sair a qualquer momento;
+* Poderá solicitar pedidos de impressões, ao solicitar, se houver solicitacão disponivel, aparecerá o formulário, se não, aparecerá mensagem informando que não é possivel efetuar nenhuma solicitacão;
+* Ao solicitar, os pedido serão listado ao lado do formulário, onde o Usuário poderá cancelar e salvar quando quiser;
+* O Usuário poderá ver os históricos de pedidos anteriores finalizados;
+* Após logar, o Usuário poderá sair a qualquer momento;
 
 ## Páginas da SIGICOP para Usuário :computer:
 ![desktop](https://user-images.githubusercontent.com/55263599/91240274-e88c6300-e717-11ea-9fdf-a78dcc2fccc1.gif)
@@ -40,20 +38,21 @@ Sistema de Gerenciamento de Impressões e Copias
 
 # PASSO A PASSO DO ADMINISTRADOR ![adm](https://user-images.githubusercontent.com/55263599/71698974-48ef1e80-2d9c-11ea-9963-3d43d39500d5.png)
 
-* O administrador deverá acessar o site da SIGICOP;
+* O Administrador deverá acessar o site da SIGICOP;
 * Quando visitar a página principal clicar em "Logar" ou em "logar agora";
 * Ao entrar na página de login, fornecer o login e senha para entrar no sistema;
-* O administrador ao logar, poderá visualizar todos os pedidos com o status "AGUARDANDO" (se houver), filtra-los e efetuar download;
-* Em "Meus Dados" (icone do administrador) poder visualizar seu nome, email e ultimo acesso, e poderá editar seus dados;
-* O administrador poderá concluir ou recusar os pedidos (se houver), se recusar será obrigado a dá uma justificativa, se concluir, será opcional a justificativa;
-* O administrador poderá listar todos os pedidos concluídos, e poderá filtra-los;
-* O administrador poderá listar todos os pedidos recusados, e poderá filtra-los;
-* O administrador em lista de concluído, poderá entregar o pedido depois que o usuário recebe a impressão;
-* O administrador poderá realizar baixa para o usuário, quando for pedido de cópia;
-* O administrador padrão poderá cadastrar novos administradores;
-* O administrador padrão poderá listar todos os administradores do sistema e remover-los;
-* O administrador padrão poderá restaurar a quantidade de solicitações de todos os usuários, informando a quantidade;
-* Ao logar, o administrador poderá sair a qualquer momento;
+* O Administrador ao logar, poderá visualizar todos os pedidos com o status "AGUARDANDO" (se houver), filtra-los e efetuar download;
+* Em "Meus Dados" (icone do Administrador) poder visualizar seu nome, email e ultimo acesso, e poderá editar seus dados;
+* O Administrador poderá concluir ou recusar os pedidos (se houver), se recusar será obrigado a dá uma justificativa, se concluir, será opcional a justificativa;
+* O Administrador poderá listar todos os pedidos concluídos, e poderá filtra-los;
+* O Administrador poderá listar todos os pedidos recusados, e poderá filtra-los;
+* O Administrador em lista de concluído, poderá entregar o pedido depois que o Usuário recebe a impressão;
+* O Administrador poderá realizar baixa para o Usuário, quando for pedido de cópia;
+* O Administrador padrão poderá cadastrar novos Administradores;
+* O Administrador padrão poderá listar todos os Administradores do sistema e remover-los;
+* O Administrador padrão poderá restaurar a quantidade de solicitações de todos os Usuários, informando a quantidade;
+* O Administrador poderá ver os históricos de pedidos anteriores finalizados;
+* Ao logar, o Administrador poderá sair a qualquer momento;
 
 ## Páginas da SIGICOP para Administrador :computer:
 ![desktop_adm](https://user-images.githubusercontent.com/55263599/91241323-f7c0e000-e71a-11ea-8299-032dcabd297c.gif)
@@ -63,14 +62,14 @@ Sistema de Gerenciamento de Impressões e Copias
 
 ## As importações mais importantes :exclamation: :
 
-[*Jquery*](https://jquery.com/) (laySeg.html)
+[*Jquery*](https://jquery.com/) ([laySeg.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/laySeg.html))
 ```html
 <!-- JS JQUERY -->
 		<script src="@{'/public/javascripts/Jquery/jquery-3.4.1.js'}" type="text/javascript" charset="${_response_encoding}"></script>		
 		<script src="@{'/public/javascripts/Jquery/jquery.mask.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 ```
 
-[*Bootstrap*](https://getbootstrap.com/docs/4.4/getting-started/introduction/) (layPri.html e laySeg.html)
+[*Bootstrap*](https://getbootstrap.com/docs/4.4/getting-started/introduction/) ([layPri.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/layPri.html) e  [laySeg.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/laySeg.html))
 ```html
 <!-- BOOTSTRAP - CSS -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/bootstrap/css/bootstrap.css'}">
@@ -78,7 +77,7 @@ Sistema de Gerenciamento de Impressões e Copias
 		<script src="@{'/public/bootstrap/js/bootstrap.bundle.min.js'}"></script>
  ``` 
 
-[*Semantic*](https://semantic-ui.com/introduction/getting-started.html) (layPri.html e laySeg.html)
+[*Semantic*](https://semantic-ui.com/introduction/getting-started.html) ([layPri.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/layPri.html) e [laySeg.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/laySeg.html))
 ```html
 <!--SEAMNTIC CSS -->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/reset.min.css'}">
@@ -103,7 +102,7 @@ Sistema de Gerenciamento de Impressões e Copias
 		<script src="@{'/public/Semantic/js/meuJs.js'}"></script>
 ```
 
-[*Sweetalert*](https://sweetalert2.github.io/) (layPri.html e laySeg.html)
+[*Sweetalert*](https://sweetalert2.github.io/) ([layPri.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/layPri.html) e [laySeg.html](https://github.com/MagdielPS/SIGICOP/blob/master/SIGICOP/app/views/laySeg.html))
 ```html
 <!-- SWEETALERT2 -->
  		<script src="@{'/public/javascripts/meuJs/sweetalert2@9.js'}"></script>
@@ -112,7 +111,7 @@ Sistema de Gerenciamento de Impressões e Copias
 Referências    | Categoria   | Links
 -------------- | :---------: | ----
 Play Framework | Plataforma de Desenvolvimento |  [1.4.5](https://www.playframework.com/documentation/1.4.x/home)
-MySQL          | BD          |  [MySQL] (https://www.mysql.com/products/workbench/) 
+MySQL          | BD          |  [MySQL](https://www.mysql.com/products/workbench/) 
 Bootstrap      | CSS         |  [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 Semantic UI    | CSS         |  [Semantic](https://semantic-ui.com/introduction/getting-started.html) 
 Sweeetalert2   | JS          |  [Sweeetalert2](https://sweetalert2.github.io/)

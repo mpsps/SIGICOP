@@ -1,0 +1,100 @@
+#{extends 'laySeg.html' /} 
+#{set title:'Buscar Usuário' /}
+<div class="heightMin">
+<!-- formulário de busca de Usuário -->
+<form action="@{Administradores.removerUsuario}" method="post" class="brancoGelo font-size-celular 
+		shadow-sm rounded border m-0-celular pt-1-celular">
+			<fieldset class="mb-0-celular">
+				<legend class="m-0-celular mb-0">Filtrar Por:</legend>
+				<div class="form-row m-0">
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="NomeUser">Matricula:</label>
+						<input type="text" name="matDoUsuario" class="form-control hei-input-celular 
+						font-size-celular" placeholder="Matricula do Usuário" 
+						id="matriculaDoUsuarioFiltro" maxlength="20" value="${matDoUsuario}" >
+					</div>
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+						<label for="email">Email:</label>
+						<input type="text" name="emailDoUsuario" class="form-control hei-input-celular 
+						font-size-celular" 
+						placeholder="Email do Usuário" id="emailDoUsuario" value="${emailDoUsuario}">
+					</div>   		
+				</div>
+				<div class="text-center mt-1-celular">
+					<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto 
+					font-size-celular">Buscar <i class="filter icon"></i></button>
+					<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" 
+					id="limpar">Limpar <i class="eraser icon"></i></span>
+				</div>
+			</fieldset>
+		</form>
+<br>
+#{if usuarioBuscado == null }
+<!-- nenhum Usuário-->
+	<div class="text-center text-primary font-size-celular border listagemVazia">
+			<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
+			<div class="h1 nenhumEncontrado">Nenhum Usuário foi encontrado</div>
+	</div>
+#{/if}
+#{else}
+	<div class="container font-size-celular text-center">
+ 		<div class="row">
+<!-- Usuário encontrado-->
+	   		<div class="col-lg-12">
+				<div class="card mb-1 shadow-sm" style="max-width: 100%;">
+					<div class="card-body brancoGelo mb-0">
+						<div class="card-text">
+							<b>Matricula: </b> <span id="nomeAdmin">${usuarioBuscado.matricula}</span>
+						</div>
+						<div class="card-text">
+							<b>Nome: </b> <span id="nomeAdmin">${usuarioBuscado.nomeUsu}</span>
+						</div>
+						<div class="card-text">
+							<b>Email: </b> ${usuarioBuscado.email}
+						</div>
+#{if usuarioBuscado.ultimoAcessoUsu}
+						<div class="card-text">
+							<b>Ultimo Acesso: </b> ${usuarioBuscado.ultimoAcessoUsu}
+						</div>
+#{/if}
+						<div class="card-text">
+							<b>Qtd Disponível: </b> <span id="nomeAdmin">${usuarioBuscado.qtdDisponivel}</span>
+						</div>
+						<div class="text-center m-0">
+								<a title="remover" href="#Remover" data-item="${usuarioBuscado.id}" id="${usuarioBuscado.id}" class="btn btn-outline-danger 
+								m-0 mt-1 butaoIconTexto remover font-size-celular">
+								Remover<i style="float: right; margin: 1px;" class="x icon"></i>
+								</a>	
+						</div>
+					</div>
+				</div>
+	 		</div>
+		</div>
+	</div>
+#{/else}
+</div>
+<script type="text/javascript">
+/* MODAL DE REMOVER ADMIN */
+$(".remover").click(function() {
+	var id = $(this).data("item");
+	$('#idRem').val(id);
+	Swal.fire({
+		position: 'top',
+		html: '<div class="font-size-celular">Tem certeza que deseja remover esse Usuário?</div>\n'
+			+'<div class="bg-info text-white p-1 font-size-celular">Nome: ${usuarioBuscado?.nomeUsu}</div>'
+			+'<br/><form action="@{Usuarios.deletarUsuario}" method="post">'
+			+'<input type="hidden" id="idRem" name="id" value="'+id+'"/>'
+			+'<input type="submit" value="Remover" class="btn btn-danger m-1 butaoIconTexto"/></form>',
+		icon: 'question',
+		showCloseButton: true,
+		showCancelButton: false,
+		showConfirmButton: false,
+		showClass: {
+			popup: 'animated fadeInDown faster'
+		},
+		hideClass: {
+			popup: 'animated fadeOutUp faster'
+		}
+	})
+}); 
+</script>

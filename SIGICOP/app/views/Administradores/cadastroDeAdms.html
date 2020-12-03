@@ -15,16 +15,16 @@
 			<form action="@{Administradores.salvarAdm} " class="ui brancoGelo m-0-celular p-0-celular mt-n2 shadow-sm m-2-tablet mt-0-tablet animated slideInDown lower" method="post">
 				<div class=" ml-1 mr-1 mb-0 mt-0 pl-3 pr-3 pb-2 pt-0 ml-0-celular mr-0-celular pl-2-celular pr-2-celular">
 				<input type="hidden" name="adm.id" value="${adm?.id}">
-#{if !adm?.id && admBanco?.admPadrao == true}
+#{if !adm?.id && admBanco?.administrador == true}
 					<label class="font-size-celular m-1" for="campoAdmin">Administrador:</label>
 					<div class="col-md-12 p-0-celular m-0-celular p-0 border">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="comum" name="adm.admPadrao"
+							<input type="radio" id="comum" name="adm.administrador"
 								class="custom-control-input m-0" value="false" checked="checked">
 							<label class="custom-control-label text-justify" for="comum">Operador</label>
 						</div>
 						<div title="+ funções" class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="padrao" name="adm.admPadrao"
+							<input type="radio" id="padrao" name="adm.administrador"
 								class="custom-control-input m-0" value="true"> <label
 								class="custom-control-label text-left" for="padrao">
 								Administrador</label> 

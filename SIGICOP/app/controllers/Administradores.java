@@ -47,7 +47,7 @@ public class Administradores extends Controller {
 			nomeDoArquivoFiltro = "";
 		}			
 		List<Pedido> listaPedidosPa = new ArrayList<Pedido>();
-			
+		// INICIO FILTRO
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty() ) {
 			listaPedidosPa = Pedido.find(" status = ?1", StatusPedido.AGUARDANDO).fetch();
 			System.out.println("Tentou filtrar sem nada ou simplesmente entrou na página!");
@@ -70,9 +70,15 @@ public class Administradores extends Controller {
 			System.out.println("Tentou filtrar só por Nome do Arquivo!");
 			System.out.println("Nome do Arquivo = \""+nomeDoArquivoFiltro+"\"");
 		}
+		// FIM FILTRO
 		String filtroPa = "";
 		String temFiltro = "tem";
-		String titulo = "Página do Administrador";
+		String titulo;
+		if (admBanco.administrador) {
+			titulo = "Pagina do Administrador";
+		} else {
+			titulo = "Pagina do Operador";
+		}
 	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa, temFiltro, titulo);
 	}	
 ///// SÓ O ADMIN PADRAO PODE CADASTRAR MAIS ADMINS /////
@@ -81,7 +87,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 
-		if(admBanco.admPadrao && admBanco.id == 1) {// verificar se é o admin padrão
+		if(admBanco.administrador && admBanco.id == 1) {// verificar se é o admin padrão
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
 			String telaAdmin = "Tela Admin";
@@ -144,7 +150,7 @@ public class Administradores extends Controller {
 					}
 				if (validation.hasErrors()) { // verificar depois de tudo se contém algum erro
 					validation.keep();
-					flash.error("Falha no Cadastro do Usuario!");
+					flash.error("Falha no Cadastro do Operador!");
 				cadastroDeAdms();
 				}else { // se não contém nenhum erro, então permite cadastrar
 					flash.success("O administrador "+adm.nomeAdm+" cadastrado com sucesso!");
@@ -196,7 +202,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 		String telaAdmin = "Tela Admin";
-		String titulo = "Editar senha";
+		String titulo = "Editar Senha";
 	render(telaAdmin, admBanco, titulo);
 	}
 ///// SALVAR A SENHA ///// 
@@ -251,7 +257,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 		
-		if(admBanco.admPadrao) {
+		if(admBanco.administrador) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.listarTodosAdmins() ... ["+ new Date()+"]" );
 			
@@ -263,7 +269,7 @@ public class Administradores extends Controller {
 				emailDoAdminFiltro = "";
 			}
 			List<Operador> listarDeAdmins = new ArrayList<Operador>();
-			
+			// INICIO FILTRO
 			if(nomeDoAdminFiltro.isEmpty() && emailDoAdminFiltro.isEmpty()) {
 				if (admBanco.id == 1) {
 					listarDeAdmins = Operador.find("id != 1").fetch();
@@ -289,6 +295,7 @@ public class Administradores extends Controller {
 					listarDeAdmins = Operador.find("admPadrao = ?1 And nomeAdm LIKE ?2 AND email LIKE ?3 ", false,"%"+ nomeDoAdminFiltro+"%", "%"+ emailDoAdminFiltro.toLowerCase()+"%").fetch();
 				}
 			}
+			// FIM FILTRO
 			String listaAdmins = "listaAdmins";
 			String telaAdmin = "telaAdmin";
 			String temFiltro = "tem";
@@ -309,7 +316,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 			
-		if(admBanco.admPadrao) {
+		if(admBanco.administrador) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.removerAdmin() ... ["+ new Date()+"]");
 			Operador admin = Operador.findById(id);
@@ -359,19 +366,20 @@ public class Administradores extends Controller {
 		}
 		
 		List<Pedido> listaPedidosHistorico = new ArrayList<Pedido>();
-		
+		// INICIO FILTRO
 		if(descricaoFiltro.isEmpty() && NomeDoArquivoFiltro.isEmpty()) {
-			listaPedidosHistorico = Pedido.find("situacao = ?1", SituacaoPedido.ARQUIVADO).fetch();
+			listaPedidosHistorico = Pedido.find("situacao = ?1 AND adm_id = ?2", SituacaoPedido.ARQUIVADO, admBanco).fetch();
 		}else if(!descricaoFiltro.isEmpty() && !NomeDoArquivoFiltro.isEmpty()) {
-			listaPedidosHistorico = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND situacao = ?3", 
-					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", "%" + descricaoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO).fetch();
+			listaPedidosHistorico = Pedido.find("lower(nomeArquivo) like ?1 AND lower(descricao) like ?2 AND situacao = ?3 AND adm_id = ?4", 
+					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", "%" + descricaoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO, admBanco).fetch();
 		}else if(!descricaoFiltro.isEmpty() && NomeDoArquivoFiltro.isEmpty()) {
-			listaPedidosHistorico = Pedido.find("lower(descricao) like ?1 AND situacao = ?2", 
-					"%" + descricaoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO).fetch();
+			listaPedidosHistorico = Pedido.find("lower(descricao) like ?1 AND situacao = ?2 AND adm_id = ?3", 
+					"%" + descricaoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO, admBanco).fetch();
 		}else if(!NomeDoArquivoFiltro.isEmpty() && descricaoFiltro.isEmpty()) {
-			listaPedidosHistorico = Pedido.find("lower(nomeArquivo) like ?1 AND situacao = ?2", 
-					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO).fetch();
+			listaPedidosHistorico = Pedido.find("lower(nomeArquivo) like ?1 AND situacao = ?2 AND adm_id = ?3", 
+					"%" + NomeDoArquivoFiltro.trim().toLowerCase() + "%", SituacaoPedido.ARQUIVADO, admBanco).fetch();
 		}
+		// FIM FILTRO
 		String temFiltro = "tem";
 		String filtroHistorico = "tem";
 		String telaAdmin = "telaAdmin";
@@ -400,7 +408,7 @@ public class Administradores extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 		
-		if(admBanco.admPadrao) {
+		if(admBanco.administrador) {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administradores.buscarUsuario() ... ["+ new Date()+"]" );
 				
@@ -414,7 +422,7 @@ public class Administradores extends Controller {
 				matDoUsuario = "";
 			}
 			Usuario usuarioBuscado = new Usuario();
-			
+			// INICIO FILTRO
 			if(!matDoUsuario.isEmpty() && emailDoUsuario.isEmpty()){
 				usuarioBuscado = Usuario.find("matricula = ?1", matDoUsuario).first();
 			}else if(matDoUsuario.isEmpty() && !emailDoUsuario.isEmpty()){	
@@ -424,7 +432,7 @@ public class Administradores extends Controller {
 			}else if(matDoUsuario.isEmpty() && emailDoUsuario.isEmpty()){
 				usuarioBuscado = null;
 			}
-				
+			// FIM FILTRO
 				String temFiltro = "tem";
 				String telaAdmin = "telaAdmin";
 				String titulo = "Remover Usuário";

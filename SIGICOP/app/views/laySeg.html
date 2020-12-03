@@ -120,17 +120,17 @@
 							<span class="w-25 m-0 p-0">
 		#{if usuarioBanco?.qtdDisponivel > 9} 
 								<span class="notificacao bg-success text-white mt-2 font-size-celular">
-									${usuarioBanco?.qtdDisponivel}
+									${usuarioBanco?.qtdDisponivel} <!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
 		#{if usuarioBanco?.qtdDisponivel > 4 &&	usuarioBanco?.qtdDisponivel < 10} 
 								<span class="notificacao bg-warning text-white m-1 font-size-celular">
-									${usuarioBanco?.qtdDisponivel}
+									${usuarioBanco?.qtdDisponivel}<!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
 		#{if usuarioBanco?.qtdDisponivel < 5} 
 								<span class="notificacao bg-danger text-white m-1 font-size-celular">
-									${usuarioBanco?.qtdDisponivel}
+									${usuarioBanco?.qtdDisponivel}<!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
 								<span class="desaparecer-celular"> <i
@@ -198,7 +198,6 @@
 						<i class="clock outline icon"></i>Histórico de Pedidos
 					</li>
 				</a>
-				
 <!-- /////////////// FIM DO MENU DO USUÁRIO //////////////// -->
 	#{/if}	
 	#{if session.contains("adminLogado")}
@@ -229,8 +228,8 @@
 									</a>
 		#{/if}
 								</li>
-		#{if admBanco?.admPadrao}<!-- admin padrão -->
-			#{if admBanco?.admPadrao && admBanco.id == 1}<!-- admin-absoluto padrão -->
+		#{if admBanco?.administrador}<!-- Verificando se é um Administrador ... -->
+			#{if admBanco?.administrador && admBanco.id == 1}<!-- ... se é admin geral  -->
 								<li>
 									<a title="Adicionar Administrador" href="@{Administradores.cadastroDeAdms}">
 										<i class="plus icon"></i>Adicionar Administrador
@@ -319,9 +318,9 @@
 									</a>
 								</li>
 		#{/else}
-		#{if listaconcluidos != null && admBanco?.admPadrao}
+		#{if listaconcluidos != null && admBanco?.administrador}
 									<li>		
-										<a title="Apagar Entregues" id="ApagarEntregues"">
+										<a title="Apagar Entregues" id="ArquivarEntregues"">
 											<i class="trash icon"></i>Arquivar Entregues
 										</a>	
 									</li>
@@ -348,9 +347,9 @@
 									</a>
 								</li>				
 		#{/else}
-		#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
+		#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.administrador}
 								<li>
-									<a title="Apagar Recusados" id="ApagarRecusados">
+									<a title="Arquivar Recusados" id="ArquivarRecusados">
 										<i class="trash icon"></i>Arquivar Recusados
 									</a>
 								</li>
@@ -372,7 +371,7 @@
 						</li>
 					</ul>
 				</nav>
-			#{if admBanco?.admPadrao}<!-- admin padrão -->
+			#{if admBanco?.administrador}<!-- admin padrão -->
 				<nav class="navigation">
 					<ul class="mainmenu">
 						<li>
@@ -380,7 +379,7 @@
 								<i class="user icon"></i>Gerenciar Usuários	
 							</a>
 							<ul class="submenu">
-				#{if admBanco?.admPadrao}
+				#{if admBanco?.administrador}
 								<li>
 									<a title="restaurar qtd disponível dos usuários" class="linkMenu" href="#Resaturar" id="restaurar" 
 									href="@{Administradores.listarTodosAdmins}">
@@ -446,7 +445,7 @@
 <!-- fim de user ou admin logado -->
 #{/if}
 #{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}<!-- user e admin deslogado  -->
-	<div id="layoutDeslogado">
+	<div id="layoutDeslogado"> <!-- na pagina de login -->
 		<nav class="navbar navbar-expand-md navbar-dark w-100 m-0 corMenu 
 		m-0-celular shadow-sm animated slideInDown faster" id="destacar-celular" id="tamanho-corpo-celular">
 	
@@ -487,7 +486,7 @@
 			</div>		
 		</nav>
 		<div class="text-center">
-<!-- FLASH DE ERRO E SUCESSO -->
+<!-- FLASH DE ERRO E SUCESSO NA PAGINA DE LOGIN-->
 	#{if flash.error}
 			<div class="uk-alert-danger p-2 m-0 animated slideInDown faster" uk-alert class="messagemDeAlerta" id="messagemAlerta" style="width: 100%; margin-top: 5% !important;">
 				<div class="font-size-celular m-0">${flash.error}</div>
@@ -521,7 +520,7 @@
 				<i class="chevron right icon"></i>
 			</div>
 	#{/if}
-			<div class="p-5 p-1-celular conteudoPagina">
+			<div class="p-5 p-1-celular conteudoPagina"> <!-- TITULO DAS PAGINAS -->
 				<div class="text-center">
 					<h1 class="text-secondary tituloCelular mb-1-tablet mt-n3-tablet">${titulo}</h1>
 				</div>
@@ -571,6 +570,7 @@
 		</div>
 	</div>
 </div>
+<!-- VOLTAR AO TOPO -->
 <a title="volta ao topo" href="#topPrincipal" class="animated fadeInUpBig faster" style="z-index: 1000;">
 	<img src="@{'/public/images/icones/voltarTopo.png'}" alt="voltar ao topo" id="topo" height="30" width="30"/>
 </a>
@@ -580,13 +580,13 @@
 	<input type="hidden" name="qtd" value="${qtd}" id="restQtd">
 </form>
 	#{if listaRecusados != null && listaRecusados.size() != 0}
-<!-- APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADO-->
+<!-- ARQUIVAR TODOS OS PEDIDOS COM O STATUS RECUSADO-->
 <form id="formApagarRecusado" action="@{Pedidos.arquivarPedidoEntregueOuRecusado}">
 	<input type="hidden" name="status" value="RECUSADO" id="inputRecusado">
 </form>
 	#{/if}
-	#{if listaconcluidos != null && admBanco?.admPadrao}
-<!-- APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUE-->
+	#{if listaconcluidos != null && admBanco?.administrador}
+<!-- ARQUIVAR TODOS OS PEDIDOS COM O STATUS ENTREGUE-->
 <form id="formApagarEntregue" action="@{Pedidos.arquivarPedidoEntregueOuRecusado}">
 	<input type="hidden" name="status" value="ENTREGUE" id="inputEntregue">
 </form>
@@ -832,7 +832,7 @@ $(document).ready(function() {
 				}
 			})
 		});
-		#{if admBanco?.admPadrao}
+		#{if admBanco?.administrador}
 /* DIALOGS COM AVISOS E PREENCHIMENTO DE MENSAGENS */		
 			$("#restaurar").click(function() {
 				Swal.fire({
@@ -878,9 +878,9 @@ $(document).ready(function() {
 					}
 				})
 			});
-			#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.admPadrao}
-/* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS RECUSADOS */
-				$("#ApagarRecusados").click(function() {
+			#{if listaRecusados != null && listaRecusados.size() != 0 && admBanco?.administrador}
+/* DIALOG QUE ARQUIVAR TODOS OS PEDIDOS COM O STATUS RECUSADOS */
+				$("#ArquivarRecusados").click(function() {
 					Swal.fire({
 						position: 'top',
 						scrollbarPadding: true,
@@ -906,9 +906,9 @@ $(document).ready(function() {
 					})
 				});
 			#{/if}
-			#{if listaconcluidos != null && admBanco?.admPadrao}
-/* DIALOG QUE APAGAR TODOS OS PEDIDOS COM O STATUS ENTREGUES */		
-				$("#ApagarEntregues").click(function() {
+			#{if listaconcluidos != null && admBanco?.administrador}
+/* DIALOG QUE ARQUIVAR TODOS OS PEDIDOS COM O STATUS ENTREGUES */		
+				$("#ArquivarEntregues").click(function() {
 					Swal.fire({
 						position: 'top',
 						scrollbarPadding: true,
@@ -1015,11 +1015,11 @@ $(document).ready(function() {
 		if(campoMatricula.length > 13 & campoMatricula.length < 18){
 			document.getElementById("campoMatricula").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);' // campoMatricula verde
 			servidorMatriculaMsg.style = 'display: none;' // "desativa" a span servidorMatriculaMsg
-		 	validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
+			validarMatriculaMsg.style = 'display: none;' // "desativa" a span validarMatriculaMsg
 	#{if mat}
-		 	servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
+			servidorMatriculaExiste.style = 'display: none;' // "desativa" a span servidorMatriculaExite
 	#{/if}	
-		} 
+		}
 	}
 		
 	// VALIDAÇÃO DE EMAIL
@@ -1034,25 +1034,25 @@ $(document).ready(function() {
 	#{/if}
 
 		if (campoEmail == '') { // verificar se o campoMatricula está vazio
-		 	document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
-		 	validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
-		 	'validacaoMsgm">obrigatório</span>';
-		 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+			document.getElementById("campoEmail").style = 'border-color: #f4c4c9; background-color: rgba(254, 245, 247, 0.8);' // campoEmail vermelho
+			validarEmailMsg.innerHTML = '<span class="validacaoErro shadow-sm rounded p-0 font-size-celular '+
+			'validacaoMsgm">obrigatório</span>';
+			servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
 		}else{ // se não, então verificar se é email válido
 			usuario = campoEmail.substring(0, campoEmail.indexOf("@"));
 			dominio = campoEmail.substring(campoEmail.indexOf("@")+ 1, campoEmail.length);
-			 
+			
 			if ((usuario.length >=1) &&
-			    (dominio.length >=3) && 
-			    (usuario.search("@")==-1) && 
-			    (dominio.search("@")==-1) &&
-			    (usuario.search(" ")==-1) && 
-			    (dominio.search(" ")==-1) &&
-			    (dominio.search(".")!=-1) &&      
-			    (dominio.indexOf(".") >=1)&& 
-			    (dominio.lastIndexOf(".") < dominio.length - 1)) {
-			 	document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);';
-			 	servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
+				(dominio.length >=3) && 
+				(usuario.search("@")==-1) && 
+				(dominio.search("@")==-1) &&
+				(usuario.search(" ")==-1) && 
+				(dominio.search(" ")==-1) &&
+				(dominio.search(".")!=-1) &&      
+				(dominio.indexOf(".") >=1)&& 
+				(dominio.lastIndexOf(".") < dominio.length - 1)) {
+				document.getElementById("campoEmail").style = 'border-color: #84e19b; background-color: rgba(240, 251, 243, 0.8);';
+				servidorEmailMsg.style = 'display: none;' // "desativa" a span servidorEmailMsg
 	#{if email}
 			 	servidorEmailExiste.style = 'display: none;' // "desativa" a span servidorEmailExiste
 	#{/if}

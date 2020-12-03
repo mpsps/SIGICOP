@@ -334,7 +334,7 @@ public class Pedidos extends Controller {
 		Operador admBanco = dadosSessaoAdmin.admin;
 
 		List<Pedido> listaconcluidos = new ArrayList<Pedido>();
-
+		// INICIO FILTRO
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
 			listaconcluidos = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar  pedidos concluidos sem nada, ou entrou na página concluido!");
@@ -353,6 +353,7 @@ public class Pedidos extends Controller {
 							"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar pedidos concluidos com conteudo!(só nome do arquivo)");
 		}
+		// FIM FILTRO
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem";
 		String titulo = "Listagem de Concluídos";
@@ -379,7 +380,7 @@ public class Pedidos extends Controller {
 		Operador admBanco = dadosSessaoAdmin.admin;
 
 		List<Pedido> listaRecusados = new ArrayList<Pedido>();
-
+		// INICIO FILTRO
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
 			listaRecusados = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar sem nada ou entrou na página!");
@@ -396,6 +397,7 @@ public class Pedidos extends Controller {
 					"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");
 		}
+		// FIM FILTRO
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem ";
 		String titulo = "Listagem de Recusados";
@@ -569,7 +571,7 @@ public class Pedidos extends Controller {
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador adminSessao = dadosSessaoAdmin.admin;
 
-		if (adminSessao.admPadrao) {
+		if (adminSessao.administrador) {
 			List<Pedido> listaPed = Pedido.find("status = ?1 AND situacao = ?2", status, SituacaoPedido.DESARQUIVADO).fetch();
 
 			if (listaPed.isEmpty()) {

@@ -1,0 +1,141 @@
+#{extends 'laySeg.html' /} 
+#{set title:'Historico de Pedidos' /}
+<div class="heightMin">
+	<div class="container font-size-celular">
+	#{if listaPedidosHistorico.size() > -1}
+	<div class="collapse multi-collapse m-0 p-0 celular ml-1-celular animated fadeInDown faster fixed-top t-filtro" id="multiCollapseExample1">
+	<i title="fechar filtro" id="fecharFiltro" class="window close outline icon mt-3 mr-2 text-danger animated zoomIn" style="font-size: 150%;"></i>
+<!-- filtro por matricula do usuario e nome do arquivo-->
+		<form action="@{Administradores.historicoPedAdm()}" method="post" class="brancoGelo 
+		font-size-celular shadow-sm rounded border m-0-celular pt-1-celular">
+			<fieldset class="mb-0-celular">
+				<legend class="m-0-celular mb-0">Filtrar Por:</legend>
+				<div class="form-row m-0">
+					<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							<label for="NomeDoArquivoFiltro" class="m-0-celular">Nome do Arquivo:</label>
+							<input type="text" name="NomeDoArquivoFiltro" class="form-control hei-input-celular font-size-celular" 
+							placeholder="Nome do Arquivo"
+							id="NomeDoArquivoFiltro" value="${NomeDoArquivoFiltro}">
+						</div>
+						<div class="form-group col-md-6 mt-1-celular mb-0-celular">
+							<label for="descricaoFiltro" class="m-0-celular">Descrição:</label>
+							<input  name="descricaoFiltro"  class="form-control hei-input-celular font-size-celular" 
+							id="descricaoFiltro"  placeholder="Descrição" 
+							value="${descricaoFiltro}" />
+						</div>
+					</div>
+					<div class="text-center mt-1-celular">
+						<button title="filtrar" type="submit" class="btn btn-primary butaoIconTexto 
+						font-size-celular">Filtrar <i class="filter icon"></i></button>
+						<span title="limpar" class="btn btn-danger butaoIconTexto font-size-celular" 
+						id="limpar">Limpar <i class="eraser icon"></i></span>	 	
+					</div>
+			</fieldset>
+		</form><br>
+	<!-- fim filtro -->
+	</div>
+	#{/if}
+		<div class="row">
+			<div class="table-responsive m-0 p-0">
+	#{if listaPedidosHistorico.size() != 0}
+			<table class="table table-striped table-bordered table-sm text-center">
+				<tr class="m-0 p-0">
+					<th scope="col">Nome do Arquivo</th>
+					<th scope="col">Status</th>
+					<th scope="col">Data de Envio</th>
+					<th scope="col">Data de Atendimento</th>
+					<th scope="col">Mais</th>
+				</tr>
+		#{list items:listaPedidosHistorico, as:'h'}
+				<tr class="m-0 ">
+					<td scope="row"><span id="${h.id}"><!-- ${h.nomeArquivo} --></span></td>
+					<td>
+					#{if h.status.name() == 'RECUSADO'}
+						<div class=" text-center rounded statusRecusado">
+							${h.status}
+						</div>	
+					#{/if}
+					#{if h.status.name() == 'ENTREGUE'}
+						<div class=" text-center rounded statusEntregue">
+							${h.status}
+						</div>
+					#{/if}
+					</td>
+					<td>${h.dataEnvio}</td>
+					<td>${h.dataAtendimento}</td>
+					<td>
+						<a title="+ Informa��es" class="btn btn-outline-info btn-sm btn-block 
+						font-size-celular" data-toggle="collapse" href="#collapseExample${h.id}" 
+						role="button" aria-expanded="false" aria-controls="collapseExample">
+							<i class="plus icon"></i>
+						</a>
+					</td>
+				</tr>
+						<tr class="collapse text-left animated fadeInDown faster m-0" id="collapseExample${h.id}">
+							<td colspan="1">
+								<div class="card">
+									<div class="card-text">
+										<b>Cópias: </b>
+										<span class=" text-center pl-1 pr-1"> ${h.qtdCopias}</span>
+									</div>
+									<div class="card-text">
+										<b>Páginas: </b> ${h.paginas}
+									</div>
+								</div>
+							</td>
+							<td colspan="4">
+								<div class="card">
+									<div class="card-text">
+										<b>Atendimento:</b> ${h.atendimento}
+									</div>
+									<div class="card-text">
+		#{if h.descricao} 
+										<b>Descricao:</b> ${h.descricao} 
+		#{/if}
+		#{else}
+										<b>Descricao:</b>[sem descricao]
+		#{/else}
+									</div>	
+								</div>	
+							</td>
+						</tr>
+		#{/list}
+				</table>
+	#{/if}
+	#{else}
+			<tr>
+			<th colspan="5">
+			<!-- informa se n�o houver ou n�o encontrar nenhum pedido-->
+			<div class="text-center text-primary font-size-celular border listagemVazia">
+				<img alt="Listagem Vazia" title="Vazio" src="@{'/public/images/icones/listagemVazia.png'}"/>
+				<div class="h1 nenhumEncontrado">Nenhum pedido foi encontrado</div>
+					<a data-toggle="collapse" href="#multiCollapseExample1" role="button" 
+						aria-expanded="false" aria-controls="multiCollapseExample1" class="btn btn-primary m-0 mt-1
+						btn-sm butaoIconTexto font-size-celular shadow-sm p-3 pl-5 pr-5 p-2-celular rounded">Tentar Filtrar
+					</a>
+			</div>
+			</th>
+			</tr>
+	#{/else} 
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(e) {
+#{list items:listaPedidosHistorico, as:'h'}
+	if(${h.nomeArquivo.size()} > 20){
+	/* 	var maxNome = ${h.nomeArquivo}.substring(0, 15); */ //.indexOf(".")
+		/* var ext = nome.split('.').pop(); */
+		var nomeCompletoArquivo = '${h.nomeArquivo}';
+		var nomeArquivoComplimido = '';
+		for(var i = 0; i < 15; i++){
+			nomeArquivoComplimido = nomeArquivoComplimido + nomeCompletoArquivo[i];
+		}
+		document.getElementById('${h.id}').innerHTML = nomeArquivoComplimido+'[...]';
+	}else{
+		document.getElementById('${h.id}').innerHTML = '${h.nomeArquivo}';
+	}
+#{/list}
+});
+</script> 

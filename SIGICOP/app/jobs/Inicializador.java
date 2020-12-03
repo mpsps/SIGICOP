@@ -22,7 +22,7 @@ public class Inicializador extends Job {
 		if (Operador.count() == 0) {
 
 			Operador admPadrao = new Operador();
-			admPadrao.admPadrao = true;
+			admPadrao.administrador = true;
 			admPadrao.nomeAdm = "Administrador";
 			admPadrao.email = "admin@email.com";
 			String senhaCript = CriptografiaUtils.criptografarMD5("123456");
@@ -30,7 +30,7 @@ public class Inicializador extends Job {
 			admPadrao.save();
 			
 			Operador adm = new Operador();
-			adm.admPadrao = false;
+			adm.administrador = false;
 			adm.nomeAdm = "Operador";
 			adm.email = "operador@email.com";
 			String senhaCriptAdm = CriptografiaUtils.criptografarMD5("123456");

@@ -34,7 +34,7 @@ public class Operador extends Model {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Long id;
 	
-	public boolean admPadrao = false;
+	public boolean administrador = false;
 	
 	@Required
 	public String nomeAdm;
