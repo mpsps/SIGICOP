@@ -115,7 +115,7 @@
 			#{/if}
 								</div>
 								<div class="card-text">
-									<b>Data de Envio: </b> ${p.dataEnvio}
+									<b>Data de Envio: </b> ${p.dataEnvio?.format("dd/MM/yyyy HH:mm:ss")}
 								</div>
 								<div class="card-text">
 			#{if p?.atendimento}
@@ -124,12 +124,12 @@
 								</div>
 								<div class="card-text">
 			#{if p?.dataAtendimento}
-									<b>Data de atendimento: </b> ${p.dataAtendimento}<br /> 
+									<b>Data de atendimento: </b> ${p.dataAtendimento?.format("dd/MM/yyyy HH:mm:ss")}<br /> 
 			#{/if}
 								</div>
 								<div class="card-text">
 			#{if p?.dataEntrega}
-								<b>Data de Entrega: </b> ${p.dataEntrega}<br /> 
+								<b>Data de Entrega: </b> ${p.dataEntrega?.format("dd/MM/yyyy HH:mm:ss")}<br /> 
 			#{/if}
 								</div>
 							</div>

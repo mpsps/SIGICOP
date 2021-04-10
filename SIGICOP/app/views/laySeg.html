@@ -26,16 +26,6 @@
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/segment.min.css'}" rel="stylesheet" type="text/css" /><!-- rodape utilizar-->
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/button.min.css'}" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/Semantic/css/meuCss.css'}" rel="stylesheet" type="text/css" />
-		<style type="text/css">
-		.notificacao {
-			width: 4px;
-			height: 4px;
-			padding: 3px!important;
-			line-height: 3px;
-			text-align: center;
-			border-radius: 10em;
-		}	
-	 	</style>
 <!-- SEMANTIC JS -->
 		<script src="@{'/public/Semantic/js/semantic.min.js'}"/></script>
 <!-- UIKIT CSS -->
@@ -115,32 +105,35 @@
 						class="rounded-circle m-0 p-0 imagem-celular"> 
 						<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none m-0"> 
 							<span title="${session['usuarioLogado']}" id="nomeUsuario" 
-								class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet">
+								class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet container">
 							</span>
+							<span class="desaparecer-celular float-right"> 
+							<i title="meus dados" class="info icon text-white"></i>
+							</span>
+						</a>
+					</span>
+				</li>
+				<li class="m-0 p-0 rounded meusDados text-center">
+					Disponível:
 							<span class="w-25 m-0 p-0">
 		#{if usuarioBanco?.qtdDisponivel > 9} 
-								<span class="notificacao bg-success text-white mt-2 font-size-celular">
+								<span class="contagemUsu bg-success text-white mt-2 font-size-celular">
 									${usuarioBanco?.qtdDisponivel} <!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
 		#{if usuarioBanco?.qtdDisponivel > 4 &&	usuarioBanco?.qtdDisponivel < 10} 
-								<span class="notificacao bg-warning text-white m-1 font-size-celular">
+								<span class="contagemUsu bg-warning text-white m-1 font-size-celular">
 									${usuarioBanco?.qtdDisponivel}<!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
 		#{if usuarioBanco?.qtdDisponivel < 5} 
-								<span class="notificacao bg-danger text-white m-1 font-size-celular">
+								<span class="contagemUsu bg-danger text-white m-1 font-size-celular">
 									${usuarioBanco?.qtdDisponivel}<!-- mostra a quantidade disponivel -->
 								</span>
 		#{/if} 
-								<span class="desaparecer-celular"> <i
-									title="meus dados" class="info icon text-white"></i>
-								</span>
 							</span> 
-						</a>
-					</span>
 				</li>
-				<hr class="mt-0 mb-2-celular mb-1-tablet">
+				<hr class="mt-0 mb-2-celular mb-1-tablet mb-1">
 		#{if voltar}
 				<a title="página do usuário" href="@{Usuarios.paginaUsuario}" class="linkMenu">
 					<li class="m-0 itemMenu rounded">
@@ -158,29 +151,29 @@
 				<a title="filtrar pedidos" class="linkMenu itemFiltro" data-toggle="collapse" 
 				href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 					<li class="m-0 itemMenu rounded">
-		  				<i class="filter icon"></i>filtrar Pedidos
+		  				<i class="filter icon"></i>Filtrar Pedidos
 			#{if statusFiltro.equals("TODOS") || statusFiltro == ""}
-						<span class="notificacao bg-secondary text-white font-size-celular" style="font-size: 10px;">
+						<span class="contagem bg-secondary text-white font-size-celular" style="font-size: 10px;">
 								${listaPedidos.size()}							
 						</span>
 			#{/if}
 			#{if statusFiltro.equals("AGUARDANDO")}
-						<span class="notificacao statusAguardando text-white font-size-celular" style="font-size: 10px;">
+						<span class="contagem statusAguardando text-white font-size-celular" style="font-size: 10px;">
 								${listaPedidos.size()}							
 						</span>
 			#{/if}
 			#{if statusFiltro.equals("RECUSADO")}
-						<span class="notificacao statusRecusado text-white font-size-celular" style="font-size: 10px;">
+						<span class="contagem statusRecusado text-white font-size-celular" style="font-size: 10px;">
 								${listaPedidos.size()}							
 						</span>
 			#{/if}
 			#{if statusFiltro.equals("CONCLUIDO")}
-						<span class="notificacao statusConcluido text-white font-size-celular" style="font-size: 10px;">
+						<span class="contagem statusConcluido text-white font-size-celular" style="font-size: 10px;">
 								${listaPedidos.size()}							
 						</span>
 			#{/if}
 			#{if statusFiltro.equals("ENTREGUE")}
-						<span class="notificacao statusEntregue text-white font-size-celular" style="font-size: 10px;">
+						<span class="contagem statusEntregue text-white font-size-celular" style="font-size: 10px;">
 								${listaPedidos.size()}							
 						</span>
 			#{/if}
@@ -206,10 +199,10 @@
 					<img title="meus dados" alt="iconUser" src="@{'/public/images/icones/iconAdmin.png'}" 
 					class="rounded-circle imagem-celular">
 					<a href="#Meus_Dados" style="padding: 0px;" class="text-decoration-none">
-						<span title="${session['adminLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet" 
+						<span title="${session['adminLogado']}" class="text-white mr-0 mt-0 text-md nomeAdminUser-tablet container" 
 						id="nomeAdmin"></span>
 					</a>
-					<span class="desaparecer-celular">
+					<span class="desaparecer-celular float-right">
 						<i title="meus dados" class="info icon text-white"></i>
 					</span>
 				</li>
@@ -217,37 +210,43 @@
 				<nav class="navigation">
 					<ul class="mainmenu">
 						<li>
-							<a title="Funções do Adiministrador"  href="#" class="itemMenu">
-								<i class="user outline icon"></i>Administrador
+							<a title="Funções do Administrador"  href="#" class="itemMenu">
+								<i class="user outline icon"></i>Gerenciar
 							</a>
 							<ul class="submenu">
 								<li>
 		#{if telaAdmin}
 									<a title="página do administrador" href="@{Administradores.paginaAdmin}">
-										<i class="address book icon"></i>Página do Administrador
+										<i class="address book icon"></i> 
+				#{if admBanco?.administrador}
+					Página do Administrador
+				#{/if}
+				#{else}
+					Página do Operador
+				#{/else}
 									</a>
 		#{/if}
 								</li>
 		#{if admBanco?.administrador}<!-- Verificando se é um Administrador ... -->
 			#{if admBanco?.administrador && admBanco.id == 1}<!-- ... se é admin geral  -->
 								<li>
-									<a title="Adicionar Administrador" href="@{Administradores.cadastroDeAdms}">
-										<i class="plus icon"></i>Adicionar Administrador
+									<a title="Adicionar Operador" href="@{Administradores.cadastroDeAdms}">
+										<i class="plus icon"></i>Adicionar Operador
 									</a>
 								</li>
 			#{/if}
 			#{if listaAdmins != null}
 								<li>
-									<a title="filtrar Adminstradores" class="itemFiltro" data-toggle="collapse" 
+									<a title="filtrar Adminstradores" class="linkMenu itemFiltro" data-toggle="collapse" 
 									href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-										<i class="search icon"></i>Filtrar Administradores
+										<i class="search icon"></i>Filtrar Operadores
 									</a>
 								</li>
 			#{/if}
 			#{else}
 								<li>
 									<a title="listar Adminstradores" href="@{Administradores.listarTodosAdmins}">
-									<i class="users icon"></i>Listar Administradores
+									<i class="users icon"></i>Listar Operadores
 									</a>
 								</li>		
 			#{/else}
@@ -280,8 +279,8 @@
 									<a title="filtrar Pedidos" class="linkMenu itemFiltro" data-toggle="collapse" 
 									href="#multiCollapseExample1" role="button" aria-expanded="false" 
 									aria-controls="multiCollapseExample1">
-										<i class="filter icon"></i>filtrar Pedidos
-										<span class="notificacao statusAguardando text-white font-size-celular" 
+										<i class="filter icon"></i>Filtrar Pedidos
+										<span class="contagem statusAguardando text-white font-size-celular" 
 										style="font-size: 10px;">
 			${listaPedidosPa.size()}							
 										</span>
@@ -301,9 +300,9 @@
 									id="concluidos"  data-toggle="collapse"
 									href="#multiCollapseExample1" role="button" aria-expanded="false" 
 									aria-controls="multiCollapseExample1">
-										<i class="filter icon"></i>filtrar Concluídos
+										<i class="filter icon"></i>Filtrar Concluídos
 			#{if listaconcluidos.size() != 0}
-							 			<span class="notificacao statusConcluido text-white font-size-celular" 
+							 			<span class="contagem statusConcluido text-white font-size-celular" 
 							 			style="font-size: 9px;">
 				${listaconcluidos.size()}
 										</span>
@@ -320,19 +319,22 @@
 		#{/else}
 		#{if listaconcluidos != null && admBanco?.administrador}
 									<li>		
-										<a title="Apagar Entregues" id="ArquivarEntregues"">
+										<a title="Arquivar Entregues" id="ArquivarEntregues" class="linkMenu">
 											<i class="trash icon"></i>Arquivar Entregues
+											<span class="contagem statusEntregue text-white font-size-celular" style="font-size: 10px;">
+												${listaentregues.size()}							
+											</span>
 										</a>	
 									</li>
 		#{/if}
 		#{if listaRecusados != null}
 								<li>
-									<a title="filtar pedidos recusados" class="itemFiltro" id="recusados" 
+									<a title="filtar pedidos recusados" class="linkMenu itemFiltro" id="recusados" 
 									data-toggle="collapse" href="#multiCollapseExample1" 
 									role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
 										<i class="filter icon"></i>Filtrar Recusados
 			#{if listaRecusados.size() != 0}
-										<span class="notificacao statusRecusado text-white font-size-celular" 
+										<span class="contagem statusRecusado text-white font-size-celular" 
 										style="font-size: 9px;">
 				${listaRecusados.size()}							
 										</span>
@@ -469,7 +471,7 @@
 			<a class="ui inverted basic" href="@{Gerenciador.principal}">
 				<img src="@{'/public/images/icones/casa.png'}" width="40" alt="home" height="40" style="float: left;" title="Home" class="" />
 	#{if !session.contains("adminLogado") && !session.contains("usuarioLogado")}
-				<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 40px; max-width: 100%; display: none;"/>
+				<img class="aparecer-celular" alt="SIGICOP" title="SIGICOP" src="@{'/public/images/sigicop/SIGICOPs.jpg'}" width="100" height="45" style="margin-left: 75px; margin-right: 75px; max-width: 100%; display: none;"/>
 	#{/if}
 			</a>
 			<div class="navbar-collapse justify-content-md-center collapse" id="navbarsExample08">
@@ -538,7 +540,7 @@
 								<h4 class="ui inverted header">IFRN-JC:</h4>
 								<div class="ui inverted link list ml-0">
 									<a href="https://portal.ifrn.edu.br/campus/joaocamara" target="_blank" class="text-decoration-none">
-										<img src="@{'/public/images/sigicop/if.png'}" width="70%" class="imagem-logo-principal" alt="IFRN_JC" title="IFRN-JC" />
+										<img src="@{'/public/images/sigicop/if.png'}" class="imagem-logo-principal " alt="IFRN_JC" title="IFRN-JC" />
 									</a>
 								</div>
 							</div>
@@ -553,7 +555,7 @@
 								</div>
 							</div>
 							<div class="four wide column">
-								<h4 class="ui inverted header">E-mails:</h4>
+								<h4 class="ui inverted header">Emails:</h4>
 								IFRN-JC: <br><span class="text-decoration-none link-contato" id="font-size-celular">gabin.jc@ifrn.edu.br</span><br>
 								Bolsista: <br><span class="text-decoration-none link-contato" id="font-size-celular">bolsistapoio2@gmail.com</span><br> 
 								Comult: <br><span class="text-decoration-none link-contato" id="font-size-celular">comult.jc@ifrn.edu.br</span>
@@ -938,7 +940,7 @@ $(document).ready(function() {
 	#{/if}
 #{/if}
 });
-#{if session.contains("adminLogado") || !session.contains("usuarioLogado")}
+#{if session.contains("adminLogado") || session.contains("usuarioLogado")}
 /* VALIDAÇÃO AO ALTERAR ALGUM DADO DO FORMULÁRIO */
 	// VALIDAÇÃO DE NOME
 	function validarNome(){							/* campo do nome */

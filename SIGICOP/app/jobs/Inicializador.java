@@ -19,9 +19,11 @@ public class Inicializador extends Job {
 	@Override
 	public void doJob() throws Exception {
 		// 	GERANDO UM ADMINISTRADOR PADRAO
+		Operador admPadrao = new Operador();
+		Operador adm = new Operador();
 		if (Operador.count() == 0) {
 
-			Operador admPadrao = new Operador();
+			
 			admPadrao.administrador = true;
 			admPadrao.nomeAdm = "Administrador";
 			admPadrao.email = "admin@email.com";
@@ -29,7 +31,7 @@ public class Inicializador extends Job {
 			admPadrao.senha = senhaCript;
 			admPadrao.save();
 			
-			Operador adm = new Operador();
+			
 			adm.administrador = false;
 			adm.nomeAdm = "Operador";
 			adm.email = "operador@email.com";
@@ -64,18 +66,73 @@ public class Inicializador extends Job {
 			String senhaCriptUsuario = CriptografiaUtils.criptografarMD5("123456");
 			usuario.senha = senhaCriptUsuario;
 			usuario.email = "usuario@email.com";
-			usuario.qtdDisponivel = 15;
+			usuario.qtdDisponivel = 3;
 			usuario.save();
 			
-			Pedido pedUsuario = new Pedido();
-			pedUsuario.nomeArquivo = "Arquivo de teste";
-			pedUsuario.dataEnvio = new Date();
-			pedUsuario.descricao = "Pedido do usuario de testes";
-			pedUsuario.frenteVerso = "frente";
-			pedUsuario.qtdCopias = 5;
-			pedUsuario.situacao = SituacaoPedido.DESARQUIVADO;
-			pedUsuario.usuario = usuario;
-			pedUsuario.save();
+			Pedido pedUsu1 = new Pedido();
+			pedUsu1.nomeArquivo = "Aquivo1.pdf";
+			pedUsu1.dataEnvio = new Date();
+			pedUsu1.descricao = "Pedido do usuario de testes";
+			pedUsu1.frenteVerso = "frente";
+			pedUsu1.qtdCopias = 1;
+			pedUsu1.paginas = 3;
+			pedUsu1.situacao = SituacaoPedido.DESARQUIVADO;
+			pedUsu1.usuario = usuario;
+			pedUsu1.adm = admPadrao;
+			pedUsu1.save();
+			
+			Pedido pedUsu2 = new Pedido();
+			pedUsu2.nomeArquivo = "Arquivo2.pdf";
+			pedUsu2.dataEnvio = new Date();
+			pedUsu2.descricao = "Pedido do usuario de testes";
+			pedUsu2.frenteVerso = "frente";
+			pedUsu2.qtdCopias = 3;
+			pedUsu2.paginas = 4;
+			pedUsu2.status = StatusPedido.CONCLUIDO;
+			pedUsu2.situacao = SituacaoPedido.DESARQUIVADO;
+			pedUsu2.usuario = usuario;
+			pedUsu2.adm = admPadrao;
+			pedUsu2.save();
+			
+			Pedido pedUsu3 = new Pedido();
+			pedUsu3.nomeArquivo = "Arquivo3.docx";
+			pedUsu3.dataEnvio = new Date();
+			pedUsu3.descricao = "Pedido do usuario de testes";
+			pedUsu3.frenteVerso = "frente";
+			pedUsu3.qtdCopias = 3;
+			pedUsu3.paginas = 1;
+			pedUsu3.status = StatusPedido.RECUSADO;
+			pedUsu3.situacao = SituacaoPedido.DESARQUIVADO;
+			pedUsu3.usuario = usuario;
+			pedUsu3.adm = admPadrao;
+			pedUsu3.save();
+			
+			Pedido pedUsu4 = new Pedido();
+			pedUsu4.nomeArquivo = "Arquivo4.pptx";
+			pedUsu4.dataEnvio = new Date();
+			pedUsu4.descricao = "Pedido do usuario de testes";
+			pedUsu4.frenteVerso = "frente";
+			pedUsu4.qtdCopias = 2;
+			pedUsu4.paginas = 5;
+			pedUsu4.status = StatusPedido.AGUARDANDO;
+			pedUsu4.situacao = SituacaoPedido.DESARQUIVADO;
+			pedUsu4.usuario = usuario;
+			pedUsu4.adm = adm;
+			pedUsu4.save();
+			
+			
+			Pedido pedUsu5 = new Pedido();
+			pedUsu5.nomeArquivo = "Arquivo5.png";
+			pedUsu5.dataEnvio = new Date();
+			pedUsu5.descricao = "Pedido do usuario de testes";
+			pedUsu5.frenteVerso = "frente";
+			pedUsu5.qtdCopias = 1;
+			pedUsu5.paginas = 1;
+			pedUsu5.status = StatusPedido.ENTREGUE;
+			pedUsu5.situacao = SituacaoPedido.DESARQUIVADO;
+			pedUsu5.usuario = usuario;
+			pedUsu5.adm = adm;
+			pedUsu5.save();
 			
 			Usuario prof = new Usuario();
 			prof.nomeUsu = "Professor";

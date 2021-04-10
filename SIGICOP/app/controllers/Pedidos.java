@@ -8,6 +8,7 @@ import java.text.DateFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +31,7 @@ import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.Seguranca;
 import util.Historico;
+import util.OrdenarListaPorData;
 import util.SituacaoPedido;
 import util.StatusPedido;
 
@@ -38,8 +40,8 @@ public class Pedidos extends Controller {
 ///// PÁGINA DE FAZER PEDIDO /////
 	@User
 	public static void solicitar() {
-	System.out.println("_____________________________________________________");
-	System.out.println("Pedidos.solicitar() ...[" + new Date() + "]");
+		System.out.println("_____________________________________________________");
+		System.out.println("Pedidos.solicitar() ...[" + new Date() + "]");
 
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = dadosDeSessao.listaDePedidos;
@@ -58,13 +60,15 @@ public class Pedidos extends Controller {
 
 		String voltar = "voltar";
 		String titulo = "Solicitar";
-	render(listaDePedidos, voltar, usuarioBanco, listaPedidosConcluidos, listaPedidosEntregues, listaPedidosRecusados, titulo);
+		render(listaDePedidos, voltar, usuarioBanco, listaPedidosConcluidos, listaPedidosEntregues,
+				listaPedidosRecusados, titulo);
 	}
+
 ///// ADICIONA PEDIDOS NA CACHE /////
 	@User
 	public static void addPedido(@Valid Pedido item) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.addPedido() ...[" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.addPedido() ...[" + new Date() + "]");
 
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = null;
@@ -80,9 +84,9 @@ public class Pedidos extends Controller {
 		int valorTotal = dadosDeSessao.usuario.qtdDisponivel - (item.paginas * item.qtdCopias);
 		if (valorTotal < 0) { // se o valor da qtd disponível for menor que 0 então a qtd está indisponível
 			flash.error("quatidade de impressão indisponível");
-		solicitar();
+			solicitar();
 		}
-	
+
 		dadosDeSessao.usuario.qtdDisponivel = valorTotal; // setar a qtd disponível atualizada no usuário da cache
 		Cache.set(session.getId(), dadosDeSessao);
 		// if (validation.hasErrors()) {
@@ -95,14 +99,14 @@ public class Pedidos extends Controller {
 		String nomeArq = params.get("name"); // recebe o nome do arquivo
 
 		if (item.arquivo == null || nomeArq == null) { // vereficar se o arquivo existe
-			flash.error("O Envio do Arquivo é obrigatorio");
-		solicitar();
+			flash.error("O envio do arquivo é obrigatório");
+			solicitar();
 		} else if (item.qtdCopias == 0) { // vereficar se a qtdCopias é 0
-			flash.error("A Quantidade de Copias é obrigatorio");
-		solicitar();
+			flash.error("A quantidade de cópias é obrigatório");
+			solicitar();
 		} else if (item.paginas == 0) { // vereficar frente ou frenteEverso foi escolhido
-			flash.error("a quantidade de páginas é obrigatorio");
-		solicitar();
+			flash.error("a quantidade de páginas é obrigatório");
+			solicitar();
 		}
 		// idLista serve para poder listar, adicionar e remover os pedidos da Cache
 		int idLista = 0;
@@ -122,18 +126,19 @@ public class Pedidos extends Controller {
 		item.nomeArquivo = nomeArq; // o item recebe o nome do arquivo
 		item.usuario = dadosDeSessao.usuario; // o item recebe o usuário da cache
 		item.situacao = SituacaoPedido.DESARQUIVADO; // a situação inicial do pedido é DESARQUIVADO
-		
+
 		listaDePedidos.add(item); // item adicionado na lista
 
 		dadosDeSessao.listaDePedidos = listaDePedidos; // lista adicionada na cache
 		Cache.set(session.getId(), dadosDeSessao);
-	solicitar();
+		solicitar();
 	}
+
 ///// SALVAR PEDIDO(S) /////
 	@User
 	public static void salvar() {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.salvar() ...[" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.salvar() ...[" + new Date() + "]");
 
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos;
@@ -151,28 +156,29 @@ public class Pedidos extends Controller {
 		Usuario user = Usuario.findById(dadosDeSessao.usuario.id);
 		user.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel;
 		user.save(); // salvar o usuario descrecentando a quantidade disponivel no banco
-		if(dadosDeSessao.listaDePedidos.size() < 2) {
+		if (dadosDeSessao.listaDePedidos.size() < 2) {
 			flash.success("Pedido salvo!");
-		}else {
+		} else {
 			flash.success("Pedidos salvos!");
 		}
 		dadosDeSessao.listaDePedidos = null;
 		Cache.set(session.getId(), dadosDeSessao);
-	solicitar();
+		solicitar();
 	}
+
 ///// APAGAR O PEDIDO DA CACHE /////
 	@User
 	public static void cancelarPedido(Long idPedido) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.cancelarPedidos() ...[" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.cancelarPedidos() ...[" + new Date() + "]");
 
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 
 		for (int i = 0; i < dadosDeSessao.listaDePedidos.size(); i++) {
 			if (dadosDeSessao.listaDePedidos.get(i).idLista == idPedido) {
 				// devolver a quantidade disponivel
-					dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel
-							+ (dadosDeSessao.listaDePedidos.get(i).qtdCopias * dadosDeSessao.listaDePedidos.get(i).paginas) ;
+				dadosDeSessao.usuario.qtdDisponivel = dadosDeSessao.usuario.qtdDisponivel
+						+ (dadosDeSessao.listaDePedidos.get(i).qtdCopias * dadosDeSessao.listaDePedidos.get(i).paginas);
 				dadosDeSessao.listaDePedidos.remove(i);
 			}
 		}
@@ -181,14 +187,15 @@ public class Pedidos extends Controller {
 		}
 
 		Cache.set(session.getId(), dadosDeSessao);
-		flash.success("Pedido Cancelado!");
-	solicitar();
+		flash.success("Pedido cancelado!");
+		solicitar();
 	}
+
 ///// PARA O USUARIO PODER APAGAR O PEDIDO DO BANCO DE DADOS /////
 	@User
 	public static void apagarPedidoAguardando(Long id) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.apagarPedido() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.apagarPedido() ... [" + new Date() + "]");
 
 		Pedido ped = Pedido.findById(id);
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
@@ -204,30 +211,31 @@ public class Pedidos extends Controller {
 						usuarioBanco.save();
 						dadosDeSessao.usuario = usuarioBanco;
 						ped.delete();
-						flash.success("Pedido apagado do Banco de Dados!");
-					Usuarios.paginaUsuario();
+						flash.success("Pedido apagado!");
+						Usuarios.paginaUsuario();
 					} else {
-						flash.error("Erro ao apagar o Pedido, usuário não encontrado!");
-					Usuarios.paginaUsuario();
+						flash.error("erro ao apagar o Pedido, usuário não encontrado!");
+						Usuarios.paginaUsuario();
 					}
 				} else {
-					flash.error("Este Pedido não foi encontrado ou não lhe pertençe!");
-				Usuarios.paginaUsuario();
+					flash.error("este Pedido não foi encontrado ou não lhe pertençe!");
+					Usuarios.paginaUsuario();
 				}
 			} else {
 				flash.error("Este Pedido não está em AGUARDANDO!");
-			Usuarios.paginaUsuario();
+				Usuarios.paginaUsuario();
 			}
 		} else {
-			flash.error("Pedido não encontrado no Banco de Dados!");
-		Usuarios.paginaUsuario();
+			flash.error("Pedido não encontrado!");
+			Usuarios.paginaUsuario();
 		}
 	}
+
 ///// ALTERAR O STATUS PARA CONCLUIDO /////
 	@Admin
 	public static void concluido(Long idPedCon, String resposta) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admin = Operador.findById(dadosSessaoAdmin.admin.id);
@@ -238,22 +246,24 @@ public class Pedidos extends Controller {
 		ped.dataAtendimento = new Date();
 		ped.adm = admin;
 		ped.save();
-		flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " concluido!");
-	Administradores.paginaAdmin();
+		flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " concluido!");
+		Administradores.paginaAdmin();
 	}
+
 ///// ALTERAR O STATUS PARA RECUSADO /////
 	@Admin
 	public static void recusar(Long idPed, String motivo) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.recusar() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.recusar() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admin = Operador.findById(dadosSessaoAdmin.admin.id);
 
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
-		
-		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o usuário
+
+		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o
+																					// usuário
 
 		ped.atendimento = motivo;
 		ped.status = StatusPedido.RECUSADO; // recusar o pedido
@@ -262,23 +272,24 @@ public class Pedidos extends Controller {
 		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
 
-		flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " Recusado!");
-	Administradores.paginaAdmin();
+		flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " Recusado!");
+		Administradores.paginaAdmin();
 	}
+
 ///// DE RECUSAR PARA CONCLUIDO DECREMENTANDO /////
 	@Admin
 	public static void recusarParaConcluido(Long idPedCon, String resposta) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admin = Operador.findById(dadosSessaoAdmin.admin.id);
 
 		Pedido ped = Pedido.findById(idPedCon);
 		Usuario user = ped.usuario;
-		
+
 		user.qtdDisponivel = user.qtdDisponivel - (ped.qtdCopias * ped.paginas); // diminuir a qtd disponível do usuário
-		
+
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.CONCLUIDO;
 		ped.dataAtendimento = new Date();
@@ -286,14 +297,15 @@ public class Pedidos extends Controller {
 		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
 
-		flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " concluido!");
-	listarRecusados();
+		flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " concluido!");
+		listarRecusados();
 	}
+
 ///// DE RECUSAR PARA CONCLUIDO DECREMENTANDO /////
 	@Admin
 	public static void concluidoParaRecusar(Long idPed, String resposta) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.concluido() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admin = Operador.findById(dadosSessaoAdmin.admin.id);
@@ -301,8 +313,9 @@ public class Pedidos extends Controller {
 		Pedido ped = Pedido.findById(idPed);
 		Usuario user = ped.usuario;
 
-		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o usuário
-		
+		user.qtdDisponivel = user.qtdDisponivel + (ped.qtdCopias * ped.paginas); // devolver a qtd disponível para o
+																					// usuário
+
 		ped.atendimento = resposta;
 		ped.status = StatusPedido.RECUSADO;
 		ped.dataAtendimento = new Date();
@@ -310,14 +323,15 @@ public class Pedidos extends Controller {
 		user.save(); // salvar o usuário com a qtd disponível devolvida
 		ped.save();
 
-		flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " concluido!");
-	listarConcluidos();
+		flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " concluido!");
+		listarConcluidos();
 	}
+
 ///// LISTAR TODOS OS PEDIDO CONCLUIDOS /////
 	@Admin
 	public static void listarConcluidos() {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.listarConcluidos() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.listarConcluidos() ... [" + new Date() + "]");
 
 		String matriculaDoUsuarioFiltro = params.get("matriculaDoUsuarioFiltro");
 		String nomeDoArquivoFiltro = params.get("nomeDoArquivoFiltro");
@@ -334,36 +348,51 @@ public class Pedidos extends Controller {
 		Operador admBanco = dadosSessaoAdmin.admin;
 
 		List<Pedido> listaconcluidos = new ArrayList<Pedido>();
+		List<Pedido> listaentregues = new ArrayList<Pedido>();
+		
+		listaentregues = Pedido.find(" status = ?1 AND situacao = ?2", StatusPedido.ENTREGUE, SituacaoPedido.DESARQUIVADO).fetch();
+		
 		// INICIO FILTRO
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
-			listaconcluidos = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaconcluidos = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.CONCLUIDO,
+					admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar  pedidos concluidos sem nada, ou entrou na página concluido!");
 		} else if (!matriculaDoUsuarioFiltro.isEmpty() && !nomeDoArquivoFiltro.isEmpty()) {
-			listaconcluidos = Pedido.find("usuario.matricula like ?1 AND lower(nomeArquivo) like ?2 AND status like ?3 AND adm_id = ?4 AND situacao = ?5",
-							"%" + matriculaDoUsuarioFiltro.trim() + "%",
-							"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO)
-					.fetch();
-			System.out.println("Tentou filtrar pedidos concluidos com conteudo!( Nome do Arquivo e matricula do usuario)");
+			listaconcluidos = Pedido.find(
+					"usuario.matricula like ?1 AND lower(nomeArquivo) like ?2 AND status like ?3 AND adm_id = ?4 AND situacao = ?5",
+					"%" + matriculaDoUsuarioFiltro.trim() + "%", "%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",
+					StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			System.out.println(
+					"Tentou filtrar pedidos concluidos com conteudo!( Nome do Arquivo e matricula do usuario)");
 		} else if (!matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
-			listaconcluidos = Pedido.find("usuario.matricula like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
-					"%" + matriculaDoUsuarioFiltro.trim() + "%", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaconcluidos = Pedido
+					.find("usuario.matricula like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
+							"%" + matriculaDoUsuarioFiltro.trim() + "%", StatusPedido.CONCLUIDO, admBanco,
+							SituacaoPedido.DESARQUIVADO)
+					.fetch();
 			System.out.println("Tentou filtrar pedidos concluidos com conteudo!(só a matricula)");
 		} else if (!nomeDoArquivoFiltro.isEmpty() && matriculaDoUsuarioFiltro.isEmpty()) {
-			listaconcluidos = Pedido.find("lower(nomeArquivo) like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
-							"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.CONCLUIDO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaconcluidos = Pedido
+					.find("lower(nomeArquivo) like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
+							"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.CONCLUIDO, admBanco,
+							SituacaoPedido.DESARQUIVADO)
+					.fetch();
 			System.out.println("Tentou filtrar pedidos concluidos com conteudo!(só nome do arquivo)");
 		}
 		// FIM FILTRO
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem";
 		String titulo = "Listagem de Concluídos";
-	render(listaconcluidos, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
+		// Ordenando a lista do mais recente para o antigo (pela data de atendimento) 
+		Collections.sort(listaconcluidos, new OrdenarListaPorData());
+		render(listaconcluidos, listaentregues, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
 	}
+
 ///// LISTAR TODOS OS PEDIDO RECUSADOS /////
 	@Admin
 	public static void listarRecusados() {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.listarRecusados() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.listarRecusados() ... [" + new Date() + "]");
 
 		String matriculaDoUsuarioFiltro = params.get("matriculaDoUsuarioFiltro");
 		String nomeDoArquivoFiltro = params.get("nomeDoArquivoFiltro");
@@ -382,58 +411,70 @@ public class Pedidos extends Controller {
 		List<Pedido> listaRecusados = new ArrayList<Pedido>();
 		// INICIO FILTRO
 		if (matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
-			listaRecusados = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaRecusados = Pedido.find(" status = ?1 AND adm_id = ?2 AND situacao = ?3", StatusPedido.RECUSADO,
+					admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar sem nada ou entrou na página!");
 		} else if (!matriculaDoUsuarioFiltro.isEmpty() && !nomeDoArquivoFiltro.isEmpty()) {
-			listaRecusados = Pedido.find("usuario.matricula like ?1 AND lower(nomeArquivo) like ?2 AND status like ?3 AND adm_id = ?4 AND situacao = ?5",
-					"%" + matriculaDoUsuarioFiltro.trim() + "%", "%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaRecusados = Pedido.find(
+					"usuario.matricula like ?1 AND lower(nomeArquivo) like ?2 AND status like ?3 AND adm_id = ?4 AND situacao = ?5",
+					"%" + matriculaDoUsuarioFiltro.trim() + "%", "%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%",
+					StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
 			System.out.println("Tentou filtrar com conteudo!( Nome do Arquivo e matricula do usuario)");
 		} else if (!matriculaDoUsuarioFiltro.isEmpty() && nomeDoArquivoFiltro.isEmpty()) {
-			listaRecusados = Pedido.find("usuario.matricula like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
-					"%" + matriculaDoUsuarioFiltro.trim() + "%", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaRecusados = Pedido
+					.find("usuario.matricula like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
+							"%" + matriculaDoUsuarioFiltro.trim() + "%", StatusPedido.RECUSADO, admBanco,
+							SituacaoPedido.DESARQUIVADO)
+					.fetch();
 			System.out.println("Tentou filtrar com conteudo!(só a matricula)");
 		} else if (!nomeDoArquivoFiltro.isEmpty() && matriculaDoUsuarioFiltro.isEmpty()) {
-			listaRecusados = Pedido.find("lower(nomeArquivo) like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
-					"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.RECUSADO, admBanco, SituacaoPedido.DESARQUIVADO).fetch();
+			listaRecusados = Pedido
+					.find("lower(nomeArquivo) like ?1 AND status like ?2 AND adm_id = ?3 AND situacao = ?4",
+							"%" + nomeDoArquivoFiltro.trim().toLowerCase() + "%", StatusPedido.RECUSADO, admBanco,
+							SituacaoPedido.DESARQUIVADO)
+					.fetch();
 			System.out.println("Tentou filtrar com conteudo!(só nome do arquivo)");
 		}
 		// FIM FILTRO
 		String telaAdmin = "Tela Admin";
 		String temFiltro = "tem ";
 		String titulo = "Listagem de Recusados";
-	render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
+		// Ordenando a lista do mais recente para o antigo (pela data de atendimento) 
+		Collections.sort(listaRecusados, new OrdenarListaPorData());
+		render(listaRecusados, telaAdmin, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, temFiltro, titulo);
 	}
+
 ///// REALIZAR BAIXA /////
 	@SuppressWarnings("deprecation")
 	@Admin
 	public static void realizarBaixa(Pedido ped) throws IOException {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.realizarBaixa() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.realizarBaixa() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admBanco = dadosSessaoAdmin.admin;
 		if (ped.usuario == null) {
-			flash.error("Selecione o Usuário do Pedido");
-		Administradores.realizarPedidoCopia();
+			flash.error("selecione o Usuário do Pedido");
+			Administradores.realizarPedidoCopia();
 		}
 		if (ped.qtdCopias == 0) {
-			flash.error("A Quantidade de Copias é obrigatorio");
-		Administradores.realizarPedidoCopia();
+			flash.error("a quantidade de cópias é obrigatório");
+			Administradores.realizarPedidoCopia();
 		} else if (ped.paginas == 0) {
-			flash.error("a quantidade de páginas é obrigatorio");
-		Administradores.realizarPedidoCopia();
+			flash.error("a quantidade de páginas é obrigatório");
+			Administradores.realizarPedidoCopia();
 		}
-		
+
 		int valor = ped.usuario.qtdDisponivel - (ped.qtdCopias * ped.paginas);
 		if (valor < 0) {
-			flash.error("quatidade de copia indisponivel");
-		Administradores.realizarPedidoCopia();
+			flash.error("quatidade de cópia indisponivel");
+			Administradores.realizarPedidoCopia();
 		}
-		
+
 		ped.usuario.qtdDisponivel = valor;
 		if (valor < 0) {
-			flash.error("quatidade de copia indisponivel");
-		Administradores.realizarPedidoCopia();
+			flash.error("quatidade de cópia indisponivel");
+			Administradores.realizarPedidoCopia();
 		}
 
 		ped.nomeArquivo = "Copia do Usuário: " + ped.usuario.matricula + " " + new Date().getDate() + " "
@@ -477,23 +518,24 @@ public class Pedidos extends Controller {
 
 			arq.close();
 			ped.save();
-			flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " entregue!");
+			flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " entregue!");
 			System.out.println("|___________________relatório criado_____________________|");
 		} catch (Exception e) {
 			System.out.println("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
 			flash.error("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
-		Administradores.realizarPedidoCopia();
+			Administradores.realizarPedidoCopia();
 		}
 
-		flash.success("Pedido de copia do usuário " + ped.usuario.nomeUsu + " realizado com sucesso!");
+		flash.success("Pedido de cópia do usuário " + ped.usuario.nomeUsu + " realizado com sucesso!");
 		Administradores.realizarPedidoCopia();
 	}
+
 ///// ENTREGAR PEDIDO /////
 	@Admin
 	public static void entregarPedido(Long id) throws IOException {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.entregarPedido() ... [" + new Date() + "]");
-	System.out.println("id do pedido = " + id);
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.entregarPedido() ... [" + new Date() + "]");
+		System.out.println("id do pedido = " + id);
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador admin = Operador.findById(dadosSessaoAdmin.admin.id);
@@ -503,13 +545,14 @@ public class Pedidos extends Controller {
 		ped.dataEntrega = new Date();
 		ped.adm = admin;
 		// gerar relatório
-	gerarRelatorio(ped);
+		gerarRelatorio(ped);
 	}
+
 ///// GERAR RELATÓRIO DO PEDIDO APÓS DE ENTREGUE /////
 	@Admin
 	public static void gerarRelatorio(Pedido ped) throws IOException {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.geraRelatorio() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.geraRelatorio() ... [" + new Date() + "]");
 
 		System.out.println("|__________________Gerando relatório...__________________|");
 //			Historico historico = new Historico();
@@ -543,101 +586,108 @@ public class Pedidos extends Controller {
 
 			arq.close();
 			ped.save();
-			flash.success("Pedido do usuario " + ped.usuario.nomeUsu + " entregue!");
+			flash.success("Pedido do usuário " + ped.usuario.nomeUsu + " entregue!");
 			System.out.println("|___________________relatório criado_____________________|");
 		} catch (Exception e) {
 			System.out.println("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
-			flash.error("ERRO AO GERAR RELATORIO DE PEDIDO ENTREGUE");
-		listarConcluidos();
+			flash.error("ERRO AO GERAR RELATÓRIO DE PEDIDO ENTREGUE");
+			listarConcluidos();
 		}
-	listarConcluidos();
+		listarConcluidos();
 	}
+
 ///// DOWNLOAD DE RELATÓRIO /////
 	@User
 	public static void downloadRelatório(Long id) throws IOException {
-		  File file = new File("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\" +id+ "_relatorio.txt");	
-		  if(!file.exists()) {
-			  flash.error("Arquivo não encontrado ou não existe");
-		  Usuarios.paginaUsuario();
-		  }
-	renderBinary(file, id+"_relatorio.txt");
+		File file = new File("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\" + id + "_relatorio.txt");
+		if (!file.exists()) {
+			flash.error("arquivo não encontrado ou não existe");
+			Usuarios.paginaUsuario();
+		}
+		renderBinary(file, id + "_relatorio.txt");
 	}
+
 ///// ARQUIVAR TODOS OS PEDIDOS COM O STATUS ENTREGUE OU RECUSADO /////
 	@Admin
 	public static void arquivarPedidoEntregueOuRecusado(StatusPedido status) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.arquivarPedidoEntregueOuRecusado() ... [" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.arquivarPedidoEntregueOuRecusado() ... [" + new Date() + "]");
 
 		DadosSessaoAdmin dadosSessaoAdmin = Cache.get(session.getId(), DadosSessaoAdmin.class);
 		Operador adminSessao = dadosSessaoAdmin.admin;
 
 		if (adminSessao.administrador) {
-			List<Pedido> listaPed = Pedido.find("status = ?1 AND situacao = ?2", status, SituacaoPedido.DESARQUIVADO).fetch();
+			List<Pedido> listaPed = Pedido.find("status = ?1 AND situacao = ?2", status, SituacaoPedido.DESARQUIVADO)
+					.fetch();
 
 			if (listaPed.isEmpty()) {
-				if(status == StatusPedido.ENTREGUE) {
-					flash.error("Ainda não possui pedido com o status " + status);
-				listarConcluidos();
-				}else if(status == StatusPedido.RECUSADO){
-					flash.error("Ainda não possui pedido com o status " + status);
-				listarRecusados();
+				if (status == StatusPedido.ENTREGUE) {
+					flash.error("ainda não possui pedido com o status " + status);
+					listarConcluidos();
+				} else if (status == StatusPedido.RECUSADO) {
+					flash.error("ainda não possui pedido com o status " + status);
+					listarRecusados();
 				}
 			} else {
 				for (int i = 0; i < listaPed.size(); i++) {
-					if(listaPed.get(i).status == StatusPedido.ENTREGUE) {
-						File file = new File("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\" + listaPed.get(i).id + "_relatorio.txt");
+					if (listaPed.get(i).status == StatusPedido.ENTREGUE) {
+						File file = new File("E:\\GitHubRepositorios\\SIGICOP\\SIGICOP\\historicoDePedidos\\"
+								+ listaPed.get(i).id + "_relatorio.txt");
 						file.delete();
 					}
 					listaPed.get(i).situacao = SituacaoPedido.ARQUIVADO;
 					listaPed.get(i).save();
-					/* listaPed.get(i).delete(); */				
+					/* listaPed.get(i).delete(); */
 				}
-				if(status == StatusPedido.ENTREGUE) {
-					flash.success("Todos os pedidos com o status " + status + " foram arquivados com sucesso");
-				listarConcluidos();
-				}else if(status == StatusPedido.RECUSADO){
-					flash.success("Todos os pedidos com o status " + status + " foram arquivados com sucesso");
-				listarRecusados();
+				if (status == StatusPedido.ENTREGUE) {
+					flash.success("todos os pedidos com o status " + status + " foram arquivados com sucesso");
+					listarConcluidos();
+				} else if (status == StatusPedido.RECUSADO) {
+					flash.success("todos os pedidos com o status " + status + " foram arquivados com sucesso");
+					listarRecusados();
 				}
 			}
 		} else {
-			flash.error("Acesso restrito ao administrador padrao do sistema");
-		Administradores.paginaAdmin();
+			flash.error("acesso restrito ao administrador padrao do sistema");
+			Administradores.paginaAdmin();
 		}
 	}
+
 ///// PARA O USUÁRIO FAZER O DOWNLOAD DO ARQUIVO DO PEDIDO /////
 	@User
 	public static void downloadUser(Long id) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.downloadUser() ... ["+ new Date()+"]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.downloadUser() ... [" + new Date() + "]");
 		Pedido ip = Pedido.findById(id);
-		
-		if(!ip.arquivo.exists()) {
-			flash.error("Arquivo não encontrado");
+
+		if (!ip.arquivo.exists()) {
+			flash.error("arquivo não encontrado");
 			Usuarios.paginaUsuario();
 		}
-		System.out.println("pedido download: "+ ip.nomeArquivo);
-	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
+		System.out.println("pedido download: " + ip.nomeArquivo);
+		renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 	}
+
 ///// PARA O ADMINISTRODOR FAZER O DOWNLOAD DO ARQUIVO DO PEDIDO  /////
 	@Admin
 	public static void downloadAdmin(Long id) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.downloadAdmin() ... ["+ new Date()+"]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.downloadAdmin() ... [" + new Date() + "]");
 		Pedido ip = Pedido.findById(id);
-		
-		if(!ip.arquivo.exists()) {
-			flash.error("Este arquivo não foi encontrado");
+
+		if (!ip.arquivo.exists()) {
+			flash.error("este arquivo não foi encontrado");
 			Administradores.paginaAdmin();
 		}
-		System.out.println("pedido download: "+ ip.nomeArquivo);
-	renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
+		System.out.println("pedido download: " + ip.nomeArquivo);
+		renderBinary(ip.arquivo.getFile(), ip.nomeArquivo);
 	}
+
 ///// ADICIONA PEDIDOS NA CACHE COM AJAX/////
 	@User
 	public static void addPedidoAjax(@Valid Pedido item) {
-	System.out.println("_____________________________________________________________________________________");
-	System.out.println("Pedidos.addPedidoAjax() ...[" + new Date() + "]");
+		System.out.println("_____________________________________________________________________________________");
+		System.out.println("Pedidos.addPedidoAjax() ...[" + new Date() + "]");
 
 		DadosSessao dadosDeSessao = Cache.get(session.getId(), DadosSessao.class);
 		List<Pedido> listaDePedidos = null;
@@ -708,13 +758,13 @@ public class Pedidos extends Controller {
 		listaDePedidos.add(item); // item adicionado na lista
 
 		dadosDeSessao.listaDePedidos = listaDePedidos;
-		
+
 		// lista adicionada na cache
 		Cache.set(session.getId(), dadosDeSessao);
-		
+
 		Gson gson = new Gson();
 		String lista = gson.toJson(listaDePedidos);
-	 
-	 renderJSON(lista);
+
+		renderJSON(lista);
 	}
 }

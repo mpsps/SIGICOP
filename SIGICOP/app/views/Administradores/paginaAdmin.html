@@ -89,28 +89,24 @@
 						<td colspan="3">
 							<div class="card">
 								<div class="card-text">
-									<b>Status: </b>
-									<span class=" text-center rounded statusAguardando pl-1 pr-1"> ${p.status}</span>
-								</div>
-								<div class="card-text">
 									<b>Usuário:</b> ${p.usuario.nomeUsu}
 								</div>
-							</div>
-						</td>
-						<td colspan="5">
-							<div class="card">
 								<div class="card-text">
 									<b>Data de Envio: </b> ${p.dataEnvio}
 								</div>
+							</div>	
+						</td>
+						<td colspan="5" rowspan="1">
+							<div class="card">
 								<div class="card-text">
 #{if p.descricao} 
-									<b>Descricao:</b> ${p.descricao} 
+									<b>Descrição:</b> ${p.descricao} 
 #{/if}
 #{else}
-									<b>Descricao:</b>[sem descricao]
+									<b>Descrição:</b>[sem descrição]
 #{/else}
 								</div>	
-							</div>	
+							</div>
 						</td>
 					</tr>
 #{/list}

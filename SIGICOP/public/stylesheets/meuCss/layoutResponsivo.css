@@ -37,6 +37,12 @@ body{
 .hmx-25 {
 	max-height: 25% !important;
 }
+.wmx-75 {
+	max-width: 75% !important;
+}
+.wmx-25 {
+	max-width: 25% !important;
+}
 .brancoGelo {
 	background: #f9f9f9!important;
 }
@@ -54,9 +60,26 @@ body{
 	position: relative;
 	right: 2px;
 }
+.contagem {
+	width: 4px;
+	height: 4px;
+	padding: 3px!important;
+	line-height: 3px;
+	text-align: center;
+	border-radius: 10em;
+}
+.contagemUsu {
+	width: 2px;
+	height: 2px;
+	padding: 2px!important;
+	line-height: 2px;
+	text-align: center;
+	border-radius: 8em;
+	font-size: 10px;
+}
 .statusAguardando{
-    color: white;
-    font-weight: bold;
+	color: white;
+	font-weight: bold;
 	background: #529fed;	
 }
 .statusConcluido{
@@ -65,7 +88,7 @@ body{
 	background: #5eed4e;
 }
 .statusRecusado{
-    color: white;
+	color: white;
 	font-weight: bold;
 	background:#ff3535;
 }
@@ -551,6 +574,9 @@ body{
 	#layoutDeslogado {
 		width: 100% !important;
 		margin: 0px !important;
+	}
+	.imagem-logo-principal {
+		width: 30%!important;
 	}
 	a[href="#top"]{
 	    padding: 0px 0px 0px 0px;

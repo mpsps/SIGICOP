@@ -5,6 +5,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.CriptografiaUtils;
 import seguranca.Seguranca;
+import util.OrdenarListaPorData;
 import util.Select2VO;
 import util.SituacaoPedido;
 import util.StatusPedido;
@@ -50,6 +52,8 @@ public class Usuarios extends Controller {
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
 		String titulo = "Página do Usuário";
+		// Ordenando a lista do mais recente para o antigo (pela data de atendimento) 
+		Collections.sort(listaPedidos, new OrdenarListaPorData());
 	render(usuarioBanco, listaPedidos, solicitar, temFiltro, titulo);
 	}	
 ///// FILTRO DE PEDIDOS NA PAGINA DO USUARIO /////
@@ -168,6 +172,8 @@ public class Usuarios extends Controller {
 		String solicitar = "solicitar";
 		String temFiltro = "tem";
 		String titulo = "Histórico de Pedidos";
+		// Ordenando a lista do mais recente para o antigo (pela data de atendimento) 
+		Collections.sort(listaPedidosHistorico, new OrdenarListaPorData());
 	render(usuarioBanco, listaPedidosHistorico, solicitar, temFiltro, titulo, voltar, descricaoFiltro, NomeDoArquivoFiltro);
 	}
 ///// SALVAR O USUARIO /////
@@ -257,7 +263,7 @@ public class Usuarios extends Controller {
 		Usuario usuarioBanco = dadosSessao.usuario;
 		
 		String solicitar = "solicitar";
-		String titulo = "Editar senha";
+		String titulo = "Editar Senha";
 		String voltar = "voltar";
 	render(usuarioBanco, titulo, voltar, solicitar);
 	}
@@ -292,19 +298,19 @@ public class Usuarios extends Controller {
 				}else {
 					flash.error("as senha não são compatíveis!");
 					String seis = "incompatíveis";
-					String titulo = "Editar senha";
+					String titulo = "Editar Senha";
 				renderTemplate("Usuarios/editarSenha.html", seis, voltar, usuarioBanco, titulo, solicitar);
 				}
 			}else {
 				flash.error("No minimo 6 caracteres!");
 				String seis = "no mínimo 6 caracteres";
-				String titulo = "Editar senha";
+				String titulo = "Editar Senha";
 			renderTemplate("Usuarios/editarSenha.html", seis, voltar, usuarioBanco, titulo, solicitar);
 			}
 		}else{
 			flash.error("falha na alteração de senha!");
 			String seis = "obrigatório";
-			String titulo = "Editar senha";
+			String titulo = "Editar Senha";
 		renderTemplate("Usuarios/editarSenha.html", seis, voltar, usuarioBanco, titulo, solicitar);
 		}
 	}
@@ -321,7 +327,7 @@ public class Usuarios extends Controller {
 		session.clear();
 		Cache.clear();
 		
-		flash.success("Voce saiu do sistema");
+		flash.success("você saiu do sistema");
 	Gerenciador.login();
 	}	
 ///// RESTAURAR A QUANTIDADE DISPONIVEL DE TODOS OS USUARIOS /////

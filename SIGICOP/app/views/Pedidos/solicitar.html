@@ -129,7 +129,7 @@
 												<div class="card-text">
 													<b>Status: </b> ${p.status}
 												</div>
-												<div class="card-text mt-0">
+												<div class="card-text mt-0" style="display: none;">
 													<b>Id lista: </b> ${p.idLista}
 												</div>
 											</div>
@@ -206,7 +206,7 @@
 												<div class="card-text">
 													<b>Status: </b> ${p.status}
 												</div>
-												<div class="card-text mt-0">
+												<div class="card-text mt-0" style="display: none;">
 													<b>Id lista: </b> ${p.idLista}
 												</div>
 											</div>
@@ -273,7 +273,7 @@ $(document).ready(function() {
 				})
 				Toast.fire({
 					icon: 'info',
-					title: '<span class="font-size-celular">Adicionando Pedido a Lista</span>'
+					title: '<span class="font-size-celular">Adicionando Pedido a Lista...</span>'
 				})
 			}else{
 				e.preventDefault();

@@ -3,6 +3,7 @@ import java.text.DateFormat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ import play.mvc.Controller;
 import play.mvc.With;
 import seguranca.CriptografiaUtils;
 import seguranca.Seguranca;
+import util.OrdenarListaPorData;
 import util.Select2VO;
 import util.SituacaoPedido;
 import util.StatusPedido;
@@ -75,9 +77,9 @@ public class Administradores extends Controller {
 		String temFiltro = "tem";
 		String titulo;
 		if (admBanco.administrador) {
-			titulo = "Pagina do Administrador";
+			titulo = "Página do Administrador";
 		} else {
-			titulo = "Pagina do Operador";
+			titulo = "Página do Operador";
 		}
 	render(listaPedidosPa, admBanco, nomeDoArquivoFiltro, matriculaDoUsuarioFiltro, filtroPa, temFiltro, titulo);
 	}	
@@ -91,7 +93,7 @@ public class Administradores extends Controller {
 		System.out.println("_____________________________________________________________________________________");
 		System.out.println("Administrador.cadastroDeAdms() ... ["+ new Date()+"]");
 			String telaAdmin = "Tela Admin";
-			String titulo = "Cadastro de Administrador";
+			String titulo = "Cadastro de Operador";
 		render(telaAdmin, admBanco, titulo);
 		}else {// se não for avisa ao admin comum
 		System.out.println("_____________________________________________________________________________________");
@@ -119,8 +121,8 @@ public class Administradores extends Controller {
 					if (validation.hasErrors()) { // enviar todos os erros se só preencer email
 						params.flash();
 					}
-					flash.error("Email ja exite!");
-					String email = "esse Email Já Existe";
+					flash.error("Email já exite!");
+					String email = "esse email já existe";
 				renderTemplate("Administradores/cadastroDeAdms.html", adm, admBanco, email, telaAdmin);
 				}else { // se não, então não possui nenhum admin com esse email		
 					if (validation.hasErrors()) { // guarda o(s) erro(s) se houver
@@ -235,19 +237,19 @@ public class Administradores extends Controller {
 				}else {
 					flash.error("as senha não são compatíveis!");
 					String seis = "incompatíveis";
-					String titulo = "Editar senha";
+					String titulo = "Editar Senha";
 				renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 				}
 			}else {
 				flash.error("No minimo 6 caracteres!");
 				String seis = "no mínimo 6 caracteres";
-				String titulo = "Editar senha";
+				String titulo = "Editar Senha";
 			renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 			}
 		}else{
 			flash.error("falha na alteração de senha!");
 			String seis = "obrigatório";
-			String titulo = "Editar senha";
+			String titulo = "Editar Senha";
 		renderTemplate("Administradores/editarSenha.html", seis, telaAdmin, admBanco, titulo);
 		}
 	}
@@ -299,7 +301,7 @@ public class Administradores extends Controller {
 			String listaAdmins = "listaAdmins";
 			String telaAdmin = "telaAdmin";
 			String temFiltro = "tem";
-			String titulo = "Listagem de Administradores";
+			String titulo = "Listagem de Operadores";
 		render(listarDeAdmins, listaAdmins, admBanco, nomeDoAdminFiltro, emailDoAdminFiltro, telaAdmin, temFiltro, titulo);
 		}else {
 		System.out.println("_____________________________________________________________________________________");
@@ -384,6 +386,8 @@ public class Administradores extends Controller {
 		String filtroHistorico = "tem";
 		String telaAdmin = "telaAdmin";
 		String titulo = "Histórico de Pedidos";
+		// Ordenando a lista do mais recente para o antigo (pela data de atendimento) 
+		Collections.sort(listaPedidosHistorico, new OrdenarListaPorData());
 	render(admBanco, listaPedidosHistorico, filtroHistorico, titulo, descricaoFiltro, NomeDoArquivoFiltro,temFiltro, telaAdmin);
 	}
 ///// TELA DE CADASTRO DE USUARIO /////
@@ -464,7 +468,7 @@ public class Administradores extends Controller {
 		session.clear();
 		Cache.clear();
 		
-		flash.success("Voce saiu do sistema");
+		flash.success("você saiu do sistema");
 	Gerenciador.login();
 	}
 }
